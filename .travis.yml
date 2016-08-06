@@ -27,3 +27,5 @@ deploy:
     repo: alexcristea/brick-validator
     branch: develop
     tags: true
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
