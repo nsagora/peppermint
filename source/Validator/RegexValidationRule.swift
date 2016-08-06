@@ -20,7 +20,7 @@ public struct RegexValidationRule: ValidationRule {
 
         guard let input = input else { return false }
 
-        let predicate = Predicate(format: "SELF MATCHES[c] %@", expression)
+        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", expression)
         return predicate.evaluate(with: input);
     }
 }
