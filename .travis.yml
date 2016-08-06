@@ -4,15 +4,22 @@ xcode_project: source/Validator.xcodeproj
 xcode_scheme: Validator
 xcode_sdk: iphonesimulator9.3
 env:
-  global: 
-    - FRAMEWORK_NAME=Validator
+  global:
+  - FRAMEWORK_NAME=Validator
 before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-before_script:
-  # bootstrap the dependencies for the project
-  # you can remove if you don't have dependencies
-  # - carthage bootstrap  
+- brew update
+- brew outdated carthage || brew upgrade carthage
+before_script: 
 before_deploy:
-  - carthage build --no-skip-current
-  - carthage archive $FRAMEWORK_NAME
+- carthage build --no-skip-current
+- carthage archive $FRAMEWORK_NAME
+deploy:
+  provider: releases
+  api_key:
+    secure: M+WIqcOkXlph4+5/Y4y5C+GfYEF5jcPB1QxpvurUAMKUhhknQKlvFokcqKCtJWJqCoPoHrhCgXQ7UdF/XoWbV1+585HLOjksXA6ZchWFDmxsPrq4eiIvY2scY3t9rTaSEd0TbAL1m9IlJyFwOJuPrMrCX8Lk8L0T5iscfIQkvRkYfUXtxcWXlhMVi2M9LTFo8SJmG3x8uyTESh94R5qYWh37Vm1MhiVHgl3M/N0g4zIlk6Q0KZlNOfEA5Gncxyr5hwGAsN7UcwrVD35ru8tyATcpM8+YGD5P9aN8ABuNymt84NEqlKyOBbJvzx+SQ3BXrkr1HyqQrin9UuaTJb1KlGmScbmT1NjestLkUVKSbVdAkzYKGjM4PzU5vcPO2Sl8QujpNO779e+Czuj3FF3IQ1tqs1zcavb7M/DWVzoGYsGs+iIW49KsP/LjcA0HHcLobqXtxaRWw2Oo/cj/NmAt7NWDGzMeJiUlpnOeuyNs51LKSdfyV15APQwIPoblIer+lDTja0P8nlP1kCd2ajG4O8XxvioFvoNGpS/77M+Jqu6iKIClZySafXu2fjbEvxb4IRKt7E4TP6Ia6k5m9FxVlEWApNmZKcmC5XzBYq/83NNSe04YdmhUM/30fZdkQmhHyY2v+YacxzYtHFy+cfZEncL/b+bsXrgwIMoD6+HvB0o=
+  file: $FRAMEWORK_NAME.framework.zip
+  skip_cleanup: true
+  on:
+    repo: alexcristea/brick-validator
+    branch: develop
+    tags: true
