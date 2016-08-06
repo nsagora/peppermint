@@ -8,12 +8,15 @@ env:
   - FRAMEWORK_NAME=Validator
 before_install:
 - brew update
-- brew outdated xctool || brew upgrade xctool
 - brew outdated carthage || brew upgrade carthage
+- gem install xcpretty
 before_script: 
 before_deploy:
 - carthage build --no-skip-current
 - carthage archive $FRAMEWORK_NAME
+script:
+- set -o pipefail
+- xcodebuild -project $TRAVIS_XCODE_PROJECT -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -destination 'name=iPhone 6' test | xcpretty -c
 deploy:
   provider: releases
   api_key:
