@@ -8,6 +8,7 @@ env:
   - FRAMEWORK_NAME=Validator
 before_install:
 - brew update
+- brew outdated xctool || brew upgrade xctool
 - brew outdated carthage || brew upgrade carthage
 before_script: 
 before_deploy:
