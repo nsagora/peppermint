@@ -54,6 +54,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA7F6A9E1D5590BD0081BD36 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAB52B331D54EB8F00110049 /* Info.plist */,
+				FAB52B321D54EB8F00110049 /* Validator.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA7F6A9F1D5590E30081BD36 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAB52B3F1D54EB8F00110049 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		FAB52B251D54EB8F00110049 = {
 			isa = PBXGroup;
 			children = (
@@ -75,10 +92,9 @@
 		FAB52B311D54EB8F00110049 /* Validator */ = {
 			isa = PBXGroup;
 			children = (
-				FAB52B321D54EB8F00110049 /* Validator.h */,
-				FAB52B331D54EB8F00110049 /* Info.plist */,
 				FAB52B491D54EC4700110049 /* ValidationRule.swift */,
 				FAB52B4B1D552DE800110049 /* RegexValidationRule.swift */,
+				FA7F6A9E1D5590BD0081BD36 /* Supporting Files */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -86,8 +102,8 @@
 		FAB52B3C1D54EB8F00110049 /* ValidatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				FAB52B3F1D54EB8F00110049 /* Info.plist */,
 				FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */,
+				FA7F6A9F1D5590E30081BD36 /* Supporting Files */,
 			);
 			path = ValidatorTests;
 			sourceTree = "<group>";
