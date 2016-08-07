@@ -46,4 +46,16 @@ class RegexValidationRuleTests: XCTestCase {
         let result = rule.validate(input: "1")
         XCTAssertTrue(result)
     }
+
+    func testItPassValitdationWithUTF8() {
+        let rule = RegexValidationRule(expression: "^\\p{L}$")
+        let result = rule.validate(input: "é")
+        XCTAssertTrue(result)
+    }
+
+    func testItPassValitdationWithUTF16() {
+        let rule = RegexValidationRule(expression: "^\\p{L}$")
+        let result = rule.validate(input: "ߘ")
+        XCTAssertTrue(result)
+    }
 }
