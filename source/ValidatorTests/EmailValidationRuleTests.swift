@@ -1,5 +1,5 @@
 //
-//  EmailValidationRuleTests.swift
+//  EmailValidationPredicateTests.swift
 //  Validator
 //
 //  Created by Alex Cristea on 07/08/16.
@@ -9,13 +9,13 @@
 import XCTest
 @testable import Validator
 
-class EmailValidationRuleTests: XCTestCase {
+class EmailValidationPredicateTests: XCTestCase {
 
-    var rule: EmailValidationRule!
+    var rule: EmailValidationPredicate!
 
     override func setUp() {
         super.setUp()
-        rule = EmailValidationRule()
+        rule = EmailValidationPredicate()
     }
     
     override func tearDown() {
@@ -24,25 +24,25 @@ class EmailValidationRuleTests: XCTestCase {
     }
 
     func testThatItFailsForNil() {
-        let result = rule.validate(input: nil)
+        let result = rule.evaluate(with: nil)
         XCTAssertFalse(result)
     }
 
     func testThatItFailsForInvalidEmail() {
         let email = "test@"
-        let result = rule.validate(input: email)
+        let result = rule.evaluate(with: email)
         XCTAssertFalse(result)
     }
 
     func testThatItPassesForValidEmail() {
         let email = "test@example.com"
-        let result = rule.validate(input: email)
+        let result = rule.evaluate(with: email)
         XCTAssertTrue(result)
     }
 
     func testThatItPassesForUTF8() {
         let email = "tést@example.com"
-        let result = rule.validate(input: email)
+        let result = rule.evaluate(with: email)
         XCTAssertTrue(result)
     }
 }

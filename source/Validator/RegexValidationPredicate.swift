@@ -1,5 +1,5 @@
 //
-//  RegexValidationRule.swift
+//  RegexValidationPredicate.swift
 //  Validator
 //
 //  Created by Alex Cristea on 05/08/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct RegexValidationRule: ValidationRule {
+public struct RegexValidationPredicate: ValidationPredicate {
 
     private var expression: String
 
@@ -16,7 +16,7 @@ public struct RegexValidationRule: ValidationRule {
         self.expression = expression
     }
 
-    public func validate(input: String?) -> Bool {
+    public func evaluate(with input: String?) -> Bool {
 
         guard let input = input else { return false }
 

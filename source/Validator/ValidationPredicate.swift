@@ -1,5 +1,5 @@
 //
-//  ValidationRule.swift
+//  ValidationPredicate.swift
 //  Validator
 //
 //  Created by Alex Cristea on 05/08/16.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-public protocol ValidationRule {
+public protocol ValidationPredicate {
 
     associatedtype InputType
-    func validate(input: InputType?) -> Bool
+    func evaluate(with input: InputType?) -> Bool
 }

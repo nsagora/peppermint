@@ -1,5 +1,5 @@
 //
-//  RegexValidationRuleTests.swift
+//  RegexValidationPredicateTests.swift
 //  Validator
 //
 //  Created by Alex Cristea on 05/08/16.
@@ -9,13 +9,13 @@
 import XCTest
 @testable import Validator
 
-class RegexValidationRuleTests: XCTestCase {
+class RegexValidationPredicateTests: XCTestCase {
 
-    var rule: RegexValidationRule!
+    var rule: RegexValidationPredicate!
 
     override func setUp() {
         super.setUp()
-        rule = RegexValidationRule(expression: "^[0-9]$")
+        rule = RegexValidationPredicate(expression: "^[0-9]$")
     }
     
     override func tearDown() {
@@ -28,34 +28,40 @@ class RegexValidationRuleTests: XCTestCase {
     }
 
     func testItFailsValidationForNil() {
-        let result = rule.validate(input: nil)
+        let result = rule.evaluate(with: nil)
         XCTAssertFalse(result)
     }
 
     func testItFailsValidationForInvalidInput() {
-        let result = rule.validate(input: "a")
+        let result = rule.evaluate(with: "a")
         XCTAssertFalse(result)
     }
 
     func testItFailsValidationForLongInvalidInput() {
-        let result = rule.validate(input: "1111111111")
+        let result = rule.evaluate(with: "1111111111")
         XCTAssertFalse(result)
     }
 
     func testItPassValidationForValidInput() {
-        let result = rule.validate(input: "1")
+        let result = rule.evaluate(with: "1")
         XCTAssertTrue(result)
     }
 
-    func testItPassValitdationWithUTF8() {
-        let rule = RegexValidationRule(expression: "^\\p{L}$")
-        let result = rule.validate(input: "é")
+    func testItPassValitdationWithUTF8Chars() {
+        let rule = RegexValidationPredicate(expression: "^\\p{L}$")
+        let result = rule.evaluate(with: "é")
         XCTAssertTrue(result)
     }
 
-    func testItPassValitdationWithUTF16() {
-        let rule = RegexValidationRule(expression: "^\\p{L}$")
-        let result = rule.validate(input: "ߘ")
+    func testItPassValitdationWithUTF16Chars() {
+        let rule = RegexValidationPredicate(expression: "^\\p{L}$")
+        let result = rule.evaluate(with: "ߘ")
+        XCTAssertTrue(result)
+    }
+
+    func testItPassValidationWithMandarineChars() {
+        let rule = RegexValidationPredicate(expression: "^\\p{L}+$")
+        let result = rule.evaluate(with: "我")
         XCTAssertTrue(result)
     }
 }

@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		FAB52B391D54EB8F00110049 /* Validator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB52B2F1D54EB8F00110049 /* Validator.framework */; };
 		FAB52B401D54EB8F00110049 /* Validator.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* Validator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAB52B4A1D54EC4700110049 /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationRule.swift */; };
-		FAB52B4C1D552DE800110049 /* RegexValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationRule.swift */; };
+		FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
+		FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */; };
 		FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
-		FAEFF3081D568F090061A72F /* EmailValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFF3071D568F090061A72F /* EmailValidationRule.swift */; };
+		FAEFF3081D568F090061A72F /* EmailValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */; };
 		FAEFF30A1D568F4D0061A72F /* EmailValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFF3091D568F4D0061A72F /* EmailValidationRuleTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,10 +32,10 @@
 		FAB52B331D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB52B381D54EB8F00110049 /* ValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB52B3F1D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAB52B491D54EC4700110049 /* ValidationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
-		FAB52B4B1D552DE800110049 /* RegexValidationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationRule.swift; sourceTree = "<group>"; };
+		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
+		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; };
-		FAEFF3071D568F090061A72F /* EmailValidationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationRule.swift; sourceTree = "<group>"; };
+		FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationPredicate.swift; sourceTree = "<group>"; };
 		FAEFF3091D568F4D0061A72F /* EmailValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationRuleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,9 +96,9 @@
 		FAB52B311D54EB8F00110049 /* Validator */ = {
 			isa = PBXGroup;
 			children = (
-				FAB52B491D54EC4700110049 /* ValidationRule.swift */,
-				FAB52B4B1D552DE800110049 /* RegexValidationRule.swift */,
-				FAEFF3071D568F090061A72F /* EmailValidationRule.swift */,
+				FAB52B491D54EC4700110049 /* ValidationPredicate.swift */,
+				FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */,
+				FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */,
 				FA7F6A9E1D5590BD0081BD36 /* Supporting Files */,
 			);
 			path = Validator;
@@ -229,9 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAEFF3081D568F090061A72F /* EmailValidationRule.swift in Sources */,
-				FAB52B4C1D552DE800110049 /* RegexValidationRule.swift in Sources */,
-				FAB52B4A1D54EC4700110049 /* ValidationRule.swift in Sources */,
+				FAEFF3081D568F090061A72F /* EmailValidationPredicate.swift in Sources */,
+				FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */,
+				FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

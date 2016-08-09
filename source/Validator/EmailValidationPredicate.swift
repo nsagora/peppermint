@@ -1,5 +1,5 @@
 //
-//  EmailValidationRule.swift
+//  EmailValidationPredicate.swift
 //  Validator
 //
 //  Created by Alex Cristea on 07/08/16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct EmailValidationRule: ValidationRule {
+public struct EmailValidationPredicate: ValidationPredicate {
 
-    private let rule: RegexValidationRule
+    private let rule: RegexValidationPredicate
     private let regex = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +
         "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" +
         "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" +
@@ -20,12 +20,12 @@ public struct EmailValidationRule: ValidationRule {
         "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
 
     public init() {
-        rule = RegexValidationRule(expression: regex)
+        rule = RegexValidationPredicate(expression: regex)
     }
 
-    public func validate(input: String?) -> Bool {
+    public func evaluate(with input: String?) -> Bool {
 
         guard let _ = input else { return false }
-        return rule.validate(input: input)
+        return rule.evaluate(with: input)
     }
 }
