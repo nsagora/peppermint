@@ -12,6 +12,9 @@
 		FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
 		FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */; };
 		FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
+		FADD5FA51D5A586B00ECACA1 /* ValidationConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */; };
+		FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */; };
+		FAE24F201D5A5FF70017902A /* ValidationConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */; };
 		FAEFF3081D568F090061A72F /* EmailValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */; };
 		FAEFF30A1D568F4D0061A72F /* EmailValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFF3091D568F4D0061A72F /* EmailValidationRuleTests.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +38,9 @@
 		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; };
+		FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraint.swift; sourceTree = "<group>"; };
+		FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
+		FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraintTests.swift; sourceTree = "<group>"; };
 		FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationPredicate.swift; sourceTree = "<group>"; };
 		FAEFF3091D568F4D0061A72F /* EmailValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationRuleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +102,8 @@
 		FAB52B311D54EB8F00110049 /* Validator */ = {
 			isa = PBXGroup;
 			children = (
+				FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */,
+				FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */,
 				FAB52B491D54EC4700110049 /* ValidationPredicate.swift */,
 				FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */,
 				FAEFF3071D568F090061A72F /* EmailValidationPredicate.swift */,
@@ -109,6 +117,7 @@
 			children = (
 				FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */,
 				FAEFF3091D568F4D0061A72F /* EmailValidationRuleTests.swift */,
+				FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */,
 				FA7F6A9F1D5590E30081BD36 /* Supporting Files */,
 			);
 			path = ValidatorTests;
@@ -230,7 +239,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAEFF3081D568F090061A72F /* EmailValidationPredicate.swift in Sources */,
+				FADD5FA51D5A586B00ECACA1 /* ValidationConstraint.swift in Sources */,
 				FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */,
+				FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */,
 				FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */,
+				FAE24F201D5A5FF70017902A /* ValidationConstraintTests.swift in Sources */,
 				FAEFF30A1D568F4D0061A72F /* EmailValidationRuleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
