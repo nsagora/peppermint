@@ -5,7 +5,7 @@ env:
   - FRAMEWORK_NAME=Validator
   - LC_CTYPE=en_US.UTF-8
   - LANG=en_US.UTF-8
-  - PROJECT=ValidationKit.xcproj
+  - PROJECT=source/ValidationKit.xcproj
   - IOS_FRAMEWORK_SCHEME="ValidationKit iOS"
   - OSX_FRAMEWORK_SCHEME="ValidationKit macOS"
   - TVOS_FRAMEWORK_SCHEME="ValidationKit tvOS"
@@ -29,8 +29,7 @@ env:
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - gem install xcpretty
-before_script: 
+  - gem install xcpretty 
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
@@ -38,15 +37,15 @@ script:
   - set -o pipefail
   # Build Framework in Debug and Run Tests if specified
   - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -project "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty -c;
+      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty -c;
     else
-      xcodebuild -project "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
+      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
     fi
   # Build Framework in Release and Run Tests if specified
   - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -project "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty -c;
+      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty -c;
     else
-      xcodebuild -project "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
+      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
     fi
 after_success:
   - bash <(curl -s https://codecov.io/bash)
