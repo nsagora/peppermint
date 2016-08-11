@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FAB52B2E1D54EB8F00110049"
-               BuildableName = "Validator.framework"
-               BlueprintName = "Validator"
-               ReferencedContainer = "container:Validator.xcodeproj">
+               BuildableName = "ValidationKit.framework"
+               BlueprintName = "ValidationKit iOS"
+               ReferencedContainer = "container:ValidationKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FAB52B371D54EB8F00110049"
-               BuildableName = "ValidatorTests.xctest"
-               BlueprintName = "ValidatorTests"
-               ReferencedContainer = "container:Validator.xcodeproj">
+               BuildableName = "ValidationKit iOS Tests.xctest"
+               BlueprintName = "ValidationKit iOS Tests"
+               ReferencedContainer = "container:ValidationKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAB52B2E1D54EB8F00110049"
-            BuildableName = "Validator.framework"
-            BlueprintName = "Validator"
-            ReferencedContainer = "container:Validator.xcodeproj">
+            BuildableName = "ValidationKit.framework"
+            BlueprintName = "ValidationKit iOS"
+            ReferencedContainer = "container:ValidationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAB52B2E1D54EB8F00110049"
-            BuildableName = "Validator.framework"
-            BlueprintName = "Validator"
-            ReferencedContainer = "container:Validator.xcodeproj">
+            BuildableName = "ValidationKit.framework"
+            BlueprintName = "ValidationKit iOS"
+            ReferencedContainer = "container:ValidationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,9 +84,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAB52B2E1D54EB8F00110049"
-            BuildableName = "Validator.framework"
-            BlueprintName = "Validator"
-            ReferencedContainer = "container:Validator.xcodeproj">
+            BuildableName = "ValidationKit.framework"
+            BlueprintName = "ValidationKit iOS"
+            ReferencedContainer = "container:ValidationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

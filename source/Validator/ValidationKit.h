@@ -3,7 +3,7 @@
 //  Validator
 //
 //  Created by Alex Cristea on 05/08/16.
-//  Copyright © 2016 NSAgora. All rights reserved.
+//  Copyright © 2016 iOS NSAgora. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
