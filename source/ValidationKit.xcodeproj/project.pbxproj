@@ -76,13 +76,13 @@
 /* Begin PBXFileReference section */
 		FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CC41D5CB80900792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CCC1D5CB80900792F43 /* ValidationKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidationKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CE01D5CB82000792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CE81D5CB82000792F43 /* ValidationKit macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidationKit macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB52B321D54EB8F00110049 /* ValidationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidationKit.h; sourceTree = "<group>"; };
 		FAB52B331D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAB52B381D54EB8F00110049 /* ValidationKit iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidationKit iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB52B3F1D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
@@ -181,12 +181,12 @@
 			isa = PBXGroup;
 			children = (
 				FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */,
-				FAB52B381D54EB8F00110049 /* ValidationKit iOS Tests.xctest */,
+				FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */,
 				FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */,
 				FAA87CC41D5CB80900792F43 /* ValidationKit.framework */,
-				FAA87CCC1D5CB80900792F43 /* ValidationKit tvOS Tests.xctest */,
+				FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */,
 				FAA87CE01D5CB82000792F43 /* ValidationKit.framework */,
-				FAA87CE81D5CB82000792F43 /* ValidationKit macOS Tests.xctest */,
+				FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 			);
 			name = "ValidationKit tvOS Tests";
 			productName = "ValidationKit tvOSTests";
-			productReference = FAA87CCC1D5CB80900792F43 /* ValidationKit tvOS Tests.xctest */;
+			productReference = FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		FAA87CDF1D5CB82000792F43 /* ValidationKit macOS */ = {
@@ -343,7 +343,7 @@
 			);
 			name = "ValidationKit macOS Tests";
 			productName = "ValidationKit macOSTests";
-			productReference = FAA87CE81D5CB82000792F43 /* ValidationKit macOS Tests.xctest */;
+			productReference = FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		FAB52B2E1D54EB8F00110049 /* ValidationKit iOS */ = {
@@ -379,7 +379,7 @@
 			);
 			name = "ValidationKit iOS Tests";
 			productName = ValidatorTests;
-			productReference = FAB52B381D54EB8F00110049 /* ValidationKit iOS Tests.xctest */;
+			productReference = FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -711,7 +711,7 @@
 				DEVELOPMENT_TEAM = JJUR3MD8QA;
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
@@ -726,7 +726,7 @@
 				DEVELOPMENT_TEAM = JJUR3MD8QA;
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
@@ -792,7 +792,7 @@
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 3.0;
 			};
@@ -809,7 +809,7 @@
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 3.0;
 			};
@@ -956,7 +956,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -966,7 +966,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ValidationKitTests;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
