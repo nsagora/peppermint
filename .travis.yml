@@ -39,5 +39,5 @@ script:
 
 after_success:
   - if [ $RUN_TESTS == "YES" ]; then
-      bash <(curl -s https://codecov.io/bash) -J "$FRAMEWORK_NAME";
+      bash <(curl -s https://codecov.io/bash);
     fi
