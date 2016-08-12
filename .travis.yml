@@ -39,5 +39,5 @@ script:
 
 after_success:
   - if [ $CODE_COVERAGE == "YES" ]; then
-      bash <(curl -s https://codecov.io/bash)
+      bash <(curl -s https://codecov.io/bash);
     fi
