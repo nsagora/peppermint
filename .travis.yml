@@ -15,17 +15,20 @@ env:
   - TVOS_SDK=appletvsimulator10.0
   - WATCHOS_SDK=watchsimulator3.0
   matrix:
-    - DESTINATION="OS=10.0,name=iPhone 6S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="arch=x86_64"                     SCHEME="$OSX_FRAMEWORK_SCHEME"     SDK="$MACOS_SDK"   RUN_TESTS="NO"
-    - DESTINATION="OS=10.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"    RUN_TESTS="NO"
-    - DESTINATION="OS=3.0,name=Apple Watch - 42mm"  SCHEME="$WATCHOS_FRAMEWORK_SCHEME" SDK="$WATCHOS_SDK" RUN_TESTS="NO"
+    - DESTINATION="OS=10.0,name=iPhone 6S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" CODE_COVERAGE="YES"
+    - DESTINATION="arch=x86_64"                     SCHEME="$OSX_FRAMEWORK_SCHEME"     SDK="$MACOS_SDK"   RUN_TESTS="NO"  CODE_COVERAGE="NO"
+    - DESTINATION="OS=10.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"    RUN_TESTS="NO"  CODE_COVERAGE="NO"
+    - DESTINATION="OS=3.0,name=Apple Watch - 42mm"  SCHEME="$WATCHOS_FRAMEWORK_SCHEME" SDK="$WATCHOS_SDK" RUN_TESTS="NO"  CODE_COVERAGE="NO"
+
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
   - gem install xcpretty 
+
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
+
 script:
   - set -o pipefail
   - if [ $RUN_TESTS == "YES" ]; then
@@ -33,5 +36,8 @@ script:
     else
       xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
     fi
+
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - if [ $CODE_COVERAGE == "YES" ]; then
+      bash <(curl -s https://codecov.io/bash)
+    fi

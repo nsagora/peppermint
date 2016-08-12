@@ -10,17 +10,23 @@ import Foundation
 
 public struct ValidationConstraint<T> {
 
-    private let predicate: (T?) -> Bool
-    private let message: String
+    private let predicateClosure: (T?) -> Bool
+    private let messageClosure: (T?) -> String
 
-    public init<P:ValidationPredicate where P.InputType == T >(predicate: P, message: String) {
-        self.predicate = predicate.evaluate
-        self.message = message
+    public init<P:ValidationPredicate where P.InputType == T>(predicate: P, message: String) {
+        self.predicateClosure = predicate.evaluate
+        self.messageClosure = { _ in return message }
+    }
+
+    public init<P:ValidationPredicate where P.InputType == T>(predicate: P, message: (T?)->String) {
+        self.predicateClosure = predicate.evaluate
+        self.messageClosure = message
     }
 
     public func evaluate(with input:T?) -> ValidationResult {
 
-        let result = predicate(input)
+        let result = predicateClosure(input)
+        let message = messageClosure(input)
 
         if result == true {
             return .Success

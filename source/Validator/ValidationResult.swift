@@ -12,16 +12,3 @@ public enum ValidationResult {
     case Success
     case Failure(ValidationError)
 }
-
-public struct ValidationError: LocalizedError {
-
-    private let message:String
-
-    public init(message:String) {
-        self.message = message
-    }
-
-    public var localizedDescription: String {
-        return message
-    }
-}

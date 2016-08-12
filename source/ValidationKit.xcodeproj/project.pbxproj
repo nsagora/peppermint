@@ -38,6 +38,10 @@
 		FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
 		FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */; };
 		FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
+		FACD1DEC1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
+		FACD1DED1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
+		FACD1DEE1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
+		FACD1DEF1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
 		FADD5FA51D5A586B00ECACA1 /* ValidationConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */; };
 		FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */; };
 		FAE24F201D5A5FF70017902A /* ValidationConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */; };
@@ -83,6 +87,7 @@
 		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
 		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; };
+		FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraint.swift; sourceTree = "<group>"; };
 		FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraintTests.swift; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */,
+				FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */,
 				FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */,
 				FAB52B491D54EC4700110049 /* ValidationPredicate.swift */,
 				FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */,
@@ -511,6 +517,7 @@
 				FAA87D001D5CB93D00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87CFE1D5CB93D00792F43 /* ValidationPredicate.swift in Sources */,
 				FAA87CFD1D5CB93D00792F43 /* ValidationConstraint.swift in Sources */,
+				FACD1DEF1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +530,7 @@
 				FAA87D051D5CB93E00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87D031D5CB93E00792F43 /* ValidationPredicate.swift in Sources */,
 				FAA87D021D5CB93E00792F43 /* ValidationConstraint.swift in Sources */,
+				FACD1DEE1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +553,7 @@
 				FAA87CFB1D5CB93C00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87CF91D5CB93C00792F43 /* ValidationPredicate.swift in Sources */,
 				FAA87CF81D5CB93C00792F43 /* ValidationConstraint.swift in Sources */,
+				FACD1DED1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +576,7 @@
 				FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */,
 				FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */,
 				FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */,
+				FACD1DEC1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +981,7 @@
 				FAA87CBD1D5CB7F500792F43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAA87CD51D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS" */ = {
 			isa = XCConfigurationList;
@@ -979,6 +990,7 @@
 				FAA87CD71D5CB80900792F43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAA87CD81D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -987,6 +999,7 @@
 				FAA87CDA1D5CB80900792F43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAA87CF11D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS" */ = {
 			isa = XCConfigurationList;
@@ -995,6 +1008,7 @@
 				FAA87CF31D5CB82000792F43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAA87CF41D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1003,6 +1017,7 @@
 				FAA87CF61D5CB82000792F43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAB52B291D54EB8F00110049 /* Build configuration list for PBXProject "ValidationKit" */ = {
 			isa = XCConfigurationList;

@@ -51,6 +51,23 @@ class ValidationConstraintTests: XCTestCase {
     }
 }
 
+extension ValidationConstraintTests {
+
+    func testThatItCallsTheMessageBlock() {
+
+        let predicate = EmailValidationPredicate()
+        let constraint = ValidationConstraint<String>(predicate: predicate) { return "\($0!) is invalid!" }
+        let result = constraint.evaluate(with: "@me")
+
+        switch result {
+        case .Failure(let error):
+            XCTAssertEqual("@me is invalid!", error.localizedDescription)
+        default:
+            XCTFail()
+        }
+    }
+}
+
 struct MockValidatorPredicate: ValidationPredicate  {
 
     func evaluate(with input: Any?) -> Bool {
