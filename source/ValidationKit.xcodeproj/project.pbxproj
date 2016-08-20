@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA00BE0F1D68470F004A38FE /* BlockValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00BE0E1D68470F004A38FE /* BlockValidationPredicate.swift */; };
+		FA00BE111D6847F5004A38FE /* BlockValidationPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00BE101D6847F5004A38FE /* BlockValidationPredicateTests.swift */; };
+		FA6141391D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
+		FA61413A1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
+		FA61413B1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
+		FA61413C1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
 		FAA87CCD1D5CB80900792F43 /* ValidationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CC41D5CB80900792F43 /* ValidationKit.framework */; };
 		FAA87CE91D5CB82000792F43 /* ValidationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CE01D5CB82000792F43 /* ValidationKit.framework */; };
 		FAA87CF71D5CB93C00792F43 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */; };
@@ -74,6 +80,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA00BE0E1D68470F004A38FE /* BlockValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockValidationPredicate.swift; path = Validator/BlockValidationPredicate.swift; sourceTree = "<group>"; };
+		FA00BE101D6847F5004A38FE /* BlockValidationPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockValidationPredicateTests.swift; path = ValidatorTests/BlockValidationPredicateTests.swift; sourceTree = "<group>"; };
+		FA6141381D61F36D00EECCC6 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CC41D5CB80900792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +180,8 @@
 		FAB52B251D54EB8F00110049 = {
 			isa = PBXGroup;
 			children = (
+				FA00BE0E1D68470F004A38FE /* BlockValidationPredicate.swift */,
+				FA00BE101D6847F5004A38FE /* BlockValidationPredicateTests.swift */,
 				FAB52B311D54EB8F00110049 /* Sources */,
 				FAB52B3C1D54EB8F00110049 /* Tests */,
 				FAB52B301D54EB8F00110049 /* Products */,
@@ -194,6 +205,7 @@
 		FAB52B311D54EB8F00110049 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				FA6141381D61F36D00EECCC6 /* Validator.swift */,
 				FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */,
 				FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */,
 				FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */,
@@ -516,6 +528,7 @@
 				FAA87CFC1D5CB93D00792F43 /* ValidationResult.swift in Sources */,
 				FAA87D001D5CB93D00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87CFE1D5CB93D00792F43 /* ValidationPredicate.swift in Sources */,
+				FA61413C1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87CFD1D5CB93D00792F43 /* ValidationConstraint.swift in Sources */,
 				FACD1DEF1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
@@ -529,6 +542,7 @@
 				FAA87D011D5CB93E00792F43 /* ValidationResult.swift in Sources */,
 				FAA87D051D5CB93E00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87D031D5CB93E00792F43 /* ValidationPredicate.swift in Sources */,
+				FA61413B1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87D021D5CB93E00792F43 /* ValidationConstraint.swift in Sources */,
 				FACD1DEE1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
@@ -552,6 +566,7 @@
 				FAA87CF71D5CB93C00792F43 /* ValidationResult.swift in Sources */,
 				FAA87CFB1D5CB93C00792F43 /* EmailValidationPredicate.swift in Sources */,
 				FAA87CF91D5CB93C00792F43 /* ValidationPredicate.swift in Sources */,
+				FA61413A1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87CF81D5CB93C00792F43 /* ValidationConstraint.swift in Sources */,
 				FACD1DED1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
@@ -571,10 +586,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA00BE0F1D68470F004A38FE /* BlockValidationPredicate.swift in Sources */,
 				FAEFF3081D568F090061A72F /* EmailValidationPredicate.swift in Sources */,
 				FADD5FA51D5A586B00ECACA1 /* ValidationConstraint.swift in Sources */,
 				FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */,
 				FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */,
+				FA6141391D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */,
 				FACD1DEC1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
@@ -584,6 +601,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA00BE111D6847F5004A38FE /* BlockValidationPredicateTests.swift in Sources */,
 				FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */,
 				FAE24F201D5A5FF70017902A /* ValidationConstraintTests.swift in Sources */,
 				FAEFF30A1D568F4D0061A72F /* EmailValidationRuleTests.swift in Sources */,

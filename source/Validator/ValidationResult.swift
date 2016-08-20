@@ -12,3 +12,19 @@ public enum ValidationResult {
     case Success
     case Failure(ValidationError)
 }
+
+extension ValidationResult {
+
+    public var isValid:Bool {
+        switch self {
+        case .Success:
+            return true
+        case.Failure:
+            return false
+        }
+    }
+
+    public var isInvalid:Bool {
+        return !isValid
+    }
+}
