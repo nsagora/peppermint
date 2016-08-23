@@ -8,16 +8,17 @@
 
 import Foundation
 
+public typealias ValidationBlock<T> = (T?) -> Bool
 
-struct BlockValidationPredicate<T>: ValidationPredicate {
+public struct BlockValidationPredicate<T>: ValidationPredicate {
 
-    private let block: (T?) -> Bool
+    private let block: ValidationBlock<T>
 
-    init(aBlock:(T?) -> Bool) {
+    public init(aBlock:ValidationBlock<T>) {
         block = aBlock
     }
 
-    func evaluate(with input: T?) -> Bool {
+    public func evaluate(with input: T?) -> Bool {
         return block(input)
     }
 }
