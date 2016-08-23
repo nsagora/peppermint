@@ -8,17 +8,19 @@
 
 import Foundation
 
+public typealias MessageBuilder<T> = (T?)->String
+
 public struct ValidationConstraint<T> {
 
     private let predicateClosure: (T?) -> Bool
-    private let messageClosure: (T?) -> String
+    private let messageClosure: MessageBuilder<T>
 
-    public init<P:ValidationPredicate where P.InputType == T>(predicate: P, message: String) {
+    public init<P:ValidationPredicate>(predicate: P, message: String) where P.InputType == T {
         self.predicateClosure = predicate.evaluate
         self.messageClosure = { _ in return message }
     }
 
-    public init<P:ValidationPredicate where P.InputType == T>(predicate: P, message: (T?)->String) {
+    public init<P:ValidationPredicate>(predicate: P, message: MessageBuilder<T>) where P.InputType == T {
         self.predicateClosure = predicate.evaluate
         self.messageClosure = message
     }

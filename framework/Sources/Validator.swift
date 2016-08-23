@@ -10,7 +10,7 @@ import Foundation
 
 public struct Validator<T> {
 
-    private var constraints = [ValidationConstraint<T>]()
+    var constraints = [ValidationConstraint<T>]()
 }
 
 extension Validator {
@@ -19,12 +19,12 @@ extension Validator {
         constraints.append(constraint)
     }
 
-    public mutating func add<P:ValidationPredicate where P.InputType == T>(predicate:P, message:String) {
+    public mutating func add<P:ValidationPredicate>(predicate:P, message:String) where P.InputType == T {
         let constraint = ValidationConstraint(predicate: predicate, message: message)
         add(constraint: constraint)
     }
 
-    public mutating func add<P:ValidationPredicate where P.InputType == T>(predicate:P, message:(T?)->String) {
+    public mutating func add<P:ValidationPredicate>(predicate:P, message: MessageBuilder<T>) where P.InputType == T {
         let constraint = ValidationConstraint(predicate: predicate, message: message)
         add(constraint: constraint)
     }
