@@ -55,13 +55,13 @@ extension ValidationConstraintTests {
 
     func testThatItCallsTheMessageBlock() {
 
-        let predicate = EmailValidationPredicate()
+        let predicate = BlockValidationPredicate<String> { $0! == "input" }
         let constraint = ValidationConstraint<String>(predicate: predicate) { return "\($0!) is invalid!" }
-        let result = constraint.evaluate(with: "@me")
+        let result = constraint.evaluate(with: "output")
 
         switch result {
         case .Failure(let error):
-            XCTAssertEqual("@me is invalid!", error.localizedDescription)
+            XCTAssertEqual("output is invalid!", error.localizedDescription)
         default:
             XCTFail()
         }
