@@ -3,7 +3,7 @@
 //  ValidationKit
 //
 //  Created by Alex Cristea on 12/08/16.
-//  Copyright © 2016 NSAgora. All rights reserved.
+//  Copyright © 2016 iOS NSAgora. All rights reserved.
 //
 
 import Foundation

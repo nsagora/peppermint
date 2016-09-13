@@ -9,17 +9,17 @@
 import Foundation
 
 public enum ValidationResult {
-    case Success
-    case Failure(ValidationError)
+    case Valid
+    case Invalid(ValidationError)
 }
 
 extension ValidationResult {
 
     public var isValid:Bool {
         switch self {
-        case .Success:
+        case .Valid:
             return true
-        case.Failure:
+        case.Invalid:
             return false
         }
     }

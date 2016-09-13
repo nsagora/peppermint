@@ -3,18 +3,16 @@
 //  ValidationKit
 //
 //  Created by Alex Cristea on 20/08/16.
-//  Copyright © 2016 NSAgora. All rights reserved.
+//  Copyright © 2016 iOS NSAgora. All rights reserved.
 //
 
 import Foundation
 
-public typealias ValidationBlock<T> = (T?) -> Bool
-
 public struct BlockValidationPredicate<T>: ValidationPredicate {
 
-    private let block: ValidationBlock<T>
+    private let block: (T?) -> Bool
 
-    public init(aBlock:ValidationBlock<T>) {
+    public init(aBlock:@escaping (T?) -> Bool) {
         block = aBlock
     }
 

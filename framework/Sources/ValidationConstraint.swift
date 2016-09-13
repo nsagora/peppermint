@@ -13,14 +13,14 @@ public typealias MessageBuilder<T> = (T?)->String
 public struct ValidationConstraint<T> {
 
     private let predicateClosure: (T?) -> Bool
-    private let messageClosure: MessageBuilder<T>
+    private let messageClosure: (T?)->String
 
     public init<P:ValidationPredicate>(predicate: P, message: String) where P.InputType == T {
         self.predicateClosure = predicate.evaluate
         self.messageClosure = { _ in return message }
     }
 
-    public init<P:ValidationPredicate>(predicate: P, message: MessageBuilder<T>) where P.InputType == T {
+    public init<P:ValidationPredicate>(predicate: P, message: @escaping MessageBuilder<T>) where P.InputType == T {
         self.predicateClosure = predicate.evaluate
         self.messageClosure = message
     }
@@ -31,11 +31,11 @@ public struct ValidationConstraint<T> {
         let message = messageClosure(input)
 
         if result == true {
-            return .Success
+            return .Valid
         }
         else {
             let error = ValidationError(message: message)
-            return .Failure(error)
+            return .Invalid(error)
         }
     }
 }
