@@ -68,7 +68,7 @@ extension ValidationConstraintTests {
     }
 }
 
-struct MockValidatorPredicate: ValidationPredicate  {
+fileprivate struct MockValidatorPredicate: ValidationPredicate  {
 
     func evaluate(with input: Any?) -> Bool {
         return input == nil
