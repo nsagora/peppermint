@@ -1,7 +1,7 @@
 __Validation Kit__ · [Validation Components][validation-components]
 
-[validation-kit]: https://github.com/alexcristea/validation-kit
-[validation-components]: https://github.com/alexcristea/validation-components 
+[validation-kit]: https://github.com/nsagora/validation-kit
+[validation-components]: https://github.com/nsagora/validation-components 
 
 -------
 
@@ -15,11 +15,11 @@ __Validation Kit__ · [Validation Components][validation-components]
 [twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [twitter-overview]: https://twitter.com/nsagora
 
-[travis-status]: https://travis-ci.org/alexcristea/validation-kit.svg?branch=develop
-[travis-overview]: https://travis-ci.org/alexcristea/validation-kit
+[travis-status]: https://travis-ci.org/nsagora/validation-kit.svg?branch=develop
+[travis-overview]: https://travis-ci.org/nsagora/validation-kit
 
-[codecov-status]: https://codecov.io/gh/alexcristea/validation-kit/branch/develop/graph/badge.svg
-[codecov-overview]: https://codecov.io/gh/alexcristea/validation-kit 
+[codecov-status]: https://codecov.io/gh/nsagora/validation-kit/branch/develop/graph/badge.svg
+[codecov-overview]: https://codecov.io/gh/nsagora/validation-kit 
 
 [carthage-compatible]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [carthage-overview]: https://github.com/Carthage/Carthage
@@ -58,19 +58,19 @@ The full documentation on how to install and use [Carthage][carthage] is availab
 To use the latest stable version, add this to your [`Cartfile`][carthage-cartfile]:
 
 ``` 
-github "alexcristea/validation-kit" 
+github "nsagora/validation-kit" 
 ```
 
 To use a certain version, add this to your [`Cartfile`][carthage-cartfile]:
 
 ``` 
-github "alexcristea/validation-kit" >= 0.1.0 
+github "nsagora/validation-kit" >= 0.1.0 
 ```
 
 To use the latest version in development, add this to your [`Cartfile`][carthage-cartfile]:
 
 ``` 
-github "alexcristea/validation-kit" "develop" 
+github "nsagora/validation-kit" "develop" 
 ```
 
 [carthage]: https://github.com/Carthage/Carthage
