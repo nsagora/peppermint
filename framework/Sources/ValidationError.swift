@@ -8,14 +8,20 @@
 
 import Foundation
 
+/**
+ Contains information about why a validation is invalid.
+ */
 public struct ValidationError: LocalizedError {
 
     private let message:String
 
-    public init(message:String) {
+    internal init(message:String) {
         self.message = message
     }
 
+    /**
+     Localised description for the reason of a failing validation.
+     */
     public var localizedDescription: String {
         return message
     }
