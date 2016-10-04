@@ -55,6 +55,19 @@ class ValidatorTests: XCTestCase {
     }
 }
 
+extension ValidatorTests {
+    
+    static var allTests : [(String, (ValidatorTests) -> () throws -> Void)] {
+        return [
+            ("testThatItCanBeInstantiated", testThatItCanBeInstantiated),
+            ("testThatAfterInitItHasNoConstraints", testThatAfterInitItHasNoConstraints),
+            ("testThatCanAddValidationConstraint", testThatCanAddValidationConstraint),
+            ("testThatCanAddValidationConstraintAlternativeOne", testThatCanAddValidationConstraintAlternativeOne),
+            ("testThatCanAddValidationConstraintAlternativeTwo", testThatCanAddValidationConstraintAlternativeTwo),
+        ]
+    }
+}
+
 fileprivate struct MockValidatorPredicate: ValidationPredicate  {
     
     func evaluate(with input: String?) -> Bool {
