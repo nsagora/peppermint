@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'ValidationKit'
   s.version          = '0.1.0'
-  s.summary          = 'Lightweight framework for input validation'
+  s.summary          = 'Lightweight framework for input validation written in Swift'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = '3.0'
 
-  s.source_files = 'framework/Sources/**'
+  s.source_files = 'Sources/**'
 end
