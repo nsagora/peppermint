@@ -56,12 +56,12 @@ public struct ValidationConstraint<T> {
         let result = predicateBuilder(input)
         
         if result == true {
-            return .Valid
+            return .valid
         }
         else {
             let message = messageBuilder(input)
             let error = ValidationError(message: message)
-            return .Invalid(error)
+            return .invalid(error)
         }
     }
 }

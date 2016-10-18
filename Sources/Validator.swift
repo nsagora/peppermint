@@ -59,7 +59,7 @@ extension Validator {
      - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `ValidationConstraint` otherwise.
      */
     public func validate(input:T?) -> ValidationResult {
-        return constraints.reduce(.Valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
+        return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
 
     /**

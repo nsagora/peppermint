@@ -15,14 +15,14 @@ public enum ValidationResult {
     /** 
      Represents a valid validation.
      */
-    case Valid
+    case valid
     
     /**
      Represents a failed validation. 
      
      It has an associated `ValidationError` to describe the reason of the failure.
      */
-    case Invalid(ValidationError)
+    case invalid(ValidationError)
 }
 
 extension ValidationResult {
@@ -32,9 +32,9 @@ extension ValidationResult {
      */
     public var isValid:Bool {
         switch self {
-        case .Valid:
+        case .valid:
             return true
-        case.Invalid:
+        case.invalid:
             return false
         }
     }

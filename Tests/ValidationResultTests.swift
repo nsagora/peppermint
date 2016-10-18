@@ -12,15 +12,15 @@ import XCTest
 class ValidationResultTests: XCTestCase {
 
     func testIsValid() {
-        XCTAssertTrue(ValidationResult.Valid.isValid)
-        XCTAssertFalse(ValidationResult.Valid.isInvalid)
+        XCTAssertTrue(ValidationResult.valid.isValid)
+        XCTAssertFalse(ValidationResult.valid.isInvalid)
     }
     
     func testIsInvalid() {
         
         let error = ValidationError(message: "Invalid")
         
-        XCTAssertTrue(ValidationResult.Invalid(error).isInvalid)
-        XCTAssertFalse(ValidationResult.Invalid(error).isValid)
+        XCTAssertTrue(ValidationResult.invalid(error).isInvalid)
+        XCTAssertFalse(ValidationResult.invalid(error).isValid)
     }
 }
