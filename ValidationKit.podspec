@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ValidationKit'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'Lightweight framework for input validation written in Swift'
 
 # This description is used to generate tags and improve search results.
