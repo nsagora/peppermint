@@ -22,7 +22,10 @@ class ValidatorTests: XCTestCase {
         validator = nil
         super.tearDown()
     }
+}
 
+extension ValidatorTests {
+    
     func testThatItCanBeInstantiated() {
         XCTAssertNotNil(validator)
     }
@@ -30,6 +33,32 @@ class ValidatorTests: XCTestCase {
     func testThatAfterInitItHasNoConstraints() {
         XCTAssertEqual(validator.constraints.count, 0)
     }
+    
+    func testThatItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
+        let validator = Validator<String>(constraints:[])
+        XCTAssertEqual(validator.constraints.count, 0)
+    }
+    
+    func testThatItCanBeInstantiatedWithAnArrayofConstrains() {
+        
+        let predicate = MockValidatorPredicate()
+        let constraint = ValidationConstraint(predicate: predicate, message: "Input should be nil")
+        
+        let validator = Validator<String>(constraints:[constraint])
+        XCTAssertEqual(validator.constraints.count, 1)
+    }
+    
+    func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
+        
+        let predicate = MockValidatorPredicate()
+        let constraint = ValidationConstraint(predicate: predicate, message: "Input should be nil")
+        
+        let validator = Validator<String>(constraints:constraint)
+        XCTAssertEqual(validator.constraints.count, 1)
+    }
+}
+
+extension ValidatorTests {
     
     func testThatCanAddValidationConstraint() {
         
@@ -52,6 +81,42 @@ class ValidatorTests: XCTestCase {
         let predicate = MockValidatorPredicate()
         validator.add(predicate: predicate, message: { return "\($0) should be nil" })
         XCTAssertEqual(validator.constraints.count, 1)
+    }
+}
+
+extension ValidatorTests {
+    
+    func testThatItValidatesAnyToValid() {
+        let predicate = MockValidatorPredicate()
+        validator.add(predicate: predicate, message: "Input should be nil")
+     
+        switch validator.evaluateAny(input: nil) {
+        case .valid:
+            XCTAssert(true)
+        default:
+            XCTFail()
+        }
+    }
+    
+    func testThatItValidatesAnyToInvalid() {
+        let predicate = MockValidatorPredicate()
+        validator.add(predicate: predicate, message: "Input should be nil")
+        
+        switch validator.evaluateAny(input: "") {
+        case .invalid:
+            XCTAssert(true)
+        default:
+            XCTFail()
+        }
+    }
+    
+    func testThatItValidatesAll() {
+        let predicate = MockValidatorPredicate()
+        validator.add(predicate: predicate, message: "Input should be nil")
+        validator.add(predicate: predicate, message: "Input should be nil twice")
+        
+        let result = validator.evaluateAll(input: nil)
+        XCTAssertEqual(result.count, 2)
     }
 }
 
