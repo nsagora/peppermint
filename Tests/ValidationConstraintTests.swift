@@ -33,7 +33,7 @@ class ValidationConstraintTests: XCTestCase {
     func testThatItReturnsSuccessForValidInput() {
         let result = constraint.evaluate(with: nil)
         switch result {
-        case .Valid:
+        case .valid:
             XCTAssertTrue(true)
         default:
             XCTFail()
@@ -43,7 +43,7 @@ class ValidationConstraintTests: XCTestCase {
     func testThatItFailsWithErrorForInvalidInput() {
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .Invalid(let error):
+        case .invalid(let error):
             XCTAssertEqual(message, error.localizedDescription)
         default:
             XCTFail()
@@ -60,7 +60,7 @@ extension ValidationConstraintTests {
         let result = constraint.evaluate(with: "output")
 
         switch result {
-        case .Invalid(let error):
+        case .invalid(let error):
             XCTAssertEqual("output is invalid!", error.localizedDescription)
         default:
             XCTFail()
