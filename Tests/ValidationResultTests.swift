@@ -23,4 +23,12 @@ class ValidationResultTests: XCTestCase {
         XCTAssertTrue(ValidationResult.invalid(error).isInvalid)
         XCTAssertFalse(ValidationResult.invalid(error).isValid)
     }
+    
+    func testResultError() {
+        
+        let error = ValidationError(message: "Invalid")
+        
+        XCTAssertTrue(ValidationResult.invalid(error).error != nil)
+        XCTAssertTrue(ValidationResult.valid.error == nil)
+    }
 }
