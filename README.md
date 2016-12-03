@@ -104,7 +104,7 @@ To provide context, a `Validator` allows to constrain an input as being required
 
 ### Full Validator Example
 
-The classic validation example is that of the login form, whereby users a prompted to enter their *username* and *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller. Similarly, the logic is often invoked through various user interactions (e.g. typing characters into a field, and tapping a *Login* button).
+The classic validation example is that of the login form, whereby users are prompted to enter their *username* and *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller. Similarly, the logic is often invoked through various user interactions (e.g. typing characters into a field, and tapping a *Login* button).
 
 `Validation Kit` seeks instead to consolidate, standardize, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `Validator` object that can be used to enforce requirements on the username input data:
 
@@ -146,7 +146,7 @@ From above, we see that once we've constructed the `usernameValidator`, we're si
 
 ### Independent Components
 
-Along with the fully integated scenario depicted above, `Validator Kit` also supports using each component independently. Specifically, we are able to exercise a `ValidationPredicate` outside of a `ValidationConstraint`, and similary exercise a `ValidationConstraint` outside of a `Validator`.
+Along with the fully integrated scenario depicted above, `Validator Kit` also supports using each component independently. Specifically, we are able to exercise a `ValidationPredicate` outside of a `ValidationConstraint`, and similarly exercise a `ValidationConstraint` outside of a `Validator`.
 
 **ValidationPredicate**
 
