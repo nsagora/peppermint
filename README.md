@@ -163,6 +163,7 @@ predicate.evaluate(with: "ab") // returns false
 let predicate = BlockValidationPredicate<String> { $0 == "Mr. Goodbytes" }
 let message = "Ah Ah Ah! You didn't say the magic word!"
 let constraint = ValidationConstraint(predicate: predicate, message: message)
+
 let result = constraint.evaluate(with: "please")
 switch result {
     case .valid:
