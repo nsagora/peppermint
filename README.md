@@ -169,7 +169,7 @@ switch result {
     case .valid:
         print("access granted...")
     case .invalid(let error):
-        print(error)
+        print(error.localizedDescription) // prints the message
 }
 ```
 
