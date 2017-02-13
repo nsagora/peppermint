@@ -45,4 +45,14 @@ extension ValidationResult {
     public var isInvalid:Bool {
         return !isValid
     }
+    
+    /**
+     `ValidationError` if the validation result is invalid, `nil` otherwise.
+     */
+    public var error: ValidationError? {
+        switch self {
+        case .valid:                return nil
+        case .invalid(let error):   return error
+        }
+    }
 }
