@@ -22,7 +22,7 @@ public struct ValidationError: LocalizedError {
     /**
      Localised description for the reason of a failing validation.
      */
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         return message
     }
 }
