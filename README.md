@@ -37,7 +37,7 @@ At the core of this project are the following principles:
 ### Separation of concerns
 
 Think of `Validation Toolkit` as to an adjustable wrench more than to a Swiss knife. 
-With this idea in mind, the kit is composed from a small set of protocols, classes and structs than ca be easily used to fit your project needs.
+With this idea in mind, the kit is composed from a small set of protocols, classes and structs than can be easily used to fit your project needs.
 
 ### All platforms availability
 
