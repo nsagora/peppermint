@@ -1,6 +1,6 @@
 import PackageDescription
 
 let package = Package(
-    name: "ValidationKit",
+    name: "ValidationToolkit",
     exclude: ["Tests"]
 )

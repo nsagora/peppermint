@@ -1,6 +1,6 @@
 //
 //  BlockValidationPredicate.swift
-//  ValidationKit
+//  ValidationToolkit
 //
 //  Created by Alex Cristea on 20/08/16.
 //  Copyright © 2016 iOS NSAgora. All rights reserved.

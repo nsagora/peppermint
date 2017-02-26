@@ -1,13 +1,13 @@
 //
 //  ValidatorTests.swift
-//  ValidationKit
+//  ValidationToolkit
 //
 //  Created by Alex Cristea on 17/09/2016.
 //  Copyright © 2016 iOS NSAgora. All rights reserved.
 //
 
 import XCTest
-@testable import ValidationKit
+@testable import ValidationToolkit
 
 class ValidatorTests: XCTestCase {
 

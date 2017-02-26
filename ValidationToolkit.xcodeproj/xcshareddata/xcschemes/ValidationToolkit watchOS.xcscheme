@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FAA87CC31D5CB80900792F43"
-               BuildableName = "ValidationKit.framework"
-               BlueprintName = "ValidationKit tvOS"
-               ReferencedContainer = "container:ValidationKit.xcodeproj">
+               BlueprintIdentifier = "FAA87CB61D5CB7F500792F43"
+               BuildableName = "ValidationToolkit.framework"
+               BlueprintName = "ValidationToolkit watchOS"
+               ReferencedContainer = "container:ValidationToolkit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,26 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FAA87CCB1D5CB80900792F43"
-               BuildableName = "ValidationKitTests.xctest"
-               BlueprintName = "ValidationKit tvOS Tests"
-               ReferencedContainer = "container:ValidationKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FAA87CC31D5CB80900792F43"
-            BuildableName = "ValidationKit.framework"
-            BlueprintName = "ValidationKit tvOS"
-            ReferencedContainer = "container:ValidationKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -65,10 +46,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FAA87CC31D5CB80900792F43"
-            BuildableName = "ValidationKit.framework"
-            BlueprintName = "ValidationKit tvOS"
-            ReferencedContainer = "container:ValidationKit.xcodeproj">
+            BlueprintIdentifier = "FAA87CB61D5CB7F500792F43"
+            BuildableName = "ValidationToolkit.framework"
+            BlueprintName = "ValidationToolkit watchOS"
+            ReferencedContainer = "container:ValidationToolkit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,10 +64,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FAA87CC31D5CB80900792F43"
-            BuildableName = "ValidationKit.framework"
-            BlueprintName = "ValidationKit tvOS"
-            ReferencedContainer = "container:ValidationKit.xcodeproj">
+            BlueprintIdentifier = "FAA87CB61D5CB7F500792F43"
+            BuildableName = "ValidationToolkit.framework"
+            BlueprintName = "ValidationToolkit watchOS"
+            ReferencedContainer = "container:ValidationToolkit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
