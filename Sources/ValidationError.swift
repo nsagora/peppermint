@@ -1,6 +1,6 @@
 //
 //  ValidationError.swift
-//  ValidationKit
+//  ValidationToolkit
 //
 //  Created by Alex Cristea on 12/08/16.
 //  Copyright © 2016 iOS NSAgora. All rights reserved.
@@ -22,7 +22,7 @@ public struct ValidationError: LocalizedError {
     /**
      Localised description for the reason of a failing validation.
      */
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         return message
     }
 }

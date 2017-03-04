@@ -1,6 +1,6 @@
 //
 //  ValidationResult.swift
-//  Validator
+//  ValidationToolkit
 //
 //  Created by Alex Cristea on 09/08/16.
 //  Copyright © 2016 iOS NSAgora. All rights reserved.
@@ -44,5 +44,15 @@ extension ValidationResult {
      */
     public var isInvalid:Bool {
         return !isValid
+    }
+    
+    /**
+     `ValidationError` if the validation result is invalid, `nil` otherwise.
+     */
+    public var error: ValidationError? {
+        switch self {
+        case .valid:                return nil
+        case .invalid(let error):   return error
+        }
     }
 }

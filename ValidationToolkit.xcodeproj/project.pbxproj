@@ -24,8 +24,8 @@
 		FA61413A1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
 		FA61413B1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
 		FA61413C1D61F36D00EECCC6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6141381D61F36D00EECCC6 /* Validator.swift */; };
-		FAA87CCD1D5CB80900792F43 /* ValidationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CC41D5CB80900792F43 /* ValidationKit.framework */; };
-		FAA87CE91D5CB82000792F43 /* ValidationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CE01D5CB82000792F43 /* ValidationKit.framework */; };
+		FAA87CCD1D5CB80900792F43 /* ValidationToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */; };
+		FAA87CE91D5CB82000792F43 /* ValidationToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CE01D5CB82000792F43 /* ValidationToolkit.framework */; };
 		FAA87CF71D5CB93C00792F43 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */; };
 		FAA87CF81D5CB93C00792F43 /* ValidationConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */; };
 		FAA87CF91D5CB93C00792F43 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
@@ -42,11 +42,11 @@
 		FAA87D081D5CB97500792F43 /* ValidationConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */; };
 		FAA87D091D5CB97600792F43 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
 		FAA87D0B1D5CB97600792F43 /* ValidationConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */; };
-		FAA87D161D5CC00D00792F43 /* ValidationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAA87D171D5CC01200792F43 /* ValidationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAA87D181D5CC04300792F43 /* ValidationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAB52B391D54EB8F00110049 /* ValidationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */; };
-		FAB52B401D54EB8F00110049 /* ValidationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAA87D161D5CC00D00792F43 /* ValidationToolkit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationToolkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAA87D171D5CC01200792F43 /* ValidationToolkit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationToolkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAA87D181D5CC04300792F43 /* ValidationToolkit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationToolkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAB52B391D54EB8F00110049 /* ValidationToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB52B2F1D54EB8F00110049 /* ValidationToolkit.framework */; };
+		FAB52B401D54EB8F00110049 /* ValidationToolkit.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB52B321D54EB8F00110049 /* ValidationToolkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
 		FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */; };
 		FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
@@ -65,14 +65,14 @@
 			containerPortal = FAB52B261D54EB8F00110049 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FAA87CC31D5CB80900792F43;
-			remoteInfo = "ValidationKit tvOS";
+			remoteInfo = "ValidationToolkit tvOS";
 		};
 		FAA87CEA1D5CB82000792F43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAB52B261D54EB8F00110049 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FAA87CDF1D5CB82000792F43;
-			remoteInfo = "ValidationKit macOS";
+			remoteInfo = "ValidationToolkit macOS";
 		};
 		FAB52B3A1D54EB8F00110049 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -87,25 +87,25 @@
 		FA00BE0E1D68470F004A38FE /* BlockValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockValidationPredicate.swift; sourceTree = "<group>"; };
 		FA00BE101D6847F5004A38FE /* BlockValidationPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockValidationPredicateTests.swift; sourceTree = "<group>"; };
 		FA17B2DA1D8D43E500534634 /* ValidationResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultTests.swift; sourceTree = "<group>"; };
-		FA17B2DE1D8D460D00534634 /* ValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
-		FA6141381D61F36D00EECCC6 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CC41D5CB80900792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CE01D5CB82000792F43 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAB52B321D54EB8F00110049 /* ValidationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidationKit.h; sourceTree = "<group>"; };
+		FA17B2DE1D8D460D00534634 /* ValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidatorTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FA6141381D61F36D00EECCC6 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Validator.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FAA87CB71D5CB7F500792F43 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CCC1D5CB80900792F43 /* ValidationToolkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationToolkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CE01D5CB82000792F43 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA87CE81D5CB82000792F43 /* ValidationToolkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationToolkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB52B2F1D54EB8F00110049 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB52B321D54EB8F00110049 /* ValidationToolkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ValidationToolkit.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FAB52B331D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB52B381D54EB8F00110049 /* ValidationToolkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationToolkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB52B3F1D54EB8F00110049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
-		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
-		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; };
+		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationPredicate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegexValidationPredicate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
-		FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraint.swift; sourceTree = "<group>"; };
-		FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
-		FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraintTests.swift; sourceTree = "<group>"; };
+		FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationConstraint.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationResult.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationConstraintTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA87CCD1D5CB80900792F43 /* ValidationKit.framework in Frameworks */,
+				FAA87CCD1D5CB80900792F43 /* ValidationToolkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA87CE91D5CB82000792F43 /* ValidationKit.framework in Frameworks */,
+				FAA87CE91D5CB82000792F43 /* ValidationToolkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB52B391D54EB8F00110049 /* ValidationKit.framework in Frameworks */,
+				FAB52B391D54EB8F00110049 /* ValidationToolkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB52B331D54EB8F00110049 /* Info.plist */,
-				FAB52B321D54EB8F00110049 /* ValidationKit.h */,
+				FAB52B321D54EB8F00110049 /* ValidationToolkit.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,13 +193,13 @@
 		FAB52B301D54EB8F00110049 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */,
-				FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */,
-				FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */,
-				FAA87CC41D5CB80900792F43 /* ValidationKit.framework */,
-				FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */,
-				FAA87CE01D5CB82000792F43 /* ValidationKit.framework */,
-				FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */,
+				FAB52B2F1D54EB8F00110049 /* ValidationToolkit.framework */,
+				FAB52B381D54EB8F00110049 /* ValidationToolkitTests.xctest */,
+				FAA87CB71D5CB7F500792F43 /* ValidationToolkit.framework */,
+				FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */,
+				FAA87CCC1D5CB80900792F43 /* ValidationToolkitTests.xctest */,
+				FAA87CE01D5CB82000792F43 /* ValidationToolkit.framework */,
+				FAA87CE81D5CB82000792F43 /* ValidationToolkitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA87D181D5CC04300792F43 /* ValidationKit.h in Headers */,
+				FAA87D181D5CC04300792F43 /* ValidationToolkit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +247,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA87D171D5CC01200792F43 /* ValidationKit.h in Headers */,
+				FAA87D171D5CC01200792F43 /* ValidationToolkit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +255,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA87D161D5CC00D00792F43 /* ValidationKit.h in Headers */,
+				FAA87D161D5CC00D00792F43 /* ValidationToolkit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,16 +263,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB52B401D54EB8F00110049 /* ValidationKit.h in Headers */,
+				FAB52B401D54EB8F00110049 /* ValidationToolkit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FAA87CB61D5CB7F500792F43 /* ValidationKit watchOS */ = {
+		FAA87CB61D5CB7F500792F43 /* ValidationToolkit watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAA87CBE1D5CB7F500792F43 /* Build configuration list for PBXNativeTarget "ValidationKit watchOS" */;
+			buildConfigurationList = FAA87CBE1D5CB7F500792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit watchOS" */;
 			buildPhases = (
 				FAA87CB21D5CB7F500792F43 /* Sources */,
 				FAA87CB31D5CB7F500792F43 /* Frameworks */,
@@ -283,14 +283,14 @@
 			);
 			dependencies = (
 			);
-			name = "ValidationKit watchOS";
-			productName = "ValidationKit watchOS";
-			productReference = FAA87CB71D5CB7F500792F43 /* ValidationKit.framework */;
+			name = "ValidationToolkit watchOS";
+			productName = "ValidationToolkit watchOS";
+			productReference = FAA87CB71D5CB7F500792F43 /* ValidationToolkit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FAA87CC31D5CB80900792F43 /* ValidationKit tvOS */ = {
+		FAA87CC31D5CB80900792F43 /* ValidationToolkit tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAA87CD51D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS" */;
+			buildConfigurationList = FAA87CD51D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit tvOS" */;
 			buildPhases = (
 				FAA87CBF1D5CB80900792F43 /* Sources */,
 				FAA87CC01D5CB80900792F43 /* Frameworks */,
@@ -301,14 +301,14 @@
 			);
 			dependencies = (
 			);
-			name = "ValidationKit tvOS";
-			productName = "ValidationKit tvOS";
-			productReference = FAA87CC41D5CB80900792F43 /* ValidationKit.framework */;
+			name = "ValidationToolkit tvOS";
+			productName = "ValidationToolkit tvOS";
+			productReference = FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FAA87CCB1D5CB80900792F43 /* ValidationKit tvOS Tests */ = {
+		FAA87CCB1D5CB80900792F43 /* ValidationToolkit tvOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAA87CD81D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS Tests" */;
+			buildConfigurationList = FAA87CD81D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit tvOS Tests" */;
 			buildPhases = (
 				FAA87CC81D5CB80900792F43 /* Sources */,
 				FAA87CC91D5CB80900792F43 /* Frameworks */,
@@ -319,14 +319,14 @@
 			dependencies = (
 				FAA87CCF1D5CB80900792F43 /* PBXTargetDependency */,
 			);
-			name = "ValidationKit tvOS Tests";
-			productName = "ValidationKit tvOSTests";
-			productReference = FAA87CCC1D5CB80900792F43 /* ValidationKitTests.xctest */;
+			name = "ValidationToolkit tvOS Tests";
+			productName = "ValidationToolkit tvOSTests";
+			productReference = FAA87CCC1D5CB80900792F43 /* ValidationToolkitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FAA87CDF1D5CB82000792F43 /* ValidationKit macOS */ = {
+		FAA87CDF1D5CB82000792F43 /* ValidationToolkit macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAA87CF11D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS" */;
+			buildConfigurationList = FAA87CF11D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit macOS" */;
 			buildPhases = (
 				FAA87CDB1D5CB82000792F43 /* Sources */,
 				FAA87CDC1D5CB82000792F43 /* Frameworks */,
@@ -337,14 +337,14 @@
 			);
 			dependencies = (
 			);
-			name = "ValidationKit macOS";
-			productName = "ValidationKit macOS";
-			productReference = FAA87CE01D5CB82000792F43 /* ValidationKit.framework */;
+			name = "ValidationToolkit macOS";
+			productName = "ValidationToolkit macOS";
+			productReference = FAA87CE01D5CB82000792F43 /* ValidationToolkit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FAA87CE71D5CB82000792F43 /* ValidationKit macOS Tests */ = {
+		FAA87CE71D5CB82000792F43 /* ValidationToolkit macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAA87CF41D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS Tests" */;
+			buildConfigurationList = FAA87CF41D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit macOS Tests" */;
 			buildPhases = (
 				FAA87CE41D5CB82000792F43 /* Sources */,
 				FAA87CE51D5CB82000792F43 /* Frameworks */,
@@ -355,14 +355,14 @@
 			dependencies = (
 				FAA87CEB1D5CB82000792F43 /* PBXTargetDependency */,
 			);
-			name = "ValidationKit macOS Tests";
-			productName = "ValidationKit macOSTests";
-			productReference = FAA87CE81D5CB82000792F43 /* ValidationKitTests.xctest */;
+			name = "ValidationToolkit macOS Tests";
+			productName = "ValidationToolkit macOSTests";
+			productReference = FAA87CE81D5CB82000792F43 /* ValidationToolkitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FAB52B2E1D54EB8F00110049 /* ValidationKit iOS */ = {
+		FAB52B2E1D54EB8F00110049 /* ValidationToolkit iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAB52B431D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationKit iOS" */;
+			buildConfigurationList = FAB52B431D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationToolkit iOS" */;
 			buildPhases = (
 				FAB52B2A1D54EB8F00110049 /* Sources */,
 				FAB52B2B1D54EB8F00110049 /* Frameworks */,
@@ -373,14 +373,14 @@
 			);
 			dependencies = (
 			);
-			name = "ValidationKit iOS";
+			name = "ValidationToolkit iOS";
 			productName = Validator;
-			productReference = FAB52B2F1D54EB8F00110049 /* ValidationKit.framework */;
+			productReference = FAB52B2F1D54EB8F00110049 /* ValidationToolkit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FAB52B371D54EB8F00110049 /* ValidationKit iOS Tests */ = {
+		FAB52B371D54EB8F00110049 /* ValidationToolkit iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAB52B461D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationKit iOS Tests" */;
+			buildConfigurationList = FAB52B461D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationToolkit iOS Tests" */;
 			buildPhases = (
 				FAB52B341D54EB8F00110049 /* Sources */,
 				FAB52B351D54EB8F00110049 /* Frameworks */,
@@ -391,9 +391,9 @@
 			dependencies = (
 				FAB52B3B1D54EB8F00110049 /* PBXTargetDependency */,
 			);
-			name = "ValidationKit iOS Tests";
+			name = "ValidationToolkit iOS Tests";
 			productName = ValidatorTests;
-			productReference = FAB52B381D54EB8F00110049 /* ValidationKitTests.xctest */;
+			productReference = FAB52B381D54EB8F00110049 /* ValidationToolkitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -403,7 +403,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "iOS NSAgora";
 				TargetAttributes = {
 					FAA87CB61D5CB7F500792F43 = {
@@ -443,7 +443,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FAB52B291D54EB8F00110049 /* Build configuration list for PBXProject "ValidationKit" */;
+			buildConfigurationList = FAB52B291D54EB8F00110049 /* Build configuration list for PBXProject "ValidationToolkit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -455,13 +455,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FAB52B2E1D54EB8F00110049 /* ValidationKit iOS */,
-				FAB52B371D54EB8F00110049 /* ValidationKit iOS Tests */,
-				FAA87CDF1D5CB82000792F43 /* ValidationKit macOS */,
-				FAA87CE71D5CB82000792F43 /* ValidationKit macOS Tests */,
-				FAA87CC31D5CB80900792F43 /* ValidationKit tvOS */,
-				FAA87CCB1D5CB80900792F43 /* ValidationKit tvOS Tests */,
-				FAA87CB61D5CB7F500792F43 /* ValidationKit watchOS */,
+				FAB52B2E1D54EB8F00110049 /* ValidationToolkit iOS */,
+				FAB52B371D54EB8F00110049 /* ValidationToolkit iOS Tests */,
+				FAA87CDF1D5CB82000792F43 /* ValidationToolkit macOS */,
+				FAA87CE71D5CB82000792F43 /* ValidationToolkit macOS Tests */,
+				FAA87CC31D5CB80900792F43 /* ValidationToolkit tvOS */,
+				FAA87CCB1D5CB80900792F43 /* ValidationToolkit tvOS Tests */,
+				FAA87CB61D5CB7F500792F43 /* ValidationToolkit watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -616,17 +616,17 @@
 /* Begin PBXTargetDependency section */
 		FAA87CCF1D5CB80900792F43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FAA87CC31D5CB80900792F43 /* ValidationKit tvOS */;
+			target = FAA87CC31D5CB80900792F43 /* ValidationToolkit tvOS */;
 			targetProxy = FAA87CCE1D5CB80900792F43 /* PBXContainerItemProxy */;
 		};
 		FAA87CEB1D5CB82000792F43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FAA87CDF1D5CB82000792F43 /* ValidationKit macOS */;
+			target = FAA87CDF1D5CB82000792F43 /* ValidationToolkit macOS */;
 			targetProxy = FAA87CEA1D5CB82000792F43 /* PBXContainerItemProxy */;
 		};
 		FAB52B3B1D54EB8F00110049 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FAB52B2E1D54EB8F00110049 /* ValidationKit iOS */;
+			target = FAB52B2E1D54EB8F00110049 /* ValidationToolkit iOS */;
 			targetProxy = FAB52B3A1D54EB8F00110049 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -638,6 +638,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -646,6 +647,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -659,6 +661,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -667,6 +670,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -680,6 +684,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -687,6 +692,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -700,6 +706,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -707,6 +714,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -721,7 +729,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -734,7 +742,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -757,6 +765,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -779,6 +788,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -793,7 +803,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -807,7 +817,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -827,8 +837,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -853,8 +865,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nsagora.validation-kit";
-				PRODUCT_NAME = ValidationKit;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nsagora.validation-toolkit";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -880,8 +892,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -899,8 +913,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nsagora.validation-kit";
-				PRODUCT_NAME = ValidationKit;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nsagora.validation-toolkit";
+				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
@@ -925,6 +939,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -944,6 +959,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ValidationToolkit;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -953,7 +969,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 			};
 			name = Debug;
 		};
@@ -962,14 +978,14 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ValidationKitTests;
+				PRODUCT_NAME = ValidationToolkitTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FAA87CBE1D5CB7F500792F43 /* Build configuration list for PBXNativeTarget "ValidationKit watchOS" */ = {
+		FAA87CBE1D5CB7F500792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAA87CBC1D5CB7F500792F43 /* Debug */,
@@ -978,7 +994,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAA87CD51D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS" */ = {
+		FAA87CD51D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAA87CD61D5CB80900792F43 /* Debug */,
@@ -987,7 +1003,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAA87CD81D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationKit tvOS Tests" */ = {
+		FAA87CD81D5CB80900792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit tvOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAA87CD91D5CB80900792F43 /* Debug */,
@@ -996,7 +1012,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAA87CF11D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS" */ = {
+		FAA87CF11D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAA87CF21D5CB82000792F43 /* Debug */,
@@ -1005,7 +1021,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAA87CF41D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationKit macOS Tests" */ = {
+		FAA87CF41D5CB82000792F43 /* Build configuration list for PBXNativeTarget "ValidationToolkit macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAA87CF51D5CB82000792F43 /* Debug */,
@@ -1014,7 +1030,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAB52B291D54EB8F00110049 /* Build configuration list for PBXProject "ValidationKit" */ = {
+		FAB52B291D54EB8F00110049 /* Build configuration list for PBXProject "ValidationToolkit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAB52B411D54EB8F00110049 /* Debug */,
@@ -1023,7 +1039,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAB52B431D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationKit iOS" */ = {
+		FAB52B431D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationToolkit iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAB52B441D54EB8F00110049 /* Debug */,
@@ -1032,7 +1048,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAB52B461D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationKit iOS Tests" */ = {
+		FAB52B461D54EB8F00110049 /* Build configuration list for PBXNativeTarget "ValidationToolkit iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAB52B471D54EB8F00110049 /* Debug */,

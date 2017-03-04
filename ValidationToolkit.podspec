@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint ValidationKit.podspec' to ensure this is a
+# Be sure to run `pod lib lint ValidationToolkit.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'ValidationKit'
-  s.version          = '0.3.0'
+  s.name             = 'ValidationToolkit'
+  s.version          = '0.4.1'
   s.summary          = 'Lightweight framework for input validation written in Swift'
 
 # This description is used to generate tags and improve search results.
@@ -17,12 +17,12 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = "Validation Kit is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching, for Swift projects."
+  s.description      = "Validation Toolkit is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching, for Swift projects."
 
-  s.homepage         = 'https://github.com/nsagora/validation-kit'
+  s.homepage         = 'https://github.com/nsagora/validation-toolkit'
   s.license          = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.author           = { 'Alex Cristea' => 'alex@thinslices.com' }
-  s.source           = { :git => 'https://github.com/nsagora/validation-kit.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/nsagora/validation-toolkit.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/nsagora'
 
   s.ios.deployment_target = '8.0'
@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '2.0'
 
-  s.source_files = 'Sources/**'
+  s.source_files = 'Sources/*.swift'
 end
