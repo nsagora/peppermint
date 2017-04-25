@@ -33,12 +33,19 @@ class RegexValidationPredicateTests: XCTestCase {
     }
 
     func testItFailsValidationForInvalidInput() {
-        let result = rule.evaluate(with: "a")
+        let result = rule.evaluate(with: "NaN")
+        XCTAssertFalse(result)
+    }
+    
+    func testItValidatesCaseInsensitive() {
+        let rule = RegexValidationPredicate(expression: "^Case Insensitive$")
+        let result = rule.evaluate(with: "case insensitive")
+        
         XCTAssertFalse(result)
     }
 
     func testItFailsValidationForLongInvalidInput() {
-        let result = rule.evaluate(with: "1111111111")
+        let result = rule.evaluate(with: "0123456789")
         XCTAssertFalse(result)
     }
 
