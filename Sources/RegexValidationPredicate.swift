@@ -34,7 +34,7 @@ public struct RegexValidationPredicate: ValidationPredicate {
 
         guard let input = input else { return false }
 
-        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", expression)
+        let predicate = NSPredicate(format: "SELF MATCHES %@", expression)
         return predicate.evaluate(with: input);
     }
 }
