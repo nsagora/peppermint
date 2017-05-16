@@ -13,15 +13,15 @@ import Foundation
  
  - paramter input: The value of the input, which can be interpolated into the description to provide more insight.
  */
-public typealias MessageBuilder<T> = (T?)->String
+public typealias MessageBuilder<T> = (T)->String
 
 /**
  A structrure that links a `ValidationPredicate` to a localised message that describes why the predicate evaluation has failed.
  */
 public struct ValidationConstraint<T> {
 
-    private let predicateBuilder: (T?) -> Bool
-    private let messageBuilder: (T?)->String
+    private let predicateBuilder: (T)->Bool
+    private let messageBuilder: MessageBuilder<T>
 
     /**
         Create a new `ValidationConstraint` instance
@@ -51,7 +51,7 @@ public struct ValidationConstraint<T> {
      - parameter input: The input to be validated.
      - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `ValidationConstraint` otherwise.
      */
-    public func evaluate(with input:T?) -> ValidationResult {
+    public func evaluate(with input:T) -> ValidationResult {
 
         let result = predicateBuilder(input)
         

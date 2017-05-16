@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- The `ValidationPredicate` predicate is used to define the structre that must be implemented by concrete predicates.
+ The `ValidationPredicate` protocol is used to define the structre that must be implemented by concrete predicates.
  */
 public protocol ValidationPredicate {
 
@@ -24,5 +24,5 @@ public protocol ValidationPredicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input matches the conditions specified by the receiver, otherwise `false`.
      */
-    func evaluate(with input: InputType?) -> Bool
+    func evaluate(with input: InputType) -> Bool
 }

@@ -13,14 +13,14 @@ import Foundation
  */
 public struct BlockValidationPredicate<T>: ValidationPredicate {
 
-    private let evaluationBlock: (T?) -> Bool
+    private let evaluationBlock: (T) -> Bool
 
     /**
      Creates and returns a new `BlockValidationPredicate` instance.
      
      - parameter aBlock: A closure describing a custom validation condition.
      */
-    public init(aBlock:@escaping (T?) -> Bool) {
+    public init(aBlock:@escaping (T) -> Bool) {
         evaluationBlock = aBlock
     }
 
@@ -30,7 +30,7 @@ public struct BlockValidationPredicate<T>: ValidationPredicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input matches the validation clouser specified by the receiver, otherwise `false`.
      */
-    public func evaluate(with input: T?) -> Bool {
+    public func evaluate(with input: T) -> Bool {
         return evaluationBlock(input)
     }
 }

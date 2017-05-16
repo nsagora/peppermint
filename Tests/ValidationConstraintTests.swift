@@ -11,10 +11,11 @@ import XCTest
 
 class ValidationConstraintTests: XCTestCase {
 
-    private let predicate = MockValidatorPredicate()
-    private let message = "Input should be nil!"
+    private let testInput = "testInput"
+    private let predicate = MockValidatorPredicate(testInput: "testInput")
+    private let message = "Input should be equal to testInput"
 
-    var constraint:ValidationConstraint<Any>!
+    var constraint:ValidationConstraint<String>!
 
     override func setUp() {
         super.setUp()
@@ -31,7 +32,7 @@ class ValidationConstraintTests: XCTestCase {
     }
 
     func testThatItReturnsSuccessForValidInput() {
-        let result = constraint.evaluate(with: nil)
+        let result = constraint.evaluate(with: testInput)
         switch result {
         case .valid:
             XCTAssertTrue(true)
@@ -55,8 +56,8 @@ extension ValidationConstraintTests {
 
     func testThatItCallsTheMessageBlock() {
 
-        let predicate = BlockValidationPredicate<String> { $0! == "input" }
-        let constraint = ValidationConstraint<String>(predicate: predicate) { return "\($0!) is invalid!" }
+        let predicate = BlockValidationPredicate<String> { $0 == "input" }
+        let constraint = ValidationConstraint<String>(predicate: predicate) { return "\($0) is invalid!" }
         let result = constraint.evaluate(with: "output")
 
         switch result {
@@ -70,7 +71,9 @@ extension ValidationConstraintTests {
 
 fileprivate struct MockValidatorPredicate: ValidationPredicate  {
 
-    func evaluate(with input: Any?) -> Bool {
-        return input == nil
+    var testInput: String
+    
+    func evaluate(with input: String) -> Bool {
+        return input == testInput
     }
 }

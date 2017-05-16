@@ -27,11 +27,6 @@ class RegexValidationPredicateTests: XCTestCase {
         XCTAssertNotNil(rule)
     }
 
-    func testItFailsValidationForNil() {
-        let result = rule.evaluate(with: nil)
-        XCTAssertFalse(result)
-    }
-
     func testItFailsValidationForInvalidInput() {
         let result = rule.evaluate(with: "NaN")
         XCTAssertFalse(result)
