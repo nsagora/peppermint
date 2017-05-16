@@ -13,13 +13,12 @@ class ValidationConstraintTests: XCTestCase {
 
     private let testInput = "testInput"
     private let predicate = MockValidatorPredicate(testInput: "testInput")
-    private let message = "Input should be equal to testInput"
 
     var constraint:ValidationConstraint<String>!
 
     override func setUp() {
         super.setUp()
-        constraint = ValidationConstraint(predicate: predicate, message: message)
+        constraint = ValidationConstraint(predicate: predicate, error: TestError.InvalidInput)
     }
     
     override func tearDown() {
@@ -44,29 +43,16 @@ class ValidationConstraintTests: XCTestCase {
     func testThatItFailsWithErrorForInvalidInput() {
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .invalid(let error):
-            XCTAssertEqual(message, error.localizedDescription)
+        case .invalid(let error as TestError):
+            XCTAssertEqual(TestError.InvalidInput, error)
         default:
             XCTFail()
         }
     }
 }
 
-extension ValidationConstraintTests {
-
-    func testThatItCallsTheMessageBlock() {
-
-        let predicate = BlockValidationPredicate<String> { $0 == "input" }
-        let constraint = ValidationConstraint<String>(predicate: predicate) { return "\($0) is invalid!" }
-        let result = constraint.evaluate(with: "output")
-
-        switch result {
-        case .invalid(let error):
-            XCTAssertEqual("output is invalid!", error.localizedDescription)
-        default:
-            XCTFail()
-        }
-    }
+fileprivate enum TestError: Error {
+    case InvalidInput
 }
 
 fileprivate struct MockValidatorPredicate: ValidationPredicate  {

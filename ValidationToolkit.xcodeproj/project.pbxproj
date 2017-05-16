@@ -50,10 +50,6 @@
 		FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B491D54EC4700110049 /* ValidationPredicate.swift */; };
 		FAB52B4C1D552DE800110049 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */; };
 		FAB52B4E1D552ECE00110049 /* RegexValidationRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */; };
-		FACD1DEC1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
-		FACD1DED1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
-		FACD1DEE1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
-		FACD1DEF1D5D84C800B51AE9 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */; };
 		FADD5FA51D5A586B00ECACA1 /* ValidationConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */; };
 		FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */; };
 		FAE24F201D5A5FF70017902A /* ValidationConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */; };
@@ -102,7 +98,6 @@
 		FAB52B491D54EC4700110049 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationPredicate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FAB52B4B1D552DE800110049 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegexValidationPredicate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FAB52B4D1D552ECE00110049 /* RegexValidationRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegexValidationRuleTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationConstraint.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationResult.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FAE24F1F1D5A5FF70017902A /* ValidationConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ValidationConstraintTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -209,7 +204,6 @@
 			children = (
 				FA6141381D61F36D00EECCC6 /* Validator.swift */,
 				FADD5FA61D5A5BDB00ECACA1 /* ValidationResult.swift */,
-				FACD1DEB1D5D84C800B51AE9 /* ValidationError.swift */,
 				FADD5FA41D5A586B00ECACA1 /* ValidationConstraint.swift */,
 				FAB52B491D54EC4700110049 /* ValidationPredicate.swift */,
 				FA00BE0E1D68470F004A38FE /* BlockValidationPredicate.swift */,
@@ -529,7 +523,6 @@
 				FAA87CFE1D5CB93D00792F43 /* ValidationPredicate.swift in Sources */,
 				FA61413C1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87CFD1D5CB93D00792F43 /* ValidationConstraint.swift in Sources */,
-				FACD1DEF1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,7 +536,6 @@
 				FAA87D031D5CB93E00792F43 /* ValidationPredicate.swift in Sources */,
 				FA61413B1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87D021D5CB93E00792F43 /* ValidationConstraint.swift in Sources */,
-				FACD1DEE1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,7 +561,6 @@
 				FAA87CF91D5CB93C00792F43 /* ValidationPredicate.swift in Sources */,
 				FA61413A1D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAA87CF81D5CB93C00792F43 /* ValidationConstraint.swift in Sources */,
-				FACD1DED1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +586,6 @@
 				FADD5FA71D5A5BDB00ECACA1 /* ValidationResult.swift in Sources */,
 				FA6141391D61F36D00EECCC6 /* Validator.swift in Sources */,
 				FAB52B4A1D54EC4700110049 /* ValidationPredicate.swift in Sources */,
-				FACD1DEC1D5D84C800B51AE9 /* ValidationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

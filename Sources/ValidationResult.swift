@@ -20,9 +20,9 @@ public enum ValidationResult {
     /**
      Represents a failed validation. 
      
-     It has an associated `ValidationError` to describe the reason of the failure.
+     It has an associated `Error` to describe the reason of the failure.
      */
-    case invalid(ValidationError)
+    case invalid(Error)
 }
 
 extension ValidationResult {
@@ -47,12 +47,12 @@ extension ValidationResult {
     }
     
     /**
-     `ValidationError` if the validation result is invalid, `nil` otherwise.
+     `Error` if the validation result is invalid, `nil` otherwise.
      */
-    public var error: ValidationError? {
+    public var error: Error? {
         switch self {
-        case .valid:                return nil
-        case .invalid(let error):   return error
+        case .valid: return nil
+        case .invalid(let error): return error
         }
     }
 }

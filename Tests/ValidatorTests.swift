@@ -44,7 +44,7 @@ extension ValidatorTests {
     func testThatItCanBeInstantiatedWithAnArrayofConstrains() {
         
         let predicate = MockValidatorPredicate(testInput: testInput)
-        let constraint = ValidationConstraint(predicate: predicate, message: "Input should be equal to testInput")
+        let constraint = ValidationConstraint(predicate: predicate, error:TestError.InvalidInput)
         
         let validator = Validator<String>(constraints:[constraint])
         XCTAssertEqual(validator.constraints.count, 1)
@@ -53,7 +53,7 @@ extension ValidatorTests {
     func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
         
         let predicate = MockValidatorPredicate(testInput: testInput)
-        let constraint = ValidationConstraint(predicate: predicate, message: "Input should be equal to testInput")
+        let constraint = ValidationConstraint(predicate: predicate, error:TestError.InvalidInput)
         
         let validator = Validator<String>(constraints:constraint)
         XCTAssertEqual(validator.constraints.count, 1)
@@ -64,7 +64,7 @@ extension ValidatorTests {
     
     func testThatCanAddValidationConstraint() {
         
-        let constraint = ValidationConstraint(predicate: predicate, message: "Input should be equal to testInput")
+        let constraint = ValidationConstraint(predicate: predicate, error:TestError.InvalidInput)
         
         validator.add(constraint: constraint)
         XCTAssertEqual(validator.constraints.count, 1)
@@ -72,13 +72,7 @@ extension ValidatorTests {
     
     func testThatCanAddValidationConstraintAlternativeOne() {
         
-        validator.add(predicate: predicate, message: "Input should be equal to testInput")
-        XCTAssertEqual(validator.constraints.count, 1)
-    }
-    
-    func testThatCanAddValidationConstraintAlternativeTwo() {
-        
-        validator.add(predicate: predicate, message: { return "\($0) should be equal to testInput" })
+        validator.add(predicate: predicate, error:TestError.InvalidInput)
         XCTAssertEqual(validator.constraints.count, 1)
     }
 }
@@ -87,7 +81,7 @@ extension ValidatorTests {
     
     func testThatItValidatesAnyToValid() {
         
-        validator.add(predicate: predicate, message: "Input should be equal to testInput")
+        validator.add(predicate: predicate, error:TestError.InvalidInput)
      
         switch validator.evaluateAny(input: testInput) {
         case .valid:
@@ -99,7 +93,7 @@ extension ValidatorTests {
     
     func testThatItValidatesAnyToInvalid() {
         
-        validator.add(predicate: predicate, message: "Input should be equal to testInput")
+        validator.add(predicate: predicate, error:TestError.InvalidInput)
         
         switch validator.evaluateAny(input: "") {
         case .invalid:
@@ -111,12 +105,17 @@ extension ValidatorTests {
     
     func testThatItValidatesAll() {
         
-        validator.add(predicate: predicate, message: "Input should be equal to testInput")
-        validator.add(predicate: predicate, message: "Input should be equal to testInput twice")
+        validator.add(predicate: predicate, error:TestError.InvalidInput)
+        validator.add(predicate: predicate, error:TestError.MissingInput)
         
         let result = validator.evaluateAll(input: testInput)
         XCTAssertEqual(result.count, 2)
     }
+}
+
+fileprivate enum TestError: Error {
+    case InvalidInput
+    case MissingInput
 }
 
 fileprivate struct MockValidatorPredicate: ValidationPredicate  {

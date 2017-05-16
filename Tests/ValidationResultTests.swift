@@ -18,17 +18,17 @@ class ValidationResultTests: XCTestCase {
     
     func testIsInvalid() {
         
-        let error = ValidationError(message: "Invalid")
-        
-        XCTAssertTrue(ValidationResult.invalid(error).isInvalid)
-        XCTAssertFalse(ValidationResult.invalid(error).isValid)
+        XCTAssertTrue(ValidationResult.invalid(TestError.InvalidInput).isInvalid)
+        XCTAssertFalse(ValidationResult.invalid(TestError.InvalidInput).isValid)
     }
     
     func testResultError() {
         
-        let error = ValidationError(message: "Invalid")
-        
-        XCTAssertTrue(ValidationResult.invalid(error).error != nil)
+        XCTAssertTrue(ValidationResult.invalid(TestError.InvalidInput).error != nil)
         XCTAssertTrue(ValidationResult.valid.error == nil)
     }
+}
+
+fileprivate enum TestError: Error {
+    case InvalidInput
 }

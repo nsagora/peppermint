@@ -58,19 +58,8 @@ extension Validator {
      - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
      - parameter message: A localized `String` to describe the reason why the input is invalid.
      */
-    public mutating func add<P:ValidationPredicate>(predicate:P, message:String) where P.InputType == T {
-        let constraint = ValidationConstraint(predicate: predicate, message: message)
-        add(constraint: constraint)
-    }
-
-    /**
-     Adds a `ValidationConstraint` to the generic collection of constraints.
-     
-     - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
-     - parameter message: A `MessageBuilder` clouser to dinamicaly build the reason why the input is invalid.
-     */
-    public mutating func add<P:ValidationPredicate>(predicate:P, message: @escaping MessageBuilder<T>) where P.InputType == T {
-        let constraint = ValidationConstraint(predicate: predicate, message: message)
+    public mutating func add<P:ValidationPredicate>(predicate:P, error:Error) where P.InputType == T {
+        let constraint = ValidationConstraint(predicate: predicate, error: error)
         add(constraint: constraint)
     }
 }
