@@ -112,7 +112,7 @@ The classic validation example is that of the login form, whereby users are prom
 // Setup a constraint used to check the length of the username
 let usernameLengthConstraint = { () -> ValidationConstraint<String> in
     let pred = BlockValidationPredicate<String> {
-        ($0 ?? "").characters.count > 2
+        $0.characters.count > 2
     }
     let msg = "Username must be at least 3 characters long."
     return ValidationConstraint(predicate: pred, message: msg)
