@@ -11,8 +11,8 @@ import XCTest
 
 class ValidationConstraintTests: XCTestCase {
 
-    private let testInput = "testInput"
-    private let predicate = MockValidatorPredicate(testInput: "testInput")
+    fileprivate let testInput = "testInput"
+    fileprivate let predicate = MockValidatorPredicate(testInput: "testInput")
 
     var constraint:ValidationConstraint<String>!
 
@@ -51,8 +51,31 @@ class ValidationConstraintTests: XCTestCase {
     }
 }
 
+extension ValidationConstraintTests {
+    
+    func testThatItDynamicallyBuildsTheValidationError() {
+        
+        let constraint = ValidationConstraint(predicate: predicate) { TestError.UnexpectedInput($0) }
+        let result = constraint.evaluate(with: "Ok")
+        switch result {
+        case .invalid(let error as TestError):
+            XCTAssertEqual(TestError.UnexpectedInput("Ok"), error)
+        default:
+            XCTFail()
+        }
+    }
+}
+
 fileprivate enum TestError: Error {
     case InvalidInput
+    case UnexpectedInput(String)
+}
+
+extension TestError: Equatable {
+    
+    public static func ==(lhs: TestError, rhs: TestError) -> Bool {
+        return (lhs.localizedDescription == rhs.localizedDescription)
+    }
 }
 
 fileprivate struct MockValidatorPredicate: ValidationPredicate  {

@@ -25,10 +25,10 @@ public struct BlockValidationPredicate<T>: ValidationPredicate {
     }
 
     /**
-     Returns a `Boolean` value that indicates whether a given input matches the evalutaion clouser specified by the receiver.
+     Returns a `Boolean` value that indicates whether a given input matches the evalutaion closure specified by the receiver.
      
      - parameter input: The input against which to evaluate the receiver.
-     - returns: `true` if input matches the validation clouser specified by the receiver, otherwise `false`.
+     - returns: `true` if input matches the validation closure specified by the receiver, otherwise `false`.
      */
     public func evaluate(with input: T) -> Bool {
         return evaluationBlock(input)
