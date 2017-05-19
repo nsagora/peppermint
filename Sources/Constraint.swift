@@ -1,5 +1,5 @@
 //
-//  ValidationConstraint.swift
+//  Constraint.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 09/08/16.
@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- Generic closure for building a localised description of the reason for a failing `ValidationConstraint`.
+ Generic closure for building a localised description of the reason for a failing `Constraint`.
  
  - paramter input: The value of the input, which can be interpolated into the description to provide more insight.
  */
@@ -18,13 +18,13 @@ public typealias ErrorBuilder<T> = (T)->Error
 /**
  A structrure that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public struct ValidationConstraint<T> {
+public struct Constraint<T> {
 
     private let predicateBuilder: (T)->Bool
     private let errorBuilder: ErrorBuilder<T>
 
     /**
-     Create a new `ValidationConstraint` instance
+     Create a new `Constraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
@@ -35,7 +35,7 @@ public struct ValidationConstraint<T> {
     }
     
     /**
-     Create a new `ValidationConstraint` instance
+     Create a new `Constraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A `ErrorBuilder` closure that dynamically builds an `Error` to describe why the evaluation has failed.
@@ -49,7 +49,7 @@ public struct ValidationConstraint<T> {
      Evaluates the input on the `Predicate`.
      
      - parameter input: The input to be validated.
-     - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `ValidationConstraint` otherwise.
+     - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `Constraint` otherwise.
      */
     public func evaluate(with input:T) -> EvaluationResult {
 

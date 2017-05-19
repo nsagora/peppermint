@@ -1,5 +1,5 @@
 //
-//  ValidationConstraintTests.swift
+//  ConstraintTests.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 09/08/16.
@@ -9,16 +9,16 @@
 import XCTest
 @testable import ValidationToolkit
 
-class ValidationConstraintTests: XCTestCase {
+class ConstraintTests: XCTestCase {
 
     fileprivate let testInput = "testInput"
-    fileprivate let predicate = MockValidatorPredicate(testInput: "testInput")
+    fileprivate let predicate = MockPredicate(testInput: "testInput")
 
-    var constraint:ValidationConstraint<String>!
+    var constraint:Constraint<String>!
 
     override func setUp() {
         super.setUp()
-        constraint = ValidationConstraint(predicate: predicate, error: TestError.InvalidInput)
+        constraint = Constraint(predicate: predicate, error: TestError.InvalidInput)
     }
     
     override func tearDown() {
@@ -51,11 +51,11 @@ class ValidationConstraintTests: XCTestCase {
     }
 }
 
-extension ValidationConstraintTests {
+extension ConstraintTests {
     
     func testThatItDynamicallyBuildsTheValidationError() {
         
-        let constraint = ValidationConstraint(predicate: predicate) { TestError.UnexpectedInput($0) }
+        let constraint = Constraint(predicate: predicate) { TestError.UnexpectedInput($0) }
         let result = constraint.evaluate(with: "Ok")
         switch result {
         case .invalid(let error as TestError):
@@ -65,6 +65,8 @@ extension ValidationConstraintTests {
         }
     }
 }
+
+// MARK: - Test Error
 
 fileprivate enum TestError: Error {
     case InvalidInput
@@ -78,7 +80,9 @@ extension TestError: Equatable {
     }
 }
 
-fileprivate struct MockValidatorPredicate: Predicate  {
+// MARK: - Mock Predicate
+
+fileprivate struct MockPredicate: Predicate  {
 
     var testInput: String
     

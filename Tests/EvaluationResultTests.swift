@@ -17,17 +17,17 @@ class EvaluationResultTests: XCTestCase {
     }
     
     func testIsInvalid() {
-        
         XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).isInvalid)
         XCTAssertFalse(EvaluationResult.invalid(TestError.InvalidInput).isValid)
     }
     
-    func testResultError() {
-        
+    func testEvaluationError() {
         XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).error != nil)
         XCTAssertTrue(EvaluationResult.valid.error == nil)
     }
 }
+
+// MARK: - Test Error
 
 fileprivate enum TestError: Error {
     case InvalidInput
