@@ -16,7 +16,7 @@ import Foundation
 public typealias ErrorBuilder<T> = (T)->Error
 
 /**
- A structrure that links a `ValidationPredicate` to a localised message that describes why the predicate evaluation has failed.
+ A structrure that links a `ValidationPredicate` to an `Error` that describes why the predicate evaluation has failed.
  */
 public struct ValidationConstraint<T> {
 
@@ -27,7 +27,7 @@ public struct ValidationConstraint<T> {
      Create a new `ValidationConstraint` instance
      
      - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
-     - parameter error: An `Error` that describe the reason why the input is invalid.
+     - parameter error: An `Error` that describes why the evaluation has failed.
      */
     public init<P:ValidationPredicate>(predicate: P, error: Error) where P.InputType == T {
         self.predicateBuilder = predicate.evaluate
@@ -38,7 +38,7 @@ public struct ValidationConstraint<T> {
      Create a new `ValidationConstraint` instance
      
      - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
-     - parameter message: A `ErrorBuilder` closure to dynamically build the reason why the input is invalid.
+     - parameter error: A `ErrorBuilder` closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
     public init<P:ValidationPredicate>(predicate: P, error: @escaping ErrorBuilder<T>) where P.InputType == T {
         self.predicateBuilder = predicate.evaluate
@@ -49,7 +49,7 @@ public struct ValidationConstraint<T> {
      Evaluates the input on the `ValidationPredicate`.
      
      - parameter input: The input to be validated.
-     - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `ValidationConstraint` otherwise.
+     - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `ValidationConstraint` otherwise.
      */
     public func evaluate(with input:T) -> ValidationResult {
 
