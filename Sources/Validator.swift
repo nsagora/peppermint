@@ -72,7 +72,7 @@ extension Validator {
      - parameter input: The input to be validated.
      - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `ValidationConstraint` otherwise.
      */
-    public func evaluateAny(input:T) -> ValidationResult {
+    public func evaluateAny(input:T) -> EvaluationResult {
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
 
@@ -80,9 +80,9 @@ extension Validator {
      Evaluates the input on all `ValidationConstraints in the collection.
      
      - parameter input: The input to be validated.
-     - returns: An array of `ValidationResult` elements, indicating the evaluation result of each `ValidationConstraint` in collection.
+     - returns: An array of `EvaluationResult` elements, indicating the evaluation result of each `ValidationConstraint` in collection.
      */
-    public func evaluateAll(input:T) -> [ValidationResult] {
+    public func evaluateAll(input:T) -> [EvaluationResult] {
         return constraints.map{ $0.evaluate(with:input) }
     }
 }

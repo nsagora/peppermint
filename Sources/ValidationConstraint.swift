@@ -51,7 +51,7 @@ public struct ValidationConstraint<T> {
      - parameter input: The input to be validated.
      - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `ValidationConstraint` otherwise.
      */
-    public func evaluate(with input:T) -> ValidationResult {
+    public func evaluate(with input:T) -> EvaluationResult {
 
         let result = predicateBuilder(input)
         

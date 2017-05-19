@@ -1,5 +1,5 @@
 //
-//  ValidationResultTests.swift
+//  EvaluationResultTests.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 17/09/2016.
@@ -9,23 +9,23 @@
 import XCTest
 @testable import ValidationToolkit
 
-class ValidationResultTests: XCTestCase {
+class EvaluationResultTests: XCTestCase {
 
     func testIsValid() {
-        XCTAssertTrue(ValidationResult.valid.isValid)
-        XCTAssertFalse(ValidationResult.valid.isInvalid)
+        XCTAssertTrue(EvaluationResult.valid.isValid)
+        XCTAssertFalse(EvaluationResult.valid.isInvalid)
     }
     
     func testIsInvalid() {
         
-        XCTAssertTrue(ValidationResult.invalid(TestError.InvalidInput).isInvalid)
-        XCTAssertFalse(ValidationResult.invalid(TestError.InvalidInput).isValid)
+        XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).isInvalid)
+        XCTAssertFalse(EvaluationResult.invalid(TestError.InvalidInput).isValid)
     }
     
     func testResultError() {
         
-        XCTAssertTrue(ValidationResult.invalid(TestError.InvalidInput).error != nil)
-        XCTAssertTrue(ValidationResult.valid.error == nil)
+        XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).error != nil)
+        XCTAssertTrue(EvaluationResult.valid.error == nil)
     }
 }
 
