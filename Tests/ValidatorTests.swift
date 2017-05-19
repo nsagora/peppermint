@@ -118,7 +118,7 @@ fileprivate enum TestError: Error {
     case MissingInput
 }
 
-fileprivate struct MockValidatorPredicate: ValidationPredicate  {
+fileprivate struct MockValidatorPredicate: Predicate  {
     
     var testInput: String
     

@@ -78,7 +78,7 @@ extension TestError: Equatable {
     }
 }
 
-fileprivate struct MockValidatorPredicate: ValidationPredicate  {
+fileprivate struct MockValidatorPredicate: Predicate  {
 
     var testInput: String
     

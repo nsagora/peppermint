@@ -1,5 +1,5 @@
 //
-//  BlockValidationPredicate.swift
+//  BlockPredicate.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 20/08/16.
@@ -9,14 +9,14 @@
 import Foundation
 
 /**
- The `BlockValidationPredicate` struct is used to define closure based conditions used to evaluate generic inputs.
+ The `BlockPredicate` struct is used to define closure based conditions used to evaluate generic inputs.
  */
-public struct BlockValidationPredicate<T>: ValidationPredicate {
+public struct BlockPredicate<T>: Predicate {
 
     private let evaluationBlock: (T) -> Bool
 
     /**
-     Creates and returns a new `BlockValidationPredicate` instance.
+     Creates and returns a new `BlockPredicate` instance.
      
      - parameter aBlock: A closure describing a custom validation condition.
      */

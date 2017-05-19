@@ -16,7 +16,7 @@ import Foundation
 public typealias ErrorBuilder<T> = (T)->Error
 
 /**
- A structrure that links a `ValidationPredicate` to an `Error` that describes why the predicate evaluation has failed.
+ A structrure that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
 public struct ValidationConstraint<T> {
 
@@ -26,10 +26,10 @@ public struct ValidationConstraint<T> {
     /**
      Create a new `ValidationConstraint` instance
      
-     - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
+     - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public init<P:ValidationPredicate>(predicate: P, error: Error) where P.InputType == T {
+    public init<P:Predicate>(predicate: P, error: Error) where P.InputType == T {
         self.predicateBuilder = predicate.evaluate
         self.errorBuilder = { _ in return error }
     }
@@ -37,16 +37,16 @@ public struct ValidationConstraint<T> {
     /**
      Create a new `ValidationConstraint` instance
      
-     - parameter predicate: A `ValidationPredicate` to describes the evaluation rule.
+     - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A `ErrorBuilder` closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P:ValidationPredicate>(predicate: P, error: @escaping ErrorBuilder<T>) where P.InputType == T {
+    public init<P:Predicate>(predicate: P, error: @escaping ErrorBuilder<T>) where P.InputType == T {
         self.predicateBuilder = predicate.evaluate
         self.errorBuilder = error
     }
 
     /**
-     Evaluates the input on the `ValidationPredicate`.
+     Evaluates the input on the `Predicate`.
      
      - parameter input: The input to be validated.
      - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `ValidationConstraint` otherwise.

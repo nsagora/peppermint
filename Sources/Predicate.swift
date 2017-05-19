@@ -1,5 +1,5 @@
 //
-//  ValidationPredicate.swift
+//  Predicate.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 05/08/16.
@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- The `ValidationPredicate` protocol is used to define the structre that must be implemented by concrete predicates.
+ The `Predicate` protocol is used to define the structre that must be implemented by concrete predicates.
  */
-public protocol ValidationPredicate {
+public protocol Predicate {
 
     /**
      A type that provides information about what kind of values the predicate can be evaluated with.
@@ -22,7 +22,7 @@ public protocol ValidationPredicate {
      Returns a `Boolean` value that indicates whether a given input matches the conditions specified by the receiver.
      
      - parameter input: The input against which to evaluate the receiver.
-     - returns: `true` if input matches the conditions specified by the receiver, otherwise `false`.
+     - returns: `true` if input matches the conditions specified by the receiver, `false` otherwise.
      */
     func evaluate(with input: InputType) -> Bool
 }

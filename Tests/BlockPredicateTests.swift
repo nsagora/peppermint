@@ -1,5 +1,5 @@
 //
-//  BlockValidationPredicateTests.swift
+//  BlockPredicateTests.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 20/08/16.
@@ -9,13 +9,13 @@
 import XCTest
 @testable import ValidationToolkit
 
-class BlockValidationPredicateTests: XCTestCase {
+class BlockPredicateTests: XCTestCase {
 
-    var predicate: BlockValidationPredicate<Int>!
+    var predicate: BlockPredicate<Int>!
 
     override func setUp() {
         super.setUp()
-        predicate = BlockValidationPredicate { $0 == 2 }
+        predicate = BlockPredicate { $0 == 2 }
     }
     
     override func tearDown() {
