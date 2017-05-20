@@ -1,5 +1,5 @@
 //
-//  ValidationResult.swift
+//  EvaluationResult.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 09/08/16.
@@ -11,7 +11,7 @@ import Foundation
 /**
  The result of a validation action.
  */
-public enum ValidationResult {
+public enum EvaluationResult {
     /** 
      Represents a valid validation.
      */
@@ -20,12 +20,12 @@ public enum ValidationResult {
     /**
      Represents a failed validation. 
      
-     It has an associated `ValidationError` to describe the reason of the failure.
+     It has an associated `Error` to describe the reason of the failure.
      */
-    case invalid(ValidationError)
+    case invalid(Error)
 }
 
-extension ValidationResult {
+extension EvaluationResult {
 
     /**
      `true` if the validation result is valid, `false` otherwise.
@@ -47,12 +47,12 @@ extension ValidationResult {
     }
     
     /**
-     `ValidationError` if the validation result is invalid, `nil` otherwise.
+     `Error` if the validation result is invalid, `nil` otherwise.
      */
-    public var error: ValidationError? {
+    public var error: Error? {
         switch self {
-        case .valid:                return nil
-        case .invalid(let error):   return error
+        case .valid: return nil
+        case .invalid(let error): return error
         }
     }
 }
