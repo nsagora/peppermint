@@ -13,16 +13,15 @@
 		FA0D2EDD1E6DD277008AA175 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0D2ED91E6DD277008AA175 /* Assets.xcassets */; };
 		FA0D2EDE1E6DD277008AA175 /* BlockBasedPredicateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EDA1E6DD277008AA175 /* BlockBasedPredicateViewController.swift */; };
 		FA0D2EDF1E6DD277008AA175 /* RegexValidationPredicateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EDB1E6DD277008AA175 /* RegexValidationPredicateViewController.swift */; };
-		FA0D2EED1E6DD35E008AA175 /* BlockValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EE41E6DD35E008AA175 /* BlockValidationPredicate.swift */; };
-		FA0D2EEF1E6DD35E008AA175 /* RegexValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EE61E6DD35E008AA175 /* RegexValidationPredicate.swift */; };
-		FA0D2EF01E6DD35E008AA175 /* ValidationConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EE71E6DD35E008AA175 /* ValidationConstraint.swift */; };
-		FA0D2EF11E6DD35E008AA175 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EE81E6DD35E008AA175 /* ValidationError.swift */; };
-		FA0D2EF21E6DD35E008AA175 /* ValidationPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EE91E6DD35E008AA175 /* ValidationPredicate.swift */; };
-		FA0D2EF31E6DD35E008AA175 /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EEA1E6DD35E008AA175 /* ValidationResult.swift */; };
-		FA0D2EF41E6DD35E008AA175 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D2EEC1E6DD35E008AA175 /* Validator.swift */; };
 		FA2E3B5D1E7728EF0028FF93 /* SimplePredicateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E3B5C1E7728EF0028FF93 /* SimplePredicateViewController.swift */; };
 		FA2E3B5F1E772CD40028FF93 /* PasswordStrenghtValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E3B5E1E772CD40028FF93 /* PasswordStrenghtValidationViewController.swift */; };
 		FA7547241EABBEDF006CAB42 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7547231EABBEDF006CAB42 /* UIViewController+Alerts.swift */; };
+		FAC8C6791ED3713C0080CF8D /* BlockPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6731ED3713C0080CF8D /* BlockPredicate.swift */; };
+		FAC8C67A1ED3713C0080CF8D /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6741ED3713C0080CF8D /* Constraint.swift */; };
+		FAC8C67B1ED3713C0080CF8D /* ConstraintSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6751ED3713C0080CF8D /* ConstraintSet.swift */; };
+		FAC8C67C1ED3713C0080CF8D /* EvaluationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6761ED3713C0080CF8D /* EvaluationResult.swift */; };
+		FAC8C67D1ED3713C0080CF8D /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6771ED3713C0080CF8D /* Predicate.swift */; };
+		FAC8C67E1ED3713C0080CF8D /* RegexPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,16 +34,15 @@
 		FA0D2ED91E6DD277008AA175 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA0D2EDA1E6DD277008AA175 /* BlockBasedPredicateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBasedPredicateViewController.swift; sourceTree = "<group>"; };
 		FA0D2EDB1E6DD277008AA175 /* RegexValidationPredicateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicateViewController.swift; sourceTree = "<group>"; };
-		FA0D2EE41E6DD35E008AA175 /* BlockValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockValidationPredicate.swift; sourceTree = "<group>"; };
-		FA0D2EE61E6DD35E008AA175 /* RegexValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidationPredicate.swift; sourceTree = "<group>"; };
-		FA0D2EE71E6DD35E008AA175 /* ValidationConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationConstraint.swift; sourceTree = "<group>"; };
-		FA0D2EE81E6DD35E008AA175 /* ValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
-		FA0D2EE91E6DD35E008AA175 /* ValidationPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationPredicate.swift; sourceTree = "<group>"; };
-		FA0D2EEA1E6DD35E008AA175 /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
-		FA0D2EEC1E6DD35E008AA175 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		FA2E3B5C1E7728EF0028FF93 /* SimplePredicateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePredicateViewController.swift; sourceTree = "<group>"; };
 		FA2E3B5E1E772CD40028FF93 /* PasswordStrenghtValidationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordStrenghtValidationViewController.swift; sourceTree = "<group>"; };
 		FA7547231EABBEDF006CAB42 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
+		FAC8C6731ED3713C0080CF8D /* BlockPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockPredicate.swift; sourceTree = "<group>"; };
+		FAC8C6741ED3713C0080CF8D /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		FAC8C6751ED3713C0080CF8D /* ConstraintSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintSet.swift; sourceTree = "<group>"; };
+		FAC8C6761ED3713C0080CF8D /* EvaluationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationResult.swift; sourceTree = "<group>"; };
+		FAC8C6771ED3713C0080CF8D /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
+		FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPredicate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,13 +118,12 @@
 		FA0D2EE31E6DD35E008AA175 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FA0D2EE41E6DD35E008AA175 /* BlockValidationPredicate.swift */,
-				FA0D2EE61E6DD35E008AA175 /* RegexValidationPredicate.swift */,
-				FA0D2EE71E6DD35E008AA175 /* ValidationConstraint.swift */,
-				FA0D2EE81E6DD35E008AA175 /* ValidationError.swift */,
-				FA0D2EE91E6DD35E008AA175 /* ValidationPredicate.swift */,
-				FA0D2EEA1E6DD35E008AA175 /* ValidationResult.swift */,
-				FA0D2EEC1E6DD35E008AA175 /* Validator.swift */,
+				FAC8C6731ED3713C0080CF8D /* BlockPredicate.swift */,
+				FAC8C6741ED3713C0080CF8D /* Constraint.swift */,
+				FAC8C6751ED3713C0080CF8D /* ConstraintSet.swift */,
+				FAC8C6761ED3713C0080CF8D /* EvaluationResult.swift */,
+				FAC8C6771ED3713C0080CF8D /* Predicate.swift */,
+				FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */,
 			);
 			name = Sources;
 			path = ../Sources;
@@ -213,19 +210,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA0D2EF21E6DD35E008AA175 /* ValidationPredicate.swift in Sources */,
-				FA0D2EED1E6DD35E008AA175 /* BlockValidationPredicate.swift in Sources */,
-				FA0D2EF41E6DD35E008AA175 /* Validator.swift in Sources */,
-				FA0D2EF31E6DD35E008AA175 /* ValidationResult.swift in Sources */,
-				FA0D2EF01E6DD35E008AA175 /* ValidationConstraint.swift in Sources */,
+				FAC8C67D1ED3713C0080CF8D /* Predicate.swift in Sources */,
+				FAC8C67A1ED3713C0080CF8D /* Constraint.swift in Sources */,
 				FA2E3B5F1E772CD40028FF93 /* PasswordStrenghtValidationViewController.swift in Sources */,
-				FA0D2EF11E6DD35E008AA175 /* ValidationError.swift in Sources */,
+				FAC8C67E1ED3713C0080CF8D /* RegexPredicate.swift in Sources */,
+				FAC8C67C1ED3713C0080CF8D /* EvaluationResult.swift in Sources */,
+				FAC8C6791ED3713C0080CF8D /* BlockPredicate.swift in Sources */,
+				FAC8C67B1ED3713C0080CF8D /* ConstraintSet.swift in Sources */,
 				FA0D2EDE1E6DD277008AA175 /* BlockBasedPredicateViewController.swift in Sources */,
 				FA2E3B5D1E7728EF0028FF93 /* SimplePredicateViewController.swift in Sources */,
 				FA0D2EDF1E6DD277008AA175 /* RegexValidationPredicateViewController.swift in Sources */,
 				FA7547241EABBEDF006CAB42 /* UIViewController+Alerts.swift in Sources */,
 				FA0D2EDC1E6DD277008AA175 /* AppDelegate.swift in Sources */,
-				FA0D2EEF1E6DD35E008AA175 /* RegexValidationPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

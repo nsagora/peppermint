@@ -15,10 +15,11 @@ class RegexValidationPredicateViewController: UITableViewController {
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
         
-        let predicate = RegexValidationPredicate(expression: "^\\d+$")
-        let text = textField.text
+        guard let text = textField.text else { return assertionFailure() }
         
+        let predicate = RegexPredicate(expression: "^\\d+$")
         let isValid = predicate.evaluate(with: text)
+        
         if isValid {
             showSuccessAlert(withMessage: "Well done ;)")
         }

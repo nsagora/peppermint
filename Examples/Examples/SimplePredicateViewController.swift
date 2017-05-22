@@ -8,6 +8,24 @@
 
 import UIKit
 
+enum FormError: Error {
+    case missing
+    case invalid(String)
+}
+
+extension FormError: LocalizedError {
+    
+    var errorDescription: String? {
+        
+        switch self {
+        case .missing:
+            return "<custom feedback message>"
+        case .invalid(let message):
+            return message
+        }
+    }
+}
+
 class SimplePredicateViewController: UITableViewController {
 
     @IBOutlet var textField: UITextField!
@@ -16,18 +34,19 @@ class SimplePredicateViewController: UITableViewController {
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
         
-        let predicate = RegexValidationPredicate(expression: "^\\d+$")
-        let text = textField.text
-        let message = messageField.text!.isEmpty ? "<custom feedback message>" : messageField.text!
+        guard let text = textField.text else { return assertionFailure() }
         
-        let constraint = ValidationConstraint(predicate: predicate, message: message)
+        let predicate = RegexPredicate(expression: "^\\d+$")
+        let error:FormError = messageField.text!.isEmpty ? .missing : .invalid(messageField.text!)
+        
+        let constraint = Constraint(predicate: predicate, error:error)
         let result = constraint.evaluate(with: text)
         
         switch result {
         case .valid:
             showSuccessAlert(withMessage: "Nice job ;)")
         case .invalid(let error):
-            showFailAlert(withMessage: error.errorDescription!)
+            showFailAlert(withMessage: error.localizedDescription)
         }
     }
 }

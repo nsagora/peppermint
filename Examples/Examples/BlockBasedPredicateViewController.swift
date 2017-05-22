@@ -14,10 +14,10 @@ class BlockValidationPredicateViewController: UITableViewController {
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
         
-        let expectedLength = 5
-        let predicate = BlockValidationPredicate<String> { $0!.characters.count == expectedLength }
-        let text = textField.text
+        guard let text = textField.text else { return assertionFailure() }
         
+        let expectedLength = 5
+        let predicate = BlockPredicate<String> { $0.characters.count == expectedLength }
         let isValid = predicate.evaluate(with: text)
         
         if isValid {

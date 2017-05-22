@@ -8,14 +8,40 @@
 
 import UIKit
 
-class PasswordStrenghtValidationViewController: UITableViewController {
+enum Form {
+    enum Password: Error {
+        case missingLowercase
+        case missingUpercase
+        case missingDigits
+        case missingSpecialChars
+        case minLenght(Int)
+    }
+}
 
+extension Form.Password: LocalizedError {
+    
+    var errorDescription:String? {
+        
+        switch self {
+        case .missingLowercase: return "At least a lower case is required"
+        case .missingUpercase: return "At least an upper case is required"
+        case .missingDigits: return "At least a digit is required"
+        case .missingSpecialChars: return "At least a special character is required"
+        case .minLenght(let lenght): return "At least \(lenght) characters are required"
+        }
+    }
+}
+
+
+class PasswordStrenghtValidationViewController: UITableViewController {
+    
     @IBOutlet var textField: UITextField!
     @IBOutlet var label: UILabel!
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
-
-        let text = textField.text
+        
+        guard let text = textField.text else { return assertionFailure() }
+        
         let validator = buildPasswordStrenghtValidator()
         let results = validator.evaluateAll(input: text)
         
@@ -30,20 +56,20 @@ class PasswordStrenghtValidationViewController: UITableViewController {
         }
     }
     
-    fileprivate func buildPasswordStrenghtValidator() -> Validator<String> {
+    fileprivate func buildPasswordStrenghtValidator() -> ConstraintSet<String> {
         
-        let lowerCasePredicate = RegexValidationPredicate(expression: "^(?=.*[a-z]).*$")
-        let upperCasePredicate = RegexValidationPredicate(expression: "^(?=.*[A-Z]).*$")
-        let digitsPredicate = RegexValidationPredicate(expression: "^(?=.*[0-9]).*$")
-        let specialChars = RegexValidationPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
-        let minLenght = RegexValidationPredicate(expression: "^.{8,}$")
+        let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
+        let upperCasePredicate = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+        let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
+        let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
+        let minLenght = RegexPredicate(expression: "^.{8,}$")
         
-        var validator = Validator<String>()
-        validator.add(predicate: lowerCasePredicate, message: "At least a lower case is required")
-        validator.add(predicate: upperCasePredicate, message: "At least an upper case is required")
-        validator.add(predicate: digitsPredicate, message: "At least a digit is required")
-        validator.add(predicate: specialChars, message: "At least a special character is required")
-        validator.add(predicate: minLenght, message: "At least 8 characters are required")
+        var validator = ConstraintSet<String>()
+        validator.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
+        validator.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
+        validator.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
+        validator.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
+        validator.add(predicate: minLenght, error: Form.Password.minLenght(8))
         
         return validator
     }
@@ -57,5 +83,5 @@ class PasswordStrenghtValidationViewController: UITableViewController {
         label.text = nil
         label.textColor = .black
     }
-
+    
 }
