@@ -19,7 +19,7 @@ extension FormError: LocalizedError {
         
         switch self {
         case .missing:
-            return "<custom feedback message>"
+            return "«Enter a custom feedback message»"
         case .invalid(let message):
             return message
         }

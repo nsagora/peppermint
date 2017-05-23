@@ -23,7 +23,7 @@ class RegexValidationPredicateViewController: UITableViewController {
             showSuccessAlert(withMessage: "Well done ;)")
         }
         else {
-            showFailAlert(withMessage: "Expected only digits...")
+            showFailAlert(withMessage: "Expected only digits.")
         }
     }
 }

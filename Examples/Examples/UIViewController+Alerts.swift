@@ -11,11 +11,11 @@ import UIKit
 extension UIViewController {
     
     func showSuccessAlert(withMessage message:String) {
-        showAlert(withTitle: "Successfully evaluated", andMessage: message)
+        showAlert(withTitle: "Input OK!", andMessage: message)
     }
     
     func showFailAlert(withMessage message:String) {
-        showAlert(withTitle: "Evaluation failed", andMessage: message)
+        showAlert(withTitle: "Evaluation failed :(", andMessage: message)
     }
     
     func showAlert(withTitle title:String, andMessage message: String) {

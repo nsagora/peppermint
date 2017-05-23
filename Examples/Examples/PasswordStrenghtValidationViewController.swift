@@ -23,11 +23,11 @@ extension Form.Password: LocalizedError {
     var errorDescription:String? {
         
         switch self {
-        case .missingLowercase: return "At least a lower case is required"
-        case .missingUpercase: return "At least an upper case is required"
-        case .missingDigits: return "At least a digit is required"
-        case .missingSpecialChars: return "At least a special character is required"
-        case .minLenght(let lenght): return "At least \(lenght) characters are required"
+        case .missingLowercase: return "At least a lower case is required."
+        case .missingUpercase: return "At least an upper case is required."
+        case .missingDigits: return "At least a digit is required."
+        case .missingSpecialChars: return "At least a special character is required."
+        case .minLenght(let lenght): return "At least \(lenght) characters are required."
         }
     }
 }

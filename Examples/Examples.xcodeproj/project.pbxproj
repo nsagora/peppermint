@@ -23,6 +23,7 @@
 		FAC8C67D1ED3713C0080CF8D /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6771ED3713C0080CF8D /* Predicate.swift */; };
 		FAC8C67E1ED3713C0080CF8D /* RegexPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */; };
 		FAC8C6801ED42F370080CF8D /* DynamicErrorConstraintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C67F1ED42F370080CF8D /* DynamicErrorConstraintViewController.swift */; };
+		FAC8C6861ED470B40080CF8D /* EvaluateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6851ED470B40080CF8D /* EvaluateButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		FAC8C6771ED3713C0080CF8D /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPredicate.swift; sourceTree = "<group>"; };
 		FAC8C67F1ED42F370080CF8D /* DynamicErrorConstraintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicErrorConstraintViewController.swift; sourceTree = "<group>"; };
+		FAC8C6851ED470B40080CF8D /* EvaluateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluateButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		FA7547221EABBEC5006CAB42 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FAC8C6851ED470B40080CF8D /* EvaluateButton.swift */,
 				FA7547231EABBEDF006CAB42 /* UIViewController+Alerts.swift */,
 			);
 			name = Extensions;
@@ -219,6 +222,7 @@
 				FAC8C67E1ED3713C0080CF8D /* RegexPredicate.swift in Sources */,
 				FAC8C67C1ED3713C0080CF8D /* EvaluationResult.swift in Sources */,
 				FAC8C6791ED3713C0080CF8D /* BlockPredicate.swift in Sources */,
+				FAC8C6861ED470B40080CF8D /* EvaluateButton.swift in Sources */,
 				FAC8C67B1ED3713C0080CF8D /* ConstraintSet.swift in Sources */,
 				FA0D2EDE1E6DD277008AA175 /* BlockBasedPredicateViewController.swift in Sources */,
 				FA2E3B5D1E7728EF0028FF93 /* SimplePredicateViewController.swift in Sources */,

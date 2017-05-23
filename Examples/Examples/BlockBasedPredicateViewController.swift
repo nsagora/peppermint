@@ -24,7 +24,7 @@ class BlockValidationPredicateViewController: UITableViewController {
             showSuccessAlert(withMessage: "Well done ;)")
         }
         else {
-           showFailAlert(withMessage: "Expected \(expectedLength) characters...")
+           showFailAlert(withMessage: "Expected \(expectedLength) characters.")
         }
     }
 }
