@@ -22,6 +22,7 @@
 		FAC8C67C1ED3713C0080CF8D /* EvaluationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6761ED3713C0080CF8D /* EvaluationResult.swift */; };
 		FAC8C67D1ED3713C0080CF8D /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6771ED3713C0080CF8D /* Predicate.swift */; };
 		FAC8C67E1ED3713C0080CF8D /* RegexPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */; };
+		FAC8C6801ED42F370080CF8D /* DynamicErrorConstraintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8C67F1ED42F370080CF8D /* DynamicErrorConstraintViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		FAC8C6761ED3713C0080CF8D /* EvaluationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationResult.swift; sourceTree = "<group>"; };
 		FAC8C6771ED3713C0080CF8D /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		FAC8C6781ED3713C0080CF8D /* RegexPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPredicate.swift; sourceTree = "<group>"; };
+		FAC8C67F1ED42F370080CF8D /* DynamicErrorConstraintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicErrorConstraintViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				FA0D2EDA1E6DD277008AA175 /* BlockBasedPredicateViewController.swift */,
 				FA0D2EDB1E6DD277008AA175 /* RegexValidationPredicateViewController.swift */,
 				FA2E3B5C1E7728EF0028FF93 /* SimplePredicateViewController.swift */,
+				FAC8C67F1ED42F370080CF8D /* DynamicErrorConstraintViewController.swift */,
 				FA2E3B5E1E772CD40028FF93 /* PasswordStrenghtValidationViewController.swift */,
 			);
 			name = ViewControllers;
@@ -222,6 +225,7 @@
 				FA0D2EDF1E6DD277008AA175 /* RegexValidationPredicateViewController.swift in Sources */,
 				FA7547241EABBEDF006CAB42 /* UIViewController+Alerts.swift in Sources */,
 				FA0D2EDC1E6DD277008AA175 /* AppDelegate.swift in Sources */,
+				FAC8C6801ED42F370080CF8D /* DynamicErrorConstraintViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

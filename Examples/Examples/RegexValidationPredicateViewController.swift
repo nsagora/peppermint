@@ -11,7 +11,6 @@ import UIKit
 class RegexValidationPredicateViewController: UITableViewController {
 
     @IBOutlet var textField: UITextField!
-    @IBOutlet var label: UILabel!
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
         

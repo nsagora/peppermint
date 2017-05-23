@@ -1,15 +1,16 @@
 //
-//  SimplePredicateViewController.swift
+//  DynamicErrorConstraintViewController.swift
 //  Examples
 //
-//  Created by Alex Cristea on 13/03/2017.
+//  Created by Alex Cristea on 23/05/2017.
 //  Copyright © 2017 Alex Cristea. All rights reserved.
 //
 
 import UIKit
 
+// MARK: - FormError
+
 fileprivate enum FormError: Error {
-    case missing
     case invalid(String)
 }
 
@@ -18,27 +19,25 @@ extension FormError: LocalizedError {
     var errorDescription: String? {
         
         switch self {
-        case .missing:
-            return "<custom feedback message>"
         case .invalid(let message):
-            return message
+            return "The input «\(message)» is invalid."
         }
     }
 }
 
-class SimplePredicateViewController: UITableViewController {
+// MARK: - ViewController
+
+class DynamicErrorConstraintViewController: UITableViewController {
 
     @IBOutlet var textField: UITextField!
-    @IBOutlet var messageField: UITextField!
     
     @IBAction func onEvaluateButtonPress(_ sender:AnyObject) {
         
         guard let text = textField.text else { return assertionFailure() }
         
         let predicate = RegexPredicate(expression: "^\\d+$")
-        let error:FormError = messageField.text!.isEmpty ? .missing : .invalid(messageField.text!)
-        
-        let constraint = Constraint(predicate: predicate, error:error)
+    
+        let constraint = Constraint(predicate: predicate) { return FormError.invalid($0)}
         let result = constraint.evaluate(with: text)
         
         switch result {

@@ -73,15 +73,4 @@ class PasswordStrenghtValidationViewController: UITableViewController {
         
         return validator
     }
-    
-    @IBAction func onResetButtonPress(_ sender:AnyObject) {
-        textField.text = nil
-        label.text = nil
-    }
-    
-    @IBAction func onTextFieldChange(_ sender:AnyObject) {
-        label.text = nil
-        label.textColor = .black
-    }
-    
 }
