@@ -49,32 +49,100 @@ Every project is uniq in it's challenges and it's great when we can focus on sol
 While Validation Toolkit is compact and offers all you need to build validation around your project needs, we created `Validation Components` to extends it by adding the common validations that most of the projects can benefits of.
 This includes validation predicates for email, required fields, password matching, url and many other.     
 
+## Requirements
+- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 8.1+
+- Swift 3.0+
+
 ## Installation
 
 ### Carthage
+[carthage]: https://github.com/Carthage/Carthage
+[carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
+[homebrew]: http://brew.sh/
 
-The full documentation on how to install and use [Carthage][carthage] is available on their official github [page][carthage].
-
-To use the latest stable version, add this to your [`Cartfile`][carthage-cartfile]:
+You can use [Carthage][carthage] to install `ValidationToolkit` by adding it to your [`Cartfile`][carthage-cartfile]:
 
 ``` 
 github "nsagora/validation-toolkit" 
 ```
 
-To use a certain version, add this to your [`Cartfile`][carthage-cartfile]:
+Run `carthage update` to build the framework and drag the built `ValidationToolkit.framework` into your Xcode project.
 
-``` 
-github "nsagora/validation-toolkit" >= 0.1.0 
+<details>
+<summary>Setting up Carthage</summary>
+
+[Carthage][carthage] is a decentralised dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install [Carthage][carthage] with [Homebrew][homebrew] using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
 ```
 
-To use the latest version in development, add this to your [`Cartfile`][carthage-cartfile]:
+</details>
 
-``` 
-github "nsagora/validation-toolkit" "develop" 
+### CocoaPods
+[cocoapods]: https://cocoapods.org
+[cocoapods-podfile]: https://guides.cocoapods.org/syntax/podfile.html
+
+You can use [CocoaPods][cocoapods] to install `ValidationToolkit` by adding it to your [`Podfile`][cocoapods-podfile]:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'YOUR_TARGET_NAME' do
+	pod 'ValidationToolkit'
+end
 ```
 
-[carthage]: https://github.com/Carthage/Carthage
-[carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
+Note that this requires CocoaPods version 1.0.0, and your iOS deployment target to be at least 8.0.
+
+<details>
+<summary>Setting up CocoaPods</summary>
+
+[CocoaPods][cocoapods] is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```
+$ gem install cocoapods
+```
+</details>
+
+
+### Swift Package Manager
+[swift-package-manager]: https://swift.org/package-manager
+[swift-package-manager-github]: https://github.com/apple/swift-package-manager
+
+You can use the [Swift Package Manager][swift-package-manager] to install `ValidationToolkit` by adding it to your `Package.swift` file:
+
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    targets: [],
+    dependencies: [
+        .Package(url: "https://github.com/nsagora/validation-toolkit", majorVersion: 1),
+    ]
+)
+```
+
+Note that the [Swift Package Manager][swift-package-manager] is still in early design and development, for more information checkout its [GitHub Page][swift-package-manager-github].
+
+### Manually
+To use this library in your project manually you may:
+
+1. for Projects, just drag the `Sources` folder into the project tree
+2. for Workspaces, include the whole `ValidationToolkit.xcodeproj`
 
 ## Concepts
 
