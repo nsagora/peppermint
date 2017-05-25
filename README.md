@@ -24,6 +24,23 @@ __Validation Toolkit__ · [Validation Components][validation-components]
 [carthage-compatible]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [carthage-overview]: https://github.com/Carthage/Carthage
 
+1. [Introduction](#introduction)
+- [Separation of concerns](#separation-of-concerns)
+- [Availability on all platforms](#availability-on-all-platforms)
+- [Open to extensibility](#open-to-extensibility)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+- [Carthage](#carthage)
+- [CocoaPods](#cocoapods)
+- [Swift Package Manager](#swift-package-manager)
+- [Manually](#manually)
+4. [Concepts](#Concepts)
+- [Predicates](#predicates)
+- [Constraints](#constraints)
+- [Constraint Sets](#constraint-sets)
+5. [Examples](#examples)
+6. [Credits and References](#credits-and-references)
+
 ## Introduction
 
 `Validation Toolkit` is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching.
