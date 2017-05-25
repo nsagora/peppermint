@@ -25,25 +25,25 @@ __Validation Toolkit__ · [Validation Components][validation-components]
 [carthage-overview]: https://github.com/Carthage/Carthage
 
 1. [Introduction](#introduction)
-- [Separation of concerns](#separation-of-concerns)
-- [Availability on all platforms](#availability-on-all-platforms)
-- [Open to extensibility](#open-to-extensibility)
+	- [Separation of concerns](#separation-of-concerns)
+	- [All platforms availability](#all-platforms-availability)
+	- [Open to extensibility](#open-to-extensibility)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
-- [Carthage](#carthage)
-- [CocoaPods](#cocoapods)
-- [Swift Package Manager](#swift-package-manager)
-- [Manually](#manually)
+	- [Carthage](#carthage)
+	- [CocoaPods](#cocoapods)
+	- [Swift Package Manager](#swift-package-manager)
+	- [Manually](#manually)
 4. [Concepts](#Concepts)
-- [Predicates](#predicates)
-- [Constraints](#constraints)
-- [Constraint Sets](#constraint-sets)
+	- [Predicates](#predicates)
+	- [Constraints](#constraints)
+	- [Constraint Sets](#constraint-sets)
 5. [Examples](#examples)
 6. [Credits and References](#credits-and-references)
 
 ## Introduction
 
-`Validation Toolkit` is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching.
+`ValidationToolkit` is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching.
 
 At the core of this project are the following principles:
 
@@ -53,17 +53,17 @@ At the core of this project are the following principles:
 
 ### Separation of concerns
 
-Think of `Validation Toolkit` as to an adjustable wrench more than to a Swiss knife. 
+Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife. 
 With this idea in mind, the toolkit is composed from a small set of protocols, classes and structs than can be easily used to fit your project needs.
 
 ### All platforms availability
 
-Since validation can take place at many levels, Validation Toolkit was designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
+Since validation can take place at many levels, `ValidationToolkit` was designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
 
 ### Open to extensibility
 
 Every project is uniq in it's challenges and it's great when we can focus on solving them instead on focusing on boilerplate tasks. 
-While Validation Toolkit is compact and offers all you need to build validation around your project needs, we created `Validation Components` to extends it by adding the common validations that most of the projects can benefits of.
+While `ValidationToolkit` is compact and offers all you need to build validation around your project needs, we created `Validation Components` to extends it by adding the common validations that most of the projects can benefits of.
 This includes validation predicates for email, required fields, password matching, url and many other.     
 
 ## Requirements
@@ -167,15 +167,53 @@ To use this library in your project manually you may:
 
 The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation predicate.
 
-Out of the box, `ValidationToolkit` brings the following predicates, which allow developers to build more specific predicates:
-- `RegexPredicate`
-- `BlockPredicate`
+Out of the box, `ValidationToolkit` comes with the following two predicates, which allow developers to compose predicates specific to the project needs.
 
-For more advanced or complex predicates the developers can extend the `Predicate` protocol to fit the project needs.
+<details>
+<summary>`RegexPredicate`</summary>
+
+```swift
+let predicate = RegexPredicate(expression: "^[a-z]$")
+predicate.evaluate(with: "a") // returns true
+predicate.evaluate(with: "5") // returns false
+predicate.evaluate(with: "ab") // returns false
+```
+</details>
+
+<details>
+<summary>`BlockPredicate`</summary>
+
+```swift
+let pred = BlockPredicate<String> { $0.characters.count > 2 }
+predicate.evaluate(with: "a") // returns false
+predicate.evaluate(with: "abc") // returns true
+```
+</details>
+
+On top of them, the developers can build more advanced or complex predicates by extending the `Predicate` protocol.
+
+<details>
+<summary>`CustomPredicate`</summary>
+
+```swift
+let predicate = RegexPredicate(expression: "^[a-z]$")
+predicate.evaluate(with: "a") // returns true
+predicate.evaluate(with: "5") // returns false
+predicate.evaluate(with: "ab") // returns false
+```
+</details>
 
 ### Constraints
 
 A `Constraint` represents a structure that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
+
+<details>
+<summary>Constraint Example</summary>
+
+```swift
+// TBD
+```
+</details>
 
 ### Constraint Sets
 
@@ -185,13 +223,21 @@ A `ConstraintSet` represents a collection of constraints and allows the evaluati
 
 To provide context, a `ConstraintSet` allows us to constraint an input as being required and also as being a valid email.
 
+<details>
+<summary>ConstraintSet Example</summary>
+
+```swift
+// TBD
+```
+</details>
+
 ## Examples
 
-### Full Validatotion Example
+### Full Validation Example
 
 The classic validation example is that of the login form, whereby users are prompted to enter their *username* and *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller. Similarly, the logic is often invoked through various user interactions (e.g. typing characters into a field, and tapping a *Login* button).
 
-`Validation Toolkit` seeks instead to consolidate, standardize, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the username input data:
+`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the username input data:
 
 ```swift
 
@@ -253,7 +299,7 @@ From above, we see that once we've constructed the `usernameValidator`, we're si
 
 ### Independent Components
 
-Along with the fully integrated scenario depicted above, `Validator Kit` also supports using each component independently. Specifically, we are able to exercise a `Predicate` outside of a `Constraint`, and similarly exercise a `Constraint` outside of a `Constraints`.
+Along with the fully integrated scenario depicted above, `ValidationToolkit` also supports using each component independently. Specifically, we are able to exercise a `Predicate` outside of a `Constraint`, and similarly exercise a `Constraint` outside of a `Constraints`.
 
 **Predicates**
 
