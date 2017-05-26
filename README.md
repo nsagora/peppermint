@@ -9,8 +9,8 @@ __Validation Toolkit__ · [Validation Components][validation-components]
 
 [![travis-status]][travis-overview] [![codecov-status]][codecov-overview] [![carthage-compatible]][carthage-overview] [![license]][license-overview] [![twitter]][twitter-overview]
 
-[license]: https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat
-[license-overview]: http://choosealicense.com/licenses/apache-2.0/
+[license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-overview]: http://choosealicense.com/licenses/mit/
 
 [twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [twitter-overview]: https://twitter.com/nsagora
