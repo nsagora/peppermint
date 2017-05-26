@@ -211,7 +211,28 @@ A `Constraint` represents a structure that links a `Predicate` to an `Error`, in
 <summary>Constraint Example</summary>
 
 ```swift
-// TBD
+let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
+let constraint = Constraint(predicate: predicate, error: MyError.magicWord)
+
+let result = constraint.evaluate(with: "please")
+switch result {
+case .valid:
+    print("access granted...")
+case .invalid(let error as MyError):
+    print(error.errorDescription)
+}
+```
+
+```swift
+enum MyError:Error {
+    case magicWord
+}
+
+extension MyError: LocalizedError {
+    var errorDescription:String? {
+        return "Ah Ah Ah! You didn't say the magic word!"
+    }
+}
 ```
 </details>
 
