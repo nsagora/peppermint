@@ -165,7 +165,7 @@ To use this library in your project manually you may:
 
 ### Predicates
 
-The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation predicate.
+The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation condition.
 
 Out of the box, `ValidationToolkit` comes with the following two predicates, which allow developers to compose predicates specific to the project needs.
 
@@ -190,16 +190,31 @@ predicate.evaluate(with: "abc") // returns true
 ```
 </details>
 
-On top of them, the developers can build more advanced or complex predicates by extending the `Predicate` protocol.
+On top of them, developers can build more advanced or complex predicates by extending the `Predicate` protocol.
 
 <details>
-<summary>`CustomPredicate`</summary>
+<summary>Custom Predicate</summary>
 
 ```swift
-let predicate = RegexPredicate(expression: "^[a-z]$")
-predicate.evaluate(with: "a") // returns true
-predicate.evaluate(with: "5") // returns false
-predicate.evaluate(with: "ab") // returns false
+public class MinLenghtPredicate: Predicate {
+    
+    public typealias InputType = String
+    
+    private let minLenght:Int
+    
+    public init(minLenght:Int) {
+        self.minLenght = minLenght
+    }
+    
+    public func evaluate(with input: String) -> Bool {
+        return input.characters.count >= minLenght
+    }
+}
+
+let predicate = MinLenghtPredicate(minLenght: 5)
+predicate.evaluate(with: "alph") // returns false
+predicate.evaluate(with: "alpha") // returns true
+predicate.evaluate(with: "alphabet") // returns true
 ```
 </details>
 
@@ -208,7 +223,7 @@ predicate.evaluate(with: "ab") // returns false
 A `Constraint` represents a structure that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
 
 <details>
-<summary>Constraint Example</summary>
+<summary>`Constraint` Example</summary>
 
 ```swift
 let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
@@ -238,23 +253,14 @@ extension MyError: LocalizedError {
 
 ### Constraint Sets
 
-A `ConstraintSet` represents a collection of constraints and allows the evaluation to be made on:
+A `ConstraintSet` represents a collection of constraints that allows the evaluation to be made on:
 - any of the constraints
 - all constraints
 
 To provide context, a `ConstraintSet` allows us to constraint an input as being required and also as being a valid email.
 
 <details>
-<summary>ConstraintSet Example</summary>
-
-```swift
-// TBD
-```
-</details>
-
-## Examples
-
-### Full Validation Example
+<summary>`ConstraintSet` Example</summary>
 
 The classic validation example is that of the login form, whereby users are prompted to enter their *username* and *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller. Similarly, the logic is often invoked through various user interactions (e.g. typing characters into a field, and tapping a *Login* button).
 
@@ -317,46 +323,15 @@ extension FormError.UserName: LocalizedError {
 ```
 
 From above, we see that once we've constructed the `usernameValidator`, we're simply calling `evaluateAll(input:)` to get a list of results. These results we can then map into an array of error messages, which we can handle as we please. You can imagine that we might construct this `usernameValidator` once, and simply evaluate it against the user input data when we want to perform validation on the username.
+</details>
 
-### Independent Components
+## Examples
+For a comprehensive list of examples try the `ValidationToolikit.playground`:
+1. Download the repository locally on your machine
+2. Open `ValidationToolkit.workspace`
+3. Build `ValidationToolkit iOS` target
+4. Select the `ValidationToolkit` playgrounds from the Project navigator.
 
-Along with the fully integrated scenario depicted above, `ValidationToolkit` also supports using each component independently. Specifically, we are able to exercise a `Predicate` outside of a `Constraint`, and similarly exercise a `Constraint` outside of a `Constraints`.
-
-**Predicates**
-
-```swift
-let predicate = RegexPredicate(expression: "^[a-z]$")
-predicate.evaluate(with: "a") // returns true
-predicate.evaluate(with: "5") // returns false
-predicate.evaluate(with: "ab") // returns false
-```
-
-**Constraints**
-
-```swift
-let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
-let constraint = Constraint(predicate: predicate, error: MyError.magicWord)
-
-let result = constraint.evaluate(with: "please")
-switch result {
-case .valid:
-    print("access granted...")
-case .invalid(let error as MyError):
-    print(error.errorDescription)
-}
-```
-
-```swift
-enum MyError:Error {
-    case magicWord
-}
-
-extension MyError: LocalizedError {
-    var errorDescription:String? {
-        return "Ah Ah Ah! You didn't say the magic word!"
-    }
-}
-```
 ## Credits and references
 
 The project was been inspired from other open source projects and they worth to be mentioned below for reference:
