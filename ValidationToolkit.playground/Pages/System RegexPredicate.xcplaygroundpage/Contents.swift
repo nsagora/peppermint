@@ -5,6 +5,7 @@ import ValidationToolkit
 
 /*:
  ## `RegexPredicate`
+ 
  Use a `RegexPredicate` to evaluate if the user input is a non-empty string composed only from digits.
  */
 
@@ -13,7 +14,7 @@ let predicate = RegexPredicate(expression: "^\\d+$")
 let isValid = predicate.evaluate(with: input)
 
 if isValid {
-    print("Input is valid.")
+    print("👍 job!")
 }
 else {
     print("Expected only digits.")

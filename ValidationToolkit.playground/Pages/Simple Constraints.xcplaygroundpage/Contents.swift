@@ -1,4 +1,4 @@
-//: [RegexPredicate](@previous)
+//: [Previous](@previous)
 
 import Foundation
 import ValidationToolkit
@@ -6,20 +6,20 @@ import ValidationToolkit
 /*:
  ## Simple Constraint
  
- Use a `RegexPredicate` based `Constraint` to evaluate if the user input is a non-empty string composed only from digits.
+ Use a `BlockPredicate` based `Constraint` to evaluate if an username has at least 5 characters.
  */
 
-let text = "He!O"
-let predicate = RegexPredicate(expression: "^\\d+$")
+let username = "He!O"
+let predicate = BlockPredicate<String> { $0.characters.count >= 5 }
 
-let constraint = Constraint(predicate: predicate, error:FormError.invalid)
-let result = constraint.evaluate(with: text)
+let constraint = Constraint(predicate: predicate, error:Form.Username.invalid)
+let result = constraint.evaluate(with: username)
 
 switch result {
 case .valid:
-    print("Nice job ;)")
+    print("Nice 🎬!")
 case .invalid(let error):
     print(error.localizedDescription)
 }
 
-//: [Dynamic Constraint](@next)
+//: [Next](@next)
