@@ -1,13 +1,13 @@
 __Validation Toolkit__ · [Validation Components][validation-components]
 
 [validation-toolkit]: https://github.com/nsagora/validation-toolkit
-[validation-components]: https://github.com/nsagora/validation-components 
+[validation-components]: https://github.com/nsagora/validation-components
 
 -------
 
 # Validation Toolkit
 
-[![travis-status]][travis-overview] [![codecov-status]][codecov-overview] [![carthage-compatible]][carthage-overview] [![license]][license-overview] [![twitter]][twitter-overview]
+[![travis-status]][travis-overview] [![codecov-status]][codecov-overview] [![carthage-compatible]][carthage-overview] [![license]][license-overview] [![twitter]][twitter-overview] [![version-badge]][version-overview]
 
 [license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-overview]: http://choosealicense.com/licenses/mit/
@@ -19,10 +19,13 @@ __Validation Toolkit__ · [Validation Components][validation-components]
 [travis-overview]: https://travis-ci.org/nsagora/validation-toolkit
 
 [codecov-status]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
-[codecov-overview]: https://codecov.io/gh/nsagora/validation-toolkit 
+[codecov-overview]: https://codecov.io/gh/nsagora/validation-toolkit
 
 [carthage-compatible]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [carthage-overview]: https://github.com/Carthage/Carthage
+
+[version-badge]: https://img.shields.io/badge/version-0.5.0-4BC51D.svg?style=flat
+[version-overview]: https://github.com/nsagora/validation-toolkit
 
 1. [Introduction](#introduction)
 	- [Separation of concerns](#separation-of-concerns)
@@ -48,12 +51,12 @@ __Validation Toolkit__ · [Validation Components][validation-components]
 At the core of this project are the following principles:
 
 - Separation of concerns
-- Availability on all platforms 
+- Availability on all platforms
 - Open to extensibility
 
 ### Separation of concerns
 
-Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife. 
+Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife.
 With this idea in mind, the toolkit is composed from a small set of protocols, classes and structs than can be easily used to fit your project needs.
 
 ### All platforms availability
@@ -62,9 +65,9 @@ Since validation can take place at many levels, `ValidationToolkit` was designed
 
 ### Open to extensibility
 
-Every project is uniq in it's challenges and it's great when we can focus on solving them instead on focusing on boilerplate tasks. 
+Every project is uniq in it's challenges and it's great when we can focus on solving them instead on focusing on boilerplate tasks.
 While `ValidationToolkit` is compact and offers all you need to build validation around your project needs, we created `Validation Components` to extends it by adding the common validations that most of the projects can benefits of.
-This includes validation predicates for email, required fields, password matching, url and many other.     
+This includes validation predicates for email, required fields, password matching, url and many other.
 
 ## Requirements
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
@@ -80,8 +83,8 @@ This includes validation predicates for email, required fields, password matchin
 
 You can use [Carthage][carthage] to install `ValidationToolkit` by adding it to your [`Cartfile`][carthage-cartfile]:
 
-``` 
-github "nsagora/validation-toolkit" 
+```
+github "nsagora/validation-toolkit"
 ```
 
 Run `carthage update` to build the framework and drag the built `ValidationToolkit.framework` into your Xcode project.
@@ -197,15 +200,15 @@ On top of them, developers can build more advanced or complex predicates by exte
 
 ```swift
 public class MinLenghtPredicate: Predicate {
-    
+
     public typealias InputType = String
-    
+
     private let minLenght:Int
-    
+
     public init(minLenght:Int) {
         self.minLenght = minLenght
     }
-    
+
     public func evaluate(with input: String) -> Bool {
         return input.characters.count >= minLenght
     }
@@ -302,7 +305,7 @@ print(errorMessages)
 // Define form errors
 
 enum FormError {
-    
+
     enum UserName:Error {
         case tooShort
         case invalidCharacters
@@ -310,7 +313,7 @@ enum FormError {
 }
 
 extension FormError.UserName: LocalizedError {
-    
+
     var errorDescription:String? {
         switch self {
         case .tooShort:
