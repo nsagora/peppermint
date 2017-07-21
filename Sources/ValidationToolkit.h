@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for Validator.
-FOUNDATION_EXPORT double ValidatorVersionNumber;
+//! Project version number for ValidationToolkit.
+FOUNDATION_EXPORT double ValidationToolkitVersionNumber;
 
-//! Project version string for Validator.
-FOUNDATION_EXPORT const unsigned char ValidatorVersionString[];
+//! Project version string for ValidationToolkit.
+FOUNDATION_EXPORT const unsigned char ValidationToolkitVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <Validator/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <ValidationToolkit/PublicHeader.h>
 
 

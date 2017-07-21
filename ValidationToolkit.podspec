@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ValidationToolkit'
-  s.version          = '0.4.1'
+  s.version          = '0.5.0'
   s.summary          = 'Lightweight framework for input validation written in Swift'
 
 # This description is used to generate tags and improve search results.
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.description      = "Validation Toolkit is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching, for Swift projects."
 
   s.homepage         = 'https://github.com/nsagora/validation-toolkit'
-  s.license          = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT License', :file => 'LICENSE' }
   s.author           = { 'Alex Cristea' => 'alex@thinslices.com' }
   s.source           = { :git => 'https://github.com/nsagora/validation-toolkit.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/nsagora'
