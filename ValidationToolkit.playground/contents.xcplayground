@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios' display-mode='raw' executeOnSourceChanges='false'>
+<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'>
     <pages>
-        <page name='System BlockPredicate'/>
+        <page name='BlockPredicate'/>
         <page name='System RegexPredicate'/>
         <page name='Custom Predicate'/>
-        <page name='Simple Constraints'/>
+        <page name='Simple Constraint'/>
         <page name='Dynamic Constraint'/>
         <page name='ConstraintSet'/>
+        <page name='EmailPredicate'/>
+        <page name='ValueMatchigPredicate'/>
+        <page name='URLPredicate'/>
     </pages>
 </playground>

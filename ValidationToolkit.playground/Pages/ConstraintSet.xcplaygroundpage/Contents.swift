@@ -6,7 +6,7 @@ import ValidationToolkit
 /*:
  ## ConstraintSet
  
- Use a `ConstraintSet` to evaluate the strength of the user password.
+ In the following example we use a `ConstraintSet` to evaluate the strength of the user password.
  */
 
 let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")

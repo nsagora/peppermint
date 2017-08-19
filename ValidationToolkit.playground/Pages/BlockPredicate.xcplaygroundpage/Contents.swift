@@ -5,7 +5,7 @@ import ValidationToolkit
 /*:
  ## `BlockPredicate`
  
- Use a `BlockPredicate` to evaluate if the length of the user input is equal to 5 characters.
+ In the following example we use a `BlockPredicate` to evaluate if the length of the user input is equal to 5 characters.
  */
 
 let input = "Hel!O"
