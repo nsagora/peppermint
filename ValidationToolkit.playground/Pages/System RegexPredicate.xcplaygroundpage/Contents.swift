@@ -6,7 +6,7 @@ import ValidationToolkit
 /*:
  ## `RegexPredicate`
  
- Use a `RegexPredicate` to evaluate if the user input is a non-empty string composed only from digits.
+ In the following example we use a `RegexPredicate` to evaluate if the user input is a non-empty string, composed only from digits.
  */
 
 let input = "1234567890"

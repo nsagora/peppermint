@@ -6,7 +6,7 @@ import ValidationToolkit
 /*:
  ## Custom Predicate
  
- Define a custom predicate which evaluates if the length of the user input is equal to 5 characters.
+ In the following example we define a custom predicate which evaluates if the length of the user input is equal to 5 characters.
  */
 
 public class MinLenghtPredicate: Predicate {

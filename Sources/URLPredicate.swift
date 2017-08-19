@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- The `URLPredicate` struct is used to evaluate whether a given input is a valid URL.
+ The `URLPredicate` struct is used to evaluate whether a given input is a syntactically valid URL.
  */
 public struct URLPredicate: Predicate {
 

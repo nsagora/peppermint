@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- The `EmailPredicate` struct is used to evaluate email inputs, based on the RFC 5322 official standard.
+ The `EmailPredicate` struct is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
  */
 public struct EmailPredicate: Predicate {
 
@@ -30,10 +30,10 @@ public struct EmailPredicate: Predicate {
     }
 
     /**
-     Returns a `Boolean` value that indicates whether a given input is a valid email, according to the RFC 5322 official standard.
+     Returns a `Boolean` value that indicates whether a given email is a syntactically valid, according to the RFC 5322 official standard.
      
      - parameter input: The input against which to evaluate the receiver.
-     - returns: `true` if input is a valid email, according to the RFC 5322 standard, otherwise `false`.
+     - returns: `true` if input is a syntactically valid email, according to the RFC 5322 standard, otherwise `false`.
      */
     public func evaluate(with input: String) -> Bool {
         return rule.evaluate(with: input)
