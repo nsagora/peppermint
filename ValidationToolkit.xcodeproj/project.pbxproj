@@ -73,6 +73,13 @@
 		FADE98B21F47769A00C0185E /* EmailPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98971F4775FA00C0185E /* EmailPredicate.swift */; };
 		FADE98B31F47769A00C0185E /* PairMatchingPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98981F4775FA00C0185E /* PairMatchingPredicate.swift */; };
 		FADE98B41F47769A00C0185E /* URLPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98991F4775FA00C0185E /* URLPredicate.swift */; };
+		FADE98B61F47F6D300C0185E /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */; };
+		FADE98B71F47F6D300C0185E /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */; };
+		FADE98B81F47F6D300C0185E /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */; };
+		FADE98B91F47F6D300C0185E /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */; };
+		FADE98BB1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98BA1F47F79E00C0185E /* AsyncPredicateTests.swift */; };
+		FADE98BC1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98BA1F47F79E00C0185E /* AsyncPredicateTests.swift */; };
+		FADE98BD1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE98BA1F47F79E00C0185E /* AsyncPredicateTests.swift */; };
 		FAE24F201D5A5FF70017902A /* ConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE24F1F1D5A5FF70017902A /* ConstraintTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +134,8 @@
 		FADE989D1F47760B00C0185E /* EmailPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailPredicateTests.swift; sourceTree = "<group>"; };
 		FADE989E1F47760B00C0185E /* PairMatchingPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairMatchingPredicateTests.swift; sourceTree = "<group>"; };
 		FADE989F1F47760B00C0185E /* URLPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPredicateTests.swift; sourceTree = "<group>"; };
+		FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncPredicate.swift; sourceTree = "<group>"; };
+		FADE98BA1F47F79E00C0185E /* AsyncPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncPredicateTests.swift; sourceTree = "<group>"; };
 		FAE24F1F1D5A5FF70017902A /* ConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConstraintTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -202,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB52B491D54EC4700110049 /* Predicate.swift */,
+				FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */,
 				FADD5FA41D5A586B00ECACA1 /* Constraint.swift */,
 				FA6141381D61F36D00EECCC6 /* ConstraintSet.swift */,
 				FADD5FA61D5A5BDB00ECACA1 /* EvaluationResult.swift */,
@@ -212,6 +222,7 @@
 		FA732DD41ECB895400137C5B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FADE98BA1F47F79E00C0185E /* AsyncPredicateTests.swift */,
 				FAE24F1F1D5A5FF70017902A /* ConstraintTests.swift */,
 				FA17B2DE1D8D460D00534634 /* ConstraintSetTests.swift */,
 				FA17B2DA1D8D43E500534634 /* EvaluationResultTests.swift */,
@@ -584,6 +595,7 @@
 			files = (
 				FADE98B21F47769A00C0185E /* EmailPredicate.swift in Sources */,
 				FA0B3A5D1D6CD31E00E8F2AD /* BlockPredicate.swift in Sources */,
+				FADE98B91F47F6D300C0185E /* AsyncPredicate.swift in Sources */,
 				FAA87CFF1D5CB93D00792F43 /* RegexPredicate.swift in Sources */,
 				FAA87CFC1D5CB93D00792F43 /* EvaluationResult.swift in Sources */,
 				FAA87CFE1D5CB93D00792F43 /* Predicate.swift in Sources */,
@@ -600,6 +612,7 @@
 			files = (
 				FADE98AF1F47769A00C0185E /* EmailPredicate.swift in Sources */,
 				FA0B3A5C1D6CD31C00E8F2AD /* BlockPredicate.swift in Sources */,
+				FADE98B81F47F6D300C0185E /* AsyncPredicate.swift in Sources */,
 				FAA87D041D5CB93E00792F43 /* RegexPredicate.swift in Sources */,
 				FAA87D011D5CB93E00792F43 /* EvaluationResult.swift in Sources */,
 				FAA87D031D5CB93E00792F43 /* Predicate.swift in Sources */,
@@ -620,6 +633,7 @@
 				FADE98AA1F47769400C0185E /* PairMatchingPredicateTests.swift in Sources */,
 				FADE98A91F47769400C0185E /* EmailPredicateTests.swift in Sources */,
 				FAA87D0B1D5CB97600792F43 /* ConstraintTests.swift in Sources */,
+				FADE98BD1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAA87D091D5CB97600792F43 /* RegexPredicateTests.swift in Sources */,
 				FA17B2DD1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
 			);
@@ -631,6 +645,7 @@
 			files = (
 				FADE98AC1F47769900C0185E /* EmailPredicate.swift in Sources */,
 				FA0B3A5B1D6CD31B00E8F2AD /* BlockPredicate.swift in Sources */,
+				FADE98B71F47F6D300C0185E /* AsyncPredicate.swift in Sources */,
 				FAA87CFA1D5CB93C00792F43 /* RegexPredicate.swift in Sources */,
 				FAA87CF71D5CB93C00792F43 /* EvaluationResult.swift in Sources */,
 				FAA87CF91D5CB93C00792F43 /* Predicate.swift in Sources */,
@@ -651,6 +666,7 @@
 				FADE98A71F47769300C0185E /* PairMatchingPredicateTests.swift in Sources */,
 				FADE98A61F47769300C0185E /* EmailPredicateTests.swift in Sources */,
 				FAA87D081D5CB97500792F43 /* ConstraintTests.swift in Sources */,
+				FADE98BC1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAA87D061D5CB97500792F43 /* RegexPredicateTests.swift in Sources */,
 				FA17B2DC1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
 			);
@@ -662,6 +678,7 @@
 			files = (
 				FADE989A1F4775FA00C0185E /* EmailPredicate.swift in Sources */,
 				FA00BE0F1D68470F004A38FE /* BlockPredicate.swift in Sources */,
+				FADE98B61F47F6D300C0185E /* AsyncPredicate.swift in Sources */,
 				FADD5FA51D5A586B00ECACA1 /* Constraint.swift in Sources */,
 				FAB52B4C1D552DE800110049 /* RegexPredicate.swift in Sources */,
 				FADD5FA71D5A5BDB00ECACA1 /* EvaluationResult.swift in Sources */,
@@ -682,6 +699,7 @@
 				FADE98A41F47769200C0185E /* PairMatchingPredicateTests.swift in Sources */,
 				FADE98A31F47769200C0185E /* EmailPredicateTests.swift in Sources */,
 				FAB52B4E1D552ECE00110049 /* RegexPredicateTests.swift in Sources */,
+				FADE98BB1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAE24F201D5A5FF70017902A /* ConstraintTests.swift in Sources */,
 				FA17B2DB1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
 			);
