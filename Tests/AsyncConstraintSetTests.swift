@@ -163,6 +163,49 @@ extension AsyncConstraintSetTests {
 
 extension AsyncConstraintSetTests {
     
+    func testItCanEvaluateAll() {
+        var aPredicate = MockPredicate<Int>()
+        aPredicate.expectedResult = 20
+        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
+        
+        var bPredicate = MockPredicate<Int>()
+        bPredicate.expectedResult = 10
+        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
+        
+        constraints.add(constraint: aConstraint)
+        constraints.add(constraint: bConstraint)
+        
+        let expect = expectation(description: "Asyn Evaluation")
+        constraints.evaluateAll(input: 20) { result in
+            expect.fulfill()
+            XCTAssertEqual([EvaluationResult.valid, EvaluationResult.invalid( MockError.Invalid)], result)
+        }
+        waitForExpectations(timeout: 0.4, handler: nil)
+    }
+    
+    func testItCanEvaluateAll2() {
+        var aPredicate = MockPredicate<Int>()
+        aPredicate.expectedResult = 20
+        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
+        
+        var bPredicate = MockPredicate<Int>()
+        bPredicate.expectedResult = 20
+        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
+        
+        constraints.add(constraint: aConstraint)
+        constraints.add(constraint: bConstraint)
+        
+        let expect = expectation(description: "Asyn Evaluation")
+        constraints.evaluateAll(input: 20) { result in
+            expect.fulfill()
+            XCTAssertEqual([EvaluationResult.valid, EvaluationResult.valid], result)
+        }
+        waitForExpectations(timeout: 0.4, handler: nil)
+    }
+}
+
+extension AsyncConstraintSetTests {
+    
     enum MockError:Error {
         case Invalid
     }

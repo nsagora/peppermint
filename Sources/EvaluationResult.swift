@@ -56,3 +56,14 @@ extension EvaluationResult {
         }
     }
 }
+
+extension EvaluationResult: Equatable {
+    
+    public static func ==(lhs: EvaluationResult, rhs: EvaluationResult) -> Bool {
+        switch (rhs, lhs) {
+        case (.valid, .valid): return true
+        case (.invalid(let a), .invalid(let b)): return a.localizedDescription == b.localizedDescription
+        default: return false
+        }
+    }
+}

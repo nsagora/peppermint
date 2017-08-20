@@ -71,8 +71,6 @@ extension AsyncConstraintSet {
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `EvaluationResult` parameter:
      - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
-     
-     - returns:
      */
     public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
         
@@ -80,8 +78,8 @@ extension AsyncConstraintSet {
         operationQueue.isSuspended = true;
         
         let operations = constraints.map { AsyncOperation(input: input, constraint: $0) }
-        let done = BlockOperation {
-            let finishedOperations = operations.filter { $0.isFinished }.map{ $0.result! }
+        let completionOperation = BlockOperation {
+            let finishedOperations = operations.filter { $0.isFinished }.flatMap{ $0.result }
             let result = finishedOperations.reduce(.valid) { $0.isInvalid ? $0 : $1 }
             
             queue.async {
@@ -89,9 +87,41 @@ extension AsyncConstraintSet {
             }
         }
         
-        operationQueue.addOperation(done)
+        operationQueue.addOperation(completionOperation)
         for operation in operations {
-            done.addDependency(operation)
+            completionOperation.addDependency(operation)
+            operationQueue.addOperation(operation)
+        }
+        
+        operationQueue.isSuspended = false
+    }
+    
+    /**
+     Asynchronous evaluates the input on all `AsyncConstraint`s in the collection.
+     
+     - parameter input: The input to be validated.
+     - parameter queue: The queue on which the completion handler is executed.
+     - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Array<EvaluationResult>` parameter:
+     - parameter result: An array of `EvaluationResult` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
+
+     */
+    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:[EvaluationResult]) -> Void) {
+        
+        let operationQueue = OperationQueue()
+        operationQueue.isSuspended = true;
+        
+        let operations = constraints.map { AsyncOperation(input: input, constraint: $0) }
+        let completionOperation = BlockOperation {
+            
+            let results = operations.filter { $0.isFinished }.flatMap{ $0.result }
+            queue.async {
+                completionHandler(results)
+            }
+        }
+        
+        operationQueue.addOperation(completionOperation)
+        for operation in operations {
+            completionOperation.addDependency(operation)
             operationQueue.addOperation(operation)
         }
         
