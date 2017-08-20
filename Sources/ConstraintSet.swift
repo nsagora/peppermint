@@ -56,7 +56,7 @@ extension ConstraintSet {
      Adds a `Constraint` to the generic collection of constraints.
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter message: A localized `String` to describe the reason why the input is invalid.
+     - parameter message: An `Error` that describes why the evaluation has failed.
      */
     public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
         let constraint = Constraint(predicate: predicate, error: error)
@@ -70,7 +70,7 @@ extension ConstraintSet {
      Evaluates the input on all `Constraints` until the first fails.
      
      - parameter input: The input to be validated.
-     - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `Constraint` otherwise.
+     - returns: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
     public func evaluateAny(input:T) -> EvaluationResult {
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }

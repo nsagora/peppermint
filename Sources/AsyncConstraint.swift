@@ -6,7 +6,7 @@ import Foundation
 public struct AsyncConstraint<T> {
     
     private var predicateBuilder: (T, DispatchQueue, @escaping (Bool) -> Void) -> Void
-    private var errorBuilder: ErrorBuilder<T>
+    private var errorBuilder: (T)->Error
     
     /**
      Create a new `AsyncConstraint` instance
@@ -24,9 +24,9 @@ public struct AsyncConstraint<T> {
      Create a new `AsyncConstraint` instance
      
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
-     - parameter error: An `ErrorBuilder` closure that dynamically builds an `Error` to describe why the evaluation has failed.
+     - parameter error: An generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P:AsyncPredicate>(predicate:P, error: @escaping ErrorBuilder<T>) where P.InputType == T {
+    public init<P:AsyncPredicate>(predicate:P, error: @escaping (T)->Error) where P.InputType == T {
         
         predicateBuilder = predicate.evaluate
         errorBuilder = error

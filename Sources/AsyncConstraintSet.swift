@@ -70,7 +70,7 @@ extension AsyncConstraintSet {
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `EvaluationResult` parameter:
-     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
+     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
      
      - returns:
      */

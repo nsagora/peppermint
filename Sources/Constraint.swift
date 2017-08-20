@@ -9,19 +9,12 @@
 import Foundation
 
 /**
- Generic closure for building a localised description of the reason for a failing `Constraint`.
- 
- - paramter input: The value of the input, which can be interpolated into the description to provide more insight.
- */
-public typealias ErrorBuilder<T> = (T)->Error
-
-/**
  A structrure that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
 public struct Constraint<T> {
 
     private let predicateBuilder: (T)->Bool
-    private let errorBuilder: ErrorBuilder<T>
+    private let errorBuilder: (T)->Error
 
     /**
      Create a new `Constraint` instance
@@ -38,9 +31,9 @@ public struct Constraint<T> {
      Create a new `Constraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter error: A `ErrorBuilder` closure that dynamically builds an `Error` to describe why the evaluation has failed.
+     - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P:Predicate>(predicate: P, error: @escaping ErrorBuilder<T>) where P.InputType == T {
+    public init<P:Predicate>(predicate: P, error: @escaping (T)->Error) where P.InputType == T {
         self.predicateBuilder = predicate.evaluate
         self.errorBuilder = error
     }

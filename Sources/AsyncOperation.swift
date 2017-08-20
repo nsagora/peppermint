@@ -2,20 +2,6 @@ import Foundation
 
 class AsyncOperation<T>: Operation {
     
-    enum State {
-        case ready
-        case executing
-        case finished
-        
-        var keyPath: String {
-            switch self {
-            case .ready: return "isReady"
-            case .executing: return "isExecuting"
-            case .finished: return "isFinished"
-            }
-        }
-    }
-    
     private let constraint: AsyncConstraint<T>
     private let input: T
     var result: EvaluationResult?
@@ -66,12 +52,29 @@ class AsyncOperation<T>: Operation {
     func execute() {
         
         constraint.evaluate(with: input, queue: .main) { result in
-            self.handle(result: result)
+            self.handle(evaluationResult: result)
         }
     }
     
-    func handle(result: EvaluationResult) {
+    func handle(evaluationResult: EvaluationResult) {
         state = .finished
-        self.result = result
+        result = evaluationResult
+    }
+}
+
+extension AsyncOperation {
+    
+    enum State {
+        case ready
+        case executing
+        case finished
+        
+        var keyPath: String {
+            switch self {
+            case .ready: return "isReady"
+            case .executing: return "isExecuting"
+            case .finished: return "isFinished"
+            }
+        }
     }
 }
