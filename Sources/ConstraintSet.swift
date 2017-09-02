@@ -16,6 +16,11 @@ public struct ConstraintSet<T> {
     var constraints:[Constraint<T>]
     
     /**
+     
+    */
+    public var conditions = [Constraint<T>]()
+    
+    /**
      Create a new `ConstraintSet` instance
      */
     public init() {
@@ -73,6 +78,23 @@ extension ConstraintSet {
      - returns: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
     public func evaluateAny(input:T) -> EvaluationResult {
+        
+        if conditions.count == 0 {
+            return forwardEvaluateAny(input: input)
+        }
+        
+        let conditionsSet = ConstraintSet(constraints: conditions);
+        let result = conditionsSet.evaluateAny(input:input)
+        
+        switch result {
+        case .valid:
+            return forwardEvaluateAny(input: input)
+        default:
+            return result
+        }
+    }
+    
+    private func forwardEvaluateAny(input:T) -> EvaluationResult {
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
 
@@ -83,6 +105,25 @@ extension ConstraintSet {
      - returns: An array of `EvaluationResult` elements, indicating the evaluation result of each `Constraint` in collection.
      */
     public func evaluateAll(input:T) -> [EvaluationResult] {
+        if conditions.count == 0 {
+            return forwardEvaluateAll(input: input)
+        }
+    
+        let conditionsSet = ConstraintSet(constraints: conditions);
+        let results = conditionsSet.evaluateAll(input:input)
+        
+        if conditionsPassAll(evaluationResults: results) {
+            return forwardEvaluateAll(input: input)
+        }
+        
+        return results
+    }
+    
+    private func conditionsPassAll(evaluationResults:[EvaluationResult]) -> Bool {
+        return evaluationResults.flatMap { $0.error }.count == 0
+    }
+    
+    private func forwardEvaluateAll(input:T) -> [EvaluationResult] {
         return constraints.map{ $0.evaluate(with:input) }
     }
 }

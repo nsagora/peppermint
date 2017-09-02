@@ -41,6 +41,23 @@ extension ConstraintSetTests {
         XCTAssertEqual(constraintSet.constraints.count, 0)
     }
     
+    func testThatWithoutConstraintsAnyEvaluationIsValid() {
+        
+        let result = constraintSet.evaluateAny(input: "any")
+        switch result {
+        case .valid:
+            XCTAssertTrue(true)
+        case .invalid(_):
+            XCTFail()
+        }
+    }
+    
+    func testThatWithoutConstraints_EvaluateAllReturnAnEmptyListOfResults() {
+        
+        let results = constraintSet.evaluateAll(input: "any")
+        XCTAssertEqual(results.count, 0)
+    }
+    
     func testThatItCanBeInstantiatedWithAnArrayofConstrains() {
         
         let predicate = MockPredicate(testInput: testInput)
@@ -113,11 +130,71 @@ extension ConstraintSetTests {
     }
 }
 
+extension ConstraintSetTests {
+    
+    func testSingleCondition_EvaluateAnyToInvalid() {
+        
+        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
+        
+        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
+        constraintSet.conditions = [condition]
+        
+        switch constraintSet.evaluateAny(input: "b") {
+        case .valid:
+            XCTFail()
+        case .invalid(let error):
+            XCTAssertEqual(error.localizedDescription, TestError.FailingCondition.localizedDescription)
+        }
+    }
+    
+    func testSingleCondition_EvaluateAnyToValid() {
+        
+        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
+        
+        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
+        constraintSet.conditions = [condition]
+        
+        switch constraintSet.evaluateAny(input: "a") {
+        case .valid:
+            XCTFail()
+        case .invalid(let error):
+            XCTAssertEqual(error.localizedDescription, TestError.InvalidInput.localizedDescription)
+        }
+    }
+    
+    func testSigleConditionEvaluateAll_EvaluationResultsContainConditionResult() {
+        
+        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
+        
+        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
+        constraintSet.conditions = [condition]
+        
+        let results = constraintSet.evaluateAll(input: "b")
+        let resultErrors = results.flatMap { $0.error?.localizedDescription}
+        
+        XCTAssertEqual([TestError.FailingCondition.localizedDescription], resultErrors)
+    }
+    
+    func testSigleConditionEvaluateAll_EvaluationResultsDoesntContainConditionResult() {
+        
+        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
+        
+        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
+        constraintSet.conditions = [condition]
+        
+        let results = constraintSet.evaluateAll(input: "a")
+        let resultErrors = results.flatMap { $0.error?.localizedDescription}
+        
+        XCTAssertEqual([TestError.InvalidInput.localizedDescription], resultErrors)
+    }
+}
+
 // MARK: - Test Error
 
 fileprivate enum TestError: Error {
     case InvalidInput
     case MissingInput
+    case FailingCondition
 }
 
 // MARK: - Mock Predicate
