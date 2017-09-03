@@ -6,6 +6,8 @@ import Foundation
 public struct AsyncConstraintSet<T> {
     
     var constraints: [AsyncConstraint<T>]
+   
+    public var conditions = [AsyncConstraint<T>]()
     
     public var count:Int {
         return constraints.count
@@ -74,6 +76,31 @@ extension AsyncConstraintSet {
      */
     public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
         
+        if !hasConditions() {
+            return forwardEvaluateAny(input: input, queue: queue, completionHandler: completionHandler)
+        }
+        
+        let conditionSet = AsyncConstraintSet(constraints: conditions)
+        let workQueue = DispatchQueue(label: "com.nsagora.validation-toolkit.async-constraint-set", attributes: .concurrent)
+        conditionSet.evaluateAny(input: input, queue: workQueue) { result in
+
+            
+            switch result {
+            case .valid: self.forwardEvaluateAny(input: input, queue: queue, completionHandler: completionHandler)
+            default: queue.async {
+                completionHandler(result)
+                }
+            }
+            
+        }
+    }
+    
+    func hasConditions() -> Bool {
+        return conditions.count != 0
+    }
+    
+    func forwardEvaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
+        
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
         
@@ -106,6 +133,29 @@ extension AsyncConstraintSet {
 
      */
     public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:[EvaluationResult]) -> Void) {
+        
+        if !hasConditions() {
+            return forwardEvaluateAll(input: input, queue: queue, completionHandler: completionHandler)
+        }
+        
+        let conditionSet = AsyncConstraintSet(constraints: conditions)
+        let workQueue = DispatchQueue(label: "com.nsagora.validation-toolkit.async-constraint-set", attributes: .concurrent)
+        
+        conditionSet.evaluateAll(input: input, queue: workQueue) { results in
+            
+            let hasErrors = results.flatMap { $0.error }.count != 0
+            if !hasErrors {
+                self.forwardEvaluateAll(input: input, queue: queue, completionHandler: completionHandler)
+            }
+            else {
+                queue.async {
+                    completionHandler(results)
+                }
+            }
+        }
+    }
+    
+    func forwardEvaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:[EvaluationResult]) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
