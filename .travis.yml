@@ -24,7 +24,7 @@ before_install:
   - brew outdated carthage || brew upgrade carthage
   - gem install xcpretty --pre --no-rdoc --no-ri --no-document --quiet
   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
-  - echo y | fastlane snapshot reset_simulators
+  - echo y | fastlane snapshot reset_simulators --force
 
 script:
   - set -o pipefail
