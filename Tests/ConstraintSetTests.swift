@@ -47,7 +47,7 @@ extension ConstraintSetTests {
         switch result {
         case .valid:
             XCTAssertTrue(true)
-        case .invalid(_):
+        default:
             XCTFail()
         }
     }
@@ -140,10 +140,10 @@ extension ConstraintSetTests {
         constraintSet.conditions = [condition]
         
         switch constraintSet.evaluateAny(input: "b") {
-        case .valid:
-            XCTFail()
         case .invalid(let error):
             XCTAssertEqual(error.localizedDescription, TestError.FailingCondition.localizedDescription)
+        default:
+            XCTFail()
         }
     }
     
@@ -155,10 +155,10 @@ extension ConstraintSetTests {
         constraintSet.conditions = [condition]
         
         switch constraintSet.evaluateAny(input: "a") {
-        case .valid:
-            XCTFail()
         case .invalid(let error):
             XCTAssertEqual(error.localizedDescription, TestError.InvalidInput.localizedDescription)
+        default:
+            XCTFail()
         }
     }
     

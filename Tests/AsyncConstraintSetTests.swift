@@ -93,8 +93,8 @@ extension AsyncConstraintSetTests {
         constraints.evaluateAny(input: 1) { result in
             expect.fulfill()
             switch result {
-            case .valid: XCTFail()
             case .invalid(_): XCTAssert(true)
+            default: XCTFail()
             }
         }
         waitForExpectations(timeout: 0.4, handler: nil)

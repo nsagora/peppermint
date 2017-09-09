@@ -23,6 +23,13 @@ public enum EvaluationResult {
      It has an associated `Error` to describe the reason of the failure.
      */
     case invalid(Error)
+    
+    /**
+     Represents a unevaluated validation.
+     
+     It has an associated array of `EvaluationResult`s to describe the evaluation results of the evaluation conditions
+     */
+    case unevaluated([EvaluationResult])
 }
 
 extension EvaluationResult {
@@ -34,25 +41,25 @@ extension EvaluationResult {
         switch self {
         case .valid:
             return true
-        case.invalid:
+        default:
             return false
         }
     }
 
     /**
-     `false` if the validation result is invalid, `true` otherwise.
+     `false` if the validation result is `.invalid` or `.unevaluated`, `true` otherwise.
      */
     public var isInvalid:Bool {
         return !isValid
     }
     
     /**
-     `Error` if the validation result is invalid, `nil` otherwise.
+     `Error` if the validation result is `.invalid`, `nil` otherwise.
      */
     public var error: Error? {
         switch self {
-        case .valid: return nil
         case .invalid(let error): return error
+        default: return nil
         }
     }
 }
@@ -63,6 +70,7 @@ extension EvaluationResult: Equatable {
         switch (rhs, lhs) {
         case (.valid, .valid): return true
         case (.invalid(let a), .invalid(let b)): return a.localizedDescription == b.localizedDescription
+        case (.unevaluated(let a), .unevaluated(let b)): return a == b
         default: return false
         }
     }

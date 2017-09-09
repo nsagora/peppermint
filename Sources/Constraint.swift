@@ -16,6 +16,8 @@ public struct Constraint<T> {
     private let predicateBuilder: (T)->Bool
     private let errorBuilder: (T)->Error
 
+    var conditions =  [Constraint<T>]()
+
     /**
      Create a new `Constraint` instance
      
@@ -38,6 +40,11 @@ public struct Constraint<T> {
         self.errorBuilder = error
     }
 
+    
+    public mutating func add(condition:Constraint<T>) {
+        conditions.append(condition)
+    }
+    
     /**
      Evaluates the input on the `Predicate`.
      
@@ -45,7 +52,26 @@ public struct Constraint<T> {
      - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `Constraint` otherwise.
      */
     public func evaluate(with input:T) -> EvaluationResult {
-
+        
+        if !hasConditions() {
+            return forwardEvaluation(with: input)
+        }
+        
+        let results = conditions.map { $0.evaluate(with: input) }
+        let isPassingConditions = results.filter { $0.isInvalid }.count == 0;
+        
+        if isPassingConditions {
+            return forwardEvaluation(with: input)
+        }
+        return EvaluationResult.unevaluated(results)
+    }
+    
+    func hasConditions() -> Bool {
+        return conditions.count > 0
+    }
+    
+    func forwardEvaluation(with input:T) -> EvaluationResult {
+        
         let result = predicateBuilder(input)
         
         if result == true {

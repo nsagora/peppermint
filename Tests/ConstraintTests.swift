@@ -53,6 +53,44 @@ class ConstraintTests: XCTestCase {
 
 extension ConstraintTests {
     
+    func testAddConditions() {
+        
+        let p = FakePredicate(expected: "001")
+        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        
+        constraint.add(condition:condition)
+        XCTAssertEqual(constraint.conditions.count, 1)
+        
+        constraint.add(condition:condition)
+        XCTAssertEqual(constraint.conditions.count, 2)
+    }
+    
+    func testThatItDoentEvaluateWhenHavingAFailingCondition() {
+        
+        let p = FakePredicate(expected: "001")
+        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        
+        constraint.add(condition:condition)
+        
+        let result = constraint.evaluate(with: "002")
+        let expectedResult = [EvaluationResult.invalid(FakeError.Invalid)]
+        XCTAssertEqual(result, EvaluationResult.unevaluated(expectedResult))
+    }
+    
+    func testThatItEvaluateWhenHavingAValidCondition() {
+        
+        let p = FakePredicate(expected: "001")
+        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        
+        constraint.add(condition:condition)
+        
+        let result = constraint.evaluate(with: "001")
+        XCTAssertEqual(result, EvaluationResult.invalid(FakeError.Invalid))
+    }
+}
+
+extension ConstraintTests {
+    
     func testThatItDynamicallyBuildsTheValidationError() {
         
         let constraint = Constraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
