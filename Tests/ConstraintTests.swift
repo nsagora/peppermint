@@ -11,14 +11,14 @@ import XCTest
 
 class ConstraintTests: XCTestCase {
 
-    fileprivate let testInput = "testInput"
-    fileprivate let predicate = MockPredicate(testInput: "testInput")
+    fileprivate let fakeInput = "testInput"
+    fileprivate let fakePredicate = FakePredicate(expected: "testInput")
 
     var constraint:Constraint<String>!
 
     override func setUp() {
         super.setUp()
-        constraint = Constraint(predicate: predicate, error: TestError.InvalidInput)
+        constraint = Constraint(predicate: fakePredicate, error: FakeError.Invalid)
     }
     
     override func tearDown() {
@@ -31,7 +31,7 @@ class ConstraintTests: XCTestCase {
     }
 
     func testThatItReturnsSuccessForValidInput() {
-        let result = constraint.evaluate(with: testInput)
+        let result = constraint.evaluate(with: fakeInput)
         switch result {
         case .valid:
             XCTAssertTrue(true)
@@ -43,8 +43,8 @@ class ConstraintTests: XCTestCase {
     func testThatItFailsWithErrorForInvalidInput() {
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .invalid(let error as TestError):
-            XCTAssertEqual(TestError.InvalidInput, error)
+        case .invalid(let error as FakeError):
+            XCTAssertEqual(FakeError.Invalid, error)
         default:
             XCTFail()
         }
@@ -55,38 +55,32 @@ extension ConstraintTests {
     
     func testThatItDynamicallyBuildsTheValidationError() {
         
-        let constraint = Constraint(predicate: predicate) { TestError.UnexpectedInput($0) }
+        let constraint = Constraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .invalid(let error as TestError):
-            XCTAssertEqual(TestError.UnexpectedInput("Ok"), error)
+        case .invalid(let error as FakeError):
+            XCTAssertEqual(FakeError.Unexpected("Ok"), error)
         default:
             XCTFail()
         }
     }
 }
 
-// MARK: - Test Error
+// MARK: - Fakes
 
-fileprivate enum TestError: Error {
-    case InvalidInput
-    case UnexpectedInput(String)
-}
-
-extension TestError: Equatable {
+extension ConstraintTests {
     
-    public static func ==(lhs: TestError, rhs: TestError) -> Bool {
-        return (lhs.localizedDescription == rhs.localizedDescription)
+    fileprivate enum FakeError: FakeableError {
+        case Invalid
+        case Unexpected(String)
     }
-}
-
-// MARK: - Mock Predicate
-
-fileprivate struct MockPredicate: Predicate  {
-
-    var testInput: String
     
-    func evaluate(with input: String) -> Bool {
-        return input == testInput
+    fileprivate struct FakePredicate: Predicate  {
+        
+        var expected: String
+        
+        func evaluate(with input: String) -> Bool {
+            return input == expected
+        }
     }
 }
