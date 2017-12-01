@@ -11,7 +11,7 @@ public struct SimpleAsyncConstraint<T>: AsyncConstraint {
     var conditions =  [SimpleAsyncConstraint<T>]()
     
     /**
-     Create a new `AsyncConstraint` instance
+     Create a new `SimpleAsyncConstraint` instance
      
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
@@ -23,7 +23,7 @@ public struct SimpleAsyncConstraint<T>: AsyncConstraint {
     }
     
     /**
-     Create a new `AsyncConstraint` instance
+     Create a new `SimpleAsyncConstraint` instance
      
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
@@ -44,7 +44,7 @@ public struct SimpleAsyncConstraint<T>: AsyncConstraint {
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
-     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
+     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
         

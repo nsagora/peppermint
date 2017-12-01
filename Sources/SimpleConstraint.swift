@@ -11,7 +11,7 @@ public struct SimpleConstraint<T>: Constraint {
     var conditions =  [SimpleConstraint<T>]()
 
     /**
-     Create a new `Constraint` instance
+     Create a new `SimpleConstraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
@@ -22,7 +22,7 @@ public struct SimpleConstraint<T>: Constraint {
     }
     
     /**
-     Create a new `Constraint` instance
+     Create a new `SimpleConstraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
@@ -41,7 +41,7 @@ public struct SimpleConstraint<T>: Constraint {
      Evaluates the input on the `Predicate`.
      
      - parameter input: The input to be validated.
-     - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `Constraint` otherwise.
+     - returns: `.valid` if the input is valid,`.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input:T) -> Result {
         
