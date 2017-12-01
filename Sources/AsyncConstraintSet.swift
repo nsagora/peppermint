@@ -6,15 +6,16 @@ import Foundation
 public struct AsyncConstraintSet<T> {
     
     var constraints: [AsyncConstraint<T>]
-   
-    public var conditions = [AsyncConstraint<T>]()
-    
+
+    /**
+     Returns the number of constraints in collection
+     */
     public var count:Int {
         return constraints.count
     }
     
     /**
-     Create a new `AsyncConstraintSet` instance
+     Create a new `AsyncConstraintSet` instance 
      */
     public init() {
         self.constraints = [AsyncConstraint<T>]()
@@ -23,7 +24,7 @@ public struct AsyncConstraintSet<T> {
     /**
      Create a new `AsyncConstraintSet` instance populated with a predefined list of `AsyncConstraints`
      
-     - parameter constraints: `[Constraint]`
+     - parameter constraints: `[AsyncConstraint]`
      */
     public init(constraints:[AsyncConstraint<T>]) {
         self.constraints = constraints
@@ -32,7 +33,7 @@ public struct AsyncConstraintSet<T> {
     /**
      Create a new `AsyncConstraintSet` instance populated with a unsized list of `AsyncConstraints`
      
-     - parameter constraints: `[Constraint]`
+     - parameter constraints: `[AsyncConstraint]`
      */
     public init(constraints:AsyncConstraint<T>...) {
         self.init(constraints: constraints)
@@ -76,31 +77,6 @@ extension AsyncConstraintSet {
      */
     public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
         
-        if !hasConditions() {
-            return forwardEvaluateAny(input: input, queue: queue, completionHandler: completionHandler)
-        }
-        
-        let conditionSet = AsyncConstraintSet(constraints: conditions)
-        let workQueue = DispatchQueue(label: "com.nsagora.validation-toolkit.async-constraint-set", attributes: .concurrent)
-        conditionSet.evaluateAny(input: input, queue: workQueue) { result in
-
-            
-            switch result {
-            case .valid: self.forwardEvaluateAny(input: input, queue: queue, completionHandler: completionHandler)
-            default: queue.async {
-                completionHandler(result)
-                }
-            }
-            
-        }
-    }
-    
-    func hasConditions() -> Bool {
-        return conditions.count != 0
-    }
-    
-    func forwardEvaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
-        
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
         
@@ -132,30 +108,7 @@ extension AsyncConstraintSet {
      - parameter result: An array of `EvaluationResult` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
 
      */
-    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:[EvaluationResult]) -> Void) {
-        
-        if !hasConditions() {
-            return forwardEvaluateAll(input: input, queue: queue, completionHandler: completionHandler)
-        }
-        
-        let conditionSet = AsyncConstraintSet(constraints: conditions)
-        let workQueue = DispatchQueue(label: "com.nsagora.validation-toolkit.async-constraint-set", attributes: .concurrent)
-        
-        conditionSet.evaluateAll(input: input, queue: workQueue) { results in
-            
-            let hasErrors = results.flatMap { $0.error }.count != 0
-            if !hasErrors {
-                self.forwardEvaluateAll(input: input, queue: queue, completionHandler: completionHandler)
-            }
-            else {
-                queue.async {
-                    completionHandler(results)
-                }
-            }
-        }
-    }
-    
-    func forwardEvaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:[EvaluationResult]) -> Void) {
+    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
@@ -164,8 +117,9 @@ extension AsyncConstraintSet {
         let completionOperation = BlockOperation {
             
             let results = operations.filter { $0.isFinished }.flatMap{ $0.result }
+            let summary = EvaluationResult.Summary(evaluationResults: results)
             queue.async {
-                completionHandler(results)
+                completionHandler(EvaluationResult(summary: summary))
             }
         }
         

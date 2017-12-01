@@ -43,8 +43,8 @@ class ConstraintTests: XCTestCase {
     func testThatItFailsWithErrorForInvalidInput() {
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .invalid(let error as FakeError):
-            XCTAssertEqual(FakeError.Invalid, error)
+        case .invalid(let summary):
+            XCTAssertEqual([FakeError.Invalid], summary.errors as! [FakeError])
         default:
             XCTFail()
         }
@@ -73,8 +73,8 @@ extension ConstraintTests {
         constraint.add(condition:condition)
         
         let result = constraint.evaluate(with: "002")
-        let expectedResult = [EvaluationResult.invalid(FakeError.Invalid)]
-        XCTAssertEqual(result, EvaluationResult.unevaluated(expectedResult))
+        let expectedResult = EvaluationResult.Summary(errors: [FakeError.Invalid])
+        XCTAssertEqual(result, EvaluationResult.invalid(expectedResult))
     }
     
     func testThatItEvaluateWhenHavingAValidCondition() {
@@ -85,7 +85,32 @@ extension ConstraintTests {
         constraint.add(condition:condition)
         
         let result = constraint.evaluate(with: "001")
-        XCTAssertEqual(result, EvaluationResult.invalid(FakeError.Invalid))
+        let summary = EvaluationResult.Summary(errors: [FakeError.Invalid])
+        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+    }
+    
+    func testThatItEvaluateWhenHavingMultiLevelCondition() {
+        
+        let p_1 = FakePredicate(expected: "001")
+        var condition_1 = Constraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
+        
+        let p_2 = FakePredicate(expected: "002")
+        let condition_2 = Constraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
+        
+        let p_3 = FakePredicate(expected: "003")
+        let condition_3 = Constraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
+        
+        condition_1.add(condition:condition_2)
+        condition_1.add(condition:condition_3)
+        constraint.add(condition:condition_1)
+        
+        var result = constraint.evaluate(with: "001")
+        var summary = EvaluationResult.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
+        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        
+        result = constraint.evaluate(with: "004")
+        summary = EvaluationResult.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
+        XCTAssertEqual(result, EvaluationResult.invalid(summary))
     }
 }
 
@@ -96,8 +121,8 @@ extension ConstraintTests {
         let constraint = Constraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
         let result = constraint.evaluate(with: "Ok")
         switch result {
-        case .invalid(let error as FakeError):
-            XCTAssertEqual(FakeError.Unexpected("Ok"), error)
+        case .invalid(let summary):
+            XCTAssertEqual([FakeError.Unexpected("Ok")], summary.errors as! [FakeError])
         default:
             XCTFail()
         }

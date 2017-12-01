@@ -49,7 +49,8 @@ public struct AsyncConstraint<T> {
             }
             else {
                 let error = self.errorBuilder(input)
-                completionHandler(.invalid(error))
+                let summary = EvaluationResult.Summary(errors: [error])
+                completionHandler(.invalid(summary))
             }
         }
     }

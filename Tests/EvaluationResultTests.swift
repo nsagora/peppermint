@@ -17,13 +17,19 @@ class EvaluationResultTests: XCTestCase {
     }
     
     func testIsInvalid() {
-        XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).isInvalid)
-        XCTAssertFalse(EvaluationResult.invalid(TestError.InvalidInput).isValid)
+        
+        let summary = EvaluationResult.Summary(errors: [TestError.InvalidInput])
+        
+        XCTAssertTrue(EvaluationResult.invalid(summary).isInvalid)
+        XCTAssertFalse(EvaluationResult.invalid(summary).isValid)
     }
     
-    func testEvaluationError() {
-        XCTAssertTrue(EvaluationResult.invalid(TestError.InvalidInput).error != nil)
-        XCTAssertTrue(EvaluationResult.valid.error == nil)
+    func testEvaluationErrors() {
+        let errors =  [TestError.InvalidInput]
+        let summary = EvaluationResult.Summary(errors:errors)
+        
+        XCTAssertEqual(errors, EvaluationResult.invalid(summary).errors as! [TestError])
+        XCTAssertTrue(EvaluationResult.valid.errors == nil)
     }
 }
 

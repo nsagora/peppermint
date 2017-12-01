@@ -63,7 +63,9 @@ public struct Constraint<T> {
         if isPassingConditions {
             return forwardEvaluation(with: input)
         }
-        return EvaluationResult.unevaluated(results)
+        
+        let summary = EvaluationResult.Summary(evaluationResults: results)
+        return EvaluationResult.invalid(summary)
     }
     
     func hasConditions() -> Bool {
@@ -79,7 +81,8 @@ public struct Constraint<T> {
         }
         else {
             let error = errorBuilder(input)
-            return .invalid(error)
+            let summary = EvaluationResult.Summary(errors: [error])
+            return .invalid(summary)
         }
     }
 }

@@ -1,5 +1,5 @@
 import XCTest
-import ValidationToolkit
+@testable import ValidationToolkit
 
 class AsyncConstraintSetTests: XCTestCase {
     
@@ -25,8 +25,8 @@ class AsyncConstraintSetTests: XCTestCase {
     
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
         
-        let predicate = MockPredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error: MockError.Invalid);
+        let predicate = FakePredicate(10)
+        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraints = AsyncConstraintSet<Int>(constraints: [constraint])
         XCTAssertNotNil(constraints)
@@ -35,8 +35,8 @@ class AsyncConstraintSetTests: XCTestCase {
     
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
         
-        let predicate = MockPredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error: MockError.Invalid);
+        let predicate = FakePredicate(10)
+        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraints = AsyncConstraintSet<Int>(constraints: constraint)
         XCTAssertNotNil(constraints)
@@ -48,8 +48,8 @@ extension AsyncConstraintSetTests {
     
     func testItCanAddAnAsynConstraint() {
         
-        let predicate = MockPredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error: MockError.Invalid);
+        let predicate = FakePredicate(10)
+        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         constraints.add(constraint: constraint)
         
@@ -58,13 +58,12 @@ extension AsyncConstraintSetTests {
     
     func testItCanAddMultipleAsyncConstraints() {
         
-        let aPredicate = MockPredicate<Int>()
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
+        let aPredicate = FakePredicate(10)
+        let aConstraint = AsyncConstraint(predicate: aPredicate, error: FakeError.Invalid);
         
-        let bPredicate = MockPredicate<Int>()
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        
+        let bPredicate = FakePredicate(10)
+        let bConstraint = AsyncConstraint(predicate: bPredicate, error: FakeError.Invalid);
+
         constraints.add(constraint: aConstraint)
         constraints.add(constraint: bConstraint)
         
@@ -73,8 +72,8 @@ extension AsyncConstraintSetTests {
     
     func testItCanAddAConstraintUsingAlternativeMethod() {
         
-        let predicate = MockPredicate<Int>()
-        constraints.add(predicate: predicate, error:MockError.Invalid)
+        let predicate = FakePredicate(10)
+        constraints.add(predicate: predicate, error:FakeError.Invalid)
         
         XCTAssertEqual(constraints.count, 1)
     }
@@ -83,11 +82,8 @@ extension AsyncConstraintSetTests {
 extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForOneConstraint() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 10
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
+
+        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
         constraints.evaluateAny(input: 1) { result in
@@ -97,174 +93,109 @@ extension AsyncConstraintSetTests {
             default: XCTFail()
             }
         }
-        waitForExpectations(timeout: 0.4, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 10
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
+        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
         constraints.evaluateAny(input: 1) { result in
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
-        waitForExpectations(timeout: 0.4, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint2() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 10
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
+
+        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
         constraints.evaluateAny(input: 20) { result in
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
-        waitForExpectations(timeout: 0.4, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint3() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 20
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
+
+        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
         constraints.evaluateAny(input: 20) { result in
             expect.fulfill()
             XCTAssertTrue(result.isValid)
         }
-        waitForExpectations(timeout: 0.4, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testItCanEvaluateAll_ToValid() {
+
+        constraints.add(predicate: FakePredicate(1), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(1), error: FakeError.FailedCondition)
+
+        let expect = expectation(description: "Evaluate all async")
+        constraints.evaluateAll(input: 1) { result in
+            expect.fulfill()
+            XCTAssertEqual(EvaluationResult.valid, result)
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testItCanEvaluateAll_ToValid_2() {
+
+        constraints.add(predicate: FakePredicate(1), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
+
+        let expect = expectation(description: "Evaluate all async")
+        let summary = EvaluationResult.Summary(errors: [FakeError.FailedCondition])
+        constraints.evaluateAll(input: 1) { result in
+            expect.fulfill()
+            XCTAssertEqual(EvaluationResult.invalid(summary), result)
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testItCanEvaluateAll_ToValid_3() {
+
+        constraints.add(predicate: FakePredicate(2), error: FakeError.Invalid)
+        constraints.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
+
+        let expect = expectation(description: "Evaluate all async")
+        let summary = EvaluationResult.Summary(errors: [FakeError.Invalid, FakeError.FailedCondition])
+        constraints.evaluateAll(input: 1) { result in
+            expect.fulfill()
+            XCTAssertEqual(EvaluationResult.invalid(summary), result)
+        }
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }
 
 extension AsyncConstraintSetTests {
     
-    func testItCanEvaluateAll() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 20
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 10
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
-        
-        let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAll(input: 20) { result in
-            expect.fulfill()
-            XCTAssertEqual([EvaluationResult.valid, EvaluationResult.invalid( MockError.Invalid)], result)
-        }
-        waitForExpectations(timeout: 0.4, handler: nil)
-    }
-    
-    func testItCanEvaluateAll2() {
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 20
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: MockError.Invalid);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
-        
-        let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAll(input: 20) { result in
-            expect.fulfill()
-            XCTAssertEqual([EvaluationResult.valid, EvaluationResult.valid], result)
-        }
-        waitForExpectations(timeout: 0.4, handler: nil)
-    }
-    
-    
-    func testItCanEvaluateAnyWithOneCondition() {
-        
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 20
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bCondition = AsyncConstraint(predicate: bPredicate, error: MockError.FailedCondition);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.conditions = [bCondition]
-        
-        let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAny(input: 10) { result in
-            expect.fulfill()
-            XCTAssertEqual(result.error?.localizedDescription, MockError.FailedCondition.localizedDescription)
-        }
-        waitForExpectations(timeout: 0.4, handler: nil)
-    }
-    
-    func testItCanEvaluateAllWithOneCondition() {
-        
-        var aPredicate = MockPredicate<Int>()
-        aPredicate.expectedResult = 20
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: MockError.Invalid);
-        
-        var bPredicate = MockPredicate<Int>()
-        bPredicate.expectedResult = 20
-        let bCondition = AsyncConstraint(predicate: bPredicate, error: MockError.FailedCondition);
-        
-        constraints.add(constraint: aConstraint)
-        constraints.conditions = [bCondition]
-        
-        let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAll(input: 10) { result in
-            expect.fulfill()
-            let errors = result.flatMap{$0.error?.localizedDescription}
-            XCTAssertEqual(errors, [MockError.FailedCondition.localizedDescription])
-        }
-        waitForExpectations(timeout: 0.4, handler: nil)
-    }
-}
-
-extension AsyncConstraintSetTests {
-    
-    enum MockError:Error {
+    enum FakeError:Error {
         case Invalid
         case FailedCondition
     }
     
-    struct MockPredicate<T:Equatable>:AsyncPredicate {
+    struct FakePredicate<T:Equatable>:AsyncPredicate {
         
-        var expectedResult:T?
-        
+        var expectedResult:T
+
+        init(_ expectedResult:T) {
+            self.expectedResult = expectedResult
+        }
+
         func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (Bool) -> Void) {
             
             queue.async {
                 completionHandler(self.expectedResult == input)
             }
-            
         }
     }
 }

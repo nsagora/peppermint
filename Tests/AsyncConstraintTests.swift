@@ -29,7 +29,7 @@ class AsyncConstraintTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 0.01, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testThatItCallsCallbackWithSucceesOnSuccess() {
@@ -45,7 +45,7 @@ class AsyncConstraintTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 0.01, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
         
     }
     
@@ -59,11 +59,11 @@ class AsyncConstraintTests: XCTestCase {
         let expect = expectation(description: "Async Evaluation")
         constraint.evaluate(with: 1, queue:.main) { result in
             XCTAssertTrue(result.isInvalid)
-            XCTAssertTrue(result.error is MockError)
+            XCTAssertTrue(result.errors is [MockError])
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 0.01, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
         
     }
 }

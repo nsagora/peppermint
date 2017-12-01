@@ -23,12 +23,11 @@ passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpe
 passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
 
 let password = "enguard!"
-let results:[EvaluationResult] = passwordConstraints.evaluateAll(input: password)
-let errors = results.filter({$0.isInvalid}).flatMap({$0.error?.localizedDescription})
+let result = passwordConstraints.evaluateAll(input: password)
 
-if errors.count == 0 {
+switch result {
+case .valid:
     print("Wow, that's a 💪 password!")
-}
-else {
-    print(errors)
+case .invalid(let summary):
+    print(summary.errors.map({$0.localizedDescription}))
 }

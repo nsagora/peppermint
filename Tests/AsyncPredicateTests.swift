@@ -9,7 +9,6 @@
 import XCTest
 import ValidationToolkit
 
-
 class AsyncPredicateTests: XCTestCase {
     
     func testThatAnyPredicateIsAlsoAnAsyncPredicate() {
@@ -20,7 +19,7 @@ class AsyncPredicateTests: XCTestCase {
             expectetion.fulfill()
         }
         
-        waitForExpectations(timeout: 0.01, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }
 
@@ -30,17 +29,6 @@ extension AsyncPredicateTests {
         
         func evaluate(with input: T) -> Bool {
             return true
-        }
-    }
-    
-    struct MockAsyncPredicate<T>:AsyncPredicate {
-        
-        typealias InputType = T
-        
-        func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ matches:Bool) -> Void) {
-            queue.async {
-                completionHandler(true)
-            }
         }
     }
 }

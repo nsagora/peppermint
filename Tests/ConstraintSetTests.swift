@@ -11,8 +11,9 @@ import XCTest
 
 class ConstraintSetTests: XCTestCase {
 
-    fileprivate let testInput = "testInput"
-    fileprivate let predicate = MockPredicate(testInput: "testInput")
+    fileprivate let validFakeInput = "fakeInput"
+    fileprivate let invalidFakeInput = "~fakeInput"
+    fileprivate let predicate = MockPredicate(testInput: "fakeInput")
     fileprivate var constraintSet: ConstraintSet<String>!
     
     override func setUp() {
@@ -32,7 +33,7 @@ extension ConstraintSetTests {
         XCTAssertNotNil(constraintSet)
     }
     
-    func testThatAfterInitItHasNoConstraints() {
+    func testThatAfterInit_ItHasNoConstraints() {
         XCTAssertEqual(constraintSet.constraints.count, 0)
     }
     
@@ -40,8 +41,26 @@ extension ConstraintSetTests {
         let constraintSet = ConstraintSet<String>(constraints:[])
         XCTAssertEqual(constraintSet.constraints.count, 0)
     }
+
+    func testThatItCanBeInstantiatedWithAnFinitArrayofConstrains() {
+
+        let predicate = MockPredicate(testInput: validFakeInput)
+        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
+
+        let constraintSet = ConstraintSet<String>(constraints:[constraint])
+        XCTAssertEqual(constraintSet.constraints.count, 1)
+    }
+
+    func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
+
+        let predicate = MockPredicate(testInput: validFakeInput)
+        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
+
+        let constraintSet = ConstraintSet<String>(constraints:constraint)
+        XCTAssertEqual(constraintSet.constraints.count, 1)
+    }
     
-    func testThatWithoutConstraintsAnyEvaluationIsValid() {
+    func testThatWithoutConstraints_EvaluateAny_IsValid() {
         
         let result = constraintSet.evaluateAny(input: "any")
         switch result {
@@ -52,28 +71,15 @@ extension ConstraintSetTests {
         }
     }
     
-    func testThatWithoutConstraints_EvaluateAllReturnAnEmptyListOfResults() {
+    func testThatWithoutConstraints_EvaluateAll_IsValid() {
         
-        let results = constraintSet.evaluateAll(input: "any")
-        XCTAssertEqual(results.count, 0)
-    }
-    
-    func testThatItCanBeInstantiatedWithAnArrayofConstrains() {
-        
-        let predicate = MockPredicate(testInput: testInput)
-        let constraint = Constraint(predicate: predicate, error:TestError.InvalidInput)
-        
-        let constraintSet = ConstraintSet<String>(constraints:[constraint])
-        XCTAssertEqual(constraintSet.constraints.count, 1)
-    }
-    
-    func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
-        
-        let predicate = MockPredicate(testInput: testInput)
-        let constraint = Constraint(predicate: predicate, error:TestError.InvalidInput)
-        
-        let constraintSet = ConstraintSet<String>(constraints:constraint)
-        XCTAssertEqual(constraintSet.constraints.count, 1)
+        let result = constraintSet.evaluateAny(input: "all")
+        switch result {
+        case .valid:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
 }
 
@@ -81,26 +87,26 @@ extension ConstraintSetTests {
     
     func testThatCanAddConstraint() {
         
-        let constraint = Constraint(predicate: predicate, error:TestError.InvalidInput)
+        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
         
         constraintSet.add(constraint: constraint)
         XCTAssertEqual(constraintSet.constraints.count, 1)
     }
     
-    func testThatCanAddConstraintAlternativeOne() {
+    func testThatCanAddConstraintUsingAlternativeMethod() {
         
-        constraintSet.add(predicate: predicate, error:TestError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
         XCTAssertEqual(constraintSet.constraints.count, 1)
     }
 }
 
 extension ConstraintSetTests {
     
-    func testThatItValidatesAnyToValid() {
+    func testThatForValidInput_EvaluateAny_IsValid() {
         
-        constraintSet.add(predicate: predicate, error:TestError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
      
-        switch constraintSet.evaluateAny(input: testInput) {
+        switch constraintSet.evaluateAny(input: validFakeInput) {
         case .valid:
             XCTAssert(true)
         default:
@@ -108,90 +114,39 @@ extension ConstraintSetTests {
         }
     }
     
-    func testThatItValidatesAnyToInvalid() {
+    func testThatForInvalidInput_EvaluateAny_IsInvalid() {
         
-        constraintSet.add(predicate: predicate, error:TestError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
         
-        switch constraintSet.evaluateAny(input: "") {
-        case .invalid:
-            XCTAssert(true)
-        default:
-            XCTFail()
-        }
+        let result = constraintSet.evaluateAny(input: invalidFakeInput)
+        let summary = EvaluationResult.Summary(errors: [FakeError.InvalidInput])
+        
+        XCTAssertEqual(result, EvaluationResult.invalid(summary))
     }
     
-    func testThatItValidatesAll() {
+    func testThatForValidInput_EvaluateAll_IsValid() {
         
-        constraintSet.add(predicate: predicate, error:TestError.InvalidInput)
-        constraintSet.add(predicate: predicate, error:TestError.MissingInput)
+        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
         
-        let result = constraintSet.evaluateAll(input: testInput)
-        XCTAssertEqual(result.count, 2)
+        let result = constraintSet.evaluateAll(input: validFakeInput)
+        XCTAssertEqual(result, EvaluationResult.valid)
     }
-}
 
-extension ConstraintSetTests {
-    
-    func testSingleCondition_EvaluateAnyToInvalid() {
-        
-        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
-        
-        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
-        constraintSet.conditions = [condition]
-        
-        switch constraintSet.evaluateAny(input: "b") {
-        case .invalid(let error):
-            XCTAssertEqual(error.localizedDescription, TestError.FailingCondition.localizedDescription)
-        default:
-            XCTFail()
-        }
-    }
-    
-    func testSingleCondition_EvaluateAnyToValid() {
-        
-        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
-        
-        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
-        constraintSet.conditions = [condition]
-        
-        switch constraintSet.evaluateAny(input: "a") {
-        case .invalid(let error):
-            XCTAssertEqual(error.localizedDescription, TestError.InvalidInput.localizedDescription)
-        default:
-            XCTFail()
-        }
-    }
-    
-    func testSigleConditionEvaluateAll_EvaluationResultsContainConditionResult() {
-        
-        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
-        
-        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
-        constraintSet.conditions = [condition]
-        
-        let results = constraintSet.evaluateAll(input: "b")
-        let resultErrors = results.flatMap { $0.error?.localizedDescription}
-        
-        XCTAssertEqual([TestError.FailingCondition.localizedDescription], resultErrors)
-    }
-    
-    func testSigleConditionEvaluateAll_EvaluationResultsDoesntContainConditionResult() {
-        
-        let condition = Constraint(predicate: MockPredicate(testInput: "a"), error: TestError.FailingCondition)
-        
-        constraintSet.add(predicate: predicate, error: TestError.InvalidInput)
-        constraintSet.conditions = [condition]
-        
-        let results = constraintSet.evaluateAll(input: "a")
-        let resultErrors = results.flatMap { $0.error?.localizedDescription}
-        
-        XCTAssertEqual([TestError.InvalidInput.localizedDescription], resultErrors)
+    func testThatForInvalidInput_EvaluateAll_IsInvalid() {
+
+        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
+
+        let result = constraintSet.evaluateAll(input: invalidFakeInput)
+        let summary = EvaluationResult.Summary(errors: [FakeError.InvalidInput, FakeError.MissingInput])
+        XCTAssertEqual(result, EvaluationResult.invalid(summary))
     }
 }
 
 // MARK: - Test Error
 
-fileprivate enum TestError: Error {
+fileprivate enum FakeError: FakeableError {
     case InvalidInput
     case MissingInput
     case FailingCondition

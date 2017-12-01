@@ -23,10 +23,6 @@ class RegexPredicateTests: XCTestCase {
         super.tearDown()
     }
 
-    func testItCanBeInstantiated() {
-        XCTAssertNotNil(rule)
-    }
-
     func testItFailsValidationForInvalidInput() {
         let result = rule.evaluate(with: "NaN")
         XCTAssertFalse(result)

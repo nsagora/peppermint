@@ -20,16 +20,9 @@ public enum EvaluationResult {
     /**
      Represents a failed validation. 
      
-     It has an associated `Error` to describe the reason of the failure.
+     It has an associated `EvaluationResult.Summary` to describe the reason of the failure.
      */
-    case invalid(Error)
-    
-    /**
-     Represents a unevaluated validation.
-     
-     It has an associated array of `EvaluationResult`s to describe the evaluation results of the evaluation conditions
-     */
-    case unevaluated([EvaluationResult])
+    case invalid(Summary)
 }
 
 extension EvaluationResult {
@@ -52,13 +45,13 @@ extension EvaluationResult {
     public var isInvalid:Bool {
         return !isValid
     }
-    
+
     /**
-     `Error` if the validation result is `.invalid`, `nil` otherwise.
+     `[Error]` if the validation result is `.invalid`, `nil` otherwise.
      */
-    public var error: Error? {
+    public var errors: [Error]? {
         switch self {
-        case .invalid(let error): return error
+        case .invalid(let summary): return summary.errors
         default: return nil
         }
     }
@@ -69,9 +62,52 @@ extension EvaluationResult: Equatable {
     public static func ==(lhs: EvaluationResult, rhs: EvaluationResult) -> Bool {
         switch (rhs, lhs) {
         case (.valid, .valid): return true
-        case (.invalid(let a), .invalid(let b)): return a.localizedDescription == b.localizedDescription
-        case (.unevaluated(let a), .unevaluated(let b)): return a == b
+        case (.invalid(let a), .invalid(let b)): return a == b
         default: return false
+        }
+    }
+}
+
+extension EvaluationResult {
+    
+    public struct Summary: Equatable {
+        
+        public private(set) var errors = [Error]()
+        
+        internal init(errors:[Error]) {
+            self.errors = errors;
+        }
+        
+        internal init(evaluationResults:[EvaluationResult]) {
+            
+            var errors = [Error]()
+            for result in evaluationResults {
+                switch result {
+                case .invalid(let summary):
+                    errors.append(contentsOf: summary.errors)
+                default:
+                    continue
+                }
+            }
+            
+            self.init(errors: errors)
+        }
+        
+        public static func ==(lhs: Summary, rhs: Summary) -> Bool {
+            return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
+        }
+    }
+}
+
+extension EvaluationResult {
+
+    internal init(summary:Summary) {
+
+        if summary.errors.count == 0 {
+            self = .valid
+        }
+        else {
+            self = .invalid(summary)
         }
     }
 }

@@ -1,11 +1,3 @@
-//
-//  ConstraintSet.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 15/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
@@ -14,11 +6,13 @@ import Foundation
 public struct ConstraintSet<T> {
 
     var constraints:[Constraint<T>]
-    
+
     /**
-     
+     Returns the number of constraints in collection
     */
-    public var conditions = [Constraint<T>]()
+    public var count:Int {
+        return constraints.count
+    }
     
     /**
      Create a new `ConstraintSet` instance
@@ -79,22 +73,6 @@ extension ConstraintSet {
      */
     public func evaluateAny(input:T) -> EvaluationResult {
         
-        if conditions.count == 0 {
-            return forwardEvaluateAny(input: input)
-        }
-        
-        let conditionsSet = ConstraintSet(constraints: conditions);
-        let result = conditionsSet.evaluateAny(input:input)
-        
-        switch result {
-        case .valid:
-            return forwardEvaluateAny(input: input)
-        default:
-            return result
-        }
-    }
-    
-    private func forwardEvaluateAny(input:T) -> EvaluationResult {
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
 
@@ -104,26 +82,11 @@ extension ConstraintSet {
      - parameter input: The input to be validated.
      - returns: An array of `EvaluationResult` elements, indicating the evaluation result of each `Constraint` in collection.
      */
-    public func evaluateAll(input:T) -> [EvaluationResult] {
-        if conditions.count == 0 {
-            return forwardEvaluateAll(input: input)
-        }
-    
-        let conditionsSet = ConstraintSet(constraints: conditions);
-        let results = conditionsSet.evaluateAll(input:input)
-        
-        if conditionsPassAll(evaluationResults: results) {
-            return forwardEvaluateAll(input: input)
-        }
-        
-        return results
-    }
-    
-    private func conditionsPassAll(evaluationResults:[EvaluationResult]) -> Bool {
-        return evaluationResults.flatMap { $0.error }.count == 0
-    }
-    
-    private func forwardEvaluateAll(input:T) -> [EvaluationResult] {
-        return constraints.map{ $0.evaluate(with:input) }
+    public func evaluateAll(input:T) -> EvaluationResult {
+
+        let results = constraints.map{ $0.evaluate(with:input) }
+        let summary = EvaluationResult.Summary(evaluationResults: results)
+
+        return EvaluationResult(summary: summary)
     }
 }
