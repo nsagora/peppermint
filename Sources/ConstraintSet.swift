@@ -26,7 +26,7 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init<C:ConstraintType>(constraints:[C]) where C.InputType == T {
+    public init<C:Constraint>(constraints:[C]) where C.InputType == T {
         self.constraints = constraints.map { $0.erase() }
     }
 
@@ -35,7 +35,7 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init<C:ConstraintType>(constraints:C...) where C.InputType == T {
+    public init<C:Constraint>(constraints:C...) where C.InputType == T {
         self.init(constraints:constraints)
     }
 }
@@ -47,7 +47,7 @@ extension ConstraintSet {
      
      - parameter constraint: `Constraint`
      */
-    public mutating func add<C:ConstraintType>(constraint:C) where C.InputType == T {
+    public mutating func add<C:Constraint>(constraint:C) where C.InputType == T {
         constraints.append(constraint.erase())
     }
 
@@ -58,7 +58,7 @@ extension ConstraintSet {
      - parameter message: An `Error` that describes why the evaluation has failed.
      */
     public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = Constraint(predicate: predicate, error: error)
+        let constraint = SimpleConstraint(predicate: predicate, error: error)
         add(constraint: constraint)
     }
 }

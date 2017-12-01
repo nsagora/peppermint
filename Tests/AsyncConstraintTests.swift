@@ -6,7 +6,7 @@ class AsyncConstraintTests: XCTestCase {
     func testCanAddAsyncPredicate() {
         
         let predicate = FakePredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         XCTAssertNotNil(constraint)
     }
@@ -14,7 +14,7 @@ class AsyncConstraintTests: XCTestCase {
     func testItCanBeInstantiatedWithErrorBlock() {
         
         let predicate = FakePredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error: { FakeError.Wrong($0) })
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: { FakeError.Wrong($0) })
         
         XCTAssertNotNil(constraint)
     }
@@ -22,7 +22,7 @@ class AsyncConstraintTests: XCTestCase {
     func testThatItCanValidate() {
         
         let predicate = FakePredicate<Int>()
-        let constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
         constraint.evaluate(with: 1, queue:.main) { result in
@@ -37,7 +37,7 @@ class AsyncConstraintTests: XCTestCase {
         var predicate = FakePredicate<Int>()
         predicate.expected = 10
         
-        let constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
         constraint.evaluate(with: 10, queue:.main) { result in
@@ -54,7 +54,7 @@ class AsyncConstraintTests: XCTestCase {
         var predicate = FakePredicate<Int>()
         predicate.expected = 10
         
-        let constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
         constraint.evaluate(with: 1, queue:.main) { result in
@@ -73,10 +73,10 @@ extension AsyncConstraintTests {
     func testAddConditions() {
 
         let p = FakePredicate(expected: "001")
-        let condition = AsyncConstraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate<String>()
-        var constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
         XCTAssertEqual(constraint.conditions.count, 1)
@@ -88,10 +88,10 @@ extension AsyncConstraintTests {
     func testThatItDoentEvaluateWhenHavingAFailingCondition() {
 
         let p = FakePredicate(expected: "001")
-        let condition = AsyncConstraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate<String>()
-        var constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
 
@@ -107,10 +107,10 @@ extension AsyncConstraintTests {
     func testThatItEvaluateWhenHavingAValidCondition() {
 
         let p = FakePredicate(expected: "001")
-        let condition = AsyncConstraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate<String>()
-        var constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
 
@@ -126,16 +126,16 @@ extension AsyncConstraintTests {
     func testThatItEvaluateWhenHavingMultiLevelCondition() {
 
         let p_1 = FakePredicate(expected: "001")
-        var condition_1 = AsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
+        var condition_1 = SimpleAsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
 
         let p_2 = FakePredicate(expected: "002")
-        let condition_2 = AsyncConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
+        let condition_2 = SimpleAsyncConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
 
         let p_3 = FakePredicate(expected: "003")
-        let condition_3 = AsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
+        let condition_3 = SimpleAsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
 
         let predicate = FakePredicate<String>()
-        var constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         condition_1.add(condition:condition_2)
         condition_1.add(condition:condition_3)
@@ -153,16 +153,16 @@ extension AsyncConstraintTests {
     func testThatItEvaluateWhenHavingMultiLevelCondition_2() {
 
         let p_1 = FakePredicate(expected: "001")
-        var condition_1 = AsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
+        var condition_1 = SimpleAsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
 
         let p_2 = FakePredicate(expected: "002")
-        let condition_2 = AsyncConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
+        let condition_2 = SimpleAsyncConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
 
         let p_3 = FakePredicate(expected: "003")
-        let condition_3 = AsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
+        let condition_3 = SimpleAsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
 
         let predicate = FakePredicate<String>()
-        var constraint = AsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         condition_1.add(condition:condition_2)
         condition_1.add(condition:condition_3)

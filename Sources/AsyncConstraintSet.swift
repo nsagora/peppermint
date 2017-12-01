@@ -26,7 +26,7 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init<C:AsyncConstraintType>(constraints:[C]) where C.InputType == T {
+    public init<C:AsyncConstraint>(constraints:[C]) where C.InputType == T {
         self.constraints = constraints.map{ $0.erase() }
     }
     
@@ -35,7 +35,7 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init<C:AsyncConstraintType>(constraints:C...) where C.InputType == T {
+    public init<C:AsyncConstraint>(constraints:C...) where C.InputType == T {
         self.init(constraints: constraints)
     }
 }
@@ -48,7 +48,7 @@ extension AsyncConstraintSet {
      
      - parameter constraint: `AsyncConstraint`
      */
-    public mutating func add<C:AsyncConstraintType>(constraint:C) where C.InputType == T {
+    public mutating func add<C:AsyncConstraint>(constraint:C) where C.InputType == T {
         constraints.append(constraint.erase())
     }
     
@@ -60,7 +60,7 @@ extension AsyncConstraintSet {
      - parameter error: An `Error` to describe the reason why the input is invalid.
      */
     public mutating func add<P:AsyncPredicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = AsyncConstraint(predicate: predicate, error: error)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: error)
         add(constraint: constraint.erase())
     }
 }

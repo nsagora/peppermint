@@ -32,7 +32,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
         
         let predicate = FakePredicate(10)
-        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: [constraint])
         XCTAssertNotNil(constraintSet)
@@ -42,7 +42,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
         
         let predicate = FakePredicate(10)
-        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: constraint)
         XCTAssertNotNil(constraintSet)
@@ -55,7 +55,7 @@ extension AsyncConstraintSetTests {
     func testItCanAddAnAsynConstraint() {
         
         let predicate = FakePredicate(10)
-        let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
         constraintSet.add(constraint: constraint)
         
@@ -65,10 +65,10 @@ extension AsyncConstraintSetTests {
     func testItCanAddMultipleAsyncConstraints() {
         
         let aPredicate = FakePredicate(10)
-        let aConstraint = AsyncConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = SimpleAsyncConstraint(predicate: aPredicate, error: FakeError.Invalid);
         
         let bPredicate = FakePredicate(10)
-        let bConstraint = AsyncConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = SimpleAsyncConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)

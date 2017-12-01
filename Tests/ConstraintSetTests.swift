@@ -47,7 +47,7 @@ extension ConstraintSetTests {
     func testThatItCanBeInstantiatedWithAnFinitArrayofConstrains() {
 
         let predicate = MockPredicate(testInput: validFakeInput)
-        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
 
         let constraintSet = ConstraintSet<String>(constraints:[constraint])
         XCTAssertEqual(constraintSet.count, 1)
@@ -56,7 +56,7 @@ extension ConstraintSetTests {
     func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
 
         let predicate = MockPredicate(testInput: validFakeInput)
-        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
 
         let constraintSet = ConstraintSet<String>(constraints:constraint)
         XCTAssertEqual(constraintSet.count, 1)
@@ -89,7 +89,7 @@ extension ConstraintSetTests {
     
     func testThatCanAddConstraint() {
         
-        let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
         
         constraintSet.add(constraint: constraint)
         XCTAssertEqual(constraintSet.count, 1)

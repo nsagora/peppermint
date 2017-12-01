@@ -14,11 +14,11 @@ class ConstraintTests: XCTestCase {
     fileprivate let fakeInput = "testInput"
     fileprivate let fakePredicate = FakePredicate(expected: "testInput")
 
-    var constraint:Constraint<String>!
+    var constraint:SimpleConstraint<String>!
 
     override func setUp() {
         super.setUp()
-        constraint = Constraint(predicate: fakePredicate, error: FakeError.Invalid)
+        constraint = SimpleConstraint(predicate: fakePredicate, error: FakeError.Invalid)
     }
     
     override func tearDown() {
@@ -56,7 +56,7 @@ extension ConstraintTests {
     func testAddConditions() {
         
         let p = FakePredicate(expected: "001")
-        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleConstraint(predicate: p, error: FakeError.Invalid)
         
         constraint.add(condition:condition)
         XCTAssertEqual(constraint.conditions.count, 1)
@@ -68,7 +68,7 @@ extension ConstraintTests {
     func testThatItDoentEvaluateWhenHavingAFailingCondition() {
         
         let p = FakePredicate(expected: "001")
-        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleConstraint(predicate: p, error: FakeError.Invalid)
         
         constraint.add(condition:condition)
         
@@ -80,7 +80,7 @@ extension ConstraintTests {
     func testThatItEvaluateWhenHavingAValidCondition() {
         
         let p = FakePredicate(expected: "001")
-        let condition = Constraint(predicate: p, error: FakeError.Invalid)
+        let condition = SimpleConstraint(predicate: p, error: FakeError.Invalid)
         
         constraint.add(condition:condition)
         
@@ -92,13 +92,13 @@ extension ConstraintTests {
     func testThatItEvaluateWhenHavingMultiLevelCondition() {
         
         let p_1 = FakePredicate(expected: "001")
-        var condition_1 = Constraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
+        var condition_1 = SimpleConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
         
         let p_2 = FakePredicate(expected: "002")
-        let condition_2 = Constraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
+        let condition_2 = SimpleConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
         
         let p_3 = FakePredicate(expected: "003")
-        let condition_3 = Constraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
+        let condition_3 = SimpleConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
         
         condition_1.add(condition:condition_2)
         condition_1.add(condition:condition_3)
@@ -118,7 +118,7 @@ extension ConstraintTests {
     
     func testThatItDynamicallyBuildsTheValidationError() {
         
-        let constraint = Constraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
+        let constraint = SimpleConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
         let result = constraint.evaluate(with: "Ok")
         switch result {
         case .invalid(let summary):
