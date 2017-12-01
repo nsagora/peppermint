@@ -93,7 +93,7 @@ extension AsyncConstraintSetTests {
             default: XCTFail()
             }
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint() {
@@ -105,7 +105,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint2() {
@@ -118,7 +118,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint3() {
@@ -131,7 +131,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertTrue(result.isValid)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     func testItCanEvaluateAll_ToValid() {
@@ -144,7 +144,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertEqual(Result.valid, result)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     func testItCanEvaluateAll_ToValid_2() {
@@ -158,7 +158,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertEqual(Result.invalid(summary), result)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     func testItCanEvaluateAll_ToValid_3() {
@@ -172,7 +172,7 @@ extension AsyncConstraintSetTests {
             expect.fulfill()
             XCTAssertEqual(Result.invalid(summary), result)
         }
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 }
 
