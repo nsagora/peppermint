@@ -54,25 +54,24 @@ public struct Constraint<T> {
     public func evaluate(with input:T) -> Result {
         
         if !hasConditions() {
-            return forwardEvaluation(with: input)
+            return continueEvaluation(with: input)
         }
-        
-        let results = conditions.map { $0.evaluate(with: input) }
-        let isPassingConditions = results.filter { $0.isInvalid }.count == 0;
-        
-        if isPassingConditions {
-            return forwardEvaluation(with: input)
+
+        let constraintSet = ConstraintSet(constraints: conditions)
+        let result = constraintSet.evaluateAll(input: input)
+
+        if result.isValid {
+            return continueEvaluation(with: input)
         }
-        
-        let summary = Result.Summary(evaluationResults: results)
-        return Result.invalid(summary)
+
+        return result
     }
     
     func hasConditions() -> Bool {
         return conditions.count > 0
     }
     
-    func forwardEvaluation(with input:T) -> Result {
+    func continueEvaluation(with input:T) -> Result {
         
         let result = predicateBuilder(input)
         
