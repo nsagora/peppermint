@@ -1,5 +1,5 @@
 //
-//  EvaluationResult.swift
+//  Result.swift
 //  ValidationToolkit
 //
 //  Created by Alex Cristea on 09/08/16.
@@ -11,7 +11,7 @@ import Foundation
 /**
  The result of a validation action.
  */
-public enum EvaluationResult {
+public enum Result {
     /** 
      Represents a valid validation.
      */
@@ -20,12 +20,12 @@ public enum EvaluationResult {
     /**
      Represents a failed validation. 
      
-     It has an associated `EvaluationResult.Summary` to describe the reason of the failure.
+     It has an associated `Result.Summary` to describe the reason of the failure.
      */
     case invalid(Summary)
 }
 
-extension EvaluationResult {
+extension Result {
 
     /**
      `true` if the validation result is valid, `false` otherwise.
@@ -57,9 +57,9 @@ extension EvaluationResult {
     }
 }
 
-extension EvaluationResult: Equatable {
+extension Result: Equatable {
     
-    public static func ==(lhs: EvaluationResult, rhs: EvaluationResult) -> Bool {
+    public static func ==(lhs: Result, rhs: Result) -> Bool {
         switch (rhs, lhs) {
         case (.valid, .valid): return true
         case (.invalid(let a), .invalid(let b)): return a == b
@@ -68,7 +68,7 @@ extension EvaluationResult: Equatable {
     }
 }
 
-extension EvaluationResult {
+extension Result {
     
     public struct Summary: Equatable {
         
@@ -78,7 +78,7 @@ extension EvaluationResult {
             self.errors = errors;
         }
         
-        internal init(evaluationResults:[EvaluationResult]) {
+        internal init(evaluationResults:[Result]) {
             
             var errors = [Error]()
             for result in evaluationResults {
@@ -99,7 +99,7 @@ extension EvaluationResult {
     }
 }
 
-extension EvaluationResult {
+extension Result {
 
     internal init(summary:Summary) {
 

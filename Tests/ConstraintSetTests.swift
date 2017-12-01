@@ -119,9 +119,9 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
         
         let result = constraintSet.evaluateAny(input: invalidFakeInput)
-        let summary = EvaluationResult.Summary(errors: [FakeError.InvalidInput])
+        let summary = Result.Summary(errors: [FakeError.InvalidInput])
         
-        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        XCTAssertEqual(result, Result.invalid(summary))
     }
     
     func testThatForValidInput_EvaluateAll_IsValid() {
@@ -130,7 +130,7 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
         
         let result = constraintSet.evaluateAll(input: validFakeInput)
-        XCTAssertEqual(result, EvaluationResult.valid)
+        XCTAssertEqual(result, Result.valid)
     }
 
     func testThatForInvalidInput_EvaluateAll_IsInvalid() {
@@ -139,8 +139,8 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
 
         let result = constraintSet.evaluateAll(input: invalidFakeInput)
-        let summary = EvaluationResult.Summary(errors: [FakeError.InvalidInput, FakeError.MissingInput])
-        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        let summary = Result.Summary(errors: [FakeError.InvalidInput, FakeError.MissingInput])
+        XCTAssertEqual(result, Result.invalid(summary))
     }
 }
 

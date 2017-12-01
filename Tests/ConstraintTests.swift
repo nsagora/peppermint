@@ -73,8 +73,8 @@ extension ConstraintTests {
         constraint.add(condition:condition)
         
         let result = constraint.evaluate(with: "002")
-        let expectedResult = EvaluationResult.Summary(errors: [FakeError.Invalid])
-        XCTAssertEqual(result, EvaluationResult.invalid(expectedResult))
+        let expectedResult = Result.Summary(errors: [FakeError.Invalid])
+        XCTAssertEqual(result, Result.invalid(expectedResult))
     }
     
     func testThatItEvaluateWhenHavingAValidCondition() {
@@ -85,8 +85,8 @@ extension ConstraintTests {
         constraint.add(condition:condition)
         
         let result = constraint.evaluate(with: "001")
-        let summary = EvaluationResult.Summary(errors: [FakeError.Invalid])
-        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        let summary = Result.Summary(errors: [FakeError.Invalid])
+        XCTAssertEqual(result, Result.invalid(summary))
     }
     
     func testThatItEvaluateWhenHavingMultiLevelCondition() {
@@ -105,12 +105,12 @@ extension ConstraintTests {
         constraint.add(condition:condition_1)
         
         var result = constraint.evaluate(with: "001")
-        var summary = EvaluationResult.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
-        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        var summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
+        XCTAssertEqual(result, Result.invalid(summary))
         
         result = constraint.evaluate(with: "004")
-        summary = EvaluationResult.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
-        XCTAssertEqual(result, EvaluationResult.invalid(summary))
+        summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
+        XCTAssertEqual(result, Result.invalid(summary))
     }
 }
 

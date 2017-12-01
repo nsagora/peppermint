@@ -40,7 +40,7 @@ public struct AsyncConstraint<T> {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
-    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:EvaluationResult) -> Void) {
+    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
         
         predicateBuilder(input, queue) { matches in
             
@@ -49,7 +49,7 @@ public struct AsyncConstraint<T> {
             }
             else {
                 let error = self.errorBuilder(input)
-                let summary = EvaluationResult.Summary(errors: [error])
+                let summary = Result.Summary(errors: [error])
                 completionHandler(.invalid(summary))
             }
         }

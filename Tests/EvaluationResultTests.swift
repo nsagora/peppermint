@@ -12,24 +12,24 @@ import XCTest
 class EvaluationResultTests: XCTestCase {
 
     func testIsValid() {
-        XCTAssertTrue(EvaluationResult.valid.isValid)
-        XCTAssertFalse(EvaluationResult.valid.isInvalid)
+        XCTAssertTrue(Result.valid.isValid)
+        XCTAssertFalse(Result.valid.isInvalid)
     }
     
     func testIsInvalid() {
         
-        let summary = EvaluationResult.Summary(errors: [TestError.InvalidInput])
+        let summary = Result.Summary(errors: [TestError.InvalidInput])
         
-        XCTAssertTrue(EvaluationResult.invalid(summary).isInvalid)
-        XCTAssertFalse(EvaluationResult.invalid(summary).isValid)
+        XCTAssertTrue(Result.invalid(summary).isInvalid)
+        XCTAssertFalse(Result.invalid(summary).isValid)
     }
     
     func testEvaluationErrors() {
         let errors =  [TestError.InvalidInput]
-        let summary = EvaluationResult.Summary(errors:errors)
+        let summary = Result.Summary(errors:errors)
         
-        XCTAssertEqual(errors, EvaluationResult.invalid(summary).errors as! [TestError])
-        XCTAssertTrue(EvaluationResult.valid.errors == nil)
+        XCTAssertEqual(errors, Result.invalid(summary).errors as! [TestError])
+        XCTAssertTrue(Result.valid.errors == nil)
     }
 }
 

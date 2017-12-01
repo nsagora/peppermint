@@ -20,7 +20,7 @@ extension AsyncConstraintSet {
         
         private let constraint: AsyncConstraint<T>
         private let input: T
-        var result: EvaluationResult?
+        var result: Result?
         
         init(input:T, constraint: AsyncConstraint<T>) {
             
@@ -72,7 +72,7 @@ extension AsyncConstraintSet {
             }
         }
         
-        func handle(evaluationResult: EvaluationResult) {
+        func handle(evaluationResult: Result) {
             state = .finished
             result = evaluationResult
         }

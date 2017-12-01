@@ -142,7 +142,7 @@ extension AsyncConstraintSetTests {
         let expect = expectation(description: "Evaluate all async")
         constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
-            XCTAssertEqual(EvaluationResult.valid, result)
+            XCTAssertEqual(Result.valid, result)
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -153,10 +153,10 @@ extension AsyncConstraintSetTests {
         constraintSet.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
 
         let expect = expectation(description: "Evaluate all async")
-        let summary = EvaluationResult.Summary(errors: [FakeError.FailedCondition])
+        let summary = Result.Summary(errors: [FakeError.FailedCondition])
         constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
-            XCTAssertEqual(EvaluationResult.invalid(summary), result)
+            XCTAssertEqual(Result.invalid(summary), result)
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -167,10 +167,10 @@ extension AsyncConstraintSetTests {
         constraintSet.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
 
         let expect = expectation(description: "Evaluate all async")
-        let summary = EvaluationResult.Summary(errors: [FakeError.Invalid, FakeError.FailedCondition])
+        let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.FailedCondition])
         constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
-            XCTAssertEqual(EvaluationResult.invalid(summary), result)
+            XCTAssertEqual(Result.invalid(summary), result)
         }
         waitForExpectations(timeout: 1, handler: nil)
     }

@@ -71,7 +71,7 @@ extension ConstraintSet {
      - parameter input: The input to be validated.
      - returns: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
-    public func evaluateAny(input:T) -> EvaluationResult {
+    public func evaluateAny(input:T) -> Result {
         
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
@@ -80,13 +80,13 @@ extension ConstraintSet {
      Evaluates the input on all `Constraints in the collection.
      
      - parameter input: The input to be validated.
-     - returns: An array of `EvaluationResult` elements, indicating the evaluation result of each `Constraint` in collection.
+     - returns: An array of `Result` elements, indicating the evaluation result of each `Constraint` in collection.
      */
-    public func evaluateAll(input:T) -> EvaluationResult {
+    public func evaluateAll(input:T) -> Result {
 
         let results = constraints.map{ $0.evaluate(with:input) }
-        let summary = EvaluationResult.Summary(evaluationResults: results)
+        let summary = Result.Summary(evaluationResults: results)
 
-        return EvaluationResult(summary: summary)
+        return Result(summary: summary)
     }
 }

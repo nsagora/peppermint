@@ -72,10 +72,10 @@ extension AsyncConstraintSet {
      
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
-     - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `EvaluationResult` parameter:
+     - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Result` parameter:
      - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
      */
-    public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
+    public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:Result) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
@@ -104,11 +104,11 @@ extension AsyncConstraintSet {
      
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
-     - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Array<EvaluationResult>` parameter:
-     - parameter result: An array of `EvaluationResult` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
+     - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Array<Result>` parameter:
+     - parameter result: An array of `Result` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
 
      */
-    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:EvaluationResult) -> Void) {
+    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:Result) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
@@ -117,9 +117,9 @@ extension AsyncConstraintSet {
         let completionOperation = BlockOperation {
             
             let results = operations.filter { $0.isFinished }.flatMap{ $0.result }
-            let summary = EvaluationResult.Summary(evaluationResults: results)
+            let summary = Result.Summary(evaluationResults: results)
             queue.async {
-                completionHandler(EvaluationResult(summary: summary))
+                completionHandler(Result(summary: summary))
             }
         }
         

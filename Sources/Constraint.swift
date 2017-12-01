@@ -51,7 +51,7 @@ public struct Constraint<T> {
      - parameter input: The input to be validated.
      - returns: `.valid` if the input is valid or a `.invalid` containing the `Error` for the failing `Constraint` otherwise.
      */
-    public func evaluate(with input:T) -> EvaluationResult {
+    public func evaluate(with input:T) -> Result {
         
         if !hasConditions() {
             return forwardEvaluation(with: input)
@@ -64,15 +64,15 @@ public struct Constraint<T> {
             return forwardEvaluation(with: input)
         }
         
-        let summary = EvaluationResult.Summary(evaluationResults: results)
-        return EvaluationResult.invalid(summary)
+        let summary = Result.Summary(evaluationResults: results)
+        return Result.invalid(summary)
     }
     
     func hasConditions() -> Bool {
         return conditions.count > 0
     }
     
-    func forwardEvaluation(with input:T) -> EvaluationResult {
+    func forwardEvaluation(with input:T) -> Result {
         
         let result = predicateBuilder(input)
         
@@ -81,7 +81,7 @@ public struct Constraint<T> {
         }
         else {
             let error = errorBuilder(input)
-            let summary = EvaluationResult.Summary(errors: [error])
+            let summary = Result.Summary(errors: [error])
             return .invalid(summary)
         }
     }
