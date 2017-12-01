@@ -1,15 +1,43 @@
 import Foundation
 
+public protocol AsyncConstraintType {
+    
+    associatedtype InputType
+    
+    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void)
+}
+
+public struct AnyAsyncConstraint<T>:AsyncConstraintType {
+    
+    private let _evaluate:(T, DispatchQueue, @escaping (Result) -> Void) -> Void
+    public typealias InputType = T
+    
+    public init<C:AsyncConstraintType>(_ constraint:C) where C.InputType == T {
+        _evaluate = constraint.evaluate
+    }
+    
+    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
+        return _evaluate(input, queue, completionHandler)
+    }
+}
+
+extension AsyncConstraintType {
+    
+    internal func erase() -> AnyAsyncConstraint<InputType> {
+        return AnyAsyncConstraint(self)
+    }
+}
+
 /**
  A structrure that links an `AsyncPredicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public struct AsyncConstraint<T> {
-
+public struct AsyncConstraint<T>: AsyncConstraintType {
+    
     private var predicate: AnyAsyncPredicate<T>
     private var errorBuilder: (T)->Error
-
+    
     var conditions =  [AsyncConstraint<T>]()
-
+    
     /**
      Create a new `AsyncConstraint` instance
      
@@ -33,11 +61,11 @@ public struct AsyncConstraint<T> {
         self.predicate = predicate.erase()
         self.errorBuilder = error
     }
-
+    
     public mutating func add(condition:AsyncConstraint<T>) {
         conditions.append(condition)
     }
-
+    
     /**
      Asynchronous evaluates the input on the `Predicate`.
      
@@ -47,30 +75,30 @@ public struct AsyncConstraint<T> {
      - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
     public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
-
+        
         if (!hasConditions()) {
             return continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
         }
-
+        
         let predicateSet = AsyncConstraintSet(constraints: conditions)
         predicateSet.evaluateAll(input: input, queue: queue) { result in
-
+            
             if result.isValid {
                 return self.continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
             }
-
+            
             completionHandler(result)
         }
     }
-
+    
     private func hasConditions() -> Bool {
         return conditions.count > 0
     }
-
+    
     private func continueEvaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
-
+        
         predicate.evaluate(with: input, queue: queue) { matches in
-
+            
             if matches {
                 completionHandler(.valid)
             }

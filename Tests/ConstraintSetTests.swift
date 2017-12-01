@@ -38,7 +38,9 @@ extension ConstraintSetTests {
     }
     
     func testThatItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
-        let constraintSet = ConstraintSet<String>(constraints:[])
+        
+        let constraints = [AnyConstraint<String>]()
+        let constraintSet = ConstraintSet<String>(constraints:constraints)
         XCTAssertEqual(constraintSet.count, 0)
     }
 

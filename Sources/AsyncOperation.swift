@@ -18,11 +18,11 @@ extension AsyncConstraintSet {
             }
         }
         
-        private let constraint: AsyncConstraint<T>
+        private let constraint: AnyAsyncConstraint<T>
         private let input: T
         var result: Result?
         
-        init(input:T, constraint: AsyncConstraint<T>) {
+        init(input:T, constraint: AnyAsyncConstraint<T>) {
             
             self.input = input
             self.constraint = constraint

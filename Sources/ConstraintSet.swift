@@ -5,7 +5,7 @@ import Foundation
  */
 public struct ConstraintSet<T> {
 
-    var constraints:[Constraint<T>]
+    var constraints:[AnyConstraint<T>]
 
     /**
      Returns the number of constraints in collection
@@ -18,7 +18,7 @@ public struct ConstraintSet<T> {
      Create a new `ConstraintSet` instance
      */
     public init() {
-        constraints = [Constraint<T>]()
+        constraints = [AnyConstraint<T>]()
     }
     
     /**
@@ -26,8 +26,8 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(constraints:[Constraint<T>]) {
-        self.constraints = constraints
+    public init<C:ConstraintType>(constraints:[C]) where C.InputType == T {
+        self.constraints = constraints.map { $0.erase() }
     }
 
     /**
@@ -35,7 +35,7 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(constraints:Constraint<T>...) {
+    public init<C:ConstraintType>(constraints:C...) where C.InputType == T {
         self.init(constraints:constraints)
     }
 }
@@ -47,8 +47,8 @@ extension ConstraintSet {
      
      - parameter constraint: `Constraint`
      */
-    public mutating func add(constraint:Constraint<T>) {
-        constraints.append(constraint)
+    public mutating func add<C:ConstraintType>(constraint:C) where C.InputType == T {
+        constraints.append(constraint.erase())
     }
 
     /**

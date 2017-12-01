@@ -1,9 +1,37 @@
 import Foundation
 
+public protocol ConstraintType {
+
+    associatedtype InputType
+
+    func evaluate(with input:InputType) -> Result
+}
+
+public struct AnyConstraint<T>:ConstraintType {
+
+    private let _evaluate:(T) -> Result
+    public typealias InputType = T
+
+    public init<C:ConstraintType>(_ constraint:C) where C.InputType == T {
+        _evaluate = constraint.evaluate
+    }
+
+    public func evaluate(with input: InputType) -> Result {
+        return _evaluate(input)
+    }
+}
+
+extension ConstraintType {
+
+    internal func erase() -> AnyConstraint<InputType> {
+        return AnyConstraint(self)
+    }
+}
+
 /**
  A structrure that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public struct Constraint<T> {
+public struct Constraint<T>: ConstraintType {
 
     private let predicate:AnyPredicate<T>
     private let errorBuilder: (T)->Error

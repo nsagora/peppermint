@@ -9,6 +9,11 @@ class AsyncConstraintSetTests: XCTestCase {
         super.setUp()
         constraintSet = AsyncConstraintSet<Int>()
     }
+
+    override func tearDown() {
+        constraintSet = nil
+        super.tearDown()
+    }
     
     func testItCanBeInstantiated() {
     
@@ -17,8 +22,9 @@ class AsyncConstraintSetTests: XCTestCase {
     }
     
     func testItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
-        
-        let constraintSet = AsyncConstraintSet<Int>(constraints: [])
+
+        let constraints = [AnyAsyncConstraint<Int>]()
+        let constraintSet = AsyncConstraintSet<Int>(constraints:constraints)
         XCTAssertNotNil(constraintSet)
         XCTAssertEqual(constraintSet.count, 0)
     }

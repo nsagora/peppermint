@@ -5,7 +5,7 @@ import Foundation
  */
 public struct AsyncConstraintSet<T> {
     
-    var constraints: [AsyncConstraint<T>]
+    var constraints: [AnyAsyncConstraint<T>]
 
     /**
      Returns the number of constraints in collection
@@ -18,7 +18,7 @@ public struct AsyncConstraintSet<T> {
      Create a new `AsyncConstraintSet` instance 
      */
     public init() {
-        self.constraints = [AsyncConstraint<T>]()
+        self.constraints = [AnyAsyncConstraint<T>]()
     }
     
     /**
@@ -26,8 +26,8 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init(constraints:[AsyncConstraint<T>]) {
-        self.constraints = constraints
+    public init<C:AsyncConstraintType>(constraints:[C]) where C.InputType == T {
+        self.constraints = constraints.map{ $0.erase() }
     }
     
     /**
@@ -35,7 +35,7 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init(constraints:AsyncConstraint<T>...) {
+    public init<C:AsyncConstraintType>(constraints:C...) where C.InputType == T {
         self.init(constraints: constraints)
     }
 }
@@ -48,8 +48,8 @@ extension AsyncConstraintSet {
      
      - parameter constraint: `AsyncConstraint`
      */
-    public mutating func add(constraint:AsyncConstraint<T>) {
-        constraints.append(constraint)
+    public mutating func add<C:AsyncConstraintType>(constraint:C) where C.InputType == T {
+        constraints.append(constraint.erase())
     }
     
     
@@ -61,7 +61,7 @@ extension AsyncConstraintSet {
      */
     public mutating func add<P:AsyncPredicate>(predicate:P, error:Error) where P.InputType == T {
         let constraint = AsyncConstraint(predicate: predicate, error: error)
-        add(constraint: constraint)
+        add(constraint: constraint.erase())
     }
 }
 
