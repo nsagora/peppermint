@@ -34,12 +34,12 @@ extension ConstraintSetTests {
     }
     
     func testThatAfterInit_ItHasNoConstraints() {
-        XCTAssertEqual(constraintSet.constraints.count, 0)
+        XCTAssertEqual(constraintSet.count, 0)
     }
     
     func testThatItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
         let constraintSet = ConstraintSet<String>(constraints:[])
-        XCTAssertEqual(constraintSet.constraints.count, 0)
+        XCTAssertEqual(constraintSet.count, 0)
     }
 
     func testThatItCanBeInstantiatedWithAnFinitArrayofConstrains() {
@@ -48,7 +48,7 @@ extension ConstraintSetTests {
         let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
 
         let constraintSet = ConstraintSet<String>(constraints:[constraint])
-        XCTAssertEqual(constraintSet.constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
 
     func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
@@ -57,7 +57,7 @@ extension ConstraintSetTests {
         let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
 
         let constraintSet = ConstraintSet<String>(constraints:constraint)
-        XCTAssertEqual(constraintSet.constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
     
     func testThatWithoutConstraints_EvaluateAny_IsValid() {
@@ -90,13 +90,13 @@ extension ConstraintSetTests {
         let constraint = Constraint(predicate: predicate, error:FakeError.InvalidInput)
         
         constraintSet.add(constraint: constraint)
-        XCTAssertEqual(constraintSet.constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
     
     func testThatCanAddConstraintUsingAlternativeMethod() {
         
         constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
-        XCTAssertEqual(constraintSet.constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
 }
 

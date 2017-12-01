@@ -3,24 +3,24 @@ import XCTest
 
 class AsyncConstraintSetTests: XCTestCase {
     
-    var constraints: AsyncConstraintSet<Int>!
+    var constraintSet: AsyncConstraintSet<Int>!
     
     override func setUp() {
         super.setUp()
-        constraints = AsyncConstraintSet<Int>()
+        constraintSet = AsyncConstraintSet<Int>()
     }
     
     func testItCanBeInstantiated() {
     
-        XCTAssertNotNil(constraints)
-        XCTAssertEqual(constraints.count, 0)
+        XCTAssertNotNil(constraintSet)
+        XCTAssertEqual(constraintSet.count, 0)
     }
     
     func testItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
         
-        let constraints = AsyncConstraintSet<Int>(constraints: [])
-        XCTAssertNotNil(constraints)
-        XCTAssertEqual(constraints.count, 0)
+        let constraintSet = AsyncConstraintSet<Int>(constraints: [])
+        XCTAssertNotNil(constraintSet)
+        XCTAssertEqual(constraintSet.count, 0)
     }
     
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
@@ -28,9 +28,9 @@ class AsyncConstraintSetTests: XCTestCase {
         let predicate = FakePredicate(10)
         let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraints = AsyncConstraintSet<Int>(constraints: [constraint])
-        XCTAssertNotNil(constraints)
-        XCTAssertEqual(constraints.count, 1)
+        let constraintSet = AsyncConstraintSet<Int>(constraints: [constraint])
+        XCTAssertNotNil(constraintSet)
+        XCTAssertEqual(constraintSet.count, 1)
     }
     
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
@@ -38,9 +38,9 @@ class AsyncConstraintSetTests: XCTestCase {
         let predicate = FakePredicate(10)
         let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraints = AsyncConstraintSet<Int>(constraints: constraint)
-        XCTAssertNotNil(constraints)
-        XCTAssertEqual(constraints.count, 1)
+        let constraintSet = AsyncConstraintSet<Int>(constraints: constraint)
+        XCTAssertNotNil(constraintSet)
+        XCTAssertEqual(constraintSet.count, 1)
     }
 }
 
@@ -51,9 +51,9 @@ extension AsyncConstraintSetTests {
         let predicate = FakePredicate(10)
         let constraint = AsyncConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        constraints.add(constraint: constraint)
+        constraintSet.add(constraint: constraint)
         
-        XCTAssertEqual(constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
     
     func testItCanAddMultipleAsyncConstraints() {
@@ -64,18 +64,18 @@ extension AsyncConstraintSetTests {
         let bPredicate = FakePredicate(10)
         let bConstraint = AsyncConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
-        constraints.add(constraint: aConstraint)
-        constraints.add(constraint: bConstraint)
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
         
-        XCTAssertEqual(constraints.count, 2)
+        XCTAssertEqual(constraintSet.count, 2)
     }
     
     func testItCanAddAConstraintUsingAlternativeMethod() {
         
         let predicate = FakePredicate(10)
-        constraints.add(predicate: predicate, error:FakeError.Invalid)
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         
-        XCTAssertEqual(constraints.count, 1)
+        XCTAssertEqual(constraintSet.count, 1)
     }
 }
 
@@ -83,10 +83,10 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForOneConstraint() {
 
-        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(10), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAny(input: 1) { result in
+        constraintSet.evaluateAny(input: 1) { result in
             expect.fulfill()
             switch result {
             case .invalid(_): XCTAssert(true)
@@ -97,11 +97,11 @@ extension AsyncConstraintSetTests {
     }
     
     func testItCanEvaluateAny_ForTwoConstraint() {
-        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(10), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAny(input: 1) { result in
+        constraintSet.evaluateAny(input: 1) { result in
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
@@ -110,11 +110,11 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForTwoConstraint2() {
 
-        constraints.add(predicate: FakePredicate(10), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(10), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAny(input: 20) { result in
+        constraintSet.evaluateAny(input: 20) { result in
             expect.fulfill()
             XCTAssertTrue(result.isInvalid)
         }
@@ -123,11 +123,11 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForTwoConstraint3() {
 
-        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(20), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(20), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(20), error: FakeError.Invalid)
         
         let expect = expectation(description: "Asyn Evaluation")
-        constraints.evaluateAny(input: 20) { result in
+        constraintSet.evaluateAny(input: 20) { result in
             expect.fulfill()
             XCTAssertTrue(result.isValid)
         }
@@ -136,11 +136,11 @@ extension AsyncConstraintSetTests {
 
     func testItCanEvaluateAll_ToValid() {
 
-        constraints.add(predicate: FakePredicate(1), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(1), error: FakeError.FailedCondition)
+        constraintSet.add(predicate: FakePredicate(1), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(1), error: FakeError.FailedCondition)
 
         let expect = expectation(description: "Evaluate all async")
-        constraints.evaluateAll(input: 1) { result in
+        constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
             XCTAssertEqual(EvaluationResult.valid, result)
         }
@@ -149,12 +149,12 @@ extension AsyncConstraintSetTests {
 
     func testItCanEvaluateAll_ToValid_2() {
 
-        constraints.add(predicate: FakePredicate(1), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
+        constraintSet.add(predicate: FakePredicate(1), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
 
         let expect = expectation(description: "Evaluate all async")
         let summary = EvaluationResult.Summary(errors: [FakeError.FailedCondition])
-        constraints.evaluateAll(input: 1) { result in
+        constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
             XCTAssertEqual(EvaluationResult.invalid(summary), result)
         }
@@ -163,12 +163,12 @@ extension AsyncConstraintSetTests {
 
     func testItCanEvaluateAll_ToValid_3() {
 
-        constraints.add(predicate: FakePredicate(2), error: FakeError.Invalid)
-        constraints.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
+        constraintSet.add(predicate: FakePredicate(2), error: FakeError.Invalid)
+        constraintSet.add(predicate: FakePredicate(2), error: FakeError.FailedCondition)
 
         let expect = expectation(description: "Evaluate all async")
         let summary = EvaluationResult.Summary(errors: [FakeError.Invalid, FakeError.FailedCondition])
-        constraints.evaluateAll(input: 1) { result in
+        constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
             XCTAssertEqual(EvaluationResult.invalid(summary), result)
         }
