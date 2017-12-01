@@ -69,7 +69,17 @@ extension Result: Equatable {
 }
 
 extension Result {
-    
+
+    internal init(summary:Summary) {
+
+        if summary.errors.count == 0 {
+            self = .valid
+        }
+        else {
+            self = .invalid(summary)
+        }
+    }
+
     public struct Summary: Equatable {
         
         public private(set) var errors = [Error]()
@@ -95,19 +105,6 @@ extension Result {
         
         public static func ==(lhs: Summary, rhs: Summary) -> Bool {
             return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
-        }
-    }
-}
-
-extension Result {
-
-    internal init(summary:Summary) {
-
-        if summary.errors.count == 0 {
-            self = .valid
-        }
-        else {
-            self = .invalid(summary)
         }
     }
 }
