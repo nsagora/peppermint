@@ -42,9 +42,10 @@
 		FA725A971FD1506B00EFF4A4 /* AnyPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A951FD1506B00EFF4A4 /* AnyPredicate.swift */; };
 		FA725A981FD1506B00EFF4A4 /* AnyPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A951FD1506B00EFF4A4 /* AnyPredicate.swift */; };
 		FA725A991FD1506B00EFF4A4 /* AnyPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A951FD1506B00EFF4A4 /* AnyPredicate.swift */; };
-		FA725A9B1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A9A1FD1520C00EFF4A4 /* AnyPredicateTests.swift */; };
-		FA725A9C1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A9A1FD1520C00EFF4A4 /* AnyPredicateTests.swift */; };
-		FA725A9D1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725A9A1FD1520C00EFF4A4 /* AnyPredicateTests.swift */; };
+		FA725AA41FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */; };
+		FA725AA51FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */; };
+		FA725AA61FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */; };
+		FA725AA71FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */; };
 		FAA87CCD1D5CB80900792F43 /* ValidationToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */; };
 		FAA87CE91D5CB82000792F43 /* ValidationToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA87CE01D5CB82000792F43 /* ValidationToolkit.framework */; };
 		FAA87CF71D5CB93C00792F43 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD5FA61D5A5BDB00ECACA1 /* Result.swift */; };
@@ -146,7 +147,7 @@
 		FA655E991F49B53500563400 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		FA6E6F9D1F5C012100E9568E /* FakeableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeableError.swift; sourceTree = "<group>"; };
 		FA725A951FD1506B00EFF4A4 /* AnyPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPredicate.swift; sourceTree = "<group>"; };
-		FA725A9A1FD1520C00EFF4A4 /* AnyPredicateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPredicateTests.swift; sourceTree = "<group>"; };
+		FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncPredicate.swift; sourceTree = "<group>"; };
 		FAA87CB71D5CB7F500792F43 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CC41D5CB80900792F43 /* ValidationToolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidationToolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA87CCC1D5CB80900792F43 /* ValidationToolkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidationToolkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				FA725A951FD1506B00EFF4A4 /* AnyPredicate.swift */,
+				FA725AA31FD1B64900EFF4A4 /* AnyAsyncPredicate.swift */,
 				FAB52B491D54EC4700110049 /* Predicate.swift */,
 				FADE98B51F47F6D300C0185E /* AsyncPredicate.swift */,
 				FADD5FA41D5A586B00ECACA1 /* Constraint.swift */,
@@ -283,7 +285,6 @@
 				FA17B2DE1D8D460D00534634 /* ConstraintSetTests.swift */,
 				FA655E8F1F48CFFB00563400 /* AsyncConstraintSetTests.swift */,
 				FA17B2DA1D8D43E500534634 /* EvaluationResultTests.swift */,
-				FA725A9A1FD1520C00EFF4A4 /* AnyPredicateTests.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -653,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA725AA71FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */,
 				FADE98B21F47769A00C0185E /* EmailPredicate.swift in Sources */,
 				FA655E9D1F49B53500563400 /* AsyncOperation.swift in Sources */,
 				FAE910661F4885190056339C /* AsyncConstraint.swift in Sources */,
@@ -674,6 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA725AA61FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */,
 				FADE98AF1F47769A00C0185E /* EmailPredicate.swift in Sources */,
 				FA655E9C1F49B53500563400 /* AsyncOperation.swift in Sources */,
 				FAE910651F4885190056339C /* AsyncConstraint.swift in Sources */,
@@ -707,7 +710,6 @@
 				FADE98BD1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAA87D091D5CB97600792F43 /* RegexPredicateTests.swift in Sources */,
 				FA17B2DD1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
-				FA725A9D1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +717,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA725AA51FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */,
 				FADE98AC1F47769900C0185E /* EmailPredicate.swift in Sources */,
 				FA655E9B1F49B53500563400 /* AsyncOperation.swift in Sources */,
 				FAE910641F4885190056339C /* AsyncConstraint.swift in Sources */,
@@ -748,7 +751,6 @@
 				FADE98BC1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAA87D061D5CB97500792F43 /* RegexPredicateTests.swift in Sources */,
 				FA17B2DC1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
-				FA725A9C1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA725AA41FD1B64900EFF4A4 /* AnyAsyncPredicate.swift in Sources */,
 				FADE989A1F4775FA00C0185E /* EmailPredicate.swift in Sources */,
 				FA655E9A1F49B53500563400 /* AsyncOperation.swift in Sources */,
 				FAE910631F4885190056339C /* AsyncConstraint.swift in Sources */,
@@ -789,7 +792,6 @@
 				FADE98BB1F47F79E00C0185E /* AsyncPredicateTests.swift in Sources */,
 				FAE24F201D5A5FF70017902A /* ConstraintTests.swift in Sources */,
 				FA17B2DB1D8D43E500534634 /* EvaluationResultTests.swift in Sources */,
-				FA725A9B1FD1520C00EFF4A4 /* AnyPredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

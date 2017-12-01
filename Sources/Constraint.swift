@@ -1,11 +1,3 @@
-//
-//  Constraint.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 09/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
@@ -13,7 +5,7 @@ import Foundation
  */
 public struct Constraint<T> {
 
-    private let predicateBuilder: (T)->Bool
+    private let predicate:AnyPredicate<T>
     private let errorBuilder: (T)->Error
 
     var conditions =  [Constraint<T>]()
@@ -25,7 +17,7 @@ public struct Constraint<T> {
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
     public init<P:Predicate>(predicate: P, error: Error) where P.InputType == T {
-        self.predicateBuilder = predicate.evaluate
+        self.predicate = predicate.erase()
         self.errorBuilder = { _ in return error }
     }
     
@@ -36,7 +28,7 @@ public struct Constraint<T> {
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
     public init<P:Predicate>(predicate: P, error: @escaping (T)->Error) where P.InputType == T {
-        self.predicateBuilder = predicate.evaluate
+        self.predicate = predicate.erase()
         self.errorBuilder = error
     }
 
@@ -73,7 +65,7 @@ public struct Constraint<T> {
     
     func continueEvaluation(with input:T) -> Result {
         
-        let result = predicateBuilder(input)
+        let result = predicate.evaluate(with: input)
         
         if result == true {
             return .valid

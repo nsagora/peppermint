@@ -4,8 +4,8 @@ import Foundation
  A structrure that links an `AsyncPredicate` to an `Error` that describes why the predicate evaluation has failed.
  */
 public struct AsyncConstraint<T> {
-    
-    private var predicateBuilder: (T, DispatchQueue, @escaping (Bool) -> Void) -> Void
+
+    private var predicate: AnyAsyncPredicate<T>
     private var errorBuilder: (T)->Error
 
     var conditions =  [AsyncConstraint<T>]()
@@ -18,8 +18,8 @@ public struct AsyncConstraint<T> {
      */
     public init<P:AsyncPredicate>(predicate:P, error:Error) where P.InputType == T {
         
-        predicateBuilder = predicate.evaluate
-        errorBuilder = { _ in return error }
+        self.predicate = predicate.erase()
+        self.errorBuilder = { _ in return error }
     }
     
     /**
@@ -30,8 +30,8 @@ public struct AsyncConstraint<T> {
      */
     public init<P:AsyncPredicate>(predicate:P, error: @escaping (T)->Error) where P.InputType == T {
         
-        predicateBuilder = predicate.evaluate
-        errorBuilder = error
+        self.predicate = predicate.erase()
+        self.errorBuilder = error
     }
 
     public mutating func add(condition:AsyncConstraint<T>) {
@@ -69,7 +69,7 @@ public struct AsyncConstraint<T> {
 
     private func continueEvaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
 
-        predicateBuilder(input, queue) { matches in
+        predicate.evaluate(with: input, queue: queue) { matches in
 
             if matches {
                 completionHandler(.valid)

@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- A type-erased predicate.
+ A type-erased `Predicate`.
  */
 public class AnyPredicate<T>: Predicate {
 
@@ -13,7 +13,7 @@ public class AnyPredicate<T>: Predicate {
     var _evaluate:(T)->Bool
 
     /**
-     Creates a type-erased predicate that wraps the given instance.
+     Creates a type-erased `Predicate` that wraps the given instance.
     */
     public init<P:Predicate>(_ predicate:P) where P.InputType == T {
         _evaluate = predicate.evaluate
@@ -33,9 +33,9 @@ public class AnyPredicate<T>: Predicate {
 extension Predicate {
 
     /**
-     Creates a type-erased predicate that wraps the given instance.
+     Creates a type-erased `Predicate` that wraps the given instance.
      */
-    public func erase() -> AnyPredicate<InputType> {
+    internal func erase() -> AnyPredicate<InputType> {
         return AnyPredicate(self)
     }
 }
