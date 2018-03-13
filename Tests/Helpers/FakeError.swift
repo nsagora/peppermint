@@ -1,9 +1,10 @@
-//
-//  FakeError.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 13/03/2018.
-//  Copyright © 2018 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
+
+enum FakeError: FakeableError {
+
+    case Invalid
+    case MissingInput
+    case FailingCondition
+
+    case Unexpected(String)
+}

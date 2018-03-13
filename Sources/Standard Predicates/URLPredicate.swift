@@ -1,17 +1,9 @@
-//
-//  URLPredicate.swift
-//  ValidationComponents
-//
-//  Created by Alex Cristea on 26/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
- The `URLPredicate` struct is used to evaluate whether a given input is a syntactically valid URL.
+ The `URLPredicate` class is used to evaluate whether a given input is a syntactically valid URL.
  */
-public struct URLPredicate: Predicate {
+public class URLPredicate: Predicate {
 
     /**
      Creates and returns a new `URLPredicate` instance.

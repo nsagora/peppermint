@@ -1,11 +1,3 @@
-//
-//  ConstraintSetTests.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 17/09/2016.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import XCTest
 @testable import ValidationToolkit
 
@@ -13,7 +5,7 @@ class ConstraintSetTests: XCTestCase {
 
     fileprivate let validFakeInput = "fakeInput"
     fileprivate let invalidFakeInput = "~fakeInput"
-    fileprivate let predicate = MockPredicate(testInput: "fakeInput")
+    fileprivate let predicate = FakePredicate(expected:"fakeInput")
     fileprivate var constraintSet: ConstraintSet<String>!
     
     override func setUp() {
@@ -46,8 +38,8 @@ extension ConstraintSetTests {
 
     func testThatItCanBeInstantiatedWithAnFinitArrayofConstrains() {
 
-        let predicate = MockPredicate(testInput: validFakeInput)
-        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
+        let predicate = FakePredicate(expected: validFakeInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.Invalid)
 
         let constraintSet = ConstraintSet<String>(constraints:[constraint])
         XCTAssertEqual(constraintSet.count, 1)
@@ -55,8 +47,8 @@ extension ConstraintSetTests {
 
     func testThatItCanBeInstantiatedWithAnUnknownNumberOfConstrains() {
 
-        let predicate = MockPredicate(testInput: validFakeInput)
-        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
+        let predicate = FakePredicate(expected: validFakeInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.Invalid)
 
         let constraintSet = ConstraintSet<String>(constraints:constraint)
         XCTAssertEqual(constraintSet.count, 1)
@@ -65,23 +57,13 @@ extension ConstraintSetTests {
     func testThatWithoutConstraints_EvaluateAny_IsValid() {
         
         let result = constraintSet.evaluateAny(input: "any")
-        switch result {
-        case .valid:
-            XCTAssertTrue(true)
-        default:
-            XCTFail()
-        }
+        XCTAssertEqual(result, Result.valid)
     }
     
     func testThatWithoutConstraints_EvaluateAll_IsValid() {
         
         let result = constraintSet.evaluateAny(input: "all")
-        switch result {
-        case .valid:
-            XCTAssertTrue(true)
-        default:
-            XCTFail()
-        }
+        XCTAssertEqual(result, Result.valid)
     }
 }
 
@@ -89,7 +71,7 @@ extension ConstraintSetTests {
     
     func testThatCanAddConstraint() {
         
-        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.InvalidInput)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.Invalid)
         
         constraintSet.add(constraint: constraint)
         XCTAssertEqual(constraintSet.count, 1)
@@ -97,7 +79,7 @@ extension ConstraintSetTests {
     
     func testThatCanAddConstraintUsingAlternativeMethod() {
         
-        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         XCTAssertEqual(constraintSet.count, 1)
     }
 }
@@ -106,29 +88,25 @@ extension ConstraintSetTests {
     
     func testThatForValidInput_EvaluateAny_IsValid() {
         
-        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
-     
-        switch constraintSet.evaluateAny(input: validFakeInput) {
-        case .valid:
-            XCTAssert(true)
-        default:
-            XCTFail()
-        }
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
+
+        let result = constraintSet.evaluateAny(input: validFakeInput)
+        XCTAssertEqual(result, Result.valid)
     }
     
     func testThatForInvalidInput_EvaluateAny_IsInvalid() {
         
-        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         
         let result = constraintSet.evaluateAny(input: invalidFakeInput)
-        let summary = Result.Summary(errors: [FakeError.InvalidInput])
+        let summary = Result.Summary(errors: [FakeError.Invalid])
         
         XCTAssertEqual(result, Result.invalid(summary))
     }
     
     func testThatForValidInput_EvaluateAll_IsValid() {
         
-        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
         
         let result = constraintSet.evaluateAll(input: validFakeInput)
@@ -137,30 +115,11 @@ extension ConstraintSetTests {
 
     func testThatForInvalidInput_EvaluateAll_IsInvalid() {
 
-        constraintSet.add(predicate: predicate, error:FakeError.InvalidInput)
+        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
 
         let result = constraintSet.evaluateAll(input: invalidFakeInput)
-        let summary = Result.Summary(errors: [FakeError.InvalidInput, FakeError.MissingInput])
+        let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
         XCTAssertEqual(result, Result.invalid(summary))
-    }
-}
-
-// MARK: - Test Error
-
-fileprivate enum FakeError: FakeableError {
-    case InvalidInput
-    case MissingInput
-    case FailingCondition
-}
-
-// MARK: - Mock Predicate
-
-fileprivate struct MockPredicate: Predicate  {
-    
-    var testInput: String
-    
-    func evaluate(with input: String) -> Bool {
-        return input == testInput
     }
 }

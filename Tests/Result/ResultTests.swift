@@ -10,7 +10,7 @@ class ResultTests: XCTestCase {
     
     func testIsInvalid() {
         
-        let summary = Result.Summary(errors: [TestError.InvalidInput])
+        let summary = Result.Summary(errors: [FakeError.Invalid])
         let invalidResult: Result = Result.invalid(summary)
 
         XCTAssertTrue(invalidResult.isInvalid)
@@ -18,7 +18,7 @@ class ResultTests: XCTestCase {
     }
     
     func testEvaluationErrors() {
-        let errors =  [TestError.InvalidInput]
+        let errors =  [FakeError.Invalid]
         let expectedSummary = Result.Summary(errors:errors)
 
         let invalidResult = Result.invalid(expectedSummary)
@@ -27,10 +27,4 @@ class ResultTests: XCTestCase {
         let validResult = Result.valid
         XCTAssertFalse(validResult.summary.hasFailingContraints)
     }
-}
-
-// MARK: - Test Error
-
-fileprivate enum TestError: Error {
-    case InvalidInput
 }

@@ -39,64 +39,13 @@ extension Result {
     }
 
     /**
-     `[Error]` if the validation result is `.invalid`, `nil` otherwise.
+     `Summary` of the validation result.
      */
-    public var errors: [Error]? {
+    public var summary: Summary {
         switch self {
-        case .invalid(let summary): return summary.errors
-        default: return nil
+        case .invalid(let summary): return summary
+        case .valid: return Summary.Successful
         }
     }
 }
 
-extension Result: Equatable {
-    
-    public static func ==(lhs: Result, rhs: Result) -> Bool {
-        switch (rhs, lhs) {
-        case (.valid, .valid): return true
-        case (.invalid(let a), .invalid(let b)): return a == b
-        default: return false
-        }
-    }
-}
-
-extension Result {
-
-    internal init(summary:Summary) {
-
-        if summary.errors.count == 0 {
-            self = .valid
-        }
-        else {
-            self = .invalid(summary)
-        }
-    }
-
-    public struct Summary: Equatable {
-        
-        public private(set) var errors = [Error]()
-        
-        internal init(errors:[Error]) {
-            self.errors = errors;
-        }
-        
-        internal init(evaluationResults:[Result]) {
-            
-            var errors = [Error]()
-            for result in evaluationResults {
-                switch result {
-                case .invalid(let summary):
-                    errors.append(contentsOf: summary.errors)
-                default:
-                    continue
-                }
-            }
-            
-            self.init(errors: errors)
-        }
-        
-        public static func ==(lhs: Summary, rhs: Summary) -> Bool {
-            return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
-        }
-    }
-}

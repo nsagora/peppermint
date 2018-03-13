@@ -1,17 +1,9 @@
-//
-//  PairMatchingPredicate.swift
-//  ValidationComponents
-//
-//  Created by Alex Cristea on 23/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
- The `PairMatchingPredicate` struct is used to evaluate whether a given pair of values match.
+ The `PairMatchingPredicate` class is used to evaluate whether a given pair of values match.
  */
-public struct PairMatchingPredicate<T:Equatable>: Predicate {
+public class PairMatchingPredicate<T:Equatable>: Predicate {
 
     public typealias InputType = (T?, T?)
 

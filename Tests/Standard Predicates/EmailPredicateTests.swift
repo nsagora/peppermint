@@ -1,11 +1,3 @@
-//
-//  EmailPredicateTests.swift
-//  Validator
-//
-//  Created by Alex Cristea on 07/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import XCTest
 @testable import ValidationToolkit
 

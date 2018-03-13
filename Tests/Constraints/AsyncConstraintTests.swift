@@ -5,7 +5,7 @@ class AsyncConstraintTests: XCTestCase {
 
     func testCanAddAsyncPredicate() {
         
-        let predicate = FakePredicate<Int>()
+        let predicate = FakePredicate(expected: Int.max)
         let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         XCTAssertNotNil(constraint)
@@ -13,15 +13,15 @@ class AsyncConstraintTests: XCTestCase {
     
     func testItCanBeInstantiatedWithErrorBlock() {
         
-        let predicate = FakePredicate<Int>()
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: { FakeError.Wrong($0) })
+        let predicate = FakePredicate(expected: Int.max)
+        let constraint = SimpleAsyncConstraint(predicate: predicate, error: { FakeError.Unexpected("Input \($0) is invalid") })
         
         XCTAssertNotNil(constraint)
     }
     
     func testThatItCanValidate() {
         
-        let predicate = FakePredicate<Int>()
+        let predicate = FakePredicate(expected: Int.max)
         let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
@@ -29,14 +29,12 @@ class AsyncConstraintTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
     
     func testThatItCallsCallbackWithSucceesOnSuccess() {
         
-        var predicate = FakePredicate<Int>()
-        predicate.expected = 10
-        
+        let predicate = FakePredicate(expected: 10)
         let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
@@ -45,25 +43,23 @@ class AsyncConstraintTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
         
     }
     
     func testThatItCallsCallbackWithErrorOnError() {
         
-        var predicate = FakePredicate<Int>()
-        predicate.expected = 10
-        
+        let predicate = FakePredicate(expected: 10)
         let constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
         
         let expect = expectation(description: "Async Evaluation")
         constraint.evaluate(with: 1, queue:.main) { result in
             XCTAssertTrue(result.isInvalid)
-            XCTAssertTrue(result.errors is [FakeError])
+            XCTAssertTrue(result.summary.errors is [FakeError])
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
         
     }
 }
@@ -75,7 +71,7 @@ extension AsyncConstraintTests {
         let p = FakePredicate(expected: "001")
         let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
-        let predicate = FakePredicate<String>()
+        let predicate = FakePredicate(expected: "002")
         var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
@@ -90,7 +86,7 @@ extension AsyncConstraintTests {
         let p = FakePredicate(expected: "001")
         let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
-        let predicate = FakePredicate<String>()
+        let predicate = FakePredicate(expected: "000")
         var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
@@ -101,7 +97,7 @@ extension AsyncConstraintTests {
             XCTAssertEqual(result, Result.invalid(expectedResult))
             expect.fulfill()
         }
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 
     func testThatItEvaluateWhenHavingAValidCondition() {
@@ -109,7 +105,7 @@ extension AsyncConstraintTests {
         let p = FakePredicate(expected: "001")
         let condition = SimpleAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
-        let predicate = FakePredicate<String>()
+        let predicate = FakePredicate(expected: "000")
         var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
@@ -120,7 +116,7 @@ extension AsyncConstraintTests {
             XCTAssertEqual(result, Result.invalid(expectedResult))
             expect.fulfill()
         }
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 
     func testThatItEvaluateWhenHavingMultiLevelCondition() {
@@ -134,7 +130,7 @@ extension AsyncConstraintTests {
         let p_3 = FakePredicate(expected: "003")
         let condition_3 = SimpleAsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
 
-        let predicate = FakePredicate<String>()
+        let predicate = FakePredicate(expected: "000")
         var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         condition_1.add(condition:condition_2)
@@ -147,7 +143,7 @@ extension AsyncConstraintTests {
             XCTAssertEqual(result, Result.invalid(summary))
             expect.fulfill()
         }
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 
     func testThatItEvaluateWhenHavingMultiLevelCondition_2() {
@@ -161,7 +157,7 @@ extension AsyncConstraintTests {
         let p_3 = FakePredicate(expected: "003")
         let condition_3 = SimpleAsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
 
-        let predicate = FakePredicate<String>()
+        let predicate = FakePredicate(expected: "004")
         var constraint = SimpleAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         condition_1.add(condition:condition_2)
@@ -174,29 +170,6 @@ extension AsyncConstraintTests {
             XCTAssertEqual(result, Result.invalid(summary))
             expect.fulfill()
         }
-        waitForExpectations(timeout: 3, handler: nil)
-    }
-}
-
-
-extension AsyncConstraintTests {
-    
-    fileprivate enum FakeError:Error {
-        case Invalid
-        case Wrong(Int)
-        case Unexpected(String)
-    }
-    
-    fileprivate struct FakePredicate<T:Equatable>: AsyncPredicate {
-
-        var expected:T?
-        
-        func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (Bool) -> Void) {
-            
-            queue.async {
-                completionHandler(self.expected == input)
-            }
-
-        }
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 }

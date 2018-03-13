@@ -3,8 +3,9 @@ import XCTest
 
 class ConstraintTests: XCTestCase {
 
-    fileprivate let fakeInput = "testInput"
-    fileprivate let fakePredicate = FakePredicate(expected: "testInput")
+    fileprivate let validFakeInput = "fakeInput"
+    fileprivate let invalidFakeInput = "~fakeInput"
+    fileprivate let fakePredicate = FakePredicate(expected: "fakeInput")
 
     var constraint:SimpleConstraint<String>!
 
@@ -23,41 +24,38 @@ class ConstraintTests: XCTestCase {
     }
 
     func testThatItReturnsSuccessForValidInput() {
-        let result = constraint.evaluate(with: fakeInput)
+        let result = constraint.evaluate(with: validFakeInput)
         XCTAssertTrue(result.isValid)
     }
 
     func testThatItFailsWithErrorForInvalidInput() {
-        let result = constraint.evaluate(with: "Ok")
-        XCTAssertEqual(result.errors as! [FakeError], [FakeError.Invalid])
+
+        // When
+        let result = constraint.evaluate(with: invalidFakeInput)
+
+        // Then
+        XCTAssertTrue(result.isInvalid)
+        XCTAssertEqual(result.summary.failingConstraints, 1)
+
+        let expectedErrors = [FakeError.Invalid]
+        let actualErrors = result.summary.errors as! [FakeError]
+        XCTAssertEqual(actualErrors, expectedErrors)
     }
 }
 
 extension ConstraintTests {
     
     func testThatItDynamicallyBuildsTheValidationError() {
+
+        // Given
         let constraint = SimpleConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
-        let result = constraint.evaluate(with: "Ok")
 
-        XCTAssertEqual(result.errors as! [FakeError], [FakeError.Unexpected("Ok")])
-    }
-}
+        // When
+        let result = constraint.evaluate(with: invalidFakeInput)
 
-// MARK: - Fakes
-
-extension ConstraintTests {
-    
-    fileprivate enum FakeError: FakeableError {
-        case Invalid
-        case Unexpected(String)
-    }
-    
-    fileprivate struct FakePredicate: Predicate  {
-        
-        var expected: String
-        
-        func evaluate(with input: String) -> Bool {
-            return input == expected
-        }
+        // Then
+        let actualErrors = result.summary.errors as! [FakeError]
+        let expectedErrors = [FakeError.Unexpected(invalidFakeInput)]
+        XCTAssertEqual(actualErrors, expectedErrors)
     }
 }
