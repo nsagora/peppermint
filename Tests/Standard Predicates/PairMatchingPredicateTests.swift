@@ -1,5 +1,5 @@
 //
-//  PairMatchingPredicatePredicate.swift
+//  PairMatchingPredicateTests.swift
 //  ValidationComponents
 //
 //  Created by Alex Cristea on 23/08/16.

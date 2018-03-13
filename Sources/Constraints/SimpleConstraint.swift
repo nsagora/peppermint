@@ -1,14 +1,12 @@
 import Foundation
 
 /**
- A structrure that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
+ A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public struct SimpleConstraint<T>: Constraint {
+public class SimpleConstraint<T>: Constraint {
 
     private let predicate:AnyPredicate<T>
     private let errorBuilder: (T)->Error
-
-    var conditions =  [SimpleConstraint<T>]()
 
     /**
      Create a new `SimpleConstraint` instance
@@ -31,11 +29,6 @@ public struct SimpleConstraint<T>: Constraint {
         self.predicate = predicate.erase()
         self.errorBuilder = error
     }
-
-    
-    public mutating func add(condition:SimpleConstraint<T>) {
-        conditions.append(condition)
-    }
     
     /**
      Evaluates the input on the `Predicate`.
@@ -44,26 +37,6 @@ public struct SimpleConstraint<T>: Constraint {
      - returns: `.valid` if the input is valid,`.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input:T) -> Result {
-        
-        if !hasConditions() {
-            return continueEvaluation(with: input)
-        }
-
-        let constraintSet = ConstraintSet(constraints: conditions)
-        let result = constraintSet.evaluateAll(input: input)
-
-        if result.isValid {
-            return continueEvaluation(with: input)
-        }
-
-        return result
-    }
-    
-    func hasConditions() -> Bool {
-        return conditions.count > 0
-    }
-    
-    func continueEvaluation(with input:T) -> Result {
         
         let result = predicate.evaluate(with: input)
         
