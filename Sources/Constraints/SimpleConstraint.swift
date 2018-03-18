@@ -43,10 +43,9 @@ public class SimpleConstraint<T>: Constraint {
         if result == true {
             return .valid
         }
-        else {
-            let error = errorBuilder(input)
-            let summary = Result.Summary(errors: [error])
-            return .invalid(summary)
-        }
+        
+        let error = errorBuilder(input)
+        let summary = Result.Summary(errors: [error])
+        return .invalid(summary)
     }
 }

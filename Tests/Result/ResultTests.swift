@@ -16,6 +16,13 @@ class ResultTests: XCTestCase {
         XCTAssertTrue(invalidResult.isInvalid)
         XCTAssertFalse(invalidResult.isValid)
     }
+
+    func testThatValidIsNotEqualToInvalid() {
+
+        let summary = Result.Summary(errors: [FakeError.Invalid])
+
+        XCTAssertNotEqual(Result.valid, Result.invalid(summary))
+    }
     
     func testEvaluationErrors() {
         let errors =  [FakeError.Invalid]
