@@ -7,7 +7,7 @@ class AsyncOperationTests: XCTestCase {
 
         // Given
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid)
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
 
         // When
         let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
@@ -20,7 +20,7 @@ class AsyncOperationTests: XCTestCase {
 
         // Given
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid)
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
         
         // When
         let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
@@ -33,7 +33,7 @@ class AsyncOperationTests: XCTestCase {
 
         // Given
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid)
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
         let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
 
         let queue = OperationQueue()

@@ -33,17 +33,32 @@ public class ConditionedConstraint<T>: SimpleConstraint<T> {
         super.init(predicate: predicate, error: error)
     }
 
-    public func append<C:Constraint>(condition:C) where C.InputType == T {
+    /**
+     Add a condition `Constraint`.
+
+     - parameter constraint: `Constraint`
+     */
+    public func add<C:Constraint>(condition:C) where C.InputType == T {
         conditions.append(condition.erase())
     }
 
-    public func append<C:Constraint>(conditions:[C]) where C.InputType == T {
+    /**
+     Add a predefined list of conditional `Constraints`.
+
+     - parameter constraints: `[Constraint]`
+     */
+    public func add<C:Constraint>(conditions:[C]) where C.InputType == T {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
 
-    public func append<C:Constraint>(conditions:C...) where C.InputType == T {
-        self.append(conditions: conditions)
+    /**
+     A an unsized list of conditional `Constraints`.
+
+     - parameter constraints: `[Constraint]`
+     */
+    public func add<C:Constraint>(conditions:C...) where C.InputType == T {
+        self.add(conditions: conditions)
     }
 
     /**

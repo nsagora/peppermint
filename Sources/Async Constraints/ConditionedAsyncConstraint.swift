@@ -3,15 +3,15 @@ import Foundation
 /**
  A structrure that links an `AsyncPredicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public struct SimpleAsyncConstraint<T>: AsyncConstraint {
+public class ConditionedAsyncConstraint<T>: AsyncConstraint {
     
     private var predicate: AnyAsyncPredicate<T>
     private var errorBuilder: (T)->Error
     
-    var conditions =  [SimpleAsyncConstraint<T>]()
+    var conditions =  [AnyAsyncConstraint<T>]()
     
     /**
-     Create a new `SimpleAsyncConstraint` instance
+     Create a new `ConditionedAsyncConstraint` instance
      
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
@@ -23,7 +23,7 @@ public struct SimpleAsyncConstraint<T>: AsyncConstraint {
     }
     
     /**
-     Create a new `SimpleAsyncConstraint` instance
+     Create a new `ConditionedAsyncConstraint` instance
      
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
@@ -33,9 +33,14 @@ public struct SimpleAsyncConstraint<T>: AsyncConstraint {
         self.predicate = predicate.erase()
         self.errorBuilder = error
     }
-    
-    public mutating func add(condition:SimpleAsyncConstraint<T>) {
-        conditions.append(condition)
+
+    /**
+     Add a condition `AsyncConstraint`.
+
+     - parameter constraint: `Constraint`
+     */
+    public func add<C:AsyncConstraint>(condition:C) where C.InputType == T {
+        conditions.append(condition.erase())
     }
     
     /**

@@ -33,10 +33,10 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // Assert
-        constraint_001.append(condition:constraint_002)
+        constraint_001.add(condition:constraint_002)
         XCTAssertEqual(constraint_001.conditionsCount, 1)
 
-        constraint_001.append(condition:constraint_003)
+        constraint_001.add(condition:constraint_003)
         XCTAssertEqual(constraint_001.conditionsCount, 2)
     }
 
@@ -53,7 +53,7 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // When
-        constraint_001.append(conditions:[constraint_002,constraint_003])
+        constraint_001.add(conditions:[constraint_002,constraint_003])
 
         // Then
         XCTAssertEqual(constraint_001.conditionsCount, 2)
@@ -72,7 +72,7 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // When
-        constraint_001.append(conditions: constraint_002, constraint_003)
+        constraint_001.add(conditions: constraint_002, constraint_003)
 
         // Then
         XCTAssertEqual(constraint_001.conditionsCount, 2)
@@ -87,7 +87,7 @@ class ConditionedConstraintTests: XCTestCase {
         let firstPredicate = FakePredicate(expected: "002")
         let firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 002"))
 
-        constraint.append(condition:firstCondition)
+        constraint.add(condition:firstCondition)
 
         // Act
         let result = constraint.evaluate(with: "__002__")
@@ -106,7 +106,7 @@ class ConditionedConstraintTests: XCTestCase {
         let firstPredicate = FakePredicate(expected: "002")
         let firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 002"))
 
-        constraint.append(condition:firstCondition)
+        constraint.add(condition:firstCondition)
 
         // Act
         let result = constraint.evaluate(with: "002")
@@ -131,9 +131,9 @@ class ConditionedConstraintTests: XCTestCase {
         let thirdPredicate = FakePredicate(expected: "202")
         let thirdCondition = ConditionedConstraint(predicate: thirdPredicate, error: FakeError.Unexpected("Expecting 202"))
 
-        firstCondition.append(condition:secondCondition)
-        firstCondition.append(condition:thirdCondition)
-        constraint.append(condition:firstCondition)
+        firstCondition.add(condition:secondCondition)
+        firstCondition.add(condition:thirdCondition)
+        constraint.add(condition:firstCondition)
 
         var result = constraint.evaluate(with: "001")
         var summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 202")])

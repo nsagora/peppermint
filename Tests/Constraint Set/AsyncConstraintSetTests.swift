@@ -32,7 +32,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: [constraint])
         XCTAssertNotNil(constraintSet)
@@ -42,7 +42,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: constraint)
         XCTAssertNotNil(constraintSet)
@@ -55,7 +55,7 @@ extension AsyncConstraintSetTests {
     func testItCanAddAnAsynConstraint() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
         
         constraintSet.add(constraint: constraint)
         
@@ -65,10 +65,10 @@ extension AsyncConstraintSetTests {
     func testItCanAddMultipleAsyncConstraints() {
         
         let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = SimpleAsyncConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
         
         let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = SimpleAsyncConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -79,7 +79,8 @@ extension AsyncConstraintSetTests {
     func testItCanAddAConstraintUsingAlternativeMethod() {
         
         let predicate = FakePredicate(expected: 10)
-        constraintSet.add(predicate: predicate, error:FakeError.Invalid)
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
+        constraintSet.add(constraint: constraint)
         
         XCTAssertEqual(constraintSet.count, 1)
     }
@@ -89,7 +90,9 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForOneConstraint() {
 
-        constraintSet.add(predicate: FakePredicate(expected: 10), error: FakeError.Invalid)
+        let predicate = FakePredicate(expected: 10)
+        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
+        constraintSet.add(constraint: constraint)
         
         let expect = expectation(description: "Async Evaluation")
         constraintSet.evaluateAny(input: 1) { result in
@@ -103,9 +106,18 @@ extension AsyncConstraintSetTests {
     }
     
     func testItCanEvaluateAny_ForTwoConstraint() {
-        constraintSet.add(predicate: FakePredicate(expected: 10), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 20), error: FakeError.Invalid)
-        
+
+        // Given
+        let aPredicate = FakePredicate(expected: 10)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+
+        let bPredicate = FakePredicate(expected: 10)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 1) { result in
             expect.fulfill()
@@ -116,9 +128,17 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForTwoConstraint2() {
 
-        constraintSet.add(predicate: FakePredicate(expected: 10), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 20), error: FakeError.Invalid)
-        
+        // Given
+        let aPredicate = FakePredicate(expected: 10)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+
+        let bPredicate = FakePredicate(expected: 10)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 20) { result in
             expect.fulfill()
@@ -129,8 +149,17 @@ extension AsyncConstraintSetTests {
     
     func testItCanEvaluateAny_ForTwoConstraint3() {
 
-        constraintSet.add(predicate: FakePredicate(expected: 20), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 20), error: FakeError.Invalid)
+        // Given
+        let aPredicate = FakePredicate(expected: 20)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+
+        let bPredicate = FakePredicate(expected: 20)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
         
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 20) { result in
@@ -142,9 +171,17 @@ extension AsyncConstraintSetTests {
 
     func testItCanEvaluateAll_ToValid() {
 
-        constraintSet.add(predicate: FakePredicate(expected: 1), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 1), error: FakeError.FailingCondition)
+        // Given
+        let aPredicate = FakePredicate(expected: 1)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
+        let bPredicate = FakePredicate(expected: 1)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
+
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
         let expect = expectation(description: "Evaluate all async")
         constraintSet.evaluateAll(input: 1) { result in
             expect.fulfill()
@@ -154,10 +191,17 @@ extension AsyncConstraintSetTests {
     }
 
     func testItCanEvaluateAll_ToValid_2() {
+        // Given
+        let aPredicate = FakePredicate(expected: 1)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
-        constraintSet.add(predicate: FakePredicate(expected: 1), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 2), error: FakeError.FailingCondition)
+        let bPredicate = FakePredicate(expected: 2)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
 
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
         let expect = expectation(description: "Evaluate all async")
         let summary = Result.Summary(errors: [FakeError.FailingCondition])
         constraintSet.evaluateAll(input: 1) { result in
@@ -169,8 +213,17 @@ extension AsyncConstraintSetTests {
 
     func testItCanEvaluateAll_ToValid_3() {
 
-        constraintSet.add(predicate: FakePredicate(expected: 2), error: FakeError.Invalid)
-        constraintSet.add(predicate: FakePredicate(expected: 2), error: FakeError.FailingCondition)
+        // Given
+        let aPredicate = FakePredicate(expected: 2)
+        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+
+        let bPredicate = FakePredicate(expected: 2)
+        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
+
+        constraintSet.add(constraint: aConstraint)
+        constraintSet.add(constraint: bConstraint)
+
+        // When
 
         let expect = expectation(description: "Evaluate all async")
         let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])

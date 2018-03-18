@@ -51,18 +51,6 @@ extension AsyncConstraintSet {
     public mutating func add<C:AsyncConstraint>(constraint:C) where C.InputType == T {
         constraints.append(constraint.erase())
     }
-    
-    
-    /**
-     Adds a `AsyncConstraint` to the generic collection of constraints.
-     
-     - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
-     - parameter error: An `Error` to describe the reason why the input is invalid.
-     */
-    public mutating func add<P:AsyncPredicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = SimpleAsyncConstraint(predicate: predicate, error: error)
-        add(constraint: constraint.erase())
-    }
 }
 
 extension AsyncConstraintSet {
