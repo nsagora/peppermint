@@ -20,13 +20,19 @@ extension AsyncConstraintSet {
         
         private let constraint: AnyAsyncConstraint<T>
         private let input: T
+        private var workQueue: DispatchQueue {
+            return DispatchQueue(label: "com.nsagora.validation-toolkit.async-operation", attributes: .concurrent)
+        }
+
         var result: Result?
         
         init(input:T, constraint: AnyAsyncConstraint<T>) {
             
             self.input = input
             self.constraint = constraint
+
             super.init()
+            self.qualityOfService = .userInitiated
         }
         
         var state: State = .ready {
@@ -55,26 +61,26 @@ extension AsyncConstraintSet {
         }
         
         override func start() {
-            
+            super.start()
+
             if (isCancelled) {
-                state = .finished
+                return finish()
             }
-            else {
-                state = .executing
-                execute()
-            }
+
+            state = .executing
+            execute()
         }
         
         func execute() {
             
-            constraint.evaluate(with: input, queue: .main) { result in
-                self.handle(evaluationResult: result)
+            constraint.evaluate(with: input, queue: workQueue) { result in
+                self.result = result
+                self.finish()
             }
         }
-        
-        func handle(evaluationResult: Result) {
+
+        internal func finish() {
             state = .finished
-            result = evaluationResult
         }
     }
 }
