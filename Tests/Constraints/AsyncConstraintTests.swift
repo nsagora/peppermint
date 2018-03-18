@@ -76,6 +76,28 @@ class AsyncConstraintTests: XCTestCase {
 
 extension AsyncConstraintTests {
 
+    func testThatAnyConstraintIsAnAsyncConstraint() {
+        // Given
+        let predicate = FakePredicate(expected: 10)
+        let constraint = SimpleConstraint(predicate: predicate, error:FakeError.Invalid)
+
+        var actualResult:Result!
+
+        // When
+        let expect = expectation(description: "Async Evaluation")
+        constraint.evaluate(with: 10, queue:.main) { result in
+            actualResult = result
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 0.5, handler: nil)
+
+        // Then
+        XCTAssertTrue(actualResult.isValid)
+    }
+}
+
+extension AsyncConstraintTests {
+
     func testAddConditions() {
 
         let p = FakePredicate(expected: "001")

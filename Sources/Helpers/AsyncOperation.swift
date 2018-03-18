@@ -20,22 +20,12 @@ extension AsyncConstraintSet {
         
         private let constraint: AnyAsyncConstraint<T>
         private let input: T
+
         private var workQueue: DispatchQueue {
             return DispatchQueue(label: "com.nsagora.validation-toolkit.async-operation", attributes: .concurrent)
         }
 
-        var result: Result?
-        
-        init(input:T, constraint: AnyAsyncConstraint<T>) {
-            
-            self.input = input
-            self.constraint = constraint
-
-            super.init()
-            self.qualityOfService = .userInitiated
-        }
-        
-        var state: State = .ready {
+        private var state: State = .ready {
             willSet {
                 willChangeValue(forKey: newValue.keyPath)
             }
@@ -43,9 +33,20 @@ extension AsyncConstraintSet {
                 didChangeValue(forKey: state.keyPath)
             }
         }
+
+        var result: Result?
+        
+        init(input:T, constraint: AnyAsyncConstraint<T>) {
+
+            self.input = input
+            self.constraint = constraint
+
+            super.init()
+            self.qualityOfService = .userInitiated
+        }
         
         override var isReady: Bool {
-            return state == .ready
+            return state == .ready && super.isReady
         }
         
         override var isExecuting: Bool {

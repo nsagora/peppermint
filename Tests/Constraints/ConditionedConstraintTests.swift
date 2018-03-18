@@ -3,6 +3,23 @@ import XCTest
 
 class ConditionedConstraintTests: XCTestCase {
 
+    func testThatItCanBeInstantiatedWithAnErrorBuildingBlock() {
+
+        // Given
+        let input = "fakeInput"
+        let predicate_001 = FakePredicate(expected: input)
+        let constraint_001 = ConditionedConstraint(predicate: predicate_001) { FakeError.Unexpected($0) }
+
+        let summary = Result.Summary(errors: [FakeError.Unexpected(input)])
+        let expectedResult = Result.invalid(summary)
+
+        // When
+        let actualResult = constraint_001.evaluate(with: "~fakeInput")
+
+        // Then
+        XCTAssertEqual(actualResult, expectedResult)
+    }
+
     func testThatCanAppendConditionalConstraints() {
 
         // Arrange
@@ -20,6 +37,44 @@ class ConditionedConstraintTests: XCTestCase {
         XCTAssertEqual(constraint_001.conditionsCount, 1)
 
         constraint_001.append(condition:constraint_003)
+        XCTAssertEqual(constraint_001.conditionsCount, 2)
+    }
+
+    func testThatItCanAppendAnArrayOfConditionalConstraints() {
+
+        // Given
+        let predicate_001 = FakePredicate(expected: "001")
+        let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
+
+        let predicate_002 = FakePredicate(expected: "002")
+        let constraint_002 = SimpleConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
+
+        let predicate_003 = FakePredicate(expected: "003")
+        let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
+
+        // When
+        constraint_001.append(conditions:[constraint_002,constraint_003])
+
+        // Then
+        XCTAssertEqual(constraint_001.conditionsCount, 2)
+    }
+
+    func testThatItCanAppendAnListOfConditionalConstraints() {
+
+        // Given
+        let predicate_001 = FakePredicate(expected: "001")
+        let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
+
+        let predicate_002 = FakePredicate(expected: "002")
+        let constraint_002 = SimpleConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
+
+        let predicate_003 = FakePredicate(expected: "003")
+        let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
+
+        // When
+        constraint_001.append(conditions: constraint_002, constraint_003)
+
+        // Then
         XCTAssertEqual(constraint_001.conditionsCount, 2)
     }
 

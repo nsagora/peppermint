@@ -42,6 +42,10 @@ public class ConditionedConstraint<T>: SimpleConstraint<T> {
         self.conditions.append(contentsOf: constraits)
     }
 
+    public func append<C:Constraint>(conditions:C...) where C.InputType == T {
+        self.append(conditions: conditions)
+    }
+
     /**
      Evaluates the input on the `Predicate`.
 
