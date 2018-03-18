@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 
 import Foundation
-import ValidationToolikt
+import ValidationToolkit
 
 /*:
  ## `PairMatchingPredicate`

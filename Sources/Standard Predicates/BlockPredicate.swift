@@ -1,17 +1,9 @@
-//
-//  BlockPredicate.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 20/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
- The `BlockPredicate` struct is used to define closure based conditions used to evaluate generic inputs.
+ The `BlockPredicate` class is used to define closure based conditions used to evaluate generic inputs.
  */
-public struct BlockPredicate<T>: Predicate {
+public class BlockPredicate<T>: Predicate {
 
     private let evaluationBlock: (T) -> Bool
 

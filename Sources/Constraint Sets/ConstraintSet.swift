@@ -1,11 +1,3 @@
-//
-//  ConstraintSet.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 15/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
@@ -13,13 +5,20 @@ import Foundation
  */
 public struct ConstraintSet<T> {
 
-    var constraints:[Constraint<T>]
+    var constraints:[AnyConstraint<T>]
+
+    /**
+     Returns the number of constraints in collection
+    */
+    public var count:Int {
+        return constraints.count
+    }
     
     /**
      Create a new `ConstraintSet` instance
      */
     public init() {
-        constraints = [Constraint<T>]()
+        constraints = [AnyConstraint<T>]()
     }
     
     /**
@@ -27,8 +26,8 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(constraints:[Constraint<T>]) {
-        self.constraints = constraints
+    public init<C:Constraint>(constraints:[C]) where C.InputType == T {
+        self.constraints = constraints.map { $0.erase() }
     }
 
     /**
@@ -36,7 +35,7 @@ public struct ConstraintSet<T> {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(constraints:Constraint<T>...) {
+    public init<C:Constraint>(constraints:C...) where C.InputType == T {
         self.init(constraints:constraints)
     }
 }
@@ -48,18 +47,18 @@ extension ConstraintSet {
      
      - parameter constraint: `Constraint`
      */
-    public mutating func add(constraint:Constraint<T>) {
-        constraints.append(constraint)
+    public mutating func add<C:Constraint>(constraint:C) where C.InputType == T {
+        constraints.append(constraint.erase())
     }
 
     /**
      Adds a `Constraint` to the generic collection of constraints.
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter message: A localized `String` to describe the reason why the input is invalid.
+     - parameter message: An `Error` that describes why the evaluation has failed.
      */
     public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = Constraint(predicate: predicate, error: error)
+        let constraint = SimpleConstraint(predicate: predicate, error: error)
         add(constraint: constraint)
     }
 }
@@ -70,9 +69,10 @@ extension ConstraintSet {
      Evaluates the input on all `Constraints` until the first fails.
      
      - parameter input: The input to be validated.
-     - returns: `.Valid` if the input is valid or a `.Invalid` containng the `ValiationError` of the failing `Constraint` otherwise.
+     - returns: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `Constraint` otherwise.
      */
-    public func evaluateAny(input:T) -> EvaluationResult {
+    public func evaluateAny(input:T) -> Result {
+        
         return constraints.reduce(.valid) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
     }
 
@@ -80,9 +80,13 @@ extension ConstraintSet {
      Evaluates the input on all `Constraints in the collection.
      
      - parameter input: The input to be validated.
-     - returns: An array of `EvaluationResult` elements, indicating the evaluation result of each `Constraint` in collection.
+     - returns: An array of `Result` elements, indicating the evaluation result of each `Constraint` in collection.
      */
-    public func evaluateAll(input:T) -> [EvaluationResult] {
-        return constraints.map{ $0.evaluate(with:input) }
+    public func evaluateAll(input:T) -> Result {
+
+        let results = constraints.map{ $0.evaluate(with:input) }
+        let summary = Result.Summary(evaluationResults: results)
+
+        return Result(summary: summary)
     }
 }

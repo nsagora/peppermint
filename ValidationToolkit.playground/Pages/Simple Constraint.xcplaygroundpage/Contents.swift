@@ -10,7 +10,7 @@ import ValidationToolkit
  */
 
 let username = "He!O"
-let predicate = BlockPredicate<String> { $0.characters.count >= 5 }
+let predicate = BlockPredicate<String> { $0.count >= 5 }
 
 let constraint = Constraint(predicate: predicate, error:Form.Username.invalid)
 let result = constraint.evaluate(with: username)
@@ -18,8 +18,8 @@ let result = constraint.evaluate(with: username)
 switch result {
 case .valid:
     print("Nice 🎬!")
-case .invalid(let error):
-    print(error.localizedDescription)
+case .invalid(let summary):
+    print(summary.errors)
 }
 
 //: [Next](@next)

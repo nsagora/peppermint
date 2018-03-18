@@ -1,11 +1,3 @@
-//
-//  BlockPredicateTests.swift
-//  ValidationToolkit
-//
-//  Created by Alex Cristea on 20/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import XCTest
 @testable import ValidationToolkit
 

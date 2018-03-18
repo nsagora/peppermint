@@ -1,17 +1,9 @@
-//
-//  EmailPredicate.swift
-//  Validator
-//
-//  Created by Alex Cristea on 07/08/16.
-//  Copyright © 2016 iOS NSAgora. All rights reserved.
-//
-
 import Foundation
 
 /**
- The `EmailPredicate` struct is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
+ The `EmailPredicate` class is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
  */
-public struct EmailPredicate: Predicate {
+public class EmailPredicate: Predicate {
 
     private let rule: RegexPredicate
     private let regex = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +
