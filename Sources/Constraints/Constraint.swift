@@ -8,7 +8,7 @@ public protocol Constraint: AsyncConstraint {
     /**
      A type that provides information about what kind of values the constraint can be evaluated with.
      */
-    associatedtype InputType
+    associatedtype InputType = InputType
 
     /**
      Evaluates the input against the receiver.
