@@ -11,12 +11,12 @@ import ValidationToolkit
  If the condition doen't take place, then the evaluation fails before checking the lenght.
  */
 
-let text = "#1234567890"
+let text = "1234567890"
 let minLenght = BlockPredicate<String> { $0.count >= 5 }
 let isNumerical = RegexPredicate(expression: "^(0|[1-9][0-9]*)$")
 
-var lenghtConstraint = Constraint(predicate: minLenght, error: Form.Username.invalid("Too short."))
-let numericConstraint = Constraint(predicate: isNumerical, error: Form.Username.invalid("Not numeric"))
+let numericConstraint = SimpleConstraint(predicate: isNumerical, error: Form.Username.invalid("Not numeric"))
+var lenghtConstraint = ConditionedConstraint(predicate: minLenght, error: Form.Username.invalid("Too short."))
 lenghtConstraint.add(condition: numericConstraint)
 
 let result = lenghtConstraint.evaluate(with: text)

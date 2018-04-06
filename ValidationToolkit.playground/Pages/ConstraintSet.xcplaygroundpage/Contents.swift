@@ -22,7 +22,7 @@ passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missing
 passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
 passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
 
-let password = "enguard!"
+let password = "3nGuard!"
 let result = passwordConstraints.evaluateAll(input: password)
 
 switch result {

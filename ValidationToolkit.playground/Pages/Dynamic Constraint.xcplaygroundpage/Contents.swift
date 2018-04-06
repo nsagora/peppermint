@@ -12,7 +12,7 @@ import ValidationToolkit
 let text = "1234567890"
 let predicate = BlockPredicate<String> { $0.count >= 5 }
 
-let constraint = Constraint(predicate: predicate) { Form.Username.invalid($0)}
+let constraint = SimpleConstraint(predicate: predicate) { Form.Username.invalid($0)}
 let result = constraint.evaluate(with: text)
 
 switch result {
