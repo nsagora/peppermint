@@ -670,37 +670,43 @@
 				TargetAttributes = {
 					FAA87CB61D5CB7F500792F43 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAA87CC31D5CB80900792F43 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JJUR3MD8QA;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAA87CCB1D5CB80900792F43 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JJUR3MD8QA;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAA87CDF1D5CB82000792F43 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAA87CE71D5CB82000792F43 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JJUR3MD8QA;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAB52B2E1D54EB8F00110049 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeamName = "Thinslices Development (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FAB52B371D54EB8F00110049 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = JJUR3MD8QA;
 						DevelopmentTeamName = "Thinslices Development (Personal Team)";
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1008,6 +1014,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1031,6 +1038,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1053,6 +1061,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1075,6 +1084,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1089,6 +1099,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
@@ -1102,6 +1113,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
@@ -1126,6 +1138,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1149,6 +1162,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1163,6 +1177,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1177,6 +1192,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = ValidationToolkitTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1311,6 +1327,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkit;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1330,6 +1347,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkit;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1339,6 +1357,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkitTests;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1348,6 +1367,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ValidationToolkitTests;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
