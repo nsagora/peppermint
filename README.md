@@ -342,6 +342,6 @@ We got inspired from other open source projects and they worth to be mentioned b
 [badge-travis]: https://travis-ci.org/nsagora/validation-toolkit.svg?branch=develop
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
 [badge-carthage]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
-[version-badge]: https://img.shields.io/badge/version-0.5.0-blue.svg?style=flat
+[version-badge]: https://img.shields.io/badge/version-0.6.0-blue.svg?style=flat
 
 
