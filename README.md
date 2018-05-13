@@ -344,6 +344,6 @@ We got inspired from other open source projects and they worth to be mentioned b
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
 [badge-carthage]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [badge-version]: https://img.shields.io/badge/version-0.6.1-blue.svg?style=flat
-[badge-docs]: https://img.shields.io/badge/docs-100%-orange.svg?style=flat
+[badge-docs]: https://img.shields.io/badge/docs-100&#37;-orange.svg?style=flat
 
 
