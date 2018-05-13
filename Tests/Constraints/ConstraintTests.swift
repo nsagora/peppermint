@@ -7,11 +7,11 @@ class ConstraintTests: XCTestCase {
     fileprivate let invalidFakeInput = "~fakeInput"
     fileprivate let fakePredicate = FakePredicate(expected: "fakeInput")
 
-    var constraint:SimpleConstraint<String>!
+    var constraint:PredicateConstraint<String>!
 
     override func setUp() {
         super.setUp()
-        constraint = SimpleConstraint(predicate: fakePredicate, error: FakeError.Invalid)
+        constraint = PredicateConstraint(predicate: fakePredicate, error: FakeError.Invalid)
     }
     
     override func tearDown() {
@@ -48,7 +48,7 @@ extension ConstraintTests {
     func testThatItDynamicallyBuildsTheValidationError() {
 
         // Given
-        let constraint = SimpleConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
+        let constraint = PredicateConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
 
         // When
         let result = constraint.evaluate(with: invalidFakeInput)

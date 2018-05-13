@@ -58,7 +58,7 @@ extension ConstraintSet {
      - parameter message: An `Error` that describes why the evaluation has failed.
      */
     public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = SimpleConstraint(predicate: predicate, error: error)
+        let constraint = PredicateConstraint(predicate: predicate, error: error)
         add(constraint: constraint)
     }
 }
