@@ -320,7 +320,7 @@ We got inspired from other open source projects and they worth to be mentioned b
 - https://github.com/jpotts18/SwiftValidator
 
 [url-validationtoolkit]: https://github.com/nsagora/validation-toolkit
-[url-validationtoolkit-docs]: https://nsagora.github.io/validation-toolkit
+[url-validationtoolkit-docs]: https://nsagora.github.io/validation-toolkit/
 
 [url-carthage]: https://github.com/Carthage/Carthage
 [url-carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
