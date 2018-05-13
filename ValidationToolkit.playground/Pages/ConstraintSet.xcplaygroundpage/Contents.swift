@@ -6,7 +6,7 @@ import ValidationToolkit
 /*:
  ## ConstraintSet
  
- Use a `ConstraintSet` to evaluate the strength of the user password.
+ In the following example we use a `ConstraintSet` to evaluate the strength of the user password.
  */
 
 let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
@@ -22,13 +22,12 @@ passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missing
 passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
 passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
 
-let password = "enguard!"
-let results:[EvaluationResult] = passwordConstraints.evaluateAll(input: password)
-let errors = results.filter({$0.isInvalid}).flatMap({$0.error?.localizedDescription})
+let password = "3nGuard!"
+let result = passwordConstraints.evaluateAll(input: password)
 
-if errors.count == 0 {
+switch result {
+case .valid:
     print("Wow, that's a 💪 password!")
-}
-else {
-    print(errors)
+case .invalid(let summary):
+    print(summary.errors.map({$0.localizedDescription}))
 }

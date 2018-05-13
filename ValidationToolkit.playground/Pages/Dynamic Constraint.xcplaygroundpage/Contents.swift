@@ -6,20 +6,20 @@ import ValidationToolkit
 /*:
  ## Dynamic Constraint
  
- Use a `BlockPredicate` based `Constraint` to evaluate if an username has at least 5 characters. The error is dynamically built at evaluation time. 
+ In the following example we use a `BlockPredicate` based `Constraint` to evaluate if an username has at least 5 characters. The error is dynamically built at evaluation time. 
  */
 
 let text = "1234567890"
-let predicate = BlockPredicate<String> { $0.characters.count >= 5 }
+let predicate = BlockPredicate<String> { $0.count >= 5 }
 
-let constraint = Constraint(predicate: predicate) { Form.Username.invalid($0)}
+let constraint = PredicateConstraint(predicate: predicate) { Form.Username.invalid($0)}
 let result = constraint.evaluate(with: text)
 
 switch result {
 case .valid:
     print("Here, have a 🍩. ")
-case .invalid(let error):
-    print(error.localizedDescription)
+case .invalid(let summary):
+    print(summary.errors)
 }
 
 //: [Next](@next)
