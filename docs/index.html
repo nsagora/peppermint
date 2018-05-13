@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ValidationToolkit  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="ValidationToolkit  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">ValidationToolkit Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">ValidationToolkit Reference</a>
+        <img id="carat" src="img/carat.png" />
+        ValidationToolkit  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/AnyAsyncPredicate.html">AnyAsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/AnyPredicate.html">AnyPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BlockPredicate.html">BlockPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ConditionedAsyncConstraint.html">ConditionedAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ConditionedConstraint.html">ConditionedConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PairMatchingPredicate.html">PairMatchingPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PredicateConstraint.html">PredicateConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/RegexPredicate.html">RegexPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/URLPredicate.html">URLPredicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Result/Summary.html">– Summary</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/AsyncConstraint.html">AsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/AsyncPredicate.html">AsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/Constraint.html">Constraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/Predicate.html">Predicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AnyAsyncConstraint.html">AnyAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnyConstraint.html">AnyConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AsyncConstraintSet.html">AsyncConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ConstraintSet.html">ConstraintSet</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='validation-toolkit' class='heading'>Validation Toolkit</h1>
+
+<p><a href="https://travis-ci.org/nsagora/validation-toolkit"><img src="https://travis-ci.org/nsagora/validation-toolkit.svg?branch=develop" alt="badge-travis"></a> <a href="https://codecov.io/gh/nsagora/validation-toolkit"><img src="https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg" alt="badge-codecov"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="badge-carthage"></a> <a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="badge-license"></a> <a href="https://twitter.com/nsagora"><img src="https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat" alt="badge-twitter"></a> <a href="https://github.com/nsagora/validation-toolkit"><img src="https://img.shields.io/badge/version-0.6.0-blue.svg?style=flat" alt="version-badge"></a></p>
+
+<ol>
+<li><a href="#introduction">Introduction</a>
+
+<ul>
+<li><a href="#separation-of-concerns">Separation of concerns</a></li>
+<li><a href="#all-platforms-availability">All platforms availability</a></li>
+<li><a href="#open-to-extensibility">Open to extensibility</a></li>
+</ul></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation">Installation</a>
+
+<ul>
+<li><a href="#carthage">Carthage</a></li>
+<li><a href="#cocoapods">CocoaPods</a></li>
+<li><a href="#swift-package-manager">Swift Package Manager</a></li>
+<li><a href="#manually">Manually</a></li>
+</ul></li>
+<li><a href="#usage-examples">Usage Examples</a>
+
+<ul>
+<li><a href="#predicates">Predicates</a></li>
+<li><a href="#constraints">Constraints</a></li>
+<li><a href="#constraint-sets">Constraint Sets</a></li>
+</ul></li>
+<li><a href="#contribute">Contribute</a></li>
+<li><a href="#meta">Meta</a>
+
+<ul>
+<li><a href="#credits-and-references">Credits and References</a></li>
+</ul></li>
+</ol>
+<h2 id='introduction' class='heading'>Introduction</h2>
+
+<p><code>ValidationToolkit</code> is designed to be a lightweight framework specialised in data validation, such as email format, input length or passwords matching.</p>
+
+<p>At the core of this project are the following principles:</p>
+
+<ul>
+<li>Separation of concerns</li>
+<li>Availability on all platforms</li>
+<li>Open to extensibility</li>
+</ul>
+<h3 id='separation-of-concerns' class='heading'>Separation of concerns</h3>
+
+<p>Think of <code>ValidationToolkit</code> as to an adjustable wrench more than to a Swiss knife.</p>
+
+<p>With this idea in mind, the toolkit is composed from a small set of protocols, structs and classes than can be easily composed to fit your project needs.</p>
+<h3 id='all-platforms-availability' class='heading'>All platforms availability</h3>
+
+<p>Since validation can take place at many levels, <code>ValidationToolkit</code> is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.</p>
+<h3 id='open-to-extensibility' class='heading'>Open to extensibility</h3>
+
+<p>Every project is unique in it&rsquo;s challenges and it&rsquo;s great when we can focus on solving them instead of spending our time on boilerplate tasks.</p>
+
+<p><code>ValidationToolkit</code> is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.</p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+</li>
+<li>Xcode 8.1+</li>
+<li>Swift 3.0+</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>You can use <a href="https://github.com/Carthage/Carthage">Carthage</a> to install <code>ValidationToolkit</code> by adding it to your <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile"><code>Cartfile</code></a>:</p>
+<pre class="highlight plaintext"><code>github "nsagora/validation-toolkit"
+</code></pre>
+
+<p>Run <code>carthage update</code> to build the framework and drag the built <code>ValidationToolkit.framework</code> into your Xcode project.</p>
+
+<details>
+<summary>Setting up Carthage</summary>
+
+[Carthage][url-carthage] is a decentralised dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install [Carthage][url-carthage] with [Homebrew][url-homebrew] using the following command:
+
+&ldquo;`bash
+$ brew update
+$ brew install carthage
+&rdquo;`
+
+</details>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>You can use <a href="https://cocoapods.org">CocoaPods</a> to install <code>ValidationToolkit</code> by adding it to your <a href="https://guides.cocoapods.org/syntax/podfile.html"><code>Podfile</code></a>:</p>
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'YOUR_TARGET_NAME'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'ValidationToolkit'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Then, run the following command:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>pod <span class="nb">install</span>
+</code></pre>
+
+<p>Note that this requires CocoaPods version 1.0.0, and your iOS deployment target to be at least 8.0.</p>
+
+<details>
+<summary>Setting up CocoaPods</summary>
+
+[CocoaPods][url-cocoapods] is a dependency manager for Cocoa projects. You can install it with the following command:
+
+&ldquo;`
+$ gem install cocoapods
+&rdquo;`
+</details>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>You can use the <a href="https://swift.org/package-manager">Swift Package Manager</a> to install <code>ValidationToolkit</code> by adding it to your <code>Package.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"YOUR_PROJECT_NAME"</span><span class="p">,</span>
+    <span class="nv">targets</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/nsagora/validation-toolkit"</span><span class="p">,</span> <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
+
+<p>Note that the <a href="https://swift.org/package-manager">Swift Package Manager</a> is still in early design and development, for more information checkout its <a href="https://github.com/apple/swift-package-manager">GitHub Page</a>.</p>
+<h3 id='manually' class='heading'>Manually</h3>
+
+<p>To use this library in your project manually you may:</p>
+
+<ol>
+<li>for Projects, just drag the <code>Sources</code> folder into the project tree</li>
+<li>for Workspaces, include the whole <code>ValidationToolkit.xcodeproj</code></li>
+</ol>
+<h2 id='usage-example' class='heading'>Usage example</h2>
+
+<p>For a comprehensive list of examples try the <code>ValidationToolikit.playground</code>:</p>
+
+<ol>
+<li>Download the repository locally on your machine</li>
+<li>Open <code>ValidationToolkit.workspace</code></li>
+<li>Build <code>ValidationToolkit iOS</code> target</li>
+<li>Select the <code>ValidationToolkit</code> playgrounds from the Project navigator.</li>
+</ol>
+<h3 id='predicates' class='heading'>Predicates</h3>
+
+<p>The <code><a href="Protocols/Predicate.html">Predicate</a></code> represents the core <code>protocol</code> and has the role to <code>evaluate</code> if an input matches on a given validation condition.</p>
+
+<p>At <code>ValidationToolkit</code>&lsquo;s core we have the following two predicates, which allow developers to compose predicates specific to the project needs.</p>
+
+<details>
+<summary>RegexPredicate</summary>
+
+&ldquo;`swift
+let predicate = RegexPredicate(expression: &rdquo;^[a-z]$&ldquo;)
+predicate.evaluate(with: &quot;a&rdquo;) // returns true
+predicate.evaluate(with: &ldquo;5&rdquo;) // returns false
+predicate.evaluate(with: &ldquo;ab&rdquo;) // returns false
+&ldquo;`
+</details>
+
+<details>
+<summary>BlockPredicate</summary>
+
+&rdquo;`swift
+let pred = BlockPredicate<String> { $0.characters.count > 2 }
+predicate.evaluate(with: &ldquo;a&rdquo;) // returns false
+predicate.evaluate(with: &ldquo;abc&rdquo;) // returns true
+&ldquo;`
+</details>
+
+<p>In addition, the toolkit offers a set of common validation predicates that your project can benefit of:</p>
+
+<details>
+<summary>EmailPredicate</summary>
+
+&rdquo;`swift
+let predicate = EmailPredicate()
+predicate.evaluate(with: &ldquo;hello@&rdquo;) // returns false
+predicate.evaluate(with: &ldquo;hello@nsagora.com&rdquo;) // returns true
+predicate.evaluate(with: &ldquo;héllo@nsagora.com&rdquo;) // returns true
+&ldquo;`
+</details>
+
+<details>
+<summary>URLPredicate</summary>
+
+&rdquo;`swift
+let predicate = URLPredicate()
+predicate.evaluate(with: &ldquo;http://www.url.com&rdquo;) // returns true
+predicate.evaluate(with: &ldquo;http:\www.url.com&rdquo;) // returns false
+&ldquo;`
+</details>
+
+<details>
+<summary>PairMatchingPredicate</summary>
+
+&rdquo;`swift
+let predicate = PairMatchingPredicate()
+predicate.evaluate(with: (&ldquo;swift&rdquo;, &ldquo;swift&rdquo;)) // returns true
+predicate.evaluate(with: (&ldquo;swift&rdquo;, &ldquo;obj-c&rdquo;)) // returns false
+&ldquo;`
+</details>
+
+<p>On top of that, developers can build more advanced or complex predicates by extending the <code><a href="Protocols/Predicate.html">Predicate</a></code> protocol, and/ or by composing or decorating the existing predicates:</p>
+
+<details>
+<summary>Custom Predicate</summary>
+
+&rdquo;`swift
+public class MinLenghtPredicate: Predicate {
+
+    public typealias InputType = String
+
+    private let minLenght:Int
+
+    public init(minLenght:Int) {
+        self.minLenght = minLenght
+    }
+
+    public func evaluate(with input: String) -> Bool {
+        return input.characters.count >= minLenght
+    }
+}
+
+let predicate = MinLenghtPredicate(minLenght: 5)
+predicate.evaluate(with: &ldquo;alph&rdquo;) // returns false
+predicate.evaluate(with: &ldquo;alpha&rdquo;) // returns true
+predicate.evaluate(with: &ldquo;alphabet&rdquo;) // returns true
+&ldquo;`
+</details>
+<h3 id='constraints' class='heading'>Constraints</h3>
+
+<p>A <code><a href="Classes/PredicateConstraint.html">PredicateConstraint</a></code> represents a data type that links a <code><a href="Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code>, in order to provide useful feedback for the end users.</p>
+
+<details>
+<summary>PredicateConstraint</summary>
+
+&rdquo;`swift
+let predicate = BlockPredicate<String> { $0 == &ldquo;Mr. Goodbytes&rdquo; }
+let constraint = PredicateConstraint(predicate: predicate, error: MyError.magicWord)
+
+let result = constraint.evaluate(with: &ldquo;please&rdquo;)
+switch result {
+case .valid:
+    print(&ldquo;access granted&hellip;&rdquo;)
+case .invalid(let summary):
+    print(&ldquo;Ah Ah Ah! You didn&rsquo;t say the magic word!&rdquo;)
+}  // prints &ldquo;Ah Ah Ah! You didn&rsquo;t say the magic word!&rdquo;
+&ldquo;`
+
+&rdquo;`swift
+enum MyError:Error {
+    case magicWord
+}
+&ldquo;`
+</details>
+<h3 id='constraint-sets' class='heading'>Constraint Sets</h3>
+
+<p>A <code><a href="Structs/ConstraintSet.html">ConstraintSet</a></code> represents a collection of constraints that allows the evaluation to be made on:</p>
+
+<ul>
+<li>any of the constraints</li>
+<li>all constraints</li>
+</ul>
+
+<p>To provide context, a <code><a href="Structs/ConstraintSet.html">ConstraintSet</a></code> allows us to constraint a piece of data as being required and also as being a valid email.</p>
+
+<details>
+<summary>ConstraintSet</summary
+
+An example is that of the registration form, whereby users are prompted to enter a strong *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
+
+`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the user's password data:
+
+```swift
+let lowerCase = RegexPredicate(expression: "^(?=.*[a-z]).*$")
+let upperCase = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+let digits = RegexPredicate(expression: "^(?=.*[0-9]).*$")
+let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
+let minLenght = RegexPredicate(expression: "^.{8,}$")
+
+var passwordConstraints = ConstraintSet<String>()
+passwordConstraints.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
+passwordConstraints.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
+passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
+passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
+passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
+
+let password = &quot;3nGuard!&rdquo;
+let result = passwordConstraints.evaluateAll(input: password)
+
+switch result {
+case .valid:
+    print(&ldquo;Wow, that&rsquo;s a 💪 password!&rdquo;)
+case .invalid(let summary):
+    print(summary.errors.map({$0.localizedDescription}))
+} // prints &ldquo;Wow, that&rsquo;s a 💪 password!&rdquo;
+&ldquo;`
+
+From above, we see that once we&rsquo;ve constructed the `passwordConstraints`, we&rsquo;re simply calling `evaluateAll(input:)` to get a `Summary` of our evaluation result. This summary can then be handled as we please.
+</details>
+<h2 id='contribute' class='heading'>Contribute</h2>
+
+<p>We would love you for the contribution to <strong>ValidationToolkit</strong>, check the <a href="https://github.com/nsagora/validation-toolkit/blob/master/LICENSE"><code>LICENSE</code></a> file for more info.</p>
+<h2 id='meta' class='heading'>Meta</h2>
+
+<p>This project is developed and maintained by the members of <a href="https://twitter.com/nsagora">iOS NSAgora</a>, the community of iOS Developers of Iași, Romania.</p>
+
+<p>Distributed under the <a href="http://choosealicense.com/licenses/mit/">MIT</a> license. See <a href="https://github.com/nsagora/validation-toolkit/blob/master/LICENSE"><code>LICENSE</code></a> for more information.</p>
+
+<p>[<a href="https://github.com/nsagora/validation-toolkit">https://github.com/nsagora/validation-toolkit</a>]</p>
+<h3 id='credits-and-references' class='heading'>Credits and references</h3>
+
+<p>We got inspired from other open source projects and they worth to be mentioned below for reference:</p>
+
+<ul>
+<li><a href="https://github.com/adamwaite/Validator">https://github.com/adamwaite/Validator</a></li>
+<li><a href="https://github.com/jpotts18/SwiftValidator">https://github.com/jpotts18/SwiftValidator</a></li>
+</ul>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/nsagora/validation-toolkit" target="_blank" rel="external">Alex Cristea</a>. All rights reserved. (Last updated: 2018-05-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

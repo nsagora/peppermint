@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PredicateConstraint Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/PredicateConstraint" class="dashAnchor"></a>
+    <a title="PredicateConstraint Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ValidationToolkit Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ValidationToolkit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PredicateConstraint Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AnyAsyncPredicate.html">AnyAsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AnyPredicate.html">AnyPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BlockPredicate.html">BlockPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConditionedAsyncConstraint.html">ConditionedAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConditionedConstraint.html">ConditionedConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PairMatchingPredicate.html">PairMatchingPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PredicateConstraint.html">PredicateConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RegexPredicate.html">RegexPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/URLPredicate.html">URLPredicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Result/Summary.html">– Summary</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AsyncPredicate.html">AsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Constraint.html">Constraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Predicate.html">Predicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AnyAsyncConstraint.html">AnyAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyConstraint.html">AnyConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AsyncConstraintSet.html">AsyncConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConstraintSet.html">ConstraintSet</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PredicateConstraint</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PredicateConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A data type that links a <code><a href="../Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code> that describes why the predicate evaluation has failed.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit19PredicateConstraintCACyxGqd__9predicate_s5Error_p5errortc9InputTypeQyd__RszAA0C0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(predicate:error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit19PredicateConstraintCACyxGqd__9predicate_s5Error_p5errortc9InputTypeQyd__RszAA0C0Rd__lufc">init(predicate:error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>PredicateConstraint</code> instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">predicate</span><span class="p">:</span> <span class="kt">P</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">InputType</span><span class="p">,</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Predicate.html">Predicate</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>predicate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code><a href="../Protocols/Predicate.html">Predicate</a></code> to describes the evaluation rule.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An <code>Error</code> that describes why the evaluation has failed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit19PredicateConstraintCACyxGqd__9predicate_s5Error_pxc5errortc9InputTypeQyd__RszAA0C0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(predicate:error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit19PredicateConstraintCACyxGqd__9predicate_s5Error_pxc5errortc9InputTypeQyd__RszAA0C0Rd__lufc">init(predicate:error:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>PredicateConstraint</code> instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">:</span><span class="kt"><a href="../Protocols/Predicate.html">Predicate</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">predicate</span><span class="p">:</span> <span class="kt">P</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Error</span><span class="p">)</span> <span class="k">where</span> <span class="kt">P</span><span class="o">.</span><span class="kt">InputType</span> <span class="o">==</span> <span class="kt">T</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>predicate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code><a href="../Protocols/Predicate.html">Predicate</a></code> to describes the evaluation rule.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A generic closure that dynamically builds an <code>Error</code> to describe why the evaluation has failed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit19PredicateConstraintC8evaluateAA6ResultOx4with_tF"></a>
+                    <a name="//apple_ref/swift/Method/evaluate(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit19PredicateConstraintC8evaluateAA6ResultOx4with_tF">evaluate(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaluates the input on the <code><a href="../Protocols/Predicate.html">Predicate</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input to be validated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>.valid</code> if the input is valid,<code>.invalid</code> containing the <code><a href="../Enums/Result/Summary.html">Result.Summary</a></code> of the failing <code><a href="../Protocols/Constraint.html">Constraint</a></code>s otherwise.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/nsagora/validation-toolkit" target="_blank" rel="external">Alex Cristea</a>. All rights reserved. (Last updated: 2018-05-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
