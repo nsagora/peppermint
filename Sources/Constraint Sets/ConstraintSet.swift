@@ -50,17 +50,6 @@ extension ConstraintSet {
     public mutating func add<C:Constraint>(constraint:C) where C.InputType == T {
         constraints.append(constraint.erase())
     }
-
-    /**
-     Adds a `Constraint` to the generic collection of constraints.
-     
-     - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter message: An `Error` that describes why the evaluation has failed.
-     */
-    public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
-        let constraint = PredicateConstraint(predicate: predicate, error: error)
-        add(constraint: constraint)
-    }
 }
 
 extension ConstraintSet {
