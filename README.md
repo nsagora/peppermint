@@ -231,14 +231,14 @@ predicate.evaluate(with: "alphabet") // returns true
 
 ### Constraints
 
-A `SimpleConstraint` represents a data type that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
+A `PredicateConstraint` represents a data type that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
 
 <details>
-<summary>SimpleConstraint</summary>
+<summary>PredicateConstraint</summary>
 
 ```swift
 let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
-let constraint = SimpleConstraint(predicate: predicate, error: MyError.magicWord)
+let constraint = PredicateConstraint(predicate: predicate, error: MyError.magicWord)
 
 let result = constraint.evaluate(with: "please")
 switch result {
@@ -266,7 +266,7 @@ A `ConstraintSet` represents a collection of constraints that allows the evaluat
 To provide context, a `ConstraintSet` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
-<summary>ConstraintSet</summary>
+<summary>ConstraintSet</summary
 
 An example is that of the registration form, whereby users are prompted to enter a strong *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
