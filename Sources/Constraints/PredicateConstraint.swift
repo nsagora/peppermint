@@ -3,13 +3,13 @@ import Foundation
 /**
  A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public class SimpleConstraint<T>: Constraint {
+public class PredicateConstraint<T>: Constraint {
 
     private let predicate:AnyPredicate<T>
     private let errorBuilder: (T)->Error
 
     /**
-     Create a new `SimpleConstraint` instance
+     Create a new `PredicateConstraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
@@ -20,7 +20,7 @@ public class SimpleConstraint<T>: Constraint {
     }
     
     /**
-     Create a new `SimpleConstraint` instance
+     Create a new `PredicateConstraint` instance
      
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.

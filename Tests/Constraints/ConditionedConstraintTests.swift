@@ -27,10 +27,10 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
-        let constraint_002 = SimpleConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
+        let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
 
         let predicate_003 = FakePredicate(expected: "003")
-        let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
+        let constraint_003 = PredicateConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // Assert
         constraint_001.add(condition:constraint_002)
@@ -47,10 +47,10 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
-        let constraint_002 = SimpleConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
+        let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
 
         let predicate_003 = FakePredicate(expected: "003")
-        let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
+        let constraint_003 = PredicateConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // When
         constraint_001.add(conditions:[constraint_002,constraint_003])
@@ -66,10 +66,10 @@ class ConditionedConstraintTests: XCTestCase {
         let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
-        let constraint_002 = SimpleConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
+        let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
 
         let predicate_003 = FakePredicate(expected: "003")
-        let constraint_003 = SimpleConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
+        let constraint_003 = PredicateConstraint(predicate: predicate_003, error: FakeError.Unexpected("Expecting 003"))
 
         // When
         constraint_001.add(conditions: constraint_002, constraint_003)

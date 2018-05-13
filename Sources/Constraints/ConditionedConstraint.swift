@@ -3,7 +3,7 @@ import Foundation
 /**
  A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public class ConditionedConstraint<T>: SimpleConstraint<T> {
+public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
     private var conditions =  [AnyConstraint<T>]()
 

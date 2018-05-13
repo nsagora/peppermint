@@ -22,7 +22,7 @@
 
 ## Introduction
 
-`ValidationToolkit` is designed to be a lightweight framework specialised in user data validation, such as email format, input length or passwords matching.
+`ValidationToolkit` is designed to be a lightweight framework specialised in data validation, such as email format, input length or passwords matching.
 
 At the core of this project are the following principles:
 
@@ -33,17 +33,18 @@ At the core of this project are the following principles:
 ### Separation of concerns
 
 Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife.
-With this idea in mind, the toolkit is composed from a small set of protocols, classes and structs than can be easily used to fit your project needs.
+
+With this idea in mind, the toolkit is composed from a small set of protocols, structs and classes than can be easily composed to fit your project needs.
 
 ### All platforms availability
 
-Since validation can take place at many levels, `ValidationToolkit` was designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
+Since validation can take place at many levels, `ValidationToolkit` is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
 
 ### Open to extensibility
 
-Every project is uniq in it's challenges and it's great when we can focus on solving them instead on focusing on boilerplate tasks.
-While `ValidationToolkit` is compact and offers all you need to build validation around your project needs, it also includes a set of common validations that most of the projects can benefit of.
-This includes validation predicates for email, required fields, password matching, url and many more to come.
+Every project is unique in it's challenges and it's great when we can focus on solving them instead of spending our time on boilerplate tasks.
+
+`ValidationToolkit` is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.
 
 ## Requirements
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
@@ -147,7 +148,7 @@ The `Predicate` represents the core `protocol` and has the role to `evaluate` if
 At `ValidationToolkit`'s core we have the following two predicates, which allow developers to compose predicates specific to the project needs.
 
 <details>
-<summary>`RegexPredicate`</summary>
+<summary>RegexPredicate</summary>
 
 ```swift
 let predicate = RegexPredicate(expression: "^[a-z]$")
@@ -158,7 +159,7 @@ predicate.evaluate(with: "ab") // returns false
 </details>
 
 <details>
-<summary>`BlockPredicate`</summary>
+<summary>BlockPredicate</summary>
 
 ```swift
 let pred = BlockPredicate<String> { $0.characters.count > 2 }
@@ -170,7 +171,7 @@ predicate.evaluate(with: "abc") // returns true
 In addition, the toolkit offers a set of common validation predicates that your project can benefit of:
 
 <details>
-<summary>`EmailPredicate`</summary>
+<summary>EmailPredicate</summary>
 
 ```swift
 let predicate = EmailPredicate()
@@ -181,7 +182,7 @@ predicate.evaluate(with: "héllo@nsagora.com") // returns true
 </details>
 
 <details>
-<summary>`URLPredicate`</summary>
+<summary>URLPredicate</summary>
 
 ```swift
 let predicate = URLPredicate()
@@ -191,7 +192,7 @@ predicate.evaluate(with: "http:\\www.url.com") // returns false
 </details>
 
 <details>
-<summary>`PairMatchingPredicate`</summary>
+<summary>PairMatchingPredicate</summary>
 
 ```swift
 let predicate = PairMatchingPredicate()
@@ -230,33 +231,27 @@ predicate.evaluate(with: "alphabet") // returns true
 
 ### Constraints
 
-A `Constraint` represents a structure that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
+A `PredicateConstraint` represents a data type that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
 
 <details>
-<summary>`Constraint` Example</summary>
+<summary>PredicateConstraint</summary>
 
 ```swift
 let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
-let constraint = Constraint(predicate: predicate, error: MyError.magicWord)
+let constraint = PredicateConstraint(predicate: predicate, error: MyError.magicWord)
 
 let result = constraint.evaluate(with: "please")
 switch result {
 case .valid:
     print("access granted...")
-case .invalid(let error as MyError):
-    print(error.errorDescription)
-}
+case .invalid(let summary):
+    print("Ah Ah Ah! You didn't say the magic word!")
+}  // prints "Ah Ah Ah! You didn't say the magic word!"
 ```
 
 ```swift
 enum MyError:Error {
     case magicWord
-}
-
-extension MyError: LocalizedError {
-    var errorDescription:String? {
-        return "Ah Ah Ah! You didn't say the magic word!"
-    }
 }
 ```
 </details>
@@ -268,72 +263,41 @@ A `ConstraintSet` represents a collection of constraints that allows the evaluat
 - any of the constraints
 - all constraints
 
-To provide context, a `ConstraintSet` allows us to constraint an input as being required and also as being a valid email.
+To provide context, a `ConstraintSet` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
-<summary>`ConstraintSet` Example</summary>
+<summary>ConstraintSet</summary
 
-The classic validation example is that of the login form, whereby users are prompted to enter their *username* and *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller. Similarly, the logic is often invoked through various user interactions (e.g. typing characters into a field, and tapping a *Login* button).
+An example is that of the registration form, whereby users are prompted to enter a strong *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
-`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the username input data:
-
-```swift
-
-// Setup a `Constraint` used to check the length of the username
-let usernameLengthConstraint = { () -> Constraint<String> in
-    let pred = BlockPredicate<String> { $0.characters.count > 2 }
-    return Constraint(predicate: pred, error: FormError.UserName.tooShort)
-}()
-
-// Setup a `Constraint` used to check the characters contained within the username
-let usernameCharactersConstraint = { () -> Constraint<String> in
-    let pred = RegexPredicate(expression: "^[0-9a-Z_\\-]*?$")
-    return Constraint<String>(predicate: pred, error: FormError.UserName.invalidCharacters)
-}()
-
-// Create our `ConstraintSet` to compose the two constraints
-let usernameConstraints = [usernameLengthConstraint, usernameCharactersConstraint];
-let usernameValidator = ConstraintSet<String>(constraints: usernameConstraints)
-
-// Evaluate user input, and collect results
-let results = usernameValidator.evaluateAll(input: "nsagora")
-let errorMessages = results.flatMap { result -> String? in
-    switch result {
-    case .valid:
-        return nil
-    case .invalid(let error):
-        return error.localizedDescription
-    }
-}
-
-print(errorMessages)
-```
+`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-// Define form errors
+let lowerCase = RegexPredicate(expression: "^(?=.*[a-z]).*$")
+let upperCase = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+let digits = RegexPredicate(expression: "^(?=.*[0-9]).*$")
+let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
+let minLenght = RegexPredicate(expression: "^.{8,}$")
 
-enum FormError {
+var passwordConstraints = ConstraintSet<String>()
+passwordConstraints.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
+passwordConstraints.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
+passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
+passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
+passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
 
-    enum UserName:Error {
-        case tooShort
-        case invalidCharacters
-    }
-}
+let password = "3nGuard!"
+let result = passwordConstraints.evaluateAll(input: password)
 
-extension FormError.UserName: LocalizedError {
-
-    var errorDescription:String? {
-        switch self {
-        case .tooShort:
-            return "Username must be at least 3 characters long."
-        case .invalidCharacters:
-            return "Username must only contain alphanumeric characters, dashes, and underscores."
-        }
-    }
-}
+switch result {
+case .valid:
+    print("Wow, that's a 💪 password!")
+case .invalid(let summary):
+    print(summary.errors.map({$0.localizedDescription}))
+} // prints "Wow, that's a 💪 password!"
 ```
 
-From above, we see that once we've constructed the `usernameValidator`, we're simply calling `evaluateAll(input:)` to get a list of results. These results we can then map into an array of error messages, which we can handle as we please. You can imagine that we might construct this `usernameValidator` once, and simply evaluate it against the user input data when we want to perform validation on the username.
+From above, we see that once we've constructed the `passwordConstraints`, we're simply calling `evaluateAll(input:)` to get a `Summary` of our evaluation result. This summary can then be handled as we please.
 </details>
 
 ## Contribute

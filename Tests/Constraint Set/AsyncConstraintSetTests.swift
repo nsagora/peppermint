@@ -32,7 +32,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: [constraint])
         XCTAssertNotNil(constraintSet)
@@ -42,7 +42,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
         let constraintSet = AsyncConstraintSet<Int>(constraints: constraint)
         XCTAssertNotNil(constraintSet)
@@ -55,7 +55,7 @@ extension AsyncConstraintSetTests {
     func testItCanAddAnAsynConstraint() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid);
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
         constraintSet.add(constraint: constraint)
         
@@ -65,10 +65,10 @@ extension AsyncConstraintSetTests {
     func testItCanAddMultipleAsyncConstraints() {
         
         let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
         
         let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -79,7 +79,7 @@ extension AsyncConstraintSetTests {
     func testItCanAddAConstraintUsingAlternativeMethod() {
         
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         constraintSet.add(constraint: constraint)
         
         XCTAssertEqual(constraintSet.count, 1)
@@ -91,7 +91,7 @@ extension AsyncConstraintSetTests {
     func testItCanEvaluateAny_ForOneConstraint() {
 
         let predicate = FakePredicate(expected: 10)
-        let constraint = SimpleConstraint(predicate: predicate, error: FakeError.Invalid)
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         constraintSet.add(constraint: constraint)
         
         let expect = expectation(description: "Async Evaluation")
@@ -109,10 +109,10 @@ extension AsyncConstraintSetTests {
 
         // Given
         let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -130,10 +130,10 @@ extension AsyncConstraintSetTests {
 
         // Given
         let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -151,10 +151,10 @@ extension AsyncConstraintSetTests {
 
         // Given
         let aPredicate = FakePredicate(expected: 20)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 20)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.Invalid);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -173,10 +173,10 @@ extension AsyncConstraintSetTests {
 
         // Given
         let aPredicate = FakePredicate(expected: 1)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 1)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -193,10 +193,10 @@ extension AsyncConstraintSetTests {
     func testItCanEvaluateAll_ToValid_2() {
         // Given
         let aPredicate = FakePredicate(expected: 1)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 2)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
@@ -215,10 +215,10 @@ extension AsyncConstraintSetTests {
 
         // Given
         let aPredicate = FakePredicate(expected: 2)
-        let aConstraint = SimpleConstraint(predicate: aPredicate, error: FakeError.Invalid);
+        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
 
         let bPredicate = FakePredicate(expected: 2)
-        let bConstraint = SimpleConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
+        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
 
         constraintSet.add(constraint: aConstraint)
         constraintSet.add(constraint: bConstraint)
