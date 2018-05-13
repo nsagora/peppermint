@@ -15,7 +15,7 @@ extension Result {
     /**
      The summary of a validation result.
      */
-    public struct Summary: Equatable {
+    public struct Summary {
 
         /**
          `[Error]` if the validation result is `.invalid`, `nil` otherwise.
@@ -36,8 +36,6 @@ extension Result {
             return failingConstraints > 0
         }
 
-        internal static var Successful = Summary(errors: [])
-
         internal init(errors:[Error]) {
             self.errors = errors;
         }
@@ -56,9 +54,20 @@ extension Result {
 
             self.init(errors: errors)
         }
-
-        public static func ==(lhs: Summary, rhs: Summary) -> Bool {
-            return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
-        }
     }
+}
+
+// MARK: - Equatable conformance
+
+extension Result.Summary: Equatable {
+
+    public static func ==(lhs: Result.Summary, rhs: Result.Summary) -> Bool {
+        return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
+    }
+}
+
+// MARK: - Factory methods
+
+extension Result.Summary {
+    internal static var Successful = Result.Summary(errors: [])
 }
