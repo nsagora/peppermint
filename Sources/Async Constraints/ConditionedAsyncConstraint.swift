@@ -4,9 +4,10 @@ import Foundation
  A structrure that links an `AsyncPredicate` to an `Error` that describes why the predicate evaluation has failed.
  */
 public class ConditionedAsyncConstraint<T>: AsyncConstraint {
+    public typealias InputType = T
     
-    private var predicate: AnyAsyncPredicate<T>
-    private var errorBuilder: (T)->Error
+    private var predicate: AnyAsyncPredicate<InputType>
+    private var errorBuilder: (InputType) -> Error
     
     var conditions =  [AnyAsyncConstraint<T>]()
     
@@ -16,7 +17,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public init<P:AsyncPredicate>(predicate:P, error:Error) where P.InputType == T {
+    public init<P: AsyncPredicate>(predicate: P, error: Error) where P.InputType == InputType {
         
         self.predicate = predicate.erase()
         self.errorBuilder = { _ in return error }
@@ -28,7 +29,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
      - parameter predicate: An `AsyncPredicate` to describes the evaluation rule.
      - parameter error: An generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P:AsyncPredicate>(predicate:P, error: @escaping (T)->Error) where P.InputType == T {
+    public init<P: AsyncPredicate>(predicate: P, error: @escaping (InputType) -> Error) where P.InputType == InputType {
         
         self.predicate = predicate.erase()
         self.errorBuilder = error
@@ -39,7 +40,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
 
      - parameter constraint: `Constraint`
      */
-    public func add<C:AsyncConstraint>(condition:C) where C.InputType == T {
+    public func add<C: AsyncConstraint>(condition: C) where C.InputType == InputType {
         conditions.append(condition.erase())
     }
     
@@ -49,9 +50,9 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
-     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
+     - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
+    public func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
         
         if (!hasConditions()) {
             return continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
@@ -60,7 +61,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
         let predicateSet = AsyncConstraintSet(constraints: conditions)
         predicateSet.evaluateAll(input: input, queue: queue) { result in
             
-            if result.isValid {
+            if result.isSuccessful {
                 return self.continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
             }
             
@@ -72,17 +73,17 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
         return conditions.count > 0
     }
     
-    private func continueEvaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void) {
+    private func continueEvaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
         
         predicate.evaluate(with: input, queue: queue) { matches in
             
             if matches {
-                completionHandler(.valid)
+                completionHandler(.success)
             }
             else {
                 let error = self.errorBuilder(input)
-                let summary = Result.Summary(errors: [error])
-                completionHandler(.invalid(summary))
+                let summary = ValidationResult.Summary(errors: [error])
+                completionHandler(.failure(summary))
             }
         }
     }

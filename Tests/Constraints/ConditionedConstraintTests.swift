@@ -10,8 +10,8 @@ class ConditionedConstraintTests: XCTestCase {
         let predicate_001 = FakePredicate(expected: input)
         let constraint_001 = ConditionedConstraint(predicate: predicate_001) { FakeError.Unexpected($0) }
 
-        let summary = Result.Summary(errors: [FakeError.Unexpected(input)])
-        let expectedResult = Result.invalid(summary)
+        let summary = ValidationResult.Summary(errors: [FakeError.Unexpected(input)])
+        let expectedResult = ValidationResult.failure(summary)
 
         // When
         let actualResult = constraint_001.evaluate(with: "~fakeInput")
@@ -91,10 +91,10 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Act
         let result = constraint.evaluate(with: "__002__")
-        let expectedResult = Result.Summary(errors: [FakeError.Unexpected("Expecting 002")])
-
+        let expectedResult = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting 002")])
+        
         // Assert
-        XCTAssertEqual(result, Result.invalid(expectedResult))
+        XCTAssertEqual(result, ValidationResult.failure(expectedResult))
     }
 
     func testThatItEvaluateWhenHavingAValidCondition() {
@@ -110,10 +110,10 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Act
         let result = constraint.evaluate(with: "002")
-        let summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 001")])
+        let summary = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting 001")])
 
         // Assert
-        XCTAssertEqual(result, Result.invalid(summary))
+        XCTAssertEqual(result, ValidationResult.failure(summary))
     }
 
     func testThatItEvaluateWhenHavingMultiLevelCondition() {
@@ -136,11 +136,11 @@ class ConditionedConstraintTests: XCTestCase {
         constraint.add(condition:firstCondition)
 
         var result = constraint.evaluate(with: "001")
-        var summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 202")])
-        XCTAssertEqual(result, Result.invalid(summary))
+        var summary = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 202")])
+        XCTAssertEqual(result, ValidationResult.failure(summary))
 
         result = constraint.evaluate(with: "004")
-        summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 201")])
-        XCTAssertEqual(result, Result.invalid(summary))
+        summary = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 201")])
+        XCTAssertEqual(result, ValidationResult.failure(summary))
     }
 }

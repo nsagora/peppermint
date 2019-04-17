@@ -4,7 +4,7 @@ import Foundation
  The `RegexPredicate` class is used to define regluar expression based conditions used to evaluate input strings.
  */
 public class RegexPredicate: Predicate {
-
+    public typealias InputType = String
     private var expression: String
 
     /**
@@ -22,9 +22,8 @@ public class RegexPredicate: Predicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input matches the reguar expression specified by the receiver, otherwise `false`.
      */
-    public func evaluate(with input: String) -> Bool {
-
+    public func evaluate(with input: InputType) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", expression)
-        return predicate.evaluate(with: input);
+        return predicate.evaluate(with: input)
     }
 }

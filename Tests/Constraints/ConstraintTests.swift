@@ -25,7 +25,7 @@ class ConstraintTests: XCTestCase {
 
     func testThatItReturnsSuccessForValidInput() {
         let result = constraint.evaluate(with: validFakeInput)
-        XCTAssertTrue(result.isValid)
+        XCTAssertTrue(result.isSuccessful)
     }
 
     func testThatItFailsWithErrorForInvalidInput() {
@@ -34,7 +34,7 @@ class ConstraintTests: XCTestCase {
         let result = constraint.evaluate(with: invalidFakeInput)
 
         // Then
-        XCTAssertTrue(result.isInvalid)
+        XCTAssertTrue(result.isFailed)
         XCTAssertEqual(result.summary.failingConstraints, 1)
 
         let expectedErrors = [FakeError.Invalid]

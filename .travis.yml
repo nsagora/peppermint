@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode10
+osx_image: xcode10.2
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
@@ -22,8 +22,8 @@ env:
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - gem install xcpretty --pre --no-rdoc --no-ri --no-document --quiet
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - gem install xcpretty --pre --no-document --quiet
+  - gem install cocoapods --pre --no-document --quiet
   - echo y | fastlane snapshot reset_simulators --force
 
 script:
@@ -34,7 +34,7 @@ script:
       xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration "$CONFIGURATION" ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
     fi
   - if [ $POD_LINT == "YES" ]; then
-      pod lib lint;
+      pod lib lint --swift-version=5.0;
     fi
 
 after_success:

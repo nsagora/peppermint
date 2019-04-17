@@ -34,9 +34,9 @@ extension AsyncConstraintSet {
             }
         }
 
-        var result: Result?
+        var result: ValidationResult?
         
-        init(input:T, constraint: AnyAsyncConstraint<T>) {
+        init(input: T, constraint: AnyAsyncConstraint<T>) {
 
             self.input = input
             self.constraint = constraint
