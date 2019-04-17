@@ -22,8 +22,8 @@ env:
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - gem install xcpretty --pre --no-rdoc --no-ri --no-document --quiet
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - gem install xcpretty --pre --no-document --quiet
+  - gem install cocoapods --pre --no-document --quiet
   - echo y | fastlane snapshot reset_simulators --force
 
 script:
