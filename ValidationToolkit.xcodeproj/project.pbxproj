@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		932363D322672D4E00EBC17A /* ValidationResult+Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932363D222672D4E00EBC17A /* ValidationResult+Summary.swift */; };
+		93C45B1822679BBA002B9229 /* ValidationResult+Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932363D222672D4E00EBC17A /* ValidationResult+Summary.swift */; };
+		93C45B1922679BBB002B9229 /* ValidationResult+Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932363D222672D4E00EBC17A /* ValidationResult+Summary.swift */; };
+		93C45B1A22679BBB002B9229 /* ValidationResult+Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932363D222672D4E00EBC17A /* ValidationResult+Summary.swift */; };
 		FA00BE0F1D68470F004A38FE /* BlockPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00BE0E1D68470F004A38FE /* BlockPredicate.swift */; };
 		FA0B3A5B1D6CD31B00E8F2AD /* BlockPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00BE0E1D68470F004A38FE /* BlockPredicate.swift */; };
 		FA0B3A5C1D6CD31C00E8F2AD /* BlockPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00BE0E1D68470F004A38FE /* BlockPredicate.swift */; };
@@ -814,6 +817,7 @@
 				FADE98B31F47769A00C0185E /* PairMatchingPredicate.swift in Sources */,
 				FA725ABB1FD1CB7100EFF4A4 /* AnyAsyncConstraint.swift in Sources */,
 				FAA87CFD1D5CB93D00792F43 /* PredicateConstraint.swift in Sources */,
+				93C45B1822679BBA002B9229 /* ValidationResult+Summary.swift in Sources */,
 				FA725AB61FD1CB4200EFF4A4 /* AsyncConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,6 +846,7 @@
 				FADE98B01F47769A00C0185E /* PairMatchingPredicate.swift in Sources */,
 				FA725ABA1FD1CB7100EFF4A4 /* AnyAsyncConstraint.swift in Sources */,
 				FAA87D021D5CB93E00792F43 /* PredicateConstraint.swift in Sources */,
+				93C45B1922679BBB002B9229 /* ValidationResult+Summary.swift in Sources */,
 				FA725AB51FD1CB4200EFF4A4 /* AsyncConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,6 +900,7 @@
 				FADE98AD1F47769900C0185E /* PairMatchingPredicate.swift in Sources */,
 				FA725AB91FD1CB7100EFF4A4 /* AnyAsyncConstraint.swift in Sources */,
 				FAA87CF81D5CB93C00792F43 /* PredicateConstraint.swift in Sources */,
+				93C45B1A22679BBB002B9229 /* ValidationResult+Summary.swift in Sources */,
 				FA725AB41FD1CB4200EFF4A4 /* AsyncConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1017,7 +1023,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1041,7 +1047,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1064,7 +1070,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1087,7 +1093,7 @@
 				PRODUCT_NAME = ValidationToolkit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};

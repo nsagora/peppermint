@@ -76,7 +76,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
         let constraintSet = ConstraintSet(constraints: conditions)
         let result = constraintSet.evaluateAll(input: input)
 
-        if result.isValid {
+        if result.isSuccessful {
             return super.evaluate(with: input)
         }
 

@@ -71,7 +71,7 @@ extension AsyncConstraintSet {
         let operations = constraints.map { AsyncOperation(input: input, constraint: $0) }
         let completionOperation = BlockOperation {
             let finishedOperations = operations.filter { $0.isFinished }.compactMap{ $0.result }
-            let result = finishedOperations.reduce(.success) { $0.isInvalid ? $0 : $1 }
+            let result = finishedOperations.reduce(.success) { $0.isFailed ? $0 : $1 }
             
             queue.async {
                 completionHandler(result)

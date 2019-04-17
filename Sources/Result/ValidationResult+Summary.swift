@@ -42,7 +42,7 @@ public extension ValidationResult {
         internal init(evaluationResults: [ValidationResult]) {
             self.init(
                 errors: evaluationResults
-                    .filter { $0.isInvalid }
+                    .filter { $0.isFailed }
                     .reduce(into: [Error]()) { (errors, result) in
                         errors += result.summary.errors
                 }

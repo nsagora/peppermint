@@ -34,7 +34,7 @@ script:
       xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration "$CONFIGURATION" ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
     fi
   - if [ $POD_LINT == "YES" ]; then
-      pod lib lint;
+      pod lib lint --swift-version=5.0;
     fi
 
 after_success:

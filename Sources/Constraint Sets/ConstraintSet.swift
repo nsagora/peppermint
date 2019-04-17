@@ -62,7 +62,7 @@ public extension ConstraintSet {
      */
     func evaluateAny(input: T) -> ValidationResult {
         
-        return constraints.reduce(.success) { $0.isInvalid ? $0 : $1.evaluate(with: input) }
+        return constraints.reduce(.success) { $0.isFailed ? $0 : $1.evaluate(with: input) }
     }
 
     /**

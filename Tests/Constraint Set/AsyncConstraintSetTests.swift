@@ -121,7 +121,7 @@ extension AsyncConstraintSetTests {
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 1) { result in
             expect.fulfill()
-            XCTAssertTrue(result.isInvalid)
+            XCTAssertTrue(result.isFailed)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
@@ -142,7 +142,7 @@ extension AsyncConstraintSetTests {
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 20) { result in
             expect.fulfill()
-            XCTAssertTrue(result.isInvalid)
+            XCTAssertTrue(result.isFailed)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
@@ -164,7 +164,7 @@ extension AsyncConstraintSetTests {
         let expect = expectation(description: "Asyn Evaluation")
         constraintSet.evaluateAny(input: 20) { result in
             expect.fulfill()
-            XCTAssertTrue(result.isValid)
+            XCTAssertTrue(result.isSuccessful)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }

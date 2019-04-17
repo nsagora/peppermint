@@ -4,8 +4,8 @@ import XCTest
 class ResultTests: XCTestCase {
 
     func testIsValid() {
-        XCTAssertTrue(ValidationResult.success.isValid)
-        XCTAssertFalse(ValidationResult.success.isInvalid)
+        XCTAssertTrue(ValidationResult.success.isSuccessful)
+        XCTAssertFalse(ValidationResult.success.isFailed)
     }
     
     func testIsInvalid() {
@@ -13,8 +13,8 @@ class ResultTests: XCTestCase {
         let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
         let invalidResult: ValidationResult = ValidationResult.failure(summary)
 
-        XCTAssertTrue(invalidResult.isInvalid)
-        XCTAssertFalse(invalidResult.isValid)
+        XCTAssertTrue(invalidResult.isFailed)
+        XCTAssertFalse(invalidResult.isSuccessful)
     }
 
     func testThatValidIsNotEqualToInvalid() {

@@ -25,7 +25,7 @@ public extension ValidationResult {
     /**
      `true` if the validation result is valid, `false` otherwise.
      */
-    var isValid: Bool {
+    var isSuccessful: Bool {
         switch self {
         case .success: return true
         case .failure: return false
@@ -35,8 +35,8 @@ public extension ValidationResult {
     /**
      `false` if the validation result is `.failure` or `.unevaluated`, `true` otherwise.
      */
-    var isInvalid: Bool {
-        return !isValid
+    var isFailed: Bool {
+        return !isSuccessful
     }
     
     /**

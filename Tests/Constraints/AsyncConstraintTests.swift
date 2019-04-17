@@ -49,7 +49,7 @@ class AsyncConstraintTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
 
         // Then
-        XCTAssertTrue(actualResult.isValid)
+        XCTAssertTrue(actualResult.isSuccessful)
     }
     
     func testThatItCallsCallbackWithErrorOnError() {
@@ -69,7 +69,7 @@ class AsyncConstraintTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
 
         // Then
-        XCTAssertTrue(actualresult.isInvalid)
+        XCTAssertTrue(actualresult.isFailed)
         XCTAssertTrue(actualresult.summary.errors is [FakeError])
     }
 }

@@ -61,7 +61,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
         let predicateSet = AsyncConstraintSet(constraints: conditions)
         predicateSet.evaluateAll(input: input, queue: queue) { result in
             
-            if result.isValid {
+            if result.isSuccessful {
                 return self.continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
             }
             
