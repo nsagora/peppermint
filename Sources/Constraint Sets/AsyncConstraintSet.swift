@@ -10,7 +10,7 @@ public struct AsyncConstraintSet<T> {
     /**
      Returns the number of constraints in collection
      */
-    public var count:Int {
+    public var count: Int {
         return constraints.count
     }
     
@@ -26,7 +26,7 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init<C:AsyncConstraint>(constraints:[C]) where C.InputType == T {
+    public init<C: AsyncConstraint>(constraints: [C]) where C.InputType == T {
         self.constraints = constraints.map{ $0.erase() }
     }
     
@@ -35,7 +35,7 @@ public struct AsyncConstraintSet<T> {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public init<C:AsyncConstraint>(constraints:C...) where C.InputType == T {
+    public init<C: AsyncConstraint>(constraints: C...) where C.InputType == T {
         self.init(constraints: constraints)
     }
 }
@@ -48,7 +48,7 @@ extension AsyncConstraintSet {
      
      - parameter constraint: `AsyncConstraint`
      */
-    public mutating func add<C:AsyncConstraint>(constraint:C) where C.InputType == T {
+    public mutating func add<C: AsyncConstraint>(constraint: C) where C.InputType == T {
         constraints.append(constraint.erase())
     }
 }
@@ -61,9 +61,9 @@ extension AsyncConstraintSet {
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Result` parameter:
-     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
+     - parameter result: `.success` if the input is valid, `.failure` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
      */
-    public func evaluateAny(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:Result) -> Void) {
+    public func evaluateAny(input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
@@ -71,7 +71,7 @@ extension AsyncConstraintSet {
         let operations = constraints.map { AsyncOperation(input: input, constraint: $0) }
         let completionOperation = BlockOperation {
             let finishedOperations = operations.filter { $0.isFinished }.compactMap{ $0.result }
-            let result = finishedOperations.reduce(.valid) { $0.isInvalid ? $0 : $1 }
+            let result = finishedOperations.reduce(.success) { $0.isInvalid ? $0 : $1 }
             
             queue.async {
                 completionHandler(result)
@@ -96,7 +96,7 @@ extension AsyncConstraintSet {
      - parameter result: An array of `Result` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
 
      */
-    public func evaluateAll(input:T, queue: DispatchQueue = .main, completionHandler:@escaping (_ result:Result) -> Void) {
+    public func evaluateAll(input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
@@ -105,9 +105,9 @@ extension AsyncConstraintSet {
         let completionOperation = BlockOperation {
             
             let results = operations.filter { $0.isFinished }.compactMap{ $0.result }
-            let summary = Result.Summary(evaluationResults: results)
+            let summary = ValidationResult.Summary(evaluationResults: results)
             queue.async {
-                completionHandler(Result(summary: summary))
+                completionHandler(ValidationResult(summary: summary))
             }
         }
         

@@ -8,7 +8,7 @@ extension ConstraintSet {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter message: An `Error` that describes why the evaluation has failed.
      */
-    public mutating func add<P:Predicate>(predicate:P, error:Error) where P.InputType == T {
+    public mutating func add<P: Predicate>(predicate: P, error: Error) where P.InputType == T {
         let constraint = PredicateConstraint(predicate: predicate, error: error)
         add(constraint: constraint)
     }

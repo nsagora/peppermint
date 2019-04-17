@@ -10,12 +10,12 @@ public class AnyPredicate<T>: Predicate {
      */
     public typealias InputType = T
 
-    var _evaluate:(T)->Bool
+    var _evaluate: (InputType) -> Bool
 
     /**
      Creates a type-erased `Predicate` that wraps the given instance.
     */
-    public init<P:Predicate>(_ predicate:P) where P.InputType == T {
+    public init<P: Predicate>(_ predicate: P) where P.InputType == InputType {
         _evaluate = predicate.evaluate
     }
 
@@ -25,7 +25,7 @@ public class AnyPredicate<T>: Predicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input matches the conditions specified by the receiver, `false` otherwise.
      */
-    public func evaluate(with input: AnyPredicate<T>.InputType) -> Bool {
+    public func evaluate(with input: InputType) -> Bool {
         return _evaluate(input)
     }
 }

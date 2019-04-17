@@ -16,7 +16,7 @@ public protocol AsyncConstraint {
      - parameter input: The input to be validated.
      - parameter queue: The queue on which the completion handler is executed.
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
-     - parameter result: `.valid` if the input is valid, `.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
+     - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result:Result) -> Void)
+    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void)
 }

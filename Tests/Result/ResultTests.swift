@@ -4,14 +4,14 @@ import XCTest
 class ResultTests: XCTestCase {
 
     func testIsValid() {
-        XCTAssertTrue(Result.valid.isValid)
-        XCTAssertFalse(Result.valid.isInvalid)
+        XCTAssertTrue(ValidationResult.success.isValid)
+        XCTAssertFalse(ValidationResult.success.isInvalid)
     }
     
     func testIsInvalid() {
         
-        let summary = Result.Summary(errors: [FakeError.Invalid])
-        let invalidResult: Result = Result.invalid(summary)
+        let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
+        let invalidResult: ValidationResult = ValidationResult.failure(summary)
 
         XCTAssertTrue(invalidResult.isInvalid)
         XCTAssertFalse(invalidResult.isValid)
@@ -19,19 +19,19 @@ class ResultTests: XCTestCase {
 
     func testThatValidIsNotEqualToInvalid() {
 
-        let summary = Result.Summary(errors: [FakeError.Invalid])
+        let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
 
-        XCTAssertNotEqual(Result.valid, Result.invalid(summary))
+        XCTAssertNotEqual(ValidationResult.success, ValidationResult.failure(summary))
     }
     
     func testEvaluationErrors() {
         let errors =  [FakeError.Invalid]
-        let expectedSummary = Result.Summary(errors:errors)
+        let expectedSummary = ValidationResult.Summary(errors:errors)
 
-        let invalidResult = Result.invalid(expectedSummary)
+        let invalidResult = ValidationResult.failure(expectedSummary)
         XCTAssertTrue(invalidResult.summary.hasFailingContraints)
 
-        let validResult = Result.valid
+        let validResult = ValidationResult.success
         XCTAssertFalse(validResult.summary.hasFailingContraints)
     }
 }

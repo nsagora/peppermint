@@ -57,13 +57,13 @@ extension ConstraintSetTests {
     func testThatWithoutConstraints_EvaluateAny_IsValid() {
         
         let result = constraintSet.evaluateAny(input: "any")
-        XCTAssertEqual(result, Result.valid)
+        XCTAssertEqual(result, ValidationResult.success)
     }
     
     func testThatWithoutConstraints_EvaluateAll_IsValid() {
         
         let result = constraintSet.evaluateAny(input: "all")
-        XCTAssertEqual(result, Result.valid)
+        XCTAssertEqual(result, ValidationResult.success)
     }
 }
 
@@ -91,7 +91,7 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.Invalid)
 
         let result = constraintSet.evaluateAny(input: validFakeInput)
-        XCTAssertEqual(result, Result.valid)
+        XCTAssertEqual(result, ValidationResult.success)
     }
     
     func testThatForInvalidInput_EvaluateAny_IsInvalid() {
@@ -99,9 +99,9 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.Invalid)
         
         let result = constraintSet.evaluateAny(input: invalidFakeInput)
-        let summary = Result.Summary(errors: [FakeError.Invalid])
+        let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
         
-        XCTAssertEqual(result, Result.invalid(summary))
+        XCTAssertEqual(result, ValidationResult.failure(summary))
     }
     
     func testThatForValidInput_EvaluateAll_IsValid() {
@@ -110,7 +110,7 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
         
         let result = constraintSet.evaluateAll(input: validFakeInput)
-        XCTAssertEqual(result, Result.valid)
+        XCTAssertEqual(result, ValidationResult.success)
     }
 
     func testThatForInvalidInput_EvaluateAll_IsInvalid() {
@@ -119,7 +119,7 @@ extension ConstraintSetTests {
         constraintSet.add(predicate: predicate, error:FakeError.MissingInput)
 
         let result = constraintSet.evaluateAll(input: invalidFakeInput)
-        let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
-        XCTAssertEqual(result, Result.invalid(summary))
+        let summary = ValidationResult.Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
+        XCTAssertEqual(result, ValidationResult.failure(summary))
     }
 }
