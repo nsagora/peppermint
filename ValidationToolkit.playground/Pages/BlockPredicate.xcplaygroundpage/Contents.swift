@@ -9,7 +9,7 @@ import ValidationToolkit
  */
 
 let input = "Hel!O"
-let predicate = BlockPredicate<String> { $0.characters.count == 5 }
+let predicate = BlockPredicate<String> { $0.count == 5 }
 let isValid = predicate.evaluate(with: input)
 
 if isValid {
