@@ -1,12 +1,18 @@
 import Foundation
 
-
-/// Validation result type.
-///
-/// - success: Validation was succesfull
-/// - failure: Validation failed. Contains `ValidationResult.Summary` that details the cause for failure
+/**
+ A value that represents a successfull or a failed evalutation. In case of failure, it contains a `ValidationResult.Summary` that summarises the reason behind it.
+ */
 public enum ValidationResult {
+
+    /**
+     Validation was succesfull.
+     */
     case success
+
+    /**
+     Validation failed. Contains `ValidationResult.Summary` that details the cause for failure.
+     */
     case failure(Summary)
 }
 
