@@ -22,9 +22,9 @@ lenghtConstraint.add(condition: numericConstraint)
 let result = lenghtConstraint.evaluate(with: text)
 
 switch result {
-case .valid:
+case .success:
     print("You 🤘! ")
-case .invalid(let summary):
+case .failure(let summary):
     print(summary.errors)
 }
 

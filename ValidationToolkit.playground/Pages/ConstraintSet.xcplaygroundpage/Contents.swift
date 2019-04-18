@@ -26,8 +26,8 @@ let password = "3nGuard!"
 let result = passwordConstraints.evaluateAll(input: password)
 
 switch result {
-case .valid:
+case .success:
     print("Wow, that's a 💪 password!")
-case .invalid(let summary):
+case .failure(let summary):
     print(summary.errors.map({$0.localizedDescription}))
 }

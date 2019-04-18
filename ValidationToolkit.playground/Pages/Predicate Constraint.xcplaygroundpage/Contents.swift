@@ -16,9 +16,9 @@ let constraint = PredicateConstraint(predicate: predicate, error:Form.Username.i
 let result = constraint.evaluate(with: username)
 
 switch result {
-case .valid:
+case .success:
     print("Nice 🎬!")
-case .invalid(let summary):
+case .failure(let summary):
     print(summary.errors)
 }
 

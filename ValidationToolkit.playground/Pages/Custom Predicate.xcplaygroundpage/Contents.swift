@@ -20,7 +20,7 @@ public class MinLenghtPredicate: Predicate {
     }
     
     public func evaluate(with input: String) -> Bool {
-        return input.characters.count >= minLenght
+        return input.count >= minLenght
     }
 }
 
