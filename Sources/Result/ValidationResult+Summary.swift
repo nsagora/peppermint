@@ -1,14 +1,4 @@
-//
-// Result+Summary.swift
-// ValidationToolkit iOS
-//
-// Created by Dmitry Mazurenko on 4/17/19.
-// Copyright © 2019 iOS NSAgora. All rights reserved.
-// 
-// 
-
 import Foundation
-
 
 public extension ValidationResult {
     /**
