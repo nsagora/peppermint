@@ -1,6 +1,12 @@
-# Validation Toolkit
+# Validation Toolkit [![badge-version]][url-validationtoolkit]
 
-[![badge-travis]][url-travis] [![badge-codecov]][url-codecov] [![badge-docs]][url-validationtoolkit-docs] [![badge-carthage]][url-carthage] [![badge-license]][url-license] [![badge-twitter]][url-twitter] [![badge-version]][url-validationtoolkit]
+[![badge-travis]][url-travis] 
+[![badge-codecov]][url-codecov]
+[![badge-docs]][url-validationtoolkit-docs]
+[![badge-swift-pm]][url-swift-package-manager]
+[![badge-carthage]][url-carthage]
+[![badge-license]][url-license]
+[![badge-twitter]][url-twitter]
 
 1. [Introduction](#introduction)
 	- [Separation of concerns](#separation-of-concerns)
@@ -342,6 +348,7 @@ We got inspired from other open source projects and they worth to be mentioned b
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [badge-travis]: https://travis-ci.org/nsagora/validation-toolkit.svg?branch=develop
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
+[badge-swift-pm]: https://img.shields.io/badge/swift%20pm-compatible-4BC51D.svg?style=flat
 [badge-carthage]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [badge-version]: https://img.shields.io/badge/version-0.6.2-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-100%25-brightgreen.svg?style=flat
