@@ -1,0 +1,68 @@
+update_fastlane
+setup_travis
+
+platform :iOS do
+  lane :build do 
+    xcodebuild(
+      scheme: "ValidationToolkit iOS",
+      workspace: "ValidationToolkit.xcworkspace",
+      destination: "generic/platform=iOS",
+      sdk: "iphonesimulator",
+      configuration: "Debug",
+      clean: true,
+      build: true
+    )
+  end 
+end
+
+platform :tvOS do
+  lane :build do 
+    xcodebuild(
+      scheme: "ValidationToolkit tvOS",
+      workspace: "ValidationToolkit.xcworkspace",
+      destination: "generic/platform=tvOS",
+      sdk: "appletvsimulator",
+      configuration: "Debug",
+      clean: true,
+      build: true
+    )
+  end 
+end
+
+platform :watchOS do
+  lane :build do 
+    xcodebuild(
+      scheme: "ValidationToolkit watchOS",
+      workspace: "ValidationToolkit.xcworkspace",
+      destination: "generic/platform=watchOS",
+      sdk: "watchsimulator",
+      configuration: "Debug",
+      clean: true,
+      build: true
+    )
+  end 
+end
+
+platform :macOS do
+  lane :build do 
+    xcodebuild(
+      scheme: "ValidationToolkit macOS",
+      workspace: "ValidationToolkit.xcworkspace",
+      destination: "generic/platform=OS X",
+      sdk: "macosx",
+      configuration: "Debug",
+      clean: true,
+      build: true
+    )
+  end 
+end
+
+platform :package do
+  lane :test do
+    spm(command:"test")
+  end
+
+  lane :build do
+    spm()
+  end
+end
