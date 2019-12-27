@@ -16,50 +16,19 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### iOS build
+### ios build
 ```
-fastlane iOS build
-```
-
-
-----
-
-## tvOS
-### tvOS build
-```
-fastlane tvOS build
+fastlane ios build
 ```
 
-
-----
-
-## watchOS
-### watchOS build
+### ios test
 ```
-fastlane watchOS build
+fastlane ios test
 ```
 
-
-----
-
-## macOS
-### macOS build
+### ios package_support
 ```
-fastlane macOS build
-```
-
-
-----
-
-## package
-### package test
-```
-fastlane package test
-```
-
-### package build
-```
-fastlane package build
+fastlane ios package_support
 ```
 
 

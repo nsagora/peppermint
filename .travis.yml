@@ -7,20 +7,13 @@ env:
   - LANG=en_US.UTF-8
 
 before_install:
-  - gem install xcpretty --pre --no-document --quiet
   - gem install bundler --pre --no-document --quiet
   - bundle install --quiet
 
-jobs:
-  include:
-    - stage: test
-      script: fastlane package test
-      script: bash <(curl -s https://codecov.io/bash) -J '^ValidationToolkit$';
-    - stage: build
-      script: fastlane iOS build
-    - script: fastlane tvOS build
-    - script: fastlane watchOS build
-    - script: fastlane macOS build
-    - stage: pods
-      script: gem install cocoapods --pre --no-document --quiet
-      script: pod lib lint --swift-version=5.0
+script:
+  - fastlane test
+  - fastlane build
+  - pod lib lint --swift-version=5.0
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -J '^ValidationToolkit$';
