@@ -1,13 +1,13 @@
 import XCTest
 @testable import ValidationToolkit
 
-class AsyncConstraintSetTests: XCTestCase {
+class AsyncCompoundConstraintTests: XCTestCase {
     
-    var constraintSet: AsyncConstraintSet<Int>!
+    var constraintSet: AsyncAndCompoundConstraint<Int>!
     
     override func setUp() {
         super.setUp()
-        constraintSet = AsyncConstraintSet<Int>()
+        constraintSet = AsyncAndCompoundConstraint<Int>()
     }
 
     override func tearDown() {
@@ -24,7 +24,7 @@ class AsyncConstraintSetTests: XCTestCase {
     func testItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
 
         let constraints = [AnyAsyncConstraint<Int>]()
-        let constraintSet = AsyncConstraintSet<Int>(constraints:constraints)
+        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints:constraints)
         XCTAssertNotNil(constraintSet)
         XCTAssertEqual(constraintSet.count, 0)
     }
@@ -34,7 +34,7 @@ class AsyncConstraintSetTests: XCTestCase {
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraintSet = AsyncConstraintSet<Int>(constraints: [constraint])
+        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints: [constraint])
         XCTAssertNotNil(constraintSet)
         XCTAssertEqual(constraintSet.count, 1)
     }
@@ -44,13 +44,13 @@ class AsyncConstraintSetTests: XCTestCase {
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraintSet = AsyncConstraintSet<Int>(constraints: constraint)
+        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints: constraint)
         XCTAssertNotNil(constraintSet)
         XCTAssertEqual(constraintSet.count, 1)
     }
 }
 
-extension AsyncConstraintSetTests {
+extension AsyncCompoundConstraintTests {
     
     func testItCanAddAnAsynConstraint() {
         
@@ -86,7 +86,7 @@ extension AsyncConstraintSetTests {
     }
 }
 
-extension AsyncConstraintSetTests {
+extension AsyncCompoundConstraintTests {
     
     func testItCanEvaluateAny_ForOneConstraint() {
 
@@ -183,7 +183,7 @@ extension AsyncConstraintSetTests {
 
         // When
         let expect = expectation(description: "Evaluate all async")
-        constraintSet.evaluateAll(input: 1) { result in
+        constraintSet.evaluate(with: 1) { result in
             expect.fulfill()
             XCTAssertEqual(ValidationResult.success, result)
         }
@@ -204,7 +204,7 @@ extension AsyncConstraintSetTests {
         // When
         let expect = expectation(description: "Evaluate all async")
         let summary = ValidationResult.Summary(errors: [FakeError.FailingCondition])
-        constraintSet.evaluateAll(input: 1) { result in
+        constraintSet.evaluate(with: 1) { result in
             expect.fulfill()
             XCTAssertEqual(ValidationResult.failure(summary), result)
         }
@@ -227,7 +227,7 @@ extension AsyncConstraintSetTests {
 
         let expect = expectation(description: "Evaluate all async")
         let summary = ValidationResult.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])
-        constraintSet.evaluateAll(input: 1) { result in
+        constraintSet.evaluate(with : 1) { result in
             expect.fulfill()
             XCTAssertEqual(ValidationResult.failure(summary), result)
         }

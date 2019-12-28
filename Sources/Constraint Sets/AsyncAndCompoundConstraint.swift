@@ -3,7 +3,9 @@ import Foundation
 /**
  A generic collection of `AsyncConstraints` on which an input can be validated on.
  */
-public struct AsyncConstraintSet<T> {
+public struct AsyncAndCompoundConstraint<T>: AsyncConstraint {
+    
+    public typealias InputType = T
     
     var constraints: [AnyAsyncConstraint<T>]
 
@@ -15,14 +17,14 @@ public struct AsyncConstraintSet<T> {
     }
     
     /**
-     Create a new `AsyncConstraintSet` instance 
+     Create a new `AsyncAndCompoundConstraint` instance 
      */
     public init() {
         self.constraints = [AnyAsyncConstraint<T>]()
     }
     
     /**
-     Create a new `AsyncConstraintSet` instance populated with a predefined list of `AsyncConstraints`
+     Create a new `AsyncAndCompoundConstraint` instance populated with a predefined list of `AsyncConstraints`
      
      - parameter constraints: `[AsyncConstraint]`
      */
@@ -31,7 +33,7 @@ public struct AsyncConstraintSet<T> {
     }
     
     /**
-     Create a new `AsyncConstraintSet` instance populated with a unsized list of `AsyncConstraints`
+     Create a new `AsyncAndCompoundConstraint` instance populated with a unsized list of `AsyncConstraints`
      
      - parameter constraints: `[AsyncConstraint]`
      */
@@ -41,7 +43,7 @@ public struct AsyncConstraintSet<T> {
 }
 
 
-extension AsyncConstraintSet {
+extension AsyncAndCompoundConstraint {
     
     /**
      Adds a `AsyncConstraint` to the generic collection of constraints.
@@ -53,7 +55,7 @@ extension AsyncConstraintSet {
     }
 }
 
-extension AsyncConstraintSet {
+extension AsyncAndCompoundConstraint {
  
     /**
      Asynchronous evaluates the input on all `AsyncConstraint`s until the first fails.
@@ -96,12 +98,12 @@ extension AsyncConstraintSet {
      - parameter result: An array of `Result` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
 
      */
-    public func evaluateAll(input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+    public func evaluate(with: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
         
         let operationQueue = OperationQueue()
         operationQueue.isSuspended = true;
         
-        let operations = constraints.map { AsyncOperation(input: input, constraint: $0) }
+        let operations = constraints.map { AsyncOperation(input: with, constraint: $0) }
         let completionOperation = BlockOperation {
             
             let results = operations.filter { $0.isFinished }.compactMap{ $0.result }

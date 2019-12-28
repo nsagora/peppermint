@@ -1,6 +1,6 @@
 import Foundation
 
-extension AsyncConstraintSet {
+extension AsyncAndCompoundConstraint {
     
     class AsyncOperation<T>: Operation {
         
