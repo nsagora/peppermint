@@ -1,0 +1,39 @@
+update_fastlane
+setup_travis
+
+default_platform(:ios)
+
+platform :ios do
+  lane :build do 
+    spm()
+    build("iOS", "iOS", "iphonesimulator")
+    build("tvOS", "tvOS", "appletvsimulator")
+    build("watchOS", "watchOS", "watchsimulator")
+    build("macOS", "OS X", "macosx")
+  end 
+
+  lane :test do
+    spm(command:"test")
+    scan(
+      scheme: "ValidationToolkit iOS",
+      workspace: "ValidationToolkit.xcworkspace",
+      clean: true
+    )
+  end
+
+  lane :package_support do 
+    pod_lib_lint(swift_version: "5.0")
+  end 
+end
+
+def build(scheme, platform, sdk) 
+  xcodebuild(
+      scheme: "ValidationToolkit #{scheme}",
+      workspace: "ValidationToolkit.xcworkspace",
+      destination: "generic/platform=#{platform}",
+      sdk: sdk,
+      configuration: "Debug",
+      clean: true,
+      build: true
+    )
+end

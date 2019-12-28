@@ -39,6 +39,13 @@ xcuserdata
 DerivedData
 *.xcuserstate
 *.gcno
+
+# Xcode Packages
+
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
  
 # CocoaPods
 #
