@@ -14,12 +14,7 @@ public struct OrCompoundConstraint<T>: Constraint {
     */
     public var count: Int { constraints.count }
     
-    /**
-     Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
-     
-     - parameter constraints: `[Constraint]`
-     */
-    public init<C: Constraint>(constraints: [C]) where C.InputType == T {
+    init<C: Constraint>(constraints: [C]) where C.InputType == T {
         self.constraints = constraints.map { $0.erase() }
     }
     

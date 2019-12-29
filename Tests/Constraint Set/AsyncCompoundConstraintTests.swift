@@ -3,85 +3,42 @@ import XCTest
 
 class AsyncCompoundConstraintTests: XCTestCase {
     
-    var constraintSet: AsyncAndCompoundConstraint<Int>!
-    
-    override func setUp() {
-        super.setUp()
-        constraintSet = AsyncAndCompoundConstraint<Int>()
-    }
-
-    override func tearDown() {
-        constraintSet = nil
-        super.tearDown()
-    }
-    
-    func testItCanBeInstantiated() {
-    
-        XCTAssertNotNil(constraintSet)
-        XCTAssertEqual(constraintSet.count, 0)
-    }
-    
     func testItCanBeInstantiatedWithAnEmptyArrayOfConstraints() {
-
+        
+        // Arrange
         let constraints = [AnyAsyncConstraint<Int>]()
-        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints:constraints)
-        XCTAssertNotNil(constraintSet)
-        XCTAssertEqual(constraintSet.count, 0)
+        
+        // Act
+        let sut = CompoundAsyncConstraint.and(subconstraints: constraints)
+        
+        // Assert
+        XCTAssertEqual(sut.count, 0)
     }
     
     func testItCanBeInstantiatedWithAPredefinedArrayOfConstraints() {
         
+        // Arrange
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints: [constraint])
-        XCTAssertNotNil(constraintSet)
-        XCTAssertEqual(constraintSet.count, 1)
+        // Act
+        let sut = CompoundAsyncConstraint.and(subconstraints: [constraint])
+        
+        // Assert
+        XCTAssertEqual(sut.count, 1)
     }
     
     func testItCanBeInstantiatedWithAUndefinedNumberOfConstraints() {
         
+        // Arrange
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        let constraintSet = AsyncAndCompoundConstraint<Int>(constraints: constraint)
-        XCTAssertNotNil(constraintSet)
-        XCTAssertEqual(constraintSet.count, 1)
-    }
-}
-
-extension AsyncCompoundConstraintTests {
-    
-    func testItCanAddAnAsynConstraint() {
+        // Act
+        let constraintSet = CompoundAsyncConstraint.and(subconstraints: constraint)
         
-        let predicate = FakePredicate(expected: 10)
-        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
-        constraintSet.add(constraint: constraint)
-        
-        XCTAssertEqual(constraintSet.count, 1)
-    }
-    
-    func testItCanAddMultipleAsyncConstraints() {
-        
-        let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-        
-        let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-        
-        XCTAssertEqual(constraintSet.count, 2)
-    }
-    
-    func testItCanAddAConstraintUsingAlternativeMethod() {
-        
-        let predicate = FakePredicate(expected: 10)
-        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        constraintSet.add(constraint: constraint)
-        
+        // Assert
         XCTAssertEqual(constraintSet.count, 1)
     }
 }
@@ -89,13 +46,18 @@ extension AsyncCompoundConstraintTests {
 extension AsyncCompoundConstraintTests {
     
     func testItCanEvaluateAny_ForOneConstraint() {
-
+        
+        // Arrange
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        constraintSet.add(constraint: constraint)
+        let sut = CompoundAsyncConstraint.or(subconstraints: constraint)
         
         let expect = expectation(description: "Async Evaluation")
-        constraintSet.evaluateAny(input: 1) { result in
+        
+        // Act
+        sut.evaluate(with: 1) { result in
+            
+            // Assert
             expect.fulfill()
             switch result {
             case .failure(_): XCTAssert(true)
@@ -106,129 +68,133 @@ extension AsyncCompoundConstraintTests {
     }
     
     func testItCanEvaluateAny_ForTwoConstraint() {
-
-        // Given
-        let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
-        let expect = expectation(description: "Asyn Evaluation")
-        constraintSet.evaluateAny(input: 1) { result in
+        
+        // Arrange
+        let predicate = FakePredicate(expected: 10)
+        let firstConstraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let secondConstraint = PredicateConstraint(predicate: predicate, error: FakeError.MissingInput)
+        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
+        
+        let expect = expectation(description: "Async Evaluation")
+        
+        // Act
+        sut.evaluate(with: 1) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertTrue(result.isFailed)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint2() {
-
-        // Given
-        let aPredicate = FakePredicate(expected: 10)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 10)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
-        let expect = expectation(description: "Asyn Evaluation")
-        constraintSet.evaluateAny(input: 20) { result in
+        
+        // Arrange
+        let predicate = FakePredicate(expected: 10)
+        let firstConstraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let secondConstraint = PredicateConstraint(predicate: predicate, error: FakeError.MissingInput)
+        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
+        
+        let expect = expectation(description: "Async Evaluation")
+        
+        // Act
+        sut.evaluate(with: 20) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertTrue(result.isFailed)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     
     func testItCanEvaluateAny_ForTwoConstraint3() {
-
-        // Given
-        let aPredicate = FakePredicate(expected: 20)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 20)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.Invalid);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
+        
+        // Arrange
+        let firstPredicate = FakePredicate(expected: 20)
+        let firstConstraint = PredicateConstraint(predicate: firstPredicate, error: FakeError.Invalid);
+        
+        let secondPredicate = FakePredicate(expected: 20)
+        let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.Invalid);
+        
+        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Asyn Evaluation")
-        constraintSet.evaluateAny(input: 20) { result in
+        
+        // Act
+        sut.evaluate(with: 20) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertTrue(result.isSuccessful)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
-
+    
     func testItCanEvaluateAll_ToValid() {
-
-        // Given
-        let aPredicate = FakePredicate(expected: 1)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 1)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
+        
+        // Arrange
+        let firstPredicate = FakePredicate(expected: 1)
+        let firstConstraint = PredicateConstraint(predicate: firstPredicate, error: FakeError.Invalid);
+        
+        let secondPredicate = FakePredicate(expected: 1)
+        let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.Invalid);
+        
+        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        
         let expect = expectation(description: "Evaluate all async")
-        constraintSet.evaluate(with: 1) { result in
+        
+        // Act
+        sut.evaluate(with: 1) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertEqual(ValidationResult.success, result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
-
+    
     func testItCanEvaluateAll_ToValid_2() {
-        // Given
-        let aPredicate = FakePredicate(expected: 1)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 2)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
+        // Arrange
+        let firstPredicate = FakePredicate(expected: 1)
+        let firstConstraint = PredicateConstraint(predicate: firstPredicate, error: FakeError.Invalid);
+        
+        let secondPredicate = FakePredicate(expected: 2)
+        let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.FailingCondition);
+        
+        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        
         let expect = expectation(description: "Evaluate all async")
         let summary = ValidationResult.Summary(errors: [FakeError.FailingCondition])
-        constraintSet.evaluate(with: 1) { result in
+        
+        // Act
+        sut.evaluate(with: 1) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertEqual(ValidationResult.failure(summary), result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
-
+    
     func testItCanEvaluateAll_ToValid_3() {
-
-        // Given
-        let aPredicate = FakePredicate(expected: 2)
-        let aConstraint = PredicateConstraint(predicate: aPredicate, error: FakeError.Invalid);
-
-        let bPredicate = FakePredicate(expected: 2)
-        let bConstraint = PredicateConstraint(predicate: bPredicate, error: FakeError.FailingCondition);
-
-        constraintSet.add(constraint: aConstraint)
-        constraintSet.add(constraint: bConstraint)
-
-        // When
-
+        
+        // Arrange
+        let firstPredicate = FakePredicate(expected: 2)
+        let firstConstraint = PredicateConstraint(predicate: firstPredicate, error: FakeError.Invalid);
+        
+        let secondPredicate = FakePredicate(expected: 2)
+        let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.FailingCondition);
+        
+        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        
         let expect = expectation(description: "Evaluate all async")
         let summary = ValidationResult.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])
-        constraintSet.evaluate(with : 1) { result in
+        
+        // Act
+        sut.evaluate(with : 1) { result in
             expect.fulfill()
+            
+            // Assert
             XCTAssertEqual(ValidationResult.failure(summary), result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
