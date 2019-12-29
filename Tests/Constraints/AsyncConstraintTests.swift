@@ -38,7 +38,7 @@ class AsyncConstraintTests: XCTestCase {
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
 
-        var actualResult:ValidationResult!
+        var actualResult:Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")
@@ -58,7 +58,7 @@ class AsyncConstraintTests: XCTestCase {
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         
-        var actualresult:ValidationResult!
+        var actualresult:Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")
@@ -102,9 +102,9 @@ extension AsyncConstraintTests {
 
         constraint.add(condition:condition)
 
-        let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
-        let expectedResult = ValidationResult.failure(summary)
-        var actualResult:ValidationResult!
+        let summary = Result.Summary(errors: [FakeError.Invalid])
+        let expectedResult = Result.failure(summary)
+        var actualResult:Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")
@@ -129,9 +129,9 @@ extension AsyncConstraintTests {
 
         constraint.add(condition:condition)
 
-        let summary = ValidationResult.Summary(errors: [FakeError.Invalid])
-        let expectedResult = ValidationResult.failure(summary)
-        var actualResult:ValidationResult!
+        let summary = Result.Summary(errors: [FakeError.Invalid])
+        let expectedResult = Result.failure(summary)
+        var actualResult:Result!
 
         // Given
         let expect = expectation(description: "Async Evaluation")
@@ -164,9 +164,9 @@ extension AsyncConstraintTests {
         c_level_2_1.add(condition:c_level_1_1)
         c_level_ground.add(condition:c_level_2_1)
 
-        var actuallyResult:ValidationResult!
-        let summary = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting Level 2.1"), FakeError.Unexpected("Expecting Level 2.2")])
-        let expectedResult = ValidationResult.failure(summary);
+        var actuallyResult:Result!
+        let summary = Result.Summary(errors: [FakeError.Unexpected("Expecting Level 2.1"), FakeError.Unexpected("Expecting Level 2.2")])
+        let expectedResult = Result.failure(summary);
 
         // When
         let expect = expectation(description: "Async Evaluation")
@@ -199,9 +199,9 @@ extension AsyncConstraintTests {
         condition_1.add(condition:condition_3)
         constraint.add(condition:condition_1)
 
-        let summary = ValidationResult.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
-        let expectedResult = ValidationResult.failure(summary)
-        var actualResult:ValidationResult!
+        let summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
+        let expectedResult = Result.failure(summary)
+        var actualResult:Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")

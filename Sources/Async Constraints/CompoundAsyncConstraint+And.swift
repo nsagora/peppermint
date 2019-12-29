@@ -29,7 +29,7 @@ extension CompoundAsyncConstraint {
          - parameter result: An array of `Result` elements, indicating the evaluation result of each `AsyncConstraint` in collection.
          
          */
-        public func evaluate(with input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+        public func evaluate(with input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: Result) -> Void) {
             
             let operationQueue = OperationQueue()
             operationQueue.isSuspended = true;
@@ -38,9 +38,9 @@ extension CompoundAsyncConstraint {
             let completionOperation = BlockOperation {
                 
                 let results = operations.filter { $0.isFinished }.compactMap{ $0.result }
-                let summary = ValidationResult.Summary(evaluationResults: results)
+                let summary = Result.Summary(evaluationResults: results)
                 queue.async {
-                    completionHandler(ValidationResult(summary: summary))
+                    completionHandler(Result(summary: summary))
                 }
             }
             

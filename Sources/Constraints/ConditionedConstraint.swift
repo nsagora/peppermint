@@ -67,7 +67,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public override func evaluate(with input: T) -> ValidationResult {
+    public override func evaluate(with input: T) -> Result {
 
         guard hasConditions else { return super.evaluate(with: input) }
 

@@ -12,9 +12,9 @@ class ConditionedAsyncConstraintTests: XCTestCase {
         // Given
         let constraint = ConditionedAsyncConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
 
-        let summary = ValidationResult.Summary(errors: [FakeError.Unexpected(invalidFakeInput)])
-        let expectedResult = ValidationResult.failure(summary)
-        var actualResult: ValidationResult!
+        let summary = Result.Summary(errors: [FakeError.Unexpected(invalidFakeInput)])
+        let expectedResult = Result.failure(summary)
+        var actualResult: Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")

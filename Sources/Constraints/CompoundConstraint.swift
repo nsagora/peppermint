@@ -6,7 +6,7 @@ public struct CompoundContraint<T>: Constraint {
     
     private init() { }
     
-    public func evaluate(with input: T) -> ValidationResult {
+    public func evaluate(with input: T) -> Result {
         fatalError()
     }
 }

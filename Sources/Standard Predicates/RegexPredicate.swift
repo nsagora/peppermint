@@ -4,9 +4,11 @@ import Foundation
  The `RegexPredicate` class is used to define regluar expression based conditions used to evaluate input strings.
  */
 public class RegexPredicate: Predicate {
+    
     public typealias InputType = String
+    
     private var expression: String
-
+    
     /**
      Creates and returns a new `RegexPredicate` instance.
      

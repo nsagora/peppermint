@@ -52,7 +52,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+    public func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result) -> Void) {
         
         if (!hasConditions()) {
             return continueEvaluate(with: input, queue: queue, completionHandler: completionHandler)
@@ -73,7 +73,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
         return conditions.count > 0
     }
     
-    private func continueEvaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+    private func continueEvaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result) -> Void) {
         
         predicate.evaluate(with: input, queue: queue) { matches in
             
@@ -82,7 +82,7 @@ public class ConditionedAsyncConstraint<T>: AsyncConstraint {
             }
             else {
                 let error = self.errorBuilder(input)
-                let summary = ValidationResult.Summary(errors: [error])
+                let summary = Result.Summary(errors: [error])
                 completionHandler(.failure(summary))
             }
         }

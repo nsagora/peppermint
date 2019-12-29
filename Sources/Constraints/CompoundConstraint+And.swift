@@ -24,11 +24,11 @@ public struct AndCompoundConstraint<T>: Constraint {
      - parameter with: The input to be validated.
      - returns: An array of `Result` elements, indicating the evaluation result of each `Constraint` in collection.
      */
-    public func evaluate(with input: T) -> ValidationResult {
+    public func evaluate(with input: T) -> Result {
 
         let results = constraints.map{ $0.evaluate(with: input) }
-        let summary = ValidationResult.Summary(evaluationResults: results)
+        let summary = Result.Summary(evaluationResults: results)
 
-        return ValidationResult(summary: summary)
+        return Result(summary: summary)
     }
 }

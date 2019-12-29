@@ -34,7 +34,7 @@ extension CompoundAsyncConstraint {
             }
         }
 
-        var result: ValidationResult?
+        var result: Result?
         
         init(input: T, constraint: AnyAsyncConstraint<T>) {
 

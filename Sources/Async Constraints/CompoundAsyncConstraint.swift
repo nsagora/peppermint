@@ -6,7 +6,7 @@ public struct CompoundAsyncConstraint<T>: AsyncConstraint {
     
     private init() { }
     
-    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (ValidationResult) -> Void) {
+    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (Result) -> Void) {
         fatalError()
     }
 }

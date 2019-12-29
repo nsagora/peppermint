@@ -55,7 +55,7 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: "any")
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.success)
+        XCTAssertEqual(result, Result.success)
     }
     
     func testThatWithoutConstraints_EvaluateAll_IsValid() {
@@ -67,7 +67,7 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: "all")
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.success)
+        XCTAssertEqual(result, Result.success)
     }
 }
 
@@ -83,13 +83,13 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: validFakeInput)
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.success)
+        XCTAssertEqual(result, Result.success)
     }
     
     func testThatForInvalidInput_EvaluateAny_IsInvalid() {
         
         // Arrange
-        let expected = ValidationResult.Summary(errors: [FakeError.Invalid])
+        let expected = Result.Summary(errors: [FakeError.Invalid])
         
         let predicate = FakePredicate(expected: validFakeInput)
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
@@ -99,7 +99,7 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: invalidFakeInput)
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.failure(expected))
+        XCTAssertEqual(result, Result.failure(expected))
     }
     
     func testThatForValidInput_EvaluateAll_IsValid() {
@@ -114,13 +114,13 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: validFakeInput)
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.success)
+        XCTAssertEqual(result, Result.success)
     }
 
     func testThatForInvalidInput_EvaluateAll_IsInvalid() {
         
         // Arrange
-        let expected = ValidationResult.Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
+        let expected = Result.Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
         
         let predicate = FakePredicate(expected: validFakeInput)
         let firstConstraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
@@ -131,6 +131,6 @@ extension CompoundConstraintTests {
         let result = sut.evaluate(with: invalidFakeInput)
         
         // Assert
-        XCTAssertEqual(result, ValidationResult.failure(expected))
+        XCTAssertEqual(result, Result.failure(expected))
     }
 }

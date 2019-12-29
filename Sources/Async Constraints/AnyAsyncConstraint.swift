@@ -10,7 +10,7 @@ public struct AnyAsyncConstraint<T>:AsyncConstraint {
      */
     public typealias InputType = T
 
-    private let _evaluate:(InputType, DispatchQueue, @escaping (ValidationResult) -> Void) -> Void
+    private let _evaluate:(InputType, DispatchQueue, @escaping (Result) -> Void) -> Void
 
     /**
      Creates a type-erased `AsyncConstraint` that wraps the given instance.
@@ -27,7 +27,7 @@ public struct AnyAsyncConstraint<T>:AsyncConstraint {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+    public func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result) -> Void) {
         return _evaluate(input, queue, completionHandler)
     }
 }

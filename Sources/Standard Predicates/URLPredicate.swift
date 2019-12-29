@@ -4,8 +4,9 @@ import Foundation
  The `URLPredicate` class is used to evaluate whether a given input is a syntactically valid URL.
  */
 public class URLPredicate: Predicate {
+    
     public typealias InputType = String
-
+    
     /**
      Creates and returns a new `URLPredicate` instance.
      */

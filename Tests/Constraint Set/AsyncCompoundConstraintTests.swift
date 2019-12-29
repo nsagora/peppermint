@@ -148,7 +148,7 @@ extension AsyncCompoundConstraintTests {
             expect.fulfill()
             
             // Assert
-            XCTAssertEqual(ValidationResult.success, result)
+            XCTAssertEqual(Result.success, result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
@@ -164,14 +164,14 @@ extension AsyncCompoundConstraintTests {
         let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Evaluate all async")
-        let summary = ValidationResult.Summary(errors: [FakeError.FailingCondition])
+        let summary = Result.Summary(errors: [FakeError.FailingCondition])
         
         // Act
         sut.evaluate(with: 1) { result in
             expect.fulfill()
             
             // Assert
-            XCTAssertEqual(ValidationResult.failure(summary), result)
+            XCTAssertEqual(Result.failure(summary), result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }
@@ -188,14 +188,14 @@ extension AsyncCompoundConstraintTests {
         let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Evaluate all async")
-        let summary = ValidationResult.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])
+        let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])
         
         // Act
         sut.evaluate(with : 1) { result in
             expect.fulfill()
             
             // Assert
-            XCTAssertEqual(ValidationResult.failure(summary), result)
+            XCTAssertEqual(Result.failure(summary), result)
         }
         waitForExpectations(timeout: 0.5, handler: nil)
     }

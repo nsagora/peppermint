@@ -24,7 +24,7 @@ public struct OrCompoundConstraint<T>: Constraint {
      - parameter with: The input to be validated.
      - returns: `.success` if the input is valid, `.failure` containing the `Error` registered with the failing `Constraint` otherwise.
      */
-    public func evaluate(with input: T) -> ValidationResult {
+    public func evaluate(with input: T) -> Result {
         
         return constraints.reduce(.success) { $0.isFailed ? $0 : $1.evaluate(with: input) }
     }

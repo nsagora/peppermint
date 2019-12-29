@@ -27,7 +27,7 @@ extension CompoundAsyncConstraint {
          - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Result` parameter:
          - parameter result: `.success` if the input is valid, `.failure` containing the `Error` registered with the failing `AsyncConstraint` otherwise.
          */
-        public func evaluate(with input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: ValidationResult) -> Void) {
+        public func evaluate(with input: T, queue: DispatchQueue = .main, completionHandler: @escaping (_ result: Result) -> Void) {
             
             let operationQueue = OperationQueue()
             operationQueue.isSuspended = true;

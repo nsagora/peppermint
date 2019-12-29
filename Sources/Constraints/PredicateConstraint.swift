@@ -38,7 +38,7 @@ public class PredicateConstraint<T>: Constraint {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public func evaluate(with input: InputType) -> ValidationResult {
+    public func evaluate(with input: InputType) -> Result {
         
         let result = predicate.evaluate(with: input)
         
@@ -47,7 +47,7 @@ public class PredicateConstraint<T>: Constraint {
         }
         
         let error = errorBuilder(input)
-        let summary = ValidationResult.Summary(errors: [error])
+        let summary = Result.Summary(errors: [error])
         return .failure(summary)
     }
 }
