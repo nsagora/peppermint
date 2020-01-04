@@ -4,10 +4,10 @@
         <page name='BlockPredicate'/>
         <page name='System RegexPredicate'/>
         <page name='Custom Predicate'/>
-        <page name='Simple Constraint'/>
+        <page name='Predicate Constraint'/>
         <page name='Dynamic Constraint'/>
         <page name='Conditionated Constraint'/>
-        <page name='ConstraintSet'/>
+        <page name='Compound Contraint'/>
         <page name='EmailPredicate'/>
         <page name='ValueMatchigPredicate'/>
         <page name='URLPredicate'/>

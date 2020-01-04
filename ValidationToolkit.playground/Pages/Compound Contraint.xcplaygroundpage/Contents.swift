@@ -15,15 +15,17 @@ let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
 let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
 let minLenght = RegexPredicate(expression: "^.{8,}$")
 
-var passwordConstraints = ConstraintSet<String>()
-passwordConstraints.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
-passwordConstraints.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
-passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
-passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
-passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
+var passwordConstraint = CompoundContraint.and(subconstraints:
+    PredicateConstraint(predicate: lowerCasePredicate, error: Form.Password.missingLowercase),
+    PredicateConstraint(predicate: upperCasePredicate, error: Form.Password.missingUpercase),
+    PredicateConstraint(predicate: digitsPredicate, error: Form.Password.missingDigits),
+    PredicateConstraint(predicate: specialChars, error: Form.Password.missingSpecialChars),
+    PredicateConstraint(predicate: minLenght, error: Form.Password.minLenght(8))
+)
+
 
 let password = "3nGuard!"
-let result = passwordConstraints.evaluateAll(input: password)
+let result = passwordConstraint.evaluate(with: password)
 
 switch result {
 case .success:
