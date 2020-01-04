@@ -18,8 +18,8 @@ extension CompoundAsyncConstraint {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public static func and<C: AsyncConstraint>(subconstraints: [C]) -> AsyncAndCompoundConstraint<T> where C.InputType == T {
-        return AsyncAndCompoundConstraint(constraints: subconstraints)
+    public static func and<C: AsyncConstraint>(subconstraints: [C]) -> AndAsyncConstraint<T> where C.InputType == T {
+        return AndAsyncConstraint(constraints: subconstraints)
     }
     
     /**
@@ -27,8 +27,8 @@ extension CompoundAsyncConstraint {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public static func and<C: AsyncConstraint>(subconstraints: C...) -> AsyncAndCompoundConstraint<T> where C.InputType == T {
-        return AsyncAndCompoundConstraint(constraints: subconstraints)
+    public static func and<C: AsyncConstraint>(subconstraints: C...) -> AndAsyncConstraint<T> where C.InputType == T {
+        return AndAsyncConstraint(constraints: subconstraints)
     }
 }
 
@@ -39,8 +39,8 @@ extension CompoundAsyncConstraint {
     
     - parameter constraints: `[AsyncConstraint]`
     */
-    public static func or<C: AsyncConstraint>(subconstraints: [C]) -> AsyncOrCompoundConstraint<T> where C.InputType == T {
-        return AsyncOrCompoundConstraint(constraints: subconstraints)
+    public static func or<C: AsyncConstraint>(subconstraints: [C]) -> OrAsyncConstraint<T> where C.InputType == T {
+        return OrAsyncConstraint(constraints: subconstraints)
     }
     
     /**
@@ -48,7 +48,7 @@ extension CompoundAsyncConstraint {
     
     - parameter constraints: `[AsyncConstraint]`
     */
-    public static func or<C: AsyncConstraint>(subconstraints: C...) -> AsyncOrCompoundConstraint<T> where C.InputType == T {
-        return AsyncOrCompoundConstraint(constraints: subconstraints)
+    public static func or<C: AsyncConstraint>(subconstraints: C...) -> OrAsyncConstraint<T> where C.InputType == T {
+        return OrAsyncConstraint(constraints: subconstraints)
     }
 }

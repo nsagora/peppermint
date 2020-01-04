@@ -14,7 +14,7 @@ extension CompoundConstraintTests {
         let constraints = [AnyConstraint<String>]()
         
         // Act
-        let sut = CompoundContraint<String>.andConstraintWith(subconstraints: constraints)
+        let sut = CompoundContraint<String>.and(subconstraints: constraints)
         
         // Assert
         XCTAssertEqual(sut.count, 0)
@@ -27,7 +27,7 @@ extension CompoundConstraintTests {
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
 
         // Act
-        let sut = CompoundContraint<String>.andConstraintWith(subconstraints: [constraint])
+        let sut = CompoundContraint<String>.and(subconstraints: [constraint])
         
         // Assert
         XCTAssertEqual(sut.count, 1)
@@ -40,7 +40,7 @@ extension CompoundConstraintTests {
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
 
         // Act
-        let sut = CompoundContraint<String>.andConstraintWith(subconstraints: constraint)
+        let sut = CompoundContraint<String>.and(subconstraints: constraint)
         
         // Assert
         XCTAssertEqual(sut.count, 1)
@@ -49,7 +49,7 @@ extension CompoundConstraintTests {
     func testThatWithoutConstraints_EvaluateAny_IsValid() {
         // Arrange
         let constraints = [AnyConstraint<String>]()
-        let sut = CompoundContraint.orConstraintWith(subconstraints: constraints)
+        let sut = CompoundContraint.or(subconstraints: constraints)
         
         // Act
         let result = sut.evaluate(with: "any")
@@ -61,7 +61,7 @@ extension CompoundConstraintTests {
     func testThatWithoutConstraints_EvaluateAll_IsValid() {
         // Arrange
         let constraints = [AnyConstraint<String>]()
-        let sut = CompoundContraint.andConstraintWith(subconstraints: constraints)
+        let sut = CompoundContraint.and(subconstraints: constraints)
         
         // Act
         let result = sut.evaluate(with: "all")
@@ -77,7 +77,7 @@ extension CompoundConstraintTests {
         // Arrange
         let predicate = FakePredicate(expected: validFakeInput)
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
-        let sut = CompoundContraint<String>.orConstraintWith(subconstraints: constraint)
+        let sut = CompoundContraint<String>.or(subconstraints: constraint)
         
         // Act
         let result = sut.evaluate(with: validFakeInput)
@@ -93,7 +93,7 @@ extension CompoundConstraintTests {
         
         let predicate = FakePredicate(expected: validFakeInput)
         let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
-        let sut = CompoundContraint<String>.orConstraintWith(subconstraints: constraint)
+        let sut = CompoundContraint<String>.or(subconstraints: constraint)
         
         // Act
         let result = sut.evaluate(with: invalidFakeInput)
@@ -108,7 +108,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validFakeInput)
         let firstConstraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate: predicate, error:FakeError.MissingInput)
-        let sut = CompoundContraint<String>.andConstraintWith(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundContraint<String>.and(subconstraints: firstConstraint, secondConstraint)
         
         // Act
         let result = sut.evaluate(with: validFakeInput)
@@ -125,7 +125,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validFakeInput)
         let firstConstraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate: predicate, error:FakeError.MissingInput)
-        let sut = CompoundContraint<String>.andConstraintWith(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundContraint<String>.and(subconstraints: firstConstraint, secondConstraint)
         
         // Act
         let result = sut.evaluate(with: invalidFakeInput)

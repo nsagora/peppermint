@@ -18,8 +18,8 @@ extension CompoundContraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func andConstraintWith<C: Constraint>(subconstraints: [C]) -> AndCompoundConstraint<T> where C.InputType == T {
-        return AndCompoundConstraint(constraints: subconstraints)
+    public static func and<C: Constraint>(subconstraints: [C]) -> AndConstraint<T> where C.InputType == T {
+        return AndConstraint(constraints: subconstraints)
     }
     
     /**
@@ -27,28 +27,28 @@ extension CompoundContraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func andConstraintWith<C: Constraint>(subconstraints: C...) -> AndCompoundConstraint<T> where C.InputType == T {
-        return AndCompoundConstraint(constraints: subconstraints)
+    public static func and<C: Constraint>(subconstraints: C...) -> AndConstraint<T> where C.InputType == T {
+        return AndConstraint(constraints: subconstraints)
     }
 }
 
 extension CompoundContraint {
     
     /**
-    Create a new `OrCompoundConstraint` instance populated with a predefined list of `Constraints`
+    Create a new `OrConstraint` instance populated with a predefined list of `Constraints`
     
     - parameter constraints: `[Constraint]`
     */
-    public static func orConstraintWith<C: Constraint>(subconstraints: [C]) -> OrCompoundConstraint<T> where C.InputType == T {
-        return OrCompoundConstraint(constraints: subconstraints)
+    public static func or<C: Constraint>(subconstraints: [C]) -> OrConstraint<T> where C.InputType == T {
+        return OrConstraint(constraints: subconstraints)
     }
     
     /**
-    Create a new `OrCompoundConstraint` instance populated with a predefined list of `Constraints`
+    Create a new `OrConstraint` instance populated with a predefined list of `Constraints`
     
     - parameter constraints: `[Constraint]`
     */
-    public static func orConstraintWith<C: Constraint>(subconstraints: C...) -> OrCompoundConstraint<T> where C.InputType == T {
-        return OrCompoundConstraint(constraints: subconstraints)
+    public static func or<C: Constraint>(subconstraints: C...) -> OrConstraint<T> where C.InputType == T {
+        return OrConstraint(constraints: subconstraints)
     }
 }

@@ -4,7 +4,7 @@ extension CompoundAsyncConstraint {
     /**
      A generic collection of `AsyncConstraints` on which an input can be validated on.
      */
-    public struct AsyncAndCompoundConstraint<T>: AsyncConstraint {
+    public struct AndAsyncConstraint<T>: AsyncConstraint {
         
         public typealias InputType = T
         

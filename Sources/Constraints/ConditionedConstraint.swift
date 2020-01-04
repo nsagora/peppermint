@@ -71,7 +71,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
         guard hasConditions else { return super.evaluate(with: input) }
 
-        let constraint = CompoundContraint.andConstraintWith(subconstraints: conditions)
+        let constraint = CompoundContraint.and(subconstraints: conditions)
         let result = constraint.evaluate(with: input)
 
         if result.isSuccessful {
