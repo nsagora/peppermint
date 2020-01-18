@@ -1,25 +1,30 @@
 import Foundation
 
+internal protocol AsyncStrategy {
+    
+    func evaluate<C: AsyncConstraint>(constraints: [C], with input: C.InputType, queue: DispatchQueue, completionHandler: @escaping (Result) -> Void)
+}
+
 public struct CompoundAsyncConstraint<T>: AsyncConstraint {
     
     public typealias InputType = T
     
-    private init() { }
+    var constraints: [AnyAsyncConstraint<T>]
+    var evaluationStrategy: AsyncStrategy
     
-    public func evaluate(with input: T, queue: DispatchQueue, completionHandler: @escaping (Result) -> Void) {
-        fatalError()
-    }
-}
-
-extension CompoundAsyncConstraint {
+    /**
+     Returns the number of constraints in collection
+     */
+    var count: Int { constraints.count }
     
     /**
      Create a new `AsyncAndCompoundConstraint` instance populated with a predefined list of `AsyncConstraints`
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public static func and<C: AsyncConstraint>(subconstraints: [C]) -> AndAsyncConstraint<T> where C.InputType == T {
-        return AndAsyncConstraint(constraints: subconstraints)
+    public init<C: AsyncConstraint>(allOf subconstraints: [C]) where C.InputType == T {
+        self.constraints = subconstraints.map { $0.erase() }
+        self.evaluationStrategy = AndStrategy()
     }
     
     /**
@@ -27,20 +32,18 @@ extension CompoundAsyncConstraint {
      
      - parameter constraints: `[AsyncConstraint]`
      */
-    public static func and<C: AsyncConstraint>(subconstraints: C...) -> AndAsyncConstraint<T> where C.InputType == T {
-        return AndAsyncConstraint(constraints: subconstraints)
+    public init<C: AsyncConstraint>(allOf subconstraints: C...) where C.InputType == T {
+        self.init(allOf: subconstraints)
     }
-}
-
-extension CompoundAsyncConstraint {
     
     /**
     Create a new `AsyncAndCompoundConstraint` instance populated with a predefined list of `AsyncConstraints`
     
     - parameter constraints: `[AsyncConstraint]`
     */
-    public static func or<C: AsyncConstraint>(subconstraints: [C]) -> OrAsyncConstraint<T> where C.InputType == T {
-        return OrAsyncConstraint(constraints: subconstraints)
+    public init<C: AsyncConstraint>(anyOf subconstraints: [C]) where C.InputType == T {
+        self.constraints = subconstraints.map { $0.erase() }
+        self.evaluationStrategy = OrStrategy()
     }
     
     /**
@@ -48,7 +51,11 @@ extension CompoundAsyncConstraint {
     
     - parameter constraints: `[AsyncConstraint]`
     */
-    public static func or<C: AsyncConstraint>(subconstraints: C...) -> OrAsyncConstraint<T> where C.InputType == T {
-        return OrAsyncConstraint(constraints: subconstraints)
+    public init<C: AsyncConstraint>(anyOf subconstraints: C...)  where C.InputType == T {
+        self.init(anyOf: subconstraints)
+    }
+    
+    public func evaluate(with input: T, queue: DispatchQueue = .main, completionHandler: @escaping (Result) -> Void) {
+        evaluationStrategy.evaluate(constraints: constraints, with: input, queue: queue, completionHandler: completionHandler)
     }
 }

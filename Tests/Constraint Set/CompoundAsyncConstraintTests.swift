@@ -9,7 +9,7 @@ class AsyncCompoundConstraintTests: XCTestCase {
         let constraints = [AnyAsyncConstraint<Int>]()
         
         // Act
-        let sut = CompoundAsyncConstraint.and(subconstraints: constraints)
+        let sut = CompoundAsyncConstraint(allOf: constraints)
         
         // Assert
         XCTAssertEqual(sut.count, 0)
@@ -22,7 +22,7 @@ class AsyncCompoundConstraintTests: XCTestCase {
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
         // Act
-        let sut = CompoundAsyncConstraint.and(subconstraints: [constraint])
+        let sut = CompoundAsyncConstraint(allOf: [constraint])
         
         // Assert
         XCTAssertEqual(sut.count, 1)
@@ -35,7 +35,7 @@ class AsyncCompoundConstraintTests: XCTestCase {
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid);
         
         // Act
-        let constraintSet = CompoundAsyncConstraint.and(subconstraints: constraint)
+        let constraintSet = CompoundAsyncConstraint(allOf: constraint)
         
         
         // Assert
@@ -50,7 +50,7 @@ extension AsyncCompoundConstraintTests {
         // Arrange
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        let sut = CompoundAsyncConstraint.or(subconstraints: constraint)
+        let sut = CompoundAsyncConstraint(anyOf: constraint)
         
         let expect = expectation(description: "Async Evaluation")
         
@@ -73,7 +73,7 @@ extension AsyncCompoundConstraintTests {
         let predicate = FakePredicate(expected: 10)
         let firstConstraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate: predicate, error: FakeError.MissingInput)
-        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(anyOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Async Evaluation")
         
@@ -93,7 +93,7 @@ extension AsyncCompoundConstraintTests {
         let predicate = FakePredicate(expected: 10)
         let firstConstraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate: predicate, error: FakeError.MissingInput)
-        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(anyOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Async Evaluation")
         
@@ -116,7 +116,7 @@ extension AsyncCompoundConstraintTests {
         let secondPredicate = FakePredicate(expected: 20)
         let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.Invalid);
         
-        let sut = CompoundAsyncConstraint.or(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(anyOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Asyn Evaluation")
         
@@ -139,7 +139,7 @@ extension AsyncCompoundConstraintTests {
         let secondPredicate = FakePredicate(expected: 1)
         let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.Invalid);
         
-        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(allOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Evaluate all async")
         
@@ -161,7 +161,7 @@ extension AsyncCompoundConstraintTests {
         let secondPredicate = FakePredicate(expected: 2)
         let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.FailingCondition);
         
-        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(allOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Evaluate all async")
         let summary = Result.Summary(errors: [FakeError.FailingCondition])
@@ -185,7 +185,7 @@ extension AsyncCompoundConstraintTests {
         let secondPredicate = FakePredicate(expected: 2)
         let secondConstraint = PredicateConstraint(predicate: secondPredicate, error: FakeError.FailingCondition);
         
-        let sut = CompoundAsyncConstraint.and(subconstraints: firstConstraint, secondConstraint)
+        let sut = CompoundAsyncConstraint(allOf: firstConstraint, secondConstraint)
         
         let expect = expectation(description: "Evaluate all async")
         let summary = Result.Summary(errors: [FakeError.Invalid, FakeError.FailingCondition])
