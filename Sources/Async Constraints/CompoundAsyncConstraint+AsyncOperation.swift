@@ -1,6 +1,6 @@
 import Foundation
 
-extension AsyncConstraintSet {
+extension CompoundAsyncConstraint {
     
     class AsyncOperation<T>: Operation {
         
@@ -36,7 +36,7 @@ extension AsyncConstraintSet {
 
         var result: Result?
         
-        init(input:T, constraint: AnyAsyncConstraint<T>) {
+        init(input: T, constraint: AnyAsyncConstraint<T>) {
 
             self.input = input
             self.constraint = constraint

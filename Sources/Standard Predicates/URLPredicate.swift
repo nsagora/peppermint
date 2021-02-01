@@ -4,7 +4,9 @@ import Foundation
  The `URLPredicate` class is used to evaluate whether a given input is a syntactically valid URL.
  */
 public class URLPredicate: Predicate {
-
+    
+    public typealias InputType = String
+    
     /**
      Creates and returns a new `URLPredicate` instance.
      */
@@ -16,7 +18,7 @@ public class URLPredicate: Predicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input is a valid URL, otherwise `false`.
      */
-    public func evaluate(with input: String) -> Bool {
+    public func evaluate(with input: InputType) -> Bool {
         return URL(string: input) != nil
     }
 }

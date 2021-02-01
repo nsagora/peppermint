@@ -10,7 +10,7 @@ class AsyncOperationTests: XCTestCase {
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
 
         // When
-        let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
+        let operation = CompoundAsyncConstraint<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
 
         // Then
         XCTAssertTrue(operation.isAsynchronous)
@@ -23,7 +23,7 @@ class AsyncOperationTests: XCTestCase {
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         
         // When
-        let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
+        let operation = CompoundAsyncConstraint<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
 
         // Then
         XCTAssertTrue(operation.isReady)
@@ -34,7 +34,7 @@ class AsyncOperationTests: XCTestCase {
         // Given
         let predicate = FakePredicate(expected: 10)
         let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
+        let operation = CompoundAsyncConstraint<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
 
         let queue = OperationQueue()
         queue.isSuspended = true
@@ -53,7 +53,7 @@ class AsyncOperationTests: XCTestCase {
         var isExecuting = false
 
         let constraint = TestableAsyncConstraint<Int>()
-        let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
+        let operation = CompoundAsyncConstraint<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
 
         let queue = OperationQueue()
         queue.isSuspended = true
@@ -77,7 +77,7 @@ class AsyncOperationTests: XCTestCase {
 
         // Given
         let constraint = TestableAsyncConstraint<Int>()
-        let operation = AsyncConstraintSet<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
+        let operation = CompoundAsyncConstraint<Int>.AsyncOperation(input: 10, constraint:constraint.erase())
         operation.cancel()
 
         // When

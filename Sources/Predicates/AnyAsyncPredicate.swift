@@ -10,12 +10,12 @@ public class AnyAsyncPredicate<T>: AsyncPredicate {
      */
     public typealias InputType = T
 
-    var _evaluate: (T, DispatchQueue, @escaping (Bool) -> Void) -> Void
+    var _evaluate: (InputType, DispatchQueue, @escaping (Bool) -> Void) -> Void
 
     /**
      Creates a type-erased `AsyncPredicate` that wraps the given instance.
      */
-    public init<P:AsyncPredicate>(_ predicate:P) where P.InputType == T {
+    public init<P: AsyncPredicate>(_ predicate: P) where P.InputType == InputType {
         _evaluate = predicate.evaluate
     }
 

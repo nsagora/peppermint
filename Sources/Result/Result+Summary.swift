@@ -1,66 +1,45 @@
 import Foundation
 
-extension Result {
-
-    internal init(summary:Summary) {
-
-        if summary.errors.count == 0 {
-            self = .valid
-        }
-        else {
-            self = .invalid(summary)
-        }
-    }
-
+public extension Result {
     /**
      The summary of a validation result.
      */
-    public struct Summary {
-
+    struct Summary {
+        
         /**
-         `[Error]` if the validation result is `.invalid`, `nil` otherwise.
+         `[Error]` if the validation result is `.failure`, `nil` otherwise.
          */
         public private(set) var errors = [Error]()
-
+        
         /**
-         The number of failing constraints for a `.invalid` result, `0` otherwise.
+         The number of failing constraints for a `.failure` result, `0` otherwise.
          */
-        public var failingConstraints: Int {
-            return errors.count
-        }
-
+        public var failingConstraints: Int { errors.count }
+        
         /**
-         `true` if the validation result is `.invalid`, `false` otherwise.
+         `true` if the validation result is `.failure`, `false` otherwise.
          */
-        public var hasFailingContraints: Bool {
-            return failingConstraints > 0
+        public var hasFailingContraints: Bool { failingConstraints > 0 }
+        
+        internal init(errors: [Error]) {
+            self.errors = errors
         }
-
-        internal init(errors:[Error]) {
-            self.errors = errors;
-        }
-
-        internal init(evaluationResults:[Result]) {
-
-            var errors = [Error]()
-            for result in evaluationResults {
-                switch result {
-                case .invalid(let summary):
-                    errors.append(contentsOf: summary.errors)
-                default:
-                    continue
-                }
-            }
-
+        
+        internal init(evaluationResults: [Result]) {
+            let errors = evaluationResults
+                .filter { $0.isFailed }
+                .reduce(into: [Error]()) { $0 += $1.summary.errors }
+            
             self.init(errors: errors)
         }
     }
 }
 
+
 // MARK: - Equatable conformance
 
 extension Result.Summary: Equatable {
-
+    
     public static func ==(lhs: Result.Summary, rhs: Result.Summary) -> Bool {
         return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
     }
@@ -69,5 +48,5 @@ extension Result.Summary: Equatable {
 // MARK: - Factory methods
 
 extension Result.Summary {
-    internal static var Successful = Result.Summary(errors: [])
+    internal static var successful = Result.Summary(errors: [])
 }

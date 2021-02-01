@@ -18,5 +18,5 @@ public protocol AsyncPredicate {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter matches: `true` if input matches the conditions specified by the receiver, `false` otherwise.
      */
-    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ matches:Bool) -> Void)
+    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ matches: Bool) -> Void)
 }

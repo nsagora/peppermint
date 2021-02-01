@@ -8,11 +8,11 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
     private var conditions =  [AnyConstraint<T>]()
 
     /**
-        The number of conditions that must ....
+        The number of conditions that must be evaluated i
     */
-    public var conditionsCount: Int {
-        return conditions.count;
-    }
+    public var conditionsCount: Int { conditions.count }
+    
+    private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
      Create a new `ConditionedConstraint` instance
@@ -20,7 +20,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public override init<P>(predicate: P, error: Error) where T == P.InputType, P : Predicate {
+    public override init<P>(predicate: P, error: Error) where T == P.InputType, P: Predicate {
         super.init(predicate: predicate, error: error)
     }
     /**
@@ -38,7 +38,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraint: `Constraint`
      */
-    public func add<C:Constraint>(condition:C) where C.InputType == T {
+    public func add<C: Constraint>(condition: C) where C.InputType == T {
         conditions.append(condition.erase())
     }
 
@@ -47,7 +47,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C:Constraint>(conditions:[C]) where C.InputType == T {
+    public func add<C: Constraint>(conditions: [C]) where C.InputType == T {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
@@ -57,7 +57,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C:Constraint>(conditions:C...) where C.InputType == T {
+    public func add<C: Constraint>(conditions: C...) where C.InputType == T {
         self.add(conditions: conditions)
     }
 
@@ -65,25 +65,19 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      Evaluates the input on the `Predicate`.
 
      - parameter input: The input to be validated.
-     - returns: `.valid` if the input is valid,`.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public override func evaluate(with input:T) -> Result {
+    public override func evaluate(with input: T) -> Result {
 
-        if !hasConditions() {
-            return super.evaluate(with: input)
-        }
+        guard hasConditions else { return super.evaluate(with: input) }
 
-        let constraintSet = ConstraintSet(constraints: conditions)
-        let result = constraintSet.evaluateAll(input: input)
+        let constraint = CompoundContraint(allOf: conditions)
+        let result = constraint.evaluate(with: input)
 
-        if result.isValid {
+        if result.isSuccessful {
             return super.evaluate(with: input)
         }
 
         return result
-    }
-
-    private func hasConditions() -> Bool {
-        return conditions.count > 0
     }
 }

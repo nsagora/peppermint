@@ -49,7 +49,7 @@ class AsyncConstraintTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
 
         // Then
-        XCTAssertTrue(actualResult.isValid)
+        XCTAssertTrue(actualResult.isSuccessful)
     }
     
     func testThatItCallsCallbackWithErrorOnError() {
@@ -69,7 +69,7 @@ class AsyncConstraintTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
 
         // Then
-        XCTAssertTrue(actualresult.isInvalid)
+        XCTAssertTrue(actualresult.isFailed)
         XCTAssertTrue(actualresult.summary.errors is [FakeError])
     }
 }
@@ -103,7 +103,7 @@ extension AsyncConstraintTests {
         constraint.add(condition:condition)
 
         let summary = Result.Summary(errors: [FakeError.Invalid])
-        let expectedResult = Result.invalid(summary)
+        let expectedResult = Result.failure(summary)
         var actualResult:Result!
 
         // When
@@ -130,7 +130,7 @@ extension AsyncConstraintTests {
         constraint.add(condition:condition)
 
         let summary = Result.Summary(errors: [FakeError.Invalid])
-        let expectedResult = Result.invalid(summary)
+        let expectedResult = Result.failure(summary)
         var actualResult:Result!
 
         // Given
@@ -166,7 +166,7 @@ extension AsyncConstraintTests {
 
         var actuallyResult:Result!
         let summary = Result.Summary(errors: [FakeError.Unexpected("Expecting Level 2.1"), FakeError.Unexpected("Expecting Level 2.2")])
-        let expectedResult = Result.invalid(summary);
+        let expectedResult = Result.failure(summary);
 
         // When
         let expect = expectation(description: "Async Evaluation")
@@ -200,7 +200,7 @@ extension AsyncConstraintTests {
         constraint.add(condition:condition_1)
 
         let summary = Result.Summary(errors: [FakeError.Unexpected("Expecting 002"), FakeError.Unexpected("Expecting 003")])
-        let expectedResult = Result.invalid(summary)
+        let expectedResult = Result.failure(summary)
         var actualResult:Result!
 
         // When

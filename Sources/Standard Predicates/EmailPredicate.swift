@@ -4,6 +4,8 @@ import Foundation
  The `EmailPredicate` class is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
  */
 public class EmailPredicate: Predicate {
+    
+    public typealias InputType = String
 
     private let rule: RegexPredicate
     private let regex = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +
@@ -27,7 +29,7 @@ public class EmailPredicate: Predicate {
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input is a syntactically valid email, according to the RFC 5322 standard, otherwise `false`.
      */
-    public func evaluate(with input: String) -> Bool {
+    public func evaluate(with input: InputType) -> Bool {
         return rule.evaluate(with: input)
     }
 }

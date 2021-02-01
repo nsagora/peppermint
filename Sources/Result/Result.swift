@@ -1,51 +1,58 @@
 import Foundation
 
 /**
- The result of a validation action.
+ A value that represents a successfull or a failed evalutation. In case of failure, it contains a `ValidationResult.Summary` that summarises the reason behind it.
  */
 public enum Result {
-    /** 
-     Represents a valid validation.
-     */
-    case valid
-    
+
     /**
-     Represents a failed validation. 
-     
-     It has an associated `Result.Summary` to describe the reason of the failure.
+     Validation was succesfull.
      */
-    case invalid(Summary)
+    case success
+
+    /**
+     Validation failed. Contains `ValidationResult.Summary` that details the cause for failure.
+     */
+    case failure(Summary)
 }
 
-extension Result {
-
+public extension Result {
+    
+    internal init(summary: Summary) {
+        
+        if summary.errors.isEmpty {
+            self = .success
+        }
+        else {
+            self = .failure(summary)
+        }
+    }
+    
     /**
      `true` if the validation result is valid, `false` otherwise.
      */
-    public var isValid:Bool {
+    var isSuccessful: Bool {
         switch self {
-        case .valid:
-            return true
-        default:
-            return false
+        case .success: return true
+        case .failure: return false
         }
     }
-
+    
     /**
-     `false` if the validation result is `.invalid` or `.unevaluated`, `true` otherwise.
+     `false` if the validation result is `.failure` or `.unevaluated`, `true` otherwise.
      */
-    public var isInvalid:Bool {
-        return !isValid
-    }
-
+    var isFailed: Bool { !isSuccessful }
+    
     /**
      `Summary` of the validation result.
      */
-    public var summary: Summary {
+    var summary: Summary {
         switch self {
-        case .invalid(let summary): return summary
-        case .valid: return Summary.Successful
+        case .failure(let summary): return summary
+        case .success: return .successful
         }
     }
 }
 
+
+extension Result: Equatable {}

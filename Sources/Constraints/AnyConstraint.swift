@@ -10,12 +10,12 @@ public struct AnyConstraint<T>:Constraint {
      */
     public typealias InputType = T
 
-    private let _evaluate:(T) -> Result
+    private let _evaluate: (InputType) -> Result
 
     /**
      Creates a type-erased `Constraint` that wraps the given instance.
      */
-    public init<C:Constraint>(_ constraint:C) where C.InputType == T {
+    public init<C: Constraint>(_ constraint: C) where C.InputType == InputType {
         _evaluate = constraint.evaluate
     }
 
@@ -23,7 +23,7 @@ public struct AnyConstraint<T>:Constraint {
      Evaluates the input against the receiver.
 
      - parameter input: The input to be validated.
-     - returns: `.valid` if the input is valid,`.invalid` containing the `Result.Summary` of the failing `Constraint`s otherwise.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: InputType) -> Result {
         return _evaluate(input)

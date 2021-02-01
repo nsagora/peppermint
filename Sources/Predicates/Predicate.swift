@@ -33,7 +33,7 @@ extension Predicate {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter matches: `true` if input matches the conditions specified by the receiver, `false` otherwise.
      */
-    public func evaluate(with input: InputType, queue: DispatchQueue = .main, completionHandler: @escaping (_ matches:Bool) -> Void) {
+    public func evaluate(with input: InputType, queue: DispatchQueue = .main, completionHandler: @escaping (_ matches: Bool) -> Void) {
         
         workQueue.async {
             let result = self.evaluate(with: input)
