@@ -3,7 +3,7 @@ import Foundation
 /**
  A value that represents a successfull or a failed evalutation. In case of failure, it contains a `ValidationResult.Summary` that summarises the reason behind it.
  */
-public enum ValidationResult {
+public enum Result {
 
     /**
      Validation was succesfull.
@@ -16,7 +16,7 @@ public enum ValidationResult {
     case failure(Summary)
 }
 
-public extension ValidationResult {
+public extension Result {
     
     internal init(summary: Summary) {
         
@@ -41,9 +41,7 @@ public extension ValidationResult {
     /**
      `false` if the validation result is `.failure` or `.unevaluated`, `true` otherwise.
      */
-    var isFailed: Bool {
-        return !isSuccessful
-    }
+    var isFailed: Bool { !isSuccessful }
     
     /**
      `Summary` of the validation result.
@@ -57,4 +55,4 @@ public extension ValidationResult {
 }
 
 
-extension ValidationResult: Equatable {}
+extension Result: Equatable {}

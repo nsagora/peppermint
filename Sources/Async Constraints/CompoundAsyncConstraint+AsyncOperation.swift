@@ -1,6 +1,6 @@
 import Foundation
 
-extension AsyncConstraintSet {
+extension CompoundAsyncConstraint {
     
     class AsyncOperation<T>: Operation {
         
@@ -34,7 +34,7 @@ extension AsyncConstraintSet {
             }
         }
 
-        var result: ValidationResult?
+        var result: Result?
         
         init(input: T, constraint: AnyAsyncConstraint<T>) {
 

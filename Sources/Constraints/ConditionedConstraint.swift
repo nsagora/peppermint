@@ -8,11 +8,11 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
     private var conditions =  [AnyConstraint<T>]()
 
     /**
-        The number of conditions that must ....
+        The number of conditions that must be evaluated i
     */
-    public var conditionsCount: Int {
-        return conditions.count;
-    }
+    public var conditionsCount: Int { conditions.count }
+    
+    private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
      Create a new `ConditionedConstraint` instance
@@ -67,23 +67,17 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public override func evaluate(with input: T) -> ValidationResult {
+    public override func evaluate(with input: T) -> Result {
 
-        if !hasConditions() {
-            return super.evaluate(with: input)
-        }
+        guard hasConditions else { return super.evaluate(with: input) }
 
-        let constraintSet = ConstraintSet(constraints: conditions)
-        let result = constraintSet.evaluateAll(input: input)
+        let constraint = CompoundContraint(allOf: conditions)
+        let result = constraint.evaluate(with: input)
 
         if result.isSuccessful {
             return super.evaluate(with: input)
         }
 
         return result
-    }
-
-    private func hasConditions() -> Bool {
-        return conditions.count > 0
     }
 }
