@@ -1,6 +1,40 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Async Constraints/CompoundAsyncConstraint.swift",
+      "line": 8,
+      "symbol": "CompoundAsyncConstraint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/CompoundConstraint.swift",
+      "line": 7,
+      "symbol": "CompoundContraint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/KeyPathConstraint.swift",
+      "line": 3,
+      "symbol": "KeyPathConstraint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/KeyPathConstraint.swift",
+      "line": 10,
+      "symbol": "KeyPathConstraint.init(_:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/TypeConstraint.swift",
+      "line": 3,
+      "symbol": "TypeConstraint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/alex/Developer/opensource/validation-toolkit"
 }
