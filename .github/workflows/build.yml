@@ -1,4 +1,4 @@
-name: Push
+name: Build
 
 on: [push]
 
@@ -8,6 +8,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Build
         run: swift build
       - name: Tests
