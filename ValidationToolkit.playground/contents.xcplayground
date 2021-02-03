@@ -8,6 +8,7 @@
         <page name='Dynamic Constraint'/>
         <page name='Conditionated Constraint'/>
         <page name='Compound Contraint'/>
+        <page name='TypeContraint'/>
         <page name='EmailPredicate'/>
         <page name='ValueMatchigPredicate'/>
         <page name='URLPredicate'/>
