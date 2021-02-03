@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AsyncConstraintSet Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/AsyncConstraintSet" class="dashAnchor"></a>
+    <a title="AsyncConstraintSet Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ValidationToolkit Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ValidationToolkit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        AsyncConstraintSet Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AnyAsyncPredicate.html">AnyAsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AnyPredicate.html">AnyPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BlockPredicate.html">BlockPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConditionedAsyncConstraint.html">ConditionedAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConditionedConstraint.html">ConditionedConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PairMatchingPredicate.html">PairMatchingPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PredicateConstraint.html">PredicateConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RegexPredicate.html">RegexPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/URLPredicate.html">URLPredicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ValidationResult.html">ValidationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ValidationResult/Summary.html">– Summary</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AsyncPredicate.html">AsyncPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Constraint.html">Constraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Predicate.html">Predicate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AnyAsyncConstraint.html">AnyAsyncConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyConstraint.html">AnyConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AsyncConstraintSet.html">AsyncConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConstraintSet.html">ConstraintSet</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>AsyncConstraintSet</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AsyncConstraintSet</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
+            <p>A generic collection of <code>AsyncConstraints</code> on which an input can be validated on.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV5countSivp"></a>
+                    <a name="//apple_ref/swift/Property/count" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV5countSivp">count</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number of constraints in collection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetVACyxGycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetVACyxGycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>AsyncConstraintSet</code> instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV11constraintsACyxGSayqd__G_tc9InputTypeQyd__RszAA0cD0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(constraints:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV11constraintsACyxGSayqd__G_tc9InputTypeQyd__RszAA0cD0Rd__lufc">init(constraints:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>AsyncConstraintSet</code> instance populated with a predefined list of <code>AsyncConstraints</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">constraints</span><span class="p">:</span> <span class="p">[</span><span class="kt">C</span><span class="p">])</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">InputType</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constraints</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>[AsyncConstraint]</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV11constraintsACyxGqd__d_tc9InputTypeQyd__RszAA0cD0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(constraints:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV11constraintsACyxGqd__d_tc9InputTypeQyd__RszAA0cD0Rd__lufc">init(constraints:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>AsyncConstraintSet</code> instance populated with a unsized list of <code>AsyncConstraints</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">constraints</span><span class="p">:</span> <span class="kt">C</span><span class="o">...</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">InputType</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constraints</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>[AsyncConstraint]</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV3add10constraintyqd___t9InputTypeQyd__RszAA0cD0Rd__lF"></a>
+                    <a name="//apple_ref/swift/Method/add(constraint:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV3add10constraintyqd___t9InputTypeQyd__RszAA0cD0Rd__lF">add(constraint:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a <code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code> to the generic collection of constraints.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="n">add</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">constraint</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">InputType</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constraint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV11evaluateAny5input5queue17completionHandleryx_So012OS_dispatch_I0CyAA0A6ResultOctF"></a>
+                    <a name="//apple_ref/swift/Method/evaluateAny(input:queue:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV11evaluateAny5input5queue17completionHandleryx_So012OS_dispatch_I0CyAA0A6ResultOctF">evaluateAny(input:queue:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronous evaluates the input on all <code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code>s until the first fails.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluateAny</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/ValidationResult.html">ValidationResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input to be validated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The queue on which the completion handler is executed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler to call when the evaluation is complete. It takes a <code>Result</code> parameter:</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>result</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>.success</code> if the input is valid, <code>.failure</code> containing the <code>Error</code> registered with the failing <code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code> otherwise.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17ValidationToolkit18AsyncConstraintSetV11evaluateAll5input5queue17completionHandleryx_So012OS_dispatch_I0CyAA0A6ResultOctF"></a>
+                    <a name="//apple_ref/swift/Method/evaluateAll(input:queue:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17ValidationToolkit18AsyncConstraintSetV11evaluateAll5input5queue17completionHandleryx_So012OS_dispatch_I0CyAA0A6ResultOctF">evaluateAll(input:queue:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronous evaluates the input on all <code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code>s in the collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluateAll</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/ValidationResult.html">ValidationResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input to be validated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The queue on which the completion handler is executed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler to call when the evaluation is complete. It takes a <code>Array&lt;Result&gt;</code> parameter:</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>result</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of <code>Result</code> elements, indicating the evaluation result of each <code><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></code> in collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://github.com/nsagora/validation-toolkit" target="_blank" rel="external">Alex Cristea</a>. All rights reserved. (Last updated: 2019-04-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

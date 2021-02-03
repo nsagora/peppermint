@@ -1,0 +1,20 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        run: swift build
+      - name: Tests
+        run: swift test --enable-code-coverage
+      - name: Codecov
+        run: |
+          xcrun llvm-cov export -format="lcov" .build/debug/ValidationToolkitPackageTests.xctest/Contents/MacOS/ValidationToolkitPackageTests -instr-profile .build/debug/codecov/default.profdata > .build/ValidationToolkitPackageTests.lcov
+          bash <(curl https://codecov.io/bash)
