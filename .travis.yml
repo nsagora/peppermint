@@ -4,4 +4,4 @@ osx_image: xcode12
 
 script:
   - swift build
-  - swift test --enable-code-coverage
+  - swift test
