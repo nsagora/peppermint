@@ -1,30 +1,28 @@
 # Validation Toolkit [![badge-version]][url-validationtoolkit]
 
-[![badge-travis]][url-travis] 
+[![badge-github]][url-validationtoolkit]
 [![badge-codecov]][url-codecov]
 [![badge-docs]][url-validationtoolkit-docs]
-[![badge-swift-pm]][url-swift-package-manager]
-[![badge-carthage]][url-carthage]
 [![badge-license]][url-license]
 [![badge-twitter]][url-twitter]
 
 1. [Introduction](#introduction)
-	- [Separation of concerns](#separation-of-concerns)
-	- [All platforms availability](#all-platforms-availability)
-	- [Open to extensibility](#open-to-extensibility)
+   - [Separation of concerns](#separation-of-concerns)
+   - [All platforms availability](#all-platforms-availability)
+   - [Open to extensibility](#open-to-extensibility)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
-	- [Carthage](#carthage)
-	- [CocoaPods](#cocoapods)
-	- [Swift Package Manager](#swift-package-manager)
-	- [Manually](#manually)
+   - [Carthage](#carthage)
+   - [CocoaPods](#cocoapods)
+   - [Swift Package Manager](#swift-package-manager)
+   - [Manually](#manually)
 4. [Usage Examples](#usage-examples)
-	- [Predicates](#predicates)
-	- [Constraints](#constraints)
-	- [Constraint Sets](#constraint-sets)
-6. [Contribute](#contribute)
-7. [Meta](#meta)
-	- [Credits and References](#credits-and-references)
+   - [Predicates](#predicates)
+   - [Constraints](#constraints)
+   - [Constraint Sets](#constraint-sets)
+5. [Contribute](#contribute)
+6. [Meta](#meta)
+   - [Credits and References](#credits-and-references)
 
 ## Introduction
 
@@ -53,6 +51,7 @@ Every project is unique in it's challenges and it's great when we can focus on s
 `ValidationToolkit` is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.
 
 ## Requirements
+
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
 - Swift 3.0+
@@ -113,6 +112,7 @@ Note that this requires CocoaPods version 1.0.0, and your iOS deployment target 
 ```
 $ gem install cocoapods
 ```
+
 </details>
 
 ### Swift Package Manager
@@ -134,12 +134,14 @@ let package = Package(
 Note that the [Swift Package Manager][url-swift-package-manager] is still in early design and development, for more information checkout its [GitHub Page][url-swift-package-manager-github].
 
 ### Manually
+
 To use this library in your project manually you may:
 
 1. for Projects, just drag the `Sources` folder into the project tree
 2. for Workspaces, include the whole `ValidationToolkit.xcodeproj`
 
 ## Usage example
+
 For a comprehensive list of examples try the `ValidationToolikit.playground`:
 
 1. Download the repository locally on your machine
@@ -162,6 +164,7 @@ predicate.evaluate(with: "a") // returns true
 predicate.evaluate(with: "5") // returns false
 predicate.evaluate(with: "ab") // returns false
 ```
+
 </details>
 
 <details>
@@ -172,6 +175,7 @@ let pred = BlockPredicate<String> { $0.characters.count > 2 }
 predicate.evaluate(with: "a") // returns false
 predicate.evaluate(with: "abc") // returns true
 ```
+
 </details>
 
 In addition, the toolkit offers a set of common validation predicates that your project can benefit of:
@@ -185,6 +189,7 @@ predicate.evaluate(with: "hello@") // returns false
 predicate.evaluate(with: "hello@nsagora.com") // returns true
 predicate.evaluate(with: "héllo@nsagora.com") // returns true
 ```
+
 </details>
 
 <details>
@@ -195,6 +200,7 @@ let predicate = URLPredicate()
 predicate.evaluate(with: "http://www.url.com") // returns true
 predicate.evaluate(with: "http:\\www.url.com") // returns false
 ```
+
 </details>
 
 <details>
@@ -205,6 +211,7 @@ let predicate = PairMatchingPredicate()
 predicate.evaluate(with: ("swift", "swift")) // returns true
 predicate.evaluate(with: ("swift", "obj-c")) // returns false
 ```
+
 </details>
 
 On top of that, developers can build more advanced or complex predicates by extending the `Predicate` protocol, and/ or by composing or decorating the existing predicates:
@@ -233,6 +240,7 @@ predicate.evaluate(with: "alph") // returns false
 predicate.evaluate(with: "alpha") // returns true
 predicate.evaluate(with: "alphabet") // returns true
 ```
+
 </details>
 
 ### Constraints
@@ -260,6 +268,7 @@ enum MyError:Error {
     case magicWord
 }
 ```
+
 </details>
 
 ### Constraint Sets
@@ -274,7 +283,7 @@ To provide context, a `ConstraintSet` allows us to constraint a piece of data as
 <details>
 <summary>ConstraintSet</summary
 
-An example is that of the registration form, whereby users are prompted to enter a strong *password*. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
+An example is that of the registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
 `ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the user's password data:
 
@@ -304,17 +313,18 @@ case .invalid(let summary):
 ```
 
 From above, we see that once we've constructed the `passwordConstraints`, we're simply calling `evaluateAll(input:)` to get a `Summary` of our evaluation result. This summary can then be handled as we please.
+
 </details>
 
 ## Contribute
 
-We would love you for the contribution to **ValidationToolkit**, check the [``LICENSE``][url-license-file] file for more info.
+We would love you for the contribution to **ValidationToolkit**, check the [`LICENSE`][url-license-file] file for more info.
 
 ## Meta
 
 This project is developed and maintained by the members of [iOS NSAgora][url-twitter], the community of iOS Developers of Iași, Romania.
 
-Distributed under the [MIT][url-license] license. See [``LICENSE``][url-license-file] for more information.
+Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-file] for more information.
 
 [https://github.com/nsagora/validation-toolkit]
 
@@ -327,30 +337,20 @@ We got inspired from other open source projects and they worth to be mentioned b
 
 [url-validationtoolkit]: https://github.com/nsagora/validation-toolkit
 [url-validationtoolkit-docs]: https://nsagora.github.io/validation-toolkit/
-
 [url-carthage]: https://github.com/Carthage/Carthage
 [url-carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
-
 [url-cocoapods]: https://cocoapods.org
 [url-cocoapods-podfile]: https://guides.cocoapods.org/syntax/podfile.html
-
 [url-swift-package-manager]: https://swift.org/package-manager
 [url-swift-package-manager-github]: https://github.com/apple/swift-package-manager
-
 [url-license]: http://choosealicense.com/licenses/mit/
 [url-license-file]: https://github.com/nsagora/validation-toolkit/blob/master/LICENSE
 [url-twitter]: https://twitter.com/nsagora
-[url-travis]: https://travis-ci.org/nsagora/validation-toolkit
 [url-codecov]: https://codecov.io/gh/nsagora/validation-toolkit
 [url-homebrew]: http://brew.sh/
-
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
-[badge-travis]: https://travis-ci.org/nsagora/validation-toolkit.svg?branch=develop
+[badge-github]: https://github.com/nsagora/validation-toolkit/workflows/Build/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
-[badge-swift-pm]: https://img.shields.io/badge/swift%20pm-compatible-4BC51D.svg?style=flat
-[badge-carthage]: https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat
 [badge-version]: https://img.shields.io/badge/version-0.6.2-blue.svg?style=flat
-[badge-docs]: https://img.shields.io/badge/docs-100%25-brightgreen.svg?style=flat
-
-
+[badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat
