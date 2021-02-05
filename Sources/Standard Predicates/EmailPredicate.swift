@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- The `EmailPredicate` class is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
+ The `EmailPredicate` struct is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
  */
-public class EmailPredicate: Predicate {
+public struct EmailPredicate: Predicate {
     
     public typealias InputType = String
 

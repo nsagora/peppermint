@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- The `BlockPredicate` class is used to define closure based conditions used to evaluate generic inputs.
+ The `BlockPredicate` struct is used to define closure based conditions used to evaluate generic inputs.
  */
-public class BlockPredicate<T>: Predicate {
+public struct BlockPredicate<T>: Predicate {
     
     public typealias InputType = T
     

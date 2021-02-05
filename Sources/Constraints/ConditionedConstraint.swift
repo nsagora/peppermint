@@ -1,18 +1,17 @@
 import Foundation
 
-/**
- A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
- */
-public class ConditionedConstraint<T>: PredicateConstraint<T> {
+/// A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
+public struct ConditionedConstraint<T>: Constraint {
 
-    private var conditions =  [AnyConstraint<T>]()
+    private let constraint: AnyConstraint<T>
+    private var conditions = [AnyConstraint<T>]()
+    
+    private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
         The number of conditions that must be evaluated i
     */
     public var conditionsCount: Int { conditions.count }
-    
-    private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
      Create a new `ConditionedConstraint` instance
@@ -20,8 +19,8 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public override init<P>(predicate: P, error: Error) where T == P.InputType, P: Predicate {
-        super.init(predicate: predicate, error: error)
+    public init<P>(predicate: P, error: Error) where T == P.InputType, P: Predicate {
+        self.constraint = PredicateConstraint(predicate: predicate, error: error).erase()
     }
     /**
      Create a new `ConditionedConstraint` instance
@@ -29,8 +28,8 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public override init<P>(predicate: P, error: @escaping (T) -> Error) where T == P.InputType, P : Predicate {
-        super.init(predicate: predicate, error: error)
+    public init<P>(predicate: P, error: @escaping (T) -> Error) where T == P.InputType, P: Predicate {
+        self.constraint = PredicateConstraint(predicate: predicate, error: error).erase()
     }
 
     /**
@@ -38,7 +37,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraint: `Constraint`
      */
-    public func add<C: Constraint>(condition: C) where C.InputType == T {
+    public mutating func add<C: Constraint>(condition: C) where C.InputType == T {
         conditions.append(condition.erase())
     }
 
@@ -47,7 +46,7 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C: Constraint>(conditions: [C]) where C.InputType == T {
+    public mutating func add<C: Constraint>(conditions: [C]) where C.InputType == T {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
@@ -57,8 +56,9 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C: Constraint>(conditions: C...) where C.InputType == T {
-        self.add(conditions: conditions)
+    public mutating func add<C: Constraint>(conditions: C...) where C.InputType == T {
+        let constraits = conditions.map { $0.erase() }
+        self.conditions.append(contentsOf: constraits)
     }
 
     /**
@@ -67,15 +67,15 @@ public class ConditionedConstraint<T>: PredicateConstraint<T> {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public override func evaluate(with input: T) -> Result {
+    public func evaluate(with input: T) -> Result {
 
-        guard hasConditions else { return super.evaluate(with: input) }
+        guard hasConditions else { return constraint.evaluate(with: input) }
 
-        let constraint = CompoundContraint(allOf: conditions)
-        let result = constraint.evaluate(with: input)
+        let compound = CompoundContraint(allOf: conditions)
+        let result = compound.evaluate(with: input)
 
         if result.isSuccessful {
-            return super.evaluate(with: input)
+            return constraint.evaluate(with: input)
         }
 
         return result

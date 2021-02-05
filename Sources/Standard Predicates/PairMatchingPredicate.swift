@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- The `PairMatchingPredicate` class is used to evaluate whether a given pair of values match.
+ The `PairMatchingPredicate` struct is used to evaluate whether a given pair of values match.
  */
-public class PairMatchingPredicate<T:Equatable>: Predicate {
+public struct PairMatchingPredicate<T:Equatable>: Predicate {
     
     public typealias InputType = (T?, T?)
     
