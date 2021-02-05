@@ -82,7 +82,7 @@ extension AsyncConstraintTests {
         let condition = ConditionedAsyncConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate(expected: "002")
-        let constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
         XCTAssertEqual(constraint.conditions.count, 1)
@@ -98,7 +98,7 @@ extension AsyncConstraintTests {
         let condition = PredicateConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate(expected: "000")
-        let constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
 
@@ -125,7 +125,7 @@ extension AsyncConstraintTests {
         let condition = PredicateConstraint(predicate: p, error: FakeError.Invalid)
 
         let predicate = FakePredicate(expected: "000")
-        let constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         constraint.add(condition:condition)
 
@@ -149,7 +149,7 @@ extension AsyncConstraintTests {
 
         // Given
         let p_level_2_1 = FakePredicate(expected: "201")
-        let c_level_2_1 = ConditionedAsyncConstraint(predicate: p_level_2_1, error: FakeError.Unexpected("Expecting Level 2.1"))
+        var c_level_2_1 = ConditionedAsyncConstraint(predicate: p_level_2_1, error: FakeError.Unexpected("Expecting Level 2.1"))
 
         let p_level_2_2 = FakePredicate(expected: "202")
         let c_level_2_2 = ConditionedAsyncConstraint(predicate: p_level_2_2, error: FakeError.Unexpected("Expecting Level 2.2"))
@@ -158,7 +158,7 @@ extension AsyncConstraintTests {
         let c_level_1_1 = ConditionedAsyncConstraint(predicate: p_level_1_1, error: FakeError.Unexpected("Expecting Level 1.1"))
 
         let p_level_ground = FakePredicate(expected: "001")
-        let c_level_ground = ConditionedAsyncConstraint(predicate: p_level_ground, error:FakeError.Unexpected("Expecting Ground"))
+        var c_level_ground = ConditionedAsyncConstraint(predicate: p_level_ground, error:FakeError.Unexpected("Expecting Ground"))
 
         c_level_2_1.add(condition:c_level_2_2)
         c_level_2_1.add(condition:c_level_1_1)
@@ -184,7 +184,7 @@ extension AsyncConstraintTests {
 
         // Given
         let p_1 = FakePredicate(expected: "001")
-        let condition_1 = ConditionedAsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
+        var condition_1 = ConditionedAsyncConstraint(predicate: p_1, error: FakeError.Unexpected("Expecting 001"))
 
         let p_2 = FakePredicate(expected: "002")
         let condition_2 = ConditionedAsyncConstraint(predicate: p_2, error: FakeError.Unexpected("Expecting 002"))
@@ -193,7 +193,7 @@ extension AsyncConstraintTests {
         let condition_3 = ConditionedAsyncConstraint(predicate: p_3, error: FakeError.Unexpected("Expecting 003"))
 
         let predicate = FakePredicate(expected: "004")
-        let constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
+        var constraint = ConditionedAsyncConstraint(predicate: predicate, error:FakeError.Invalid)
 
         condition_1.add(condition:condition_2)
         condition_1.add(condition:condition_3)
