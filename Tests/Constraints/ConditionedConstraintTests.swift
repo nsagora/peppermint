@@ -24,7 +24,7 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Arrange
         let predicate_001 = FakePredicate(expected: "001")
-        let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
+        var constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
         let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
@@ -44,7 +44,7 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Given
         let predicate_001 = FakePredicate(expected: "001")
-        let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
+        var constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
         let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
@@ -63,7 +63,7 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Given
         let predicate_001 = FakePredicate(expected: "001")
-        let constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
+        var constraint_001 = ConditionedConstraint(predicate: predicate_001, error: FakeError.Unexpected("Expecting 001"))
 
         let predicate_002 = FakePredicate(expected: "002")
         let constraint_002 = PredicateConstraint(predicate: predicate_002, error: FakeError.Unexpected("Expecting 002"))
@@ -82,7 +82,7 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Arrange
         let predicate = FakePredicate(expected: "001")
-        let constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
+        var constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
 
         let firstPredicate = FakePredicate(expected: "002")
         let firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 002"))
@@ -101,7 +101,7 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Arrange
         let predicate = FakePredicate(expected: "001")
-        let constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
+        var constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
 
         let firstPredicate = FakePredicate(expected: "002")
         let firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 002"))
@@ -120,10 +120,10 @@ class ConditionedConstraintTests: XCTestCase {
 
         // Arrange
         let predicate = FakePredicate(expected: "001")
-        let constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
+        var constraint = ConditionedConstraint(predicate: predicate, error: FakeError.Unexpected("Expecting 001"))
 
         let firstPredicate = FakePredicate(expected: "101")
-        let firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 101"))
+        var firstCondition = ConditionedConstraint(predicate: firstPredicate, error: FakeError.Unexpected("Expecting 101"))
 
         let secondPredicate = FakePredicate(expected: "201")
         let secondCondition = ConditionedConstraint(predicate: secondPredicate, error: FakeError.Unexpected("Expecting 201"))

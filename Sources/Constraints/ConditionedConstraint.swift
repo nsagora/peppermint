@@ -1,7 +1,7 @@
 import Foundation
 
 /// A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
-public class ConditionedConstraint<T>: Constraint {
+public struct ConditionedConstraint<T>: Constraint {
 
     private let constraint: AnyConstraint<T>
     private var conditions = [AnyConstraint<T>]()
@@ -37,7 +37,7 @@ public class ConditionedConstraint<T>: Constraint {
 
      - parameter constraint: `Constraint`
      */
-    public func add<C: Constraint>(condition: C) where C.InputType == T {
+    public mutating func add<C: Constraint>(condition: C) where C.InputType == T {
         conditions.append(condition.erase())
     }
 
@@ -46,7 +46,7 @@ public class ConditionedConstraint<T>: Constraint {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C: Constraint>(conditions: [C]) where C.InputType == T {
+    public mutating func add<C: Constraint>(conditions: [C]) where C.InputType == T {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
@@ -56,8 +56,9 @@ public class ConditionedConstraint<T>: Constraint {
 
      - parameter constraints: `[Constraint]`
      */
-    public func add<C: Constraint>(conditions: C...) where C.InputType == T {
-        self.add(conditions: conditions)
+    public mutating func add<C: Constraint>(conditions: C...) where C.InputType == T {
+        let constraits = conditions.map { $0.erase() }
+        self.conditions.append(contentsOf: constraits)
     }
 
     /**
