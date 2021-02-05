@@ -3,7 +3,7 @@ import Foundation
 /**
  A type-erased `Predicate`.
  */
-public class AnyPredicate<T>: Predicate {
+public struct AnyPredicate<T>: Predicate {
 
     /**
      A type that provides information about what kind of values the predicate can be evaluated with.

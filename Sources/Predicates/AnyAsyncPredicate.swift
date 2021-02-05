@@ -3,7 +3,7 @@ import Foundation
 /**
  A type-erased `AsyncPredicate`.
  */
-public class AnyAsyncPredicate<T>: AsyncPredicate {
+public struct AnyAsyncPredicate<T>: AsyncPredicate {
 
     /**
      A type that provides information about what kind of values the predicate can be evaluated with.
