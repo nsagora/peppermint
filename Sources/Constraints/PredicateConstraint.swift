@@ -3,7 +3,7 @@ import Foundation
 /**
  A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  */
-public class PredicateConstraint<T>: Constraint {
+public struct PredicateConstraint<T>: Constraint {
     
     public typealias InputType = T
     
