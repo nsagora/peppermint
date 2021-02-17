@@ -24,4 +24,9 @@ class BlockPredicateTests: XCTestCase {
         let result = predicate.evaluate(with: 1)
         XCTAssertFalse(result)
     }
+    
+    static var allTests = [
+        ("testThatItEvaluatesTrueForValidInput", testThatItEvaluatesTrueForValidInput),
+        ("testThatItEvaluatesFalseForInvalidInput", testThatItEvaluatesFalseForInvalidInput),
+    ]
 }
