@@ -1,27 +1,27 @@
+import ValidationToolkit
 import XCTest
-@testable import ValidationToolkit
 
 class BlockPredicateTests: XCTestCase {
 
-    var predicate: BlockPredicate<Int>!
+    var predicate: BlockPredicate<String>!
 
     override func setUp() {
         super.setUp()
-        predicate = BlockPredicate { $0 == 2 }
+        predicate = BlockPredicate { $0 == "valid" }
     }
-    
+
     override func tearDown() {
         predicate = nil
         super.tearDown()
     }
 
-    func testThatItEvaluatesTrueForValidInput() {
-        let result = predicate.evaluate(with: 2)
+    func testEvaluateShouldReturnTrueWhenInputIsValid() {
+        let result = predicate.evaluate(with: "valid")
         XCTAssertTrue(result)
     }
 
-    func testThatItEvaluatesFalseForInvalidInput() {
-        let result = predicate.evaluate(with: 1)
+    func testEvaluateShouldReturnFalseWhenInputIsInvalid() {
+        let result = predicate.evaluate(with: "invalid")
         XCTAssertFalse(result)
     }
 }

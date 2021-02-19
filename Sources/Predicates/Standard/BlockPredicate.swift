@@ -12,10 +12,10 @@ public struct BlockPredicate<T>: Predicate {
     /**
      Creates and returns a new `BlockPredicate` instance.
      
-     - parameter aBlock: A closure describing a custom validation condition.
+     - parameter evaluationBlock: A closure describing a custom validation condition.
      */
-    public init(aBlock: @escaping (InputType) -> Bool) {
-        evaluationBlock = aBlock
+    public init(evaluationBlock: @escaping (InputType) -> Bool) {
+        self.evaluationBlock = evaluationBlock
     }
     
     /**
