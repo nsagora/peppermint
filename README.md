@@ -279,5 +279,5 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [badge-github]: https://github.com/nsagora/validation-toolkit/workflows/Build/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-0.6.2-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-0.7-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat

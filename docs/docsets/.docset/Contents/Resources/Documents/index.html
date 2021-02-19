@@ -109,7 +109,7 @@
         <section>
           <section class="section">
             
-            <h1 id='validation-toolkit-a-href-https-github-com-nsagora-validation-toolkit-img-src-https-img-shields-io-badge-version-0-6-2-blue-svg-style-flat-alt-badge-version-a' class='heading'>Validation Toolkit <a href="https://github.com/nsagora/validation-toolkit"><img src="https://img.shields.io/badge/version-0.6.2-blue.svg?style=flat" alt="badge-version"></a></h1>
+            <h1 id='validation-toolkit-a-href-https-github-com-nsagora-validation-toolkit-img-src-https-img-shields-io-badge-version-0-7-blue-svg-style-flat-alt-badge-version-a' class='heading'>Validation Toolkit <a href="https://github.com/nsagora/validation-toolkit"><img src="https://img.shields.io/badge/version-0.7-blue.svg?style=flat" alt="badge-version"></a></h1>
 
 <p><a href="https://github.com/nsagora/validation-toolkit"><img src="https://github.com/nsagora/validation-toolkit/workflows/Build/badge.svg" alt="badge-github"></a>
 <a href="https://codecov.io/gh/nsagora/validation-toolkit"><img src="https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg" alt="badge-codecov"></a>
@@ -129,24 +129,18 @@
 <li><a href="#installation">Installation</a>
 
 <ul>
-<li><a href="#carthage">Carthage</a></li>
-<li><a href="#cocoapods">CocoaPods</a></li>
 <li><a href="#swift-package-manager">Swift Package Manager</a></li>
-<li><a href="#manually">Manually</a></li>
 </ul></li>
 <li><a href="#usage-examples">Usage Examples</a>
 
 <ul>
 <li><a href="#predicates">Predicates</a></li>
 <li><a href="#constraints">Constraints</a></li>
-<li><a href="#constraint-sets">Constraint Sets</a></li>
+<li><a href="#predicate-constraint">Predicate Constraint</a></li>
+<li><a href="#compound-constraint">Compound Constraint</a></li>
 </ul></li>
 <li><a href="#contribute">Contribute</a></li>
-<li><a href="#meta">Meta</a>
-
-<ul>
-<li><a href="#credits-and-references">Credits and References</a></li>
-</ul></li>
+<li><a href="#meta">Meta</a></li>
 </ol>
 <h2 id='introduction' class='heading'>Introduction</h2>
 
@@ -163,7 +157,7 @@
 
 <p>Think of <code>ValidationToolkit</code> as to an adjustable wrench more than to a Swiss knife.</p>
 
-<p>With this idea in mind, the toolkit is composed from a small set of protocols, structs and classes than can be easily composed to fit your project needs.</p>
+<p>With this idea in mind, the toolkit is composed from a small set of protocols and structs that can be easily composed to fit your project needs.</p>
 <h3 id='all-platforms-availability' class='heading'>All platforms availability</h3>
 
 <p>Since validation can take place at many levels, <code>ValidationToolkit</code> is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.</p>
@@ -177,58 +171,9 @@
 <ul>
 <li>iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+</li>
 <li>Xcode 8.1+</li>
-<li>Swift 3.0+</li>
+<li>Swift 4.2+</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
-<h3 id='carthage' class='heading'>Carthage</h3>
-
-<p>You can use <a href="https://github.com/Carthage/Carthage">Carthage</a> to install <code>ValidationToolkit</code> by adding it to your <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile"><code>Cartfile</code></a>:</p>
-<pre class="highlight plaintext"><code>github "nsagora/validation-toolkit"
-</code></pre>
-
-<p>Run <code>carthage update</code> to build the framework and drag the built <code>ValidationToolkit.framework</code> into your Xcode project.</p>
-
-<details>
-<summary>Setting up Carthage</summary>
-
-[Carthage][url-carthage] is a decentralised dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install [Carthage][url-carthage] with [Homebrew][url-homebrew] using the following command:
-
-&ldquo;`bash
-$ brew update
-$ brew install carthage
-&rdquo;`
-
-</details>
-<h3 id='cocoapods' class='heading'>CocoaPods</h3>
-
-<p>You can use <a href="https://cocoapods.org">CocoaPods</a> to install <code>ValidationToolkit</code> by adding it to your <a href="https://guides.cocoapods.org/syntax/podfile.html"><code>Podfile</code></a>:</p>
-<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
-<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
-<span class="n">use_frameworks!</span>
-
-<span class="n">target</span> <span class="s1">'YOUR_TARGET_NAME'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'ValidationToolkit'</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Then, run the following command:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>pod install
-</code></pre>
-
-<p>Note that this requires CocoaPods version 1.0.0, and your iOS deployment target to be at least 8.0.</p>
-
-<details>
-<summary>Setting up CocoaPods</summary>
-
-[CocoaPods][url-cocoapods] is a dependency manager for Cocoa projects. You can install it with the following command:
-
-&ldquo;`
-$ gem install cocoapods
-&rdquo;`
-
-</details>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
 <p>You can use the <a href="https://swift.org/package-manager">Swift Package Manager</a> to install <code>ValidationToolkit</code> by adding it to your <code>Package.swift</code> file:</p>
@@ -242,25 +187,14 @@ $ gem install cocoapods
     <span class="p">]</span>
 <span class="p">)</span>
 </code></pre>
-
-<p>Note that the <a href="https://swift.org/package-manager">Swift Package Manager</a> is still in early design and development, for more information checkout its <a href="https://github.com/apple/swift-package-manager">GitHub Page</a>.</p>
-<h3 id='manually' class='heading'>Manually</h3>
-
-<p>To use this library in your project manually you may:</p>
-
-<ol>
-<li>for Projects, just drag the <code>Sources</code> folder into the project tree</li>
-<li>for Workspaces, include the whole <code>ValidationToolkit.xcodeproj</code></li>
-</ol>
 <h2 id='usage-example' class='heading'>Usage example</h2>
 
-<p>For a comprehensive list of examples try the <code>ValidationToolikit.playground</code>:</p>
+<p>For a comprehensive list of examples try the <code>Examples.playground</code>:</p>
 
 <ol>
 <li>Download the repository locally on your machine</li>
-<li>Open <code>ValidationToolkit.workspace</code></li>
-<li>Build <code>ValidationToolkit iOS</code> target</li>
-<li>Select the <code>ValidationToolkit</code> playgrounds from the Project navigator.</li>
+<li>Open the project in Xcode</li>
+<li>Select the <code>Examples</code> playgrounds from the Project navigator</li>
 </ol>
 <h3 id='predicates' class='heading'>Predicates</h3>
 
@@ -356,6 +290,7 @@ predicate.evaluate(with: &ldquo;alphabet&rdquo;) // returns true
 
 </details>
 <h3 id='constraints' class='heading'>Constraints</h3>
+<h4 id='predicate-constraint' class='heading'>Predicate Constraint</h4>
 
 <p>A <code><a href="Structs/PredicateConstraint.html">PredicateConstraint</a></code> represents a data type that links a <code><a href="Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code>, in order to provide useful feedback for the end users.</p>
 
@@ -376,56 +311,57 @@ case .invalid(let summary):
 &ldquo;`
 
 &rdquo;`swift
-enum MyError:Error {
+enum MyError: Error {
     case magicWord
 }
 &ldquo;`
 
 </details>
-<h3 id='constraint-sets' class='heading'>Constraint Sets</h3>
+<h4 id='compound-contraint' class='heading'>Compound Contraint</h4>
 
-<p>A <code>ConstraintSet</code> represents a collection of constraints that allows the evaluation to be made on:</p>
+<p>A <code><a href="Structs/CompoundContraint.html">CompoundContraint</a></code> represents a composition of constraints that allows the evaluation to be made on:</p>
 
 <ul>
 <li>any of the constraints</li>
 <li>all constraints</li>
 </ul>
 
-<p>To provide context, a <code>ConstraintSet</code> allows us to constraint a piece of data as being required and also as being a valid email.</p>
+<p>To provide context, a <code><a href="Structs/CompoundContraint.html">CompoundContraint</a></code> allows us to constraint a piece of data as being required and also as being a valid email.</p>
 
 <details>
 <summary>ConstraintSet</summary
 
-An example is that of the registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
+An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
-`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the user's password data:
+`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-let lowerCase = RegexPredicate(expression: "^(?=.*[a-z]).*$")
-let upperCase = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
-let digits = RegexPredicate(expression: "^(?=.*[0-9]).*$")
+let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
+let upperCasePredicate = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
 let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
 let minLenght = RegexPredicate(expression: "^.{8,}$")
 
-var passwordConstraints = ConstraintSet<String>()
-passwordConstraints.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
-passwordConstraints.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
-passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
-passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
-passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
+var passwordConstraint = CompoundContraint<String>(allOf:
+    PredicateConstraint(predicate: lowerCasePredicate, error: Form.Password.missingLowercase),
+    PredicateConstraint(predicate: upperCasePredicate, error: Form.Password.missingUpercase),
+    PredicateConstraint(predicate: digitsPredicate, error: Form.Password.missingDigits),
+    PredicateConstraint(predicate: specialChars, error: Form.Password.missingSpecialChars),
+    PredicateConstraint(predicate: minLenght, error: Form.Password.minLenght(8))
+)
 
 let password = &quot;3nGuard!&rdquo;
-let result = passwordConstraints.evaluateAll(input: password)
+let result = passwordConstraint.evaluate(with: password)
 
 switch result {
-case .valid:
+case .success:
     print(&ldquo;Wow, that&rsquo;s a 💪 password!&rdquo;)
-case .invalid(let summary):
+case .failure(let summary):
     print(summary.errors.map({$0.localizedDescription}))
 } // prints &ldquo;Wow, that&rsquo;s a 💪 password!&rdquo;
 &ldquo;`
 
-From above, we see that once we&rsquo;ve constructed the `passwordConstraints`, we&rsquo;re simply calling `evaluateAll(input:)` to get a `Summary` of our evaluation result. This summary can then be handled as we please.
+From above, we see that once we&rsquo;ve constructed the `passwordConstraint`, we&rsquo;re simply calling `evaluate(with:)` to get our evaluation `Result`. This contains `Summary` that can be handled as we please.
 
 </details>
 <h2 id='contribute' class='heading'>Contribute</h2>
@@ -438,14 +374,6 @@ From above, we see that once we&rsquo;ve constructed the `passwordConstraints`, 
 <p>Distributed under the <a href="http://choosealicense.com/licenses/mit/">MIT</a> license. See <a href="https://github.com/nsagora/validation-toolkit/blob/master/LICENSE"><code>LICENSE</code></a> for more information.</p>
 
 <p>[<a href="https://github.com/nsagora/validation-toolkit">https://github.com/nsagora/validation-toolkit</a>]</p>
-<h3 id='credits-and-references' class='heading'>Credits and references</h3>
-
-<p>We got inspired from other open source projects and they worth to be mentioned below for reference:</p>
-
-<ul>
-<li><a href="https://github.com/adamwaite/Validator">https://github.com/adamwaite/Validator</a></li>
-<li><a href="https://github.com/jpotts18/SwiftValidator">https://github.com/jpotts18/SwiftValidator</a></li>
-</ul>
 
           </section>
         </section>
