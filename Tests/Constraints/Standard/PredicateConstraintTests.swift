@@ -1,7 +1,7 @@
 import XCTest
 @testable import ValidationToolkit
 
-class ConstraintTests: XCTestCase {
+class PredicateConstraintTests: XCTestCase {
 
     fileprivate let validFakeInput = "fakeInput"
     fileprivate let invalidFakeInput = "~fakeInput"
@@ -43,7 +43,7 @@ class ConstraintTests: XCTestCase {
     }
 }
 
-extension ConstraintTests {
+extension PredicateConstraintTests {
     
     func testThatItDynamicallyBuildsTheValidationError() {
 

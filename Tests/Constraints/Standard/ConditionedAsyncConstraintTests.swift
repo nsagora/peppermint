@@ -1,80 +1,35 @@
 import XCTest
 @testable import ValidationToolkit
 
-class AsyncConstraintTests: XCTestCase {
+class ConditionedAsyncConstraintTests: XCTestCase {
 
-    func testCanAddAsyncPredicate() {
-        
-        let predicate = FakePredicate(expected: Int.max)
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
-        
-        XCTAssertNotNil(constraint)
-    }
-    
-    func testItCanBeInstantiatedWithErrorBlock() {
-        
-        let predicate = FakePredicate(expected: Int.max)
-        let constraint = PredicateConstraint(predicate: predicate, error: { FakeError.Unexpected("Input \($0) is invalid") })
-        
-        XCTAssertNotNil(constraint)
-    }
-    
-    func testThatItCanValidate() {
-        
-        let predicate = FakePredicate(expected: Int.max)
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
-        
-        let expect = expectation(description: "Async Evaluation")
-        constraint.evaluate(with: 1, queue:.main) { result in
-            expect.fulfill()
-        }
-        
-        waitForExpectations(timeout: 0.5, handler: nil)
-    }
-    
-    func testThatItCallsCallbackWithSucceesOnSuccess() {
+    fileprivate let validFakeInput = "fakeInput"
+    fileprivate let invalidFakeInput = "~fakeInput"
+    fileprivate let fakePredicate = FakePredicate(expected: "fakeInput")
+
+    func testThatItDynamicallyBuildsTheValidationError() {
 
         // Given
-        let predicate = FakePredicate(expected: 10)
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let constraint = ConditionedAsyncConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
 
-        var actualResult:Result!
+        let summary = Result.Summary(errors: [FakeError.Unexpected(invalidFakeInput)])
+        let expectedResult = Result.failure(summary)
+        var actualResult: Result!
 
         // When
         let expect = expectation(description: "Async Evaluation")
-        constraint.evaluate(with: 10, queue:.main) { result in
+        constraint.evaluate(with: invalidFakeInput, queue: .main) { result in
             actualResult = result
             expect.fulfill()
         }
         waitForExpectations(timeout: 0.5, handler: nil)
 
         // Then
-        XCTAssertTrue(actualResult.isSuccessful)
-    }
-    
-    func testThatItCallsCallbackWithErrorOnError() {
-
-        // Given
-        let predicate = FakePredicate(expected: 10)
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
-        
-        var actualresult:Result!
-
-        // When
-        let expect = expectation(description: "Async Evaluation")
-        constraint.evaluate(with: 1, queue:.main) { result in
-            actualresult = result
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 0.5, handler: nil)
-
-        // Then
-        XCTAssertTrue(actualresult.isFailed)
-        XCTAssertTrue(actualresult.summary.errors is [FakeError])
+        XCTAssertEqual(actualResult, expectedResult)
     }
 }
 
-extension AsyncConstraintTests {
+extension ConditionedAsyncConstraintTests {
 
     func testAddConditions() {
 
