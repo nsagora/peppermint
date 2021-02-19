@@ -1,39 +1,25 @@
 import XCTest
-@testable import ValidationToolkit
+import ValidationToolkit
 
 class PredicateConstraintTests: XCTestCase {
 
-    fileprivate let validFakeInput = "fakeInput"
-    fileprivate let invalidFakeInput = "~fakeInput"
-    fileprivate let fakePredicate = FakePredicate(expected: "fakeInput")
+    fileprivate let validInput = "validInput"
+    fileprivate let invalidInput = "invalidInput"
+    fileprivate let predicate = FakePredicate(expected: "validInput")
 
-    var constraint:PredicateConstraint<String>!
-
-    override func setUp() {
-        super.setUp()
-        constraint = PredicateConstraint(predicate: fakePredicate, error: FakeError.Invalid)
-    }
-    
-    override func tearDown() {
-        constraint = nil
-        super.tearDown()
-    }
-    
-    func testThatItCanBeInstantiated() {
-        XCTAssertNotNil(constraint)
-    }
-
-    func testThatItReturnsSuccessForValidInput() {
-        let result = constraint.evaluate(with: validFakeInput)
+    func testEvaluateShouldReturnASuccessfulResultWhenTheInputIsValid() {
+        
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let result = constraint.evaluate(with: validInput)
+        
         XCTAssertTrue(result.isSuccessful)
     }
 
-    func testThatItFailsWithErrorForInvalidInput() {
+    func testEvaluateShouldReturnAFailureResultWhenTheInputIsInvalid() {
 
-        // When
-        let result = constraint.evaluate(with: invalidFakeInput)
+        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let result = constraint.evaluate(with: invalidInput)
 
-        // Then
         XCTAssertTrue(result.isFailed)
         XCTAssertEqual(result.summary.failingConstraints, 1)
 
@@ -45,17 +31,50 @@ class PredicateConstraintTests: XCTestCase {
 
 extension PredicateConstraintTests {
     
-    func testThatItDynamicallyBuildsTheValidationError() {
+    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithErrorBlock() {
 
-        // Given
-        let constraint = PredicateConstraint(predicate: fakePredicate) { FakeError.Unexpected($0) }
+        let constraint = PredicateConstraint(predicate: predicate) { FakeError.Unexpected($0) }
+        let result = constraint.evaluate(with: invalidInput)
 
-        // When
-        let result = constraint.evaluate(with: invalidFakeInput)
-
-        // Then
         let actualErrors = result.summary.errors as! [FakeError]
-        let expectedErrors = [FakeError.Unexpected(invalidFakeInput)]
+        let expectedErrors = [FakeError.Unexpected(invalidInput)]
+        XCTAssertTrue(result.isFailed)
+        XCTAssertEqual(actualErrors, expectedErrors)
+    }
+}
+
+extension PredicateConstraintTests {
+    
+    func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
+
+        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let expect = expectation(description: "Async Evaluation")
+        
+        var actualResult:Result!
+        constraint.evaluate(with: validInput, queue:.main) { result in
+            actualResult = result
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 0.5, handler: nil)
+
+        XCTAssertTrue(actualResult.isSuccessful)
+    }
+    
+    func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
+
+        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let expect = expectation(description: "Async Evaluation")
+        
+        var actualResult:Result!
+        constraint.evaluate(with: invalidInput, queue:.main) { result in
+            actualResult = result
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 0.5, handler: nil)
+
+        let actualErrors = actualResult.summary.errors as! [FakeError]
+        let expectedErrors = [FakeError.Invalid]
+        XCTAssertTrue(actualResult.isFailed)
         XCTAssertEqual(actualErrors, expectedErrors)
     }
 }
