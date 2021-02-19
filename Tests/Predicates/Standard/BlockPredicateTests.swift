@@ -1,5 +1,5 @@
-import ValidationToolkit
 import XCTest
+import ValidationToolkit
 
 class BlockPredicateTests: XCTestCase {
 

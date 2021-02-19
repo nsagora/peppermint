@@ -1,5 +1,5 @@
 import XCTest
-import ValidationToolkit
+@testable import ValidationToolkit
 
 class PredicateConstraintTests: XCTestCase {
 
@@ -9,16 +9,16 @@ class PredicateConstraintTests: XCTestCase {
 
     func testEvaluateShouldReturnASuccessfulResultWhenTheInputIsValid() {
         
-        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        let result = constraint.evaluate(with: validInput)
+        let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let result = sut.evaluate(with: validInput)
         
         XCTAssertTrue(result.isSuccessful)
     }
 
     func testEvaluateShouldReturnAFailureResultWhenTheInputIsInvalid() {
 
-        let constraint = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
-        let result = constraint.evaluate(with: invalidInput)
+        let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let result = sut.evaluate(with: invalidInput)
 
         XCTAssertTrue(result.isFailed)
         XCTAssertEqual(result.summary.failingConstraints, 1)
@@ -33,8 +33,8 @@ extension PredicateConstraintTests {
     
     func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithErrorBlock() {
 
-        let constraint = PredicateConstraint(predicate: predicate) { FakeError.Unexpected($0) }
-        let result = constraint.evaluate(with: invalidInput)
+        let sut = PredicateConstraint(predicate: predicate) { FakeError.Unexpected($0) }
+        let result = sut.evaluate(with: invalidInput)
 
         let actualErrors = result.summary.errors as! [FakeError]
         let expectedErrors = [FakeError.Unexpected(invalidInput)]
@@ -47,11 +47,11 @@ extension PredicateConstraintTests {
     
     func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
 
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
         var actualResult:Result!
-        constraint.evaluate(with: validInput, queue:.main) { result in
+        sut.evaluate(with: validInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
         }
@@ -62,11 +62,11 @@ extension PredicateConstraintTests {
     
     func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
 
-        let constraint = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
         var actualResult:Result!
-        constraint.evaluate(with: invalidInput, queue:.main) { result in
+        sut.evaluate(with: invalidInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
         }
