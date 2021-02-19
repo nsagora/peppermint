@@ -27,7 +27,6 @@ public struct TypeConstraint<T>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T) -> Result {
-        let results = constraints.map { $0.evaluate(with: input) }
-        return Result(summary: .init(evaluationResults: results))
+        return CompoundContraint(allOf: constraints).evaluate(with: input)
     }
 }
