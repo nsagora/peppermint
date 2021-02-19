@@ -3,12 +3,12 @@ import XCTest
 
 class ResultTests: XCTestCase {
 
-    func testIsValid() {
+    func testSuccessState() {
         XCTAssertTrue(Result.success.isSuccessful)
         XCTAssertFalse(Result.success.isFailed)
     }
     
-    func testIsInvalid() {
+    func testFailureState() {
         
         let summary = Result.Summary(errors: [FakeError.Invalid])
         let invalidResult: Result = Result.failure(summary)
@@ -16,17 +16,10 @@ class ResultTests: XCTestCase {
         XCTAssertTrue(invalidResult.isFailed)
         XCTAssertFalse(invalidResult.isSuccessful)
     }
-
-    func testThatValidIsNotEqualToInvalid() {
-
-        let summary = Result.Summary(errors: [FakeError.Invalid])
-
-        XCTAssertNotEqual(Result.success, Result.failure(summary))
-    }
     
-    func testEvaluationErrors() {
+    func testGasFailingContraintsShouldReturnTrueWhenThereAreErrors() {
         let errors =  [FakeError.Invalid]
-        let expectedSummary = Result.Summary(errors:errors)
+        let expectedSummary = Result.Summary(errors: errors)
 
         let invalidResult = Result.failure(expectedSummary)
         XCTAssertTrue(invalidResult.summary.hasFailingContraints)

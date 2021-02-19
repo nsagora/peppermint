@@ -1,6 +1,8 @@
 import Foundation
 
-/// A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
+/**
+ A data type that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
+ */
 public struct ConditionedConstraint<T>: Constraint {
 
     private let constraint: AnyConstraint<T>
@@ -9,7 +11,7 @@ public struct ConditionedConstraint<T>: Constraint {
     private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
-        The number of conditions that must be evaluated i
+     The number of conditions that must be evaluated i
     */
     public var conditionsCount: Int { conditions.count }
 

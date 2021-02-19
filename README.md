@@ -12,17 +12,14 @@
    - [Open to extensibility](#open-to-extensibility)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
-   - [Carthage](#carthage)
-   - [CocoaPods](#cocoapods)
    - [Swift Package Manager](#swift-package-manager)
-   - [Manually](#manually)
 4. [Usage Examples](#usage-examples)
    - [Predicates](#predicates)
    - [Constraints](#constraints)
-   - [Constraint Sets](#constraint-sets)
+    - [Predicate Constraint](#predicate-constraint)
+    - [Compound Constraint](#compound-constraint)
 5. [Contribute](#contribute)
 6. [Meta](#meta)
-   - [Credits and References](#credits-and-references)
 
 ## Introduction
 
@@ -38,7 +35,7 @@ At the core of this project are the following principles:
 
 Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife.
 
-With this idea in mind, the toolkit is composed from a small set of protocols, structs and classes than can be easily composed to fit your project needs.
+With this idea in mind, the toolkit is composed from a small set of protocols and structs that can be easily composed to fit your project needs.
 
 ### All platforms availability
 
@@ -54,66 +51,9 @@ Every project is unique in it's challenges and it's great when we can focus on s
 
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
-- Swift 3.0+
+- Swift 4.2+
 
 ## Installation
-
-### Carthage
-
-You can use [Carthage][url-carthage] to install `ValidationToolkit` by adding it to your [`Cartfile`][url-carthage-cartfile]:
-
-```
-github "nsagora/validation-toolkit"
-```
-
-Run `carthage update` to build the framework and drag the built `ValidationToolkit.framework` into your Xcode project.
-
-<details>
-<summary>Setting up Carthage</summary>
-
-[Carthage][url-carthage] is a decentralised dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install [Carthage][url-carthage] with [Homebrew][url-homebrew] using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-</details>
-
-### CocoaPods
-
-You can use [CocoaPods][url-cocoapods] to install `ValidationToolkit` by adding it to your [`Podfile`][url-cocoapods-podfile]:
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-target 'YOUR_TARGET_NAME' do
-	pod 'ValidationToolkit'
-end
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
-
-Note that this requires CocoaPods version 1.0.0, and your iOS deployment target to be at least 8.0.
-
-<details>
-<summary>Setting up CocoaPods</summary>
-
-[CocoaPods][url-cocoapods] is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```
-$ gem install cocoapods
-```
-
-</details>
 
 ### Swift Package Manager
 
@@ -131,23 +71,13 @@ let package = Package(
 )
 ```
 
-Note that the [Swift Package Manager][url-swift-package-manager] is still in early design and development, for more information checkout its [GitHub Page][url-swift-package-manager-github].
-
-### Manually
-
-To use this library in your project manually you may:
-
-1. for Projects, just drag the `Sources` folder into the project tree
-2. for Workspaces, include the whole `ValidationToolkit.xcodeproj`
-
 ## Usage example
 
-For a comprehensive list of examples try the `ValidationToolikit.playground`:
+For a comprehensive list of examples try the `Examples.playground`:
 
 1. Download the repository locally on your machine
-2. Open `ValidationToolkit.workspace`
-3. Build `ValidationToolkit iOS` target
-4. Select the `ValidationToolkit` playgrounds from the Project navigator.
+2. Open the project in Xcode
+4. Select the `Examples` playgrounds from the Project navigator
 
 ### Predicates
 
@@ -245,6 +175,9 @@ predicate.evaluate(with: "alphabet") // returns true
 
 ### Constraints
 
+
+#### Predicate Constraint
+
 A `PredicateConstraint` represents a data type that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
 
 <details>
@@ -264,55 +197,56 @@ case .invalid(let summary):
 ```
 
 ```swift
-enum MyError:Error {
+enum MyError: Error {
     case magicWord
 }
 ```
 
 </details>
 
-### Constraint Sets
+#### Compound Contraint
 
-A `ConstraintSet` represents a collection of constraints that allows the evaluation to be made on:
+A `CompoundContraint` represents a composition of constraints that allows the evaluation to be made on:
 
 - any of the constraints
 - all constraints
 
-To provide context, a `ConstraintSet` allows us to constraint a piece of data as being required and also as being a valid email.
+To provide context, a `CompoundContraint` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
 <summary>ConstraintSet</summary
 
-An example is that of the registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
+An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
-`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `ConstraintSet` object that can be used to enforce requirements on the user's password data:
+`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-let lowerCase = RegexPredicate(expression: "^(?=.*[a-z]).*$")
-let upperCase = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
-let digits = RegexPredicate(expression: "^(?=.*[0-9]).*$")
+let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
+let upperCasePredicate = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
 let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
 let minLenght = RegexPredicate(expression: "^.{8,}$")
 
-var passwordConstraints = ConstraintSet<String>()
-passwordConstraints.add(predicate: lowerCasePredicate, error: Form.Password.missingLowercase)
-passwordConstraints.add(predicate: upperCasePredicate, error: Form.Password.missingUpercase)
-passwordConstraints.add(predicate: digitsPredicate, error: Form.Password.missingDigits)
-passwordConstraints.add(predicate: specialChars, error: Form.Password.missingSpecialChars)
-passwordConstraints.add(predicate: minLenght, error: Form.Password.minLenght(8))
+var passwordConstraint = CompoundContraint<String>(allOf:
+    PredicateConstraint(predicate: lowerCasePredicate, error: Form.Password.missingLowercase),
+    PredicateConstraint(predicate: upperCasePredicate, error: Form.Password.missingUpercase),
+    PredicateConstraint(predicate: digitsPredicate, error: Form.Password.missingDigits),
+    PredicateConstraint(predicate: specialChars, error: Form.Password.missingSpecialChars),
+    PredicateConstraint(predicate: minLenght, error: Form.Password.minLenght(8))
+)
 
 let password = "3nGuard!"
-let result = passwordConstraints.evaluateAll(input: password)
+let result = passwordConstraint.evaluate(with: password)
 
 switch result {
-case .valid:
+case .success:
     print("Wow, that's a 💪 password!")
-case .invalid(let summary):
+case .failure(let summary):
     print(summary.errors.map({$0.localizedDescription}))
 } // prints "Wow, that's a 💪 password!"
 ```
 
-From above, we see that once we've constructed the `passwordConstraints`, we're simply calling `evaluateAll(input:)` to get a `Summary` of our evaluation result. This summary can then be handled as we please.
+From above, we see that once we've constructed the `passwordConstraint`, we're simply calling `evaluate(with:)` to get our evaluation `Result`. This contains `Summary` that can be handled as we please.
 
 </details>
 
@@ -327,13 +261,6 @@ This project is developed and maintained by the members of [iOS NSAgora][url-twi
 Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-file] for more information.
 
 [https://github.com/nsagora/validation-toolkit]
-
-### Credits and references
-
-We got inspired from other open source projects and they worth to be mentioned below for reference:
-
-- https://github.com/adamwaite/Validator
-- https://github.com/jpotts18/SwiftValidator
 
 [url-validationtoolkit]: https://github.com/nsagora/validation-toolkit
 [url-validationtoolkit-docs]: https://nsagora.github.io/validation-toolkit/
@@ -352,5 +279,5 @@ We got inspired from other open source projects and they worth to be mentioned b
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [badge-github]: https://github.com/nsagora/validation-toolkit/workflows/Build/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-0.6.2-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-0.7-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat

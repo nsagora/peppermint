@@ -25,7 +25,9 @@ public struct RegexPredicate: Predicate {
      - returns: `true` if input matches the reguar expression specified by the receiver, otherwise `false`.
      */
     public func evaluate(with input: InputType) -> Bool {
-        let predicate = NSPredicate(format: "SELF MATCHES %@", expression)
-        return predicate.evaluate(with: input)
+        if let _ = input.range(of: expression, options: .regularExpression) {
+            return true
+        }
+        return false
     }
 }

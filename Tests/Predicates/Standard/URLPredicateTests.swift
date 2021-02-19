@@ -1,5 +1,5 @@
 import XCTest
-@testable import ValidationToolkit
+import ValidationToolkit
 
 class URLPredicateTests: XCTestCase {
 

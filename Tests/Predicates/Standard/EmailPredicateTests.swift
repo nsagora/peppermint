@@ -1,5 +1,5 @@
 import XCTest
-@testable import ValidationToolkit
+import ValidationToolkit
 
 class EmailPredicateTests: XCTestCase {
 
@@ -15,19 +15,25 @@ class EmailPredicateTests: XCTestCase {
         super.tearDown()
     }
 
-    func testThatItFailsForInvalidEmail() {
+    func testEvaluateShouldReturnFalseWhenEmailIsIncomplete() {
         let email = "test@"
         let result = predicate.evaluate(with: email)
         XCTAssertFalse(result)
     }
+    
+    func testEvaluateShouldReturnFalseWhenEmailIsInvalid() {
+        let email = "test@example.com@example.com"
+        let result = predicate.evaluate(with: email)
+        XCTAssertFalse(result)
+    }
 
-    func testThatItPassesForValidEmail() {
+    func testEvaluateShouldReturnTrueWhenEmailIsValid() {
         let email = "test@example.com"
         let result = predicate.evaluate(with: email)
         XCTAssertTrue(result)
     }
 
-    func testThatItPassesForUTF8() {
+    func testEvaluateShouldReturnTrueWhenEmailContainsUTF8Characters() {
         let email = "tést@example.com"
         let result = predicate.evaluate(with: email)
         XCTAssertTrue(result)
