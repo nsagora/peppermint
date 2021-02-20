@@ -20,7 +20,7 @@ class PredicateConstraintTests: XCTestCase {
         let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: invalidInput)
 
-        XCTAssertTrue(result.isFailed)
+        XCTAssertTrue(result.isFailure)
         XCTAssertEqual(result.summary.failingConstraints, 1)
 
         let expectedErrors = [FakeError.Invalid]
@@ -38,7 +38,7 @@ extension PredicateConstraintTests {
 
         let actualErrors = result.summary.errors as! [FakeError]
         let expectedErrors = [FakeError.Unexpected(invalidInput)]
-        XCTAssertTrue(result.isFailed)
+        XCTAssertTrue(result.isFailure)
         XCTAssertEqual(actualErrors, expectedErrors)
     }
 }
@@ -50,7 +50,7 @@ extension PredicateConstraintTests {
         let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
-        var actualResult:Result!
+        var actualResult: Result<Void, Summary>!
         sut.evaluate(with: validInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
@@ -65,7 +65,7 @@ extension PredicateConstraintTests {
         let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
-        var actualResult:Result!
+        var actualResult: Result<Void, Summary>!
         sut.evaluate(with: invalidInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
@@ -74,7 +74,7 @@ extension PredicateConstraintTests {
 
         let actualErrors = actualResult.summary.errors as! [FakeError]
         let expectedErrors = [FakeError.Invalid]
-        XCTAssertTrue(actualResult.isFailed)
+        XCTAssertTrue(actualResult.isFailure)
         XCTAssertEqual(actualErrors, expectedErrors)
     }
 }

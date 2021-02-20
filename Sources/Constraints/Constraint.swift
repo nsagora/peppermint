@@ -11,12 +11,17 @@ public protocol Constraint: AsyncConstraint {
     associatedtype InputType
 
     /**
+     An error type that provides information about why the evaluation failed.
+     */
+    associatedtype ErrorType: Error
+    
+    /**
      Evaluates the input against the receiver.
 
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    func evaluate(with input: InputType) -> Result
+    func evaluate(with input: InputType) -> Result<Void, Summary>
 }
 
 public extension Constraint {
@@ -33,7 +38,7 @@ public extension Constraint {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-     func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result) -> Void) {
+     func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result<Void, Summary>) -> Void) {
 
         workQueue.async {
             let result = self.evaluate(with: input)
