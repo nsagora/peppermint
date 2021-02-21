@@ -13,7 +13,7 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
         self.keyPath = keyPath
     }
     
-    public func evaluate(with input: T) -> Result<Void, Summary> {
+    public func evaluate(with input: T) -> Result<Void, Summary<E>> {
         let value = input[keyPath: keyPath]
         return constraint.evaluate(with: value)
     }

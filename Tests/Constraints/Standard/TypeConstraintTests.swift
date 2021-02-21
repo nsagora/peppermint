@@ -18,7 +18,12 @@ class TypeConstraintTests: XCTestCase {
         
         let result = sut.evaluate(with: input)
         
-        XCTAssertTrue(result.isSuccessful)
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateShouldReturnASuccessfulResultWhenThereAreTwoKeyPathConstraintsFulfilled() {
@@ -33,7 +38,12 @@ class TypeConstraintTests: XCTestCase {
         
         let result = sut.evaluate(with: input)
         
-        XCTAssertTrue(result.isSuccessful)
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereIsOneKeyPathConstraintFailing() {
@@ -46,7 +56,12 @@ class TypeConstraintTests: XCTestCase {
         
         let result = sut.evaluate(with: input)
         
-        XCTAssertEqual(result.summary, Summary(errors: [FakeError.FailingCondition]))
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.FailingCondition]))
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereAreOneFulfilledAndOneFailingKeyPathConstraints() {
@@ -61,7 +76,12 @@ class TypeConstraintTests: XCTestCase {
         
         let result = sut.evaluate(with: input)
         
-        XCTAssertEqual(result.summary, Summary(errors: [FakeError.Invalid]))
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereAreTwoKeyPathConstraintsFailing() {
@@ -76,6 +96,11 @@ class TypeConstraintTests: XCTestCase {
         
         let result = sut.evaluate(with: input)
         
-        XCTAssertEqual(result.summary, Summary(errors: [FakeError.FailingCondition, FakeError.Invalid]))
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.FailingCondition, .Invalid]))
+        default:
+            XCTFail()
+        }
     }
 }

@@ -4,8 +4,10 @@ import XCTest
 class SummaryTests: XCTestCase {
 
     func testSuccessState() {
-        XCTAssertTrue(Result<Void, Summary>.success().isSuccessful)
-        XCTAssertFalse(Result<Void, Summary>.success().isFailure)
+        let result = Result<Void, Summary<FakeError>>.success(())
+        
+        XCTAssertTrue(result.isSuccessful)
+        XCTAssertFalse(result.isFailure)
     }
     
     func testFailureState() {
@@ -22,9 +24,11 @@ class SummaryTests: XCTestCase {
         let expectedSummary = Summary(errors: errors)
 
         let invalidResult = Result<Void, Summary>.failure(expectedSummary)
-        XCTAssertTrue(invalidResult.summary.hasFailingContraints)
-
-        let validResult = Result<Void, Summary>.success(())
-        XCTAssertFalse(validResult.summary.hasFailingContraints)
+        switch invalidResult {
+        case .failure(let summary):
+            XCTAssertTrue(summary.hasFailingContraints)
+        default:
+            XCTFail()
+        }
     }
 }

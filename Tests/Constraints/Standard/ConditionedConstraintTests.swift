@@ -10,8 +10,12 @@ class ConditionedConstraintTests: XCTestCase {
 
         let result = sut.evaluate(with: "invalidInput")
 
-        let expectedResult = Summary(errors: [FakeError.Invalid])
-        XCTAssertEqual(result.summary, expectedResult)
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateReturnsTheBuiltErrorInTheResultWhenInputIsInvalid() {
@@ -20,9 +24,13 @@ class ConditionedConstraintTests: XCTestCase {
         let sut = ConditionedConstraint(predicate: predicate) { FakeError.Unexpected($0) }
 
         let result = sut.evaluate(with: "invalidInput")
-
-        let expectedResult = Summary(errors: [FakeError.Unexpected("validInput")])
-        XCTAssertEqual(result.summary, expectedResult)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("validInput")]))
+        default:
+            XCTFail()
+        }
     }
 
     func testAddConditionalConstraints() {
@@ -86,9 +94,13 @@ class ConditionedConstraintTests: XCTestCase {
         sut.add(condition: firstCondition)
 
         let result = sut.evaluate(with: "__002__")
-        let expectedResult = Summary(errors: [FakeError.Unexpected("Expecting 002")])
         
-        XCTAssertEqual(result.summary, expectedResult)
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 002")]))
+        default:
+            XCTFail()
+        }
     }
 
     func testEvaluateShouldReturnAFailingConditionWhenTheConditionsAreFulfilledButNotTheMainPredicate() {
@@ -102,9 +114,13 @@ class ConditionedConstraintTests: XCTestCase {
         sut.add(condition: firstCondition)
 
         let result = sut.evaluate(with: "002")
-        let summary = Summary(errors: [FakeError.Unexpected("Expecting 001")])
         
-        XCTAssertEqual(result.summary, summary)
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 001")]))
+        default:
+            XCTFail()
+        }
     }
 
     func testEvaluateShouldReturnAFailureResultWhenConditionsAreNotFulfilledAtDeeperLevels() {
@@ -126,11 +142,21 @@ class ConditionedConstraintTests: XCTestCase {
         sut.add(condition:firstCondition)
 
         let firstResult = sut.evaluate(with: "001")
-        let firstSummary = Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 202")])
-        XCTAssertEqual(firstResult.summary, firstSummary)
+        
+        switch firstResult {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 201"), .Unexpected("Expecting 202")]))
+        default:
+            XCTFail()
+        }
 
         let secondResult = sut.evaluate(with: "004")
-        let secondSummary = Summary(errors: [FakeError.Unexpected("Expecting 201"), FakeError.Unexpected("Expecting 201")])
-        XCTAssertEqual(secondResult.summary, secondSummary)
+        
+        switch secondResult {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 201"), .Unexpected("Expecting 201")]))
+        default:
+            XCTFail()
+        }
     }
 }

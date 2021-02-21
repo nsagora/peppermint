@@ -3,12 +3,12 @@ import Foundation
 /**
  The summary of a validation result.
  */
-public struct Summary: Error {
+public struct Summary<E>: Error where E: Error {
     
     /**
      A non-empty`[Error]` if the validation result is `.failure`, empty otherwise.
      */
-    public private(set) var errors = [Error]()
+    public private(set) var errors = [E]()
     
     /**
      The number of failing constraints for a `.failure` result, `0` otherwise.
@@ -20,16 +20,8 @@ public struct Summary: Error {
      */
     public var hasFailingContraints: Bool { failingConstraints > 0 }
     
-    internal init(errors: [Error]) {
+    internal init(errors: [E]) {
         self.errors = errors
-    }
-    
-    internal init(evaluationResults: [Result<Void, Summary>]) {
-        let errors = evaluationResults
-            .filter { $0.isFailure }
-            .reduce(into: [Error]()) { $0 += $1.summary.errors }
-        
-        self.init(errors: errors)
     }
 }
 
@@ -41,10 +33,4 @@ extension Summary: Equatable {
     public static func ==(lhs: Summary, rhs: Summary) -> Bool {
         return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
     }
-}
-
-// MARK: - Factory methods
-
-extension Summary {
-    internal static var successful: Summary { Summary(errors: [])}
 }

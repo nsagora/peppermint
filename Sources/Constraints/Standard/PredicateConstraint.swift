@@ -39,7 +39,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    public func evaluate(with input: T) -> Result<Void, Summary> {
+    public func evaluate(with input: T) -> Result<Void, Summary<E>> {
         
         let result = predicate.evaluate(with: input)
         

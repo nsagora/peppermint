@@ -38,7 +38,12 @@ extension CompoundConstraintTests {
         let sut = CompoundContraint(allOf: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
-        XCTAssertTrue(result.isSuccessful)
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
 
     func testEvaluateShouldReturnAFailureResultWhenAllOfTheContraintsAreFailing() {
@@ -50,8 +55,12 @@ extension CompoundConstraintTests {
         let sut = CompoundContraint(allOf: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
-        let expectedResult = Summary(errors: [FakeError.Invalid, FakeError.MissingInput])
-        XCTAssertEqual(result.summary, expectedResult)
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid, .MissingInput]))
+        default:
+            XCTFail()
+        }
     }
 }
 
@@ -86,7 +95,12 @@ extension CompoundConstraintTests {
         let sut = CompoundContraint(anyOf: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
-        XCTAssertTrue(result.isSuccessful)
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
     
     
@@ -100,7 +114,11 @@ extension CompoundConstraintTests {
         let sut = CompoundContraint(anyOf: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
-        let expectedResult = Summary(errors: [FakeError.Invalid])
-        XCTAssertEqual(result.summary, expectedResult)
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default:
+            XCTFail()
+        }
     }
 }
