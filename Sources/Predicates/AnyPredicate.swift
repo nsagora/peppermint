@@ -10,13 +10,13 @@ public struct AnyPredicate<T>: Predicate {
      */
     public typealias InputType = T
 
-    var _evaluate: (InputType) -> Bool
+    var evaluate: (InputType) -> Bool
 
     /**
      Creates a type-erased `Predicate` that wraps the given instance.
     */
     public init<P: Predicate>(_ predicate: P) where P.InputType == InputType {
-        _evaluate = predicate.evaluate
+        self.evaluate = predicate.evaluate
     }
 
     /**
@@ -26,7 +26,7 @@ public struct AnyPredicate<T>: Predicate {
      - returns: `true` if input matches the conditions specified by the receiver, `false` otherwise.
      */
     public func evaluate(with input: InputType) -> Bool {
-        return _evaluate(input)
+        return evaluate(input)
     }
 }
 

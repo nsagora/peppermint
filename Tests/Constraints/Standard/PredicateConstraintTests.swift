@@ -12,20 +12,23 @@ class PredicateConstraintTests: XCTestCase {
         let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: validInput)
         
-        XCTAssertTrue(result.isSuccessful)
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default: XCTFail()
+        }
     }
 
     func testEvaluateShouldReturnAFailureResultWhenTheInputIsInvalid() {
 
         let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: invalidInput)
-
-        XCTAssertTrue(result.isFailed)
-        XCTAssertEqual(result.summary.failingConstraints, 1)
-
-        let expectedErrors = [FakeError.Invalid]
-        let actualErrors = result.summary.errors as! [FakeError]
-        XCTAssertEqual(actualErrors, expectedErrors)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
     }
 }
 
@@ -35,11 +38,12 @@ extension PredicateConstraintTests {
 
         let sut = PredicateConstraint(predicate: predicate) { FakeError.Unexpected($0) }
         let result = sut.evaluate(with: invalidInput)
-
-        let actualErrors = result.summary.errors as! [FakeError]
-        let expectedErrors = [FakeError.Unexpected(invalidInput)]
-        XCTAssertTrue(result.isFailed)
-        XCTAssertEqual(actualErrors, expectedErrors)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(invalidInput)]))
+        default: XCTFail()
+        }
     }
 }
 
@@ -50,14 +54,18 @@ extension PredicateConstraintTests {
         let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
-        var actualResult:Result!
+        var actualResult: Result<Void, Summary<FakeError>>!
         sut.evaluate(with: validInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
         }
         waitForExpectations(timeout: 0.5, handler: nil)
 
-        XCTAssertTrue(actualResult.isSuccessful)
+        switch actualResult {
+        case .success:
+            XCTAssertTrue(true)
+        default: XCTFail()
+        }
     }
     
     func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
@@ -65,16 +73,17 @@ extension PredicateConstraintTests {
         let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
-        var actualResult:Result!
+        var actualResult: Result<Void, Summary<FakeError>>!
         sut.evaluate(with: invalidInput, queue:.main) { result in
             actualResult = result
             expect.fulfill()
         }
         waitForExpectations(timeout: 0.5, handler: nil)
-
-        let actualErrors = actualResult.summary.errors as! [FakeError]
-        let expectedErrors = [FakeError.Invalid]
-        XCTAssertTrue(actualResult.isFailed)
-        XCTAssertEqual(actualErrors, expectedErrors)
+        
+        switch actualResult {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
     }
 }
