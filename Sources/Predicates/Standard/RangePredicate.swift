@@ -58,3 +58,15 @@ public struct RangePredicate<T: Comparable>: Predicate {
         return true
     }
 }
+
+extension RangePredicate where T: Strideable, T.Stride: SignedInteger {
+    
+    /**
+     Creates and returns a new `RangePredicate` instance.
+     :
+     - parameter range: A `Range` that defines the lower and uppper bounds of the range.
+     */
+    public init(_ range: Range<T>) {
+        self.init(ClosedRange<T>(range))
+    }
+}

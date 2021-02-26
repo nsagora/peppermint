@@ -67,6 +67,13 @@ class RangePredicateTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    func testEvaluateShouldReturnFakseWhenInputEqualsTheUpperBoundOfTheOpenRange() {
+        let sut = RangePredicate<Int>(0..<10)
+        let result = sut.evaluate(with: 10)
+        
+        XCTAssertFalse(result)
+    }
+    
     func testEvaluateShouldReturnTrueWhenInputIsInTheRange() {
         let sut = RangePredicate<Int>(0...10)
         let result = sut.evaluate(with: 10)
