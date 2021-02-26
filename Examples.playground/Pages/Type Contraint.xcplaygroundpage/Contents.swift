@@ -10,32 +10,52 @@ import ValidationToolkit
  */
 
 struct RegistrationData {
+    
+    enum Error: Swift.Error {
+        case username
+        case password(String)
+        case email
+        case underAge
+    }
+    
     var username: String
     var password: String
     var email: String
     var age: Int
 }
 
-let usernameConstraint = PredicateConstraint(predicate: BlockPredicate<String> { $0.count >= 5 } ) { Form.Username.invalid($0) }
-
-let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
-let upperCasePredicate = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
-let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
-let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
-let minLenght = RegexPredicate(expression: "^.{8,}$")
-
-var passwordConstraint = CompoundContraint<String>(allOf:
-    PredicateConstraint(predicate: lowerCasePredicate, error: Form.Password.missingLowercase),
-    PredicateConstraint(predicate: upperCasePredicate, error: Form.Password.missingUpercase),
-    PredicateConstraint(predicate: digitsPredicate, error: Form.Password.missingDigits),
-    PredicateConstraint(predicate: specialChars, error: Form.Password.missingSpecialChars),
-    PredicateConstraint(predicate: minLenght, error: Form.Password.minLenght(8))
+let usernameConstraint = PredicateConstraint(
+    predicate: BlockPredicate<String> { $0.count >= 5 },
+    error: RegistrationData.Error.username
 )
 
-var emailConstraint = PredicateConstraint(predicate: EmailPredicate()) { Form.Email.invalid($0) }
-var ageConstraint = PredicateConstraint(predicate: BlockPredicate<Int> { $0 > 14}, error: Form.Age.underage )
+var passwordConstraint = CompoundContraint(allOf:
+    PredicateConstraint(
+        predicate: RegexPredicate(expression: "^(?=.*[a-z]).*$"),
+        error: RegistrationData.Error.password("Missing lowercase")
+    ),
+    PredicateConstraint(
+        predicate: RegexPredicate(expression: "^(?=.*[A-Z]).*$"),
+        error: RegistrationData.Error.password("Missing uppercase")
+    ),
+    PredicateConstraint(
+        predicate: RegexPredicate(expression: "^(?=.*[0-9]).*$"),
+        error: RegistrationData.Error.password("Missing digits")
+    ),
+    PredicateConstraint(
+        predicate: RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$"),
+        error: RegistrationData.Error.password("Missing special characters")
+    ),
+    PredicateConstraint(
+        predicate: RegexPredicate(expression: "^.{8,}$"),
+        error: RegistrationData.Error.password("Minimum 8 characters required")
+    )
+)
 
-var loginConstraint = TypeConstraint<RegistrationData>()
+var emailConstraint = PredicateConstraint(predicate: EmailPredicate(), error: RegistrationData.Error.email)
+var ageConstraint = PredicateConstraint(predicate: BlockPredicate<Int> { $0 > 14}, error: RegistrationData.Error.underAge)
+
+var loginConstraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
 loginConstraint.set(usernameConstraint, for: \.username)
 loginConstraint.set(passwordConstraint, for: \.password)
 loginConstraint.set(emailConstraint, for: \.email)
@@ -50,7 +70,7 @@ case .success:
     print("Account successfully created 🥳")
 case .failure(let summary):
     summary.errors.forEach {
-        print($0.localizedDescription)
+        print($0)
     }
 }
 
