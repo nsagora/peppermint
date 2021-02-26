@@ -21,8 +21,7 @@ class TypeConstraintTests: XCTestCase {
         switch result {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -41,8 +40,7 @@ class TypeConstraintTests: XCTestCase {
         switch result {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -59,8 +57,7 @@ class TypeConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.FailingCondition]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -79,8 +76,7 @@ class TypeConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -99,8 +95,7 @@ class TypeConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.FailingCondition, .Invalid]))
-        default:
-            XCTFail()
+        default:  XCTFail()
         }
     }
 }

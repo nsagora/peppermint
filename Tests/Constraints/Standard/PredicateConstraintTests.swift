@@ -15,8 +15,7 @@ class PredicateConstraintTests: XCTestCase {
         switch result {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 
@@ -28,8 +27,7 @@ class PredicateConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }
@@ -44,8 +42,7 @@ extension PredicateConstraintTests {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(invalidInput)]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }
@@ -67,8 +64,7 @@ extension PredicateConstraintTests {
         switch actualResult {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -87,8 +83,7 @@ extension PredicateConstraintTests {
         switch actualResult {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }

@@ -41,8 +41,7 @@ extension CompoundConstraintTests {
         switch result {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 
@@ -58,8 +57,7 @@ extension CompoundConstraintTests {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid, .MissingInput]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }
@@ -98,8 +96,7 @@ extension CompoundConstraintTests {
         switch result {
         case .success:
             XCTAssertTrue(true)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -117,8 +114,7 @@ extension CompoundConstraintTests {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }

@@ -8,11 +8,11 @@ class SummaryTests: XCTestCase {
         let expectedSummary = Summary(errors: errors)
 
         let invalidResult = Result<Void, Summary>.failure(expectedSummary)
+        
         switch invalidResult {
         case .failure(let summary):
             XCTAssertTrue(summary.hasFailingContraints)
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }

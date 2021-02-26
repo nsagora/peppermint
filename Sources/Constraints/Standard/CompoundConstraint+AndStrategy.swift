@@ -18,9 +18,8 @@ extension CompoundContraint {
             let summary = Summary<C.ErrorType>(errors: errors)
             if summary.errors.isEmpty {
                 return Result<Void, Summary<C.ErrorType>>.success(())
-            } else {
-                return Result<Void, Summary<C.ErrorType>>.failure(summary)
             }
+            return Result<Void, Summary<C.ErrorType>>.failure(summary)
         }
     }
 }

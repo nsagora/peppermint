@@ -13,8 +13,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
     
@@ -28,8 +27,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("validInput")]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 
@@ -98,8 +96,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 002")]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 
@@ -118,8 +115,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 001")]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 
@@ -146,8 +142,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch firstResult {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 201"), .Unexpected("Expecting 202")]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
 
         let secondResult = sut.evaluate(with: "004")
@@ -155,8 +150,7 @@ class ConditionedConstraintTests: XCTestCase {
         switch secondResult {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 201"), .Unexpected("Expecting 201")]))
-        default:
-            XCTFail()
+        default: XCTFail()
         }
     }
 }

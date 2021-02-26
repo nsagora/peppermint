@@ -1,6 +1,6 @@
 import Foundation
 
-enum FakeError: FakeableError {
+enum FakeError: Error {
 
     case Invalid
     case MissingInput
