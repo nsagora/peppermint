@@ -1,0 +1,17 @@
+name: Build on Linux
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        run: swift build --enable-test-discovery
+      - name: Tests
+        run: swift test --enable-test-discovery
