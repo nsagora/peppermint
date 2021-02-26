@@ -23,8 +23,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(allOf subconstraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.constraints = subconstraints.map { $0.erase() }
+    public init<C: Constraint>(allOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
+        self.constraints = constraints.map { $0.erase() }
         self.evaluationStrategy = AndStrategy()
     }
     
@@ -33,8 +33,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(allOf subconstraints: C...) where C.InputType == T, C.ErrorType == E {
-        self.init(allOf: subconstraints)
+    public init<C: Constraint>(allOf constraints: C...) where C.InputType == T, C.ErrorType == E {
+        self.init(allOf: constraints)
     }
     
     /**
@@ -42,8 +42,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(anyOf subconstraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.constraints = subconstraints.map { $0.erase() }
+    public init<C: Constraint>(anyOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
+        self.constraints = constraints.map { $0.erase() }
         self.evaluationStrategy = OrStrategy()
     }
     
@@ -52,8 +52,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(anyOf subconstraints: C...) where C.InputType == T, C.ErrorType == E {
-        self.init(anyOf: subconstraints)
+    public init<C: Constraint>(anyOf constraints: C...) where C.InputType == T, C.ErrorType == E {
+        self.init(anyOf: constraints)
     }
     
     /**
@@ -64,5 +64,46 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
         return evaluationStrategy.evaluate(constraints: constraints, with: input)
+    }
+}
+
+// MARK: - Factory Methods
+
+extension CompoundContraint {
+    
+    /**
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+    
+    - parameter constraints: `[Constraint]`
+    */
+    public static func allOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(allOf: constraints)
+    }
+    
+    /**
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+    
+    - parameter constraints: `[Constraint]`
+    */
+    public static func allOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(allOf: constraints)
+    }
+    
+    /**
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+    
+    - parameter constraints: `[Constraint]`
+    */
+    public static func anyOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(anyOf: constraints)
+    }
+    
+    /**
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+    
+    - parameter constraints: `[Constraint]`
+    */
+    public static func anyOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(anyOf: constraints)
     }
 }

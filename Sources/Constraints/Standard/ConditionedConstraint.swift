@@ -21,20 +21,22 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
     /**
      Create a new `ConditionedConstraint` instance
 
-     - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter error: An `Error` that describes why the evaluation has failed.
+     - parameter constraint: A `Constraint` to describes the evaluation rule.
+     - parameter conditions: An array of `Constraints` that must fullfil before evaluating the constraint.
      */
-    public init<P: Predicate>(predicate: P, error: E) where P.InputType == T  {
-        self.constraint = PredicateConstraint(predicate: predicate, error: error).erase()
+    public init<C: Constraint>(_ constraint: C, conditions: [C] = []) where C.InputType == T, C.ErrorType == E {
+        self.constraint = constraint.erase()
+        self.conditions = conditions.map { $0.erase() }
     }
+    
     /**
      Create a new `ConditionedConstraint` instance
 
-     - parameter predicate: A `Predicate` to describes the evaluation rule.
-     - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
+     - parameter constraint: A `Constraint` to describes the evaluation rule.
+     - parameter conditions: An array of `Constraints` that must fullfil before evaluating the constraint.
      */
-    public init<P: Predicate>(predicate: P, error: @escaping (T) -> E) where P.InputType == T {
-        self.constraint = PredicateConstraint(predicate: predicate, error: error).erase()
+    public init<C: Constraint>(_ constraint: C, conditions: C...) where C.InputType == T, C.ErrorType == E {
+        self.init(constraint, conditions: conditions)
     }
 
     /**
@@ -42,7 +44,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
 
      - parameter constraint: `Constraint`
      */
-    public mutating func add<C: Constraint>(condition: C) where C.InputType == T, C.ErrorType == E {
+    public mutating func add<C: Constraint>(_ condition: C) where C.InputType == T, C.ErrorType == E {
         conditions.append(condition.erase())
     }
 
@@ -51,7 +53,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
 
      - parameter constraints: `[Constraint]`
      */
-    public mutating func add<C: Constraint>(conditions: [C]) where C.InputType == T, C.ErrorType == E {
+    public mutating func add<C: Constraint>(_ conditions: [C]) where C.InputType == T, C.ErrorType == E {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
@@ -61,7 +63,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
 
      - parameter constraints: `[Constraint]`
      */
-    public mutating func add<C: Constraint>(conditions: C...) where C.InputType == T, C.ErrorType == E {
+    public mutating func add<C: Constraint>(_ conditions: C...) where C.InputType == T, C.ErrorType == E {
         let constraits = conditions.map { $0.erase() }
         self.conditions.append(contentsOf: constraits)
     }
