@@ -73,16 +73,15 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
-
+        
         guard hasConditions else { return constraint.evaluate(with: input) }
-
+        
         let compound = CompoundContraint(allOf: conditions)
         let result = compound.evaluate(with: input)
-
-        if result.isSuccessful {
-            return constraint.evaluate(with: input)
+        
+        switch result {
+        case .success: return constraint.evaluate(with: input)
+        case .failure: return result
         }
-
-        return result
     }
 }

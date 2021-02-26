@@ -64,7 +64,12 @@ extension PredicateConstraintTests {
         }
         waitForExpectations(timeout: 0.5, handler: nil)
 
-        XCTAssertTrue(actualResult.isSuccessful)
+        switch actualResult {
+        case .success:
+            XCTAssertTrue(true)
+        default:
+            XCTFail()
+        }
     }
     
     func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
