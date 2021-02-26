@@ -53,7 +53,7 @@ var passwordConstraint = CompoundContraint(allOf:
 )
 
 var emailConstraint = PredicateConstraint(predicate: EmailPredicate(), error: RegistrationData.Error.email)
-var ageConstraint = PredicateConstraint(predicate: BlockPredicate<Int> { $0 > 14}, error: RegistrationData.Error.underAge)
+var ageConstraint = PredicateConstraint(predicate: RangePredicate(min: 14), error: RegistrationData.Error.underAge)
 
 var loginConstraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
 loginConstraint.set(usernameConstraint, for: \.username)
