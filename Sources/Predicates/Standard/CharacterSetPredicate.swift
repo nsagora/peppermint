@@ -25,6 +25,6 @@ public struct CharacterSetPredicate: Predicate {
      - returns: `true` if input  contains only characters in the charecter set, otherwise `false`.
      */
     public func evaluate(with input: String) -> Bool {
-        return input.unicodeScalars.allSatisfy { self.characterSet.contains($0)}
+        return CharacterSet(charactersIn: input).isStrictSubset(of: characterSet)
     }
 }
