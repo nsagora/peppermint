@@ -24,45 +24,55 @@ struct RegistrationData {
     var age: Int
 }
 
-let usernameConstraint = PredicateConstraint(
-    predicate: BlockPredicate<String> { $0.count >= 5 },
-    error: RegistrationData.Error.username
-)
-
-var passwordConstraint = CompoundContraint(allOf:
-    PredicateConstraint(
-        predicate: RegexPredicate(expression: "^(?=.*[a-z]).*$"),
-        error: RegistrationData.Error.password("Missing lowercase")
-    ),
-    PredicateConstraint(
-        predicate: RegexPredicate(expression: "^(?=.*[A-Z]).*$"),
-        error: RegistrationData.Error.password("Missing uppercase")
-    ),
-    PredicateConstraint(
-        predicate: RegexPredicate(expression: "^(?=.*[0-9]).*$"),
-        error: RegistrationData.Error.password("Missing digits")
-    ),
-    PredicateConstraint(
-        predicate: RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$"),
-        error: RegistrationData.Error.password("Missing special characters")
-    ),
-    PredicateConstraint(
-        predicate: RegexPredicate(expression: "^.{8,}$"),
-        error: RegistrationData.Error.password("Minimum 8 characters required")
-    )
-)
-
-var emailConstraint = PredicateConstraint(predicate: EmailPredicate(), error: RegistrationData.Error.email)
-var ageConstraint = PredicateConstraint(predicate: RangePredicate(min: 14), error: RegistrationData.Error.underAge)
-
 var loginConstraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
-loginConstraint.set(usernameConstraint, for: \.username)
-loginConstraint.set(passwordConstraint, for: \.password)
-loginConstraint.set(emailConstraint, for: \.email)
-loginConstraint.set(ageConstraint, for: \.age)
+
+loginConstraint.set(for: \.username) {
+    PredicateConstraint {
+        $0.count >= 5
+    } errorBuilder: {
+        .username
+    }
+}
+
+loginConstraint.set(for: \.password) {
+    CompoundContraint.allOf(
+        PredicateConstraint {
+            RegexPredicate(expression: "^(?=.*[a-z]).*$")
+        } errorBuilder: {
+            .password("Requires lowercase characters")
+        },
+        PredicateConstraint{
+            RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+        } errorBuilder: {
+            .password("Requires uppercase characters")
+        },
+        PredicateConstraint {
+            RegexPredicate(expression: "^(?=.*[0-9]).*$")
+        } errorBuilder: {
+            .password("Requires digits")
+        },
+        PredicateConstraint {
+            RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
+        } errorBuilder: {
+            .password("Requires special characters")
+        },
+        PredicateConstraint {
+            RegexPredicate(expression: "^.{8,}$")
+        }  errorBuilder: {
+            .password("Requires minimum 8 characters")
+        }
+    )
+}
+
+loginConstraint.set(for: \.email) {
+    PredicateConstraint(EmailPredicate(), error: .email)
+}
+
+loginConstraint.set(for: \.age) {
+    PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+}
 
 let user = RegistrationData(username: "me", password: "secure", email: "@example.com", age: 12)
-
 let result = loginConstraint.evaluate(with: user)
 
 switch result {

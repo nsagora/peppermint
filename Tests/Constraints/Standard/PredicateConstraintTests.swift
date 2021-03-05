@@ -121,3 +121,39 @@ extension PredicateConstraintTests {
         }
     }
 }
+
+extension PredicateConstraintTests {
+    
+    func testInitReturnsABlockPredicateConstraint() {
+        
+        let sut = PredicateConstraint<String, FakeError> {
+            $0 == self.validInput
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        let result = sut.evaluate(with: validInput)
+        
+        switch result {
+        case .success: XCTAssertTrue(true)
+        default: XCTFail()
+        }
+    }
+    
+    func testInitReturnsABlockPredicateConstraintWithErrorBuilder() {
+        
+        let sut = PredicateConstraint<String, FakeError> {
+            $0 == self.validInput
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(validInput)]))
+        default: XCTFail()
+        }
+    }
+}
