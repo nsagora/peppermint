@@ -15,9 +15,9 @@ let text = "1234567890"
 let minLenght = BlockPredicate<String> { $0.count >= 5 }
 let isNumerical = RegexPredicate(expression: "^(0|[1-9][0-9]*)$")
 
-let numericConstraint = PredicateConstraint(predicate: isNumerical, error: Form.Username.invalid("Not numeric"))
-var lenghtConstraint = ConditionedConstraint(predicate: minLenght, error: Form.Username.invalid("Too short."))
-lenghtConstraint.add(condition: numericConstraint)
+let minConstraint = PredicateConstraint(minLenght, error: Form.Username.invalid("Too short."))
+let numericConstraint = PredicateConstraint(isNumerical, error: Form.Username.invalid("Not numeric"))
+var lenghtConstraint = ConditionedConstraint(minConstraint, conditions: [numericConstraint])
 
 let result = lenghtConstraint.evaluate(with: text)
 
