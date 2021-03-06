@@ -14,7 +14,7 @@ class TypeConstraintTests: XCTestCase {
         let integerConstraint = PredicateConstraint(BlockPredicate { $0 > 5}, error: FakeError.FailingCondition)
         
         var sut = TypeConstraint<FakeData, FakeError>()
-        sut.set(integerConstraint, for:\.integer)
+        sut.set(for: \.integer, constraint: integerConstraint)
         
         let result = sut.evaluate(with: input)
         
@@ -32,8 +32,8 @@ class TypeConstraintTests: XCTestCase {
         let stringConstraint = PredicateConstraint(BlockPredicate { $0 == "Swift"}, error: FakeError.Invalid)
         
         var sut = TypeConstraint<FakeData, FakeError>()
-        sut.set(integerConstraint, for:\.integer)
-        sut.set(stringConstraint, for: \.string)
+        sut.set(for: \.integer, constraint: integerConstraint)
+        sut.set(for: \.string, constraint: stringConstraint)
         
         let result = sut.evaluate(with: input)
         
@@ -69,7 +69,7 @@ class TypeConstraintTests: XCTestCase {
         let integerConstraint = PredicateConstraint(BlockPredicate { $0 < 5}, error: FakeError.FailingCondition)
         
         var sut = TypeConstraint<FakeData, FakeError>()
-        sut.set(integerConstraint, for:\.integer)
+        sut.set(for: \.integer, constraint: integerConstraint)
         
         let result = sut.evaluate(with: input)
         
@@ -87,8 +87,8 @@ class TypeConstraintTests: XCTestCase {
         let stringConstraint = PredicateConstraint(BlockPredicate { $0 != "Swift"}, error: FakeError.Invalid)
         
         var sut = TypeConstraint<FakeData, FakeError>()
-        sut.set(integerConstraint, for:\.integer)
-        sut.set(stringConstraint, for: \.string)
+        sut.set(for: \.integer, constraint: integerConstraint)
+        sut.set(for: \.string, constraint: stringConstraint)
         
         let result = sut.evaluate(with: input)
         
@@ -106,8 +106,8 @@ class TypeConstraintTests: XCTestCase {
         let stringConstraint = PredicateConstraint(BlockPredicate { $0 != "Swift"}, error: FakeError.Invalid)
         
         var sut = TypeConstraint<FakeData, FakeError>()
-        sut.set(integerConstraint, for:\.integer)
-        sut.set(stringConstraint, for: \.string)
+        sut.set(for: \.integer, constraint: integerConstraint)
+        sut.set(for: \.string, constraint: stringConstraint)
         
         let result = sut.evaluate(with: input)
         
