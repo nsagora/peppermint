@@ -12,7 +12,7 @@ import ValidationToolkit
 let username = "username"
 let predicate = BlockPredicate<String> { $0.count >= 5 }
 
-let constraint = PredicateConstraint(predicate: predicate, error: Form.Username.invalid)
+let constraint = PredicateConstraint(predicate, error: Form.Username.missing)
 let result = constraint.evaluate(with: username)
 
 switch result {

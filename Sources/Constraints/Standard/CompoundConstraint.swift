@@ -10,8 +10,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    var constraints: [AnyConstraint<T, E>]
-    var evaluationStrategy: Strategy
+    private var constraints: [AnyConstraint<T, E>]
+    private var evaluationStrategy: Strategy
     
     /**
      Returns the number of constraints in collection
@@ -23,9 +23,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(allOf subconstraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.constraints = subconstraints.map { $0.erase() }
-        self.evaluationStrategy = AndStrategy()
+    public static func allOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(allOf: constraints)
     }
     
     /**
@@ -33,27 +32,36 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(allOf subconstraints: C...) where C.InputType == T, C.ErrorType == E {
-        self.init(allOf: subconstraints)
+    public static func allOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(allOf: constraints)
     }
     
     /**
-    Create a new `OrConstraint` instance populated with a predefined list of `Constraints`
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
     
     - parameter constraints: `[Constraint]`
     */
-    public init<C: Constraint>(anyOf subconstraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.constraints = subconstraints.map { $0.erase() }
+    public static func anyOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(anyOf: constraints)
+    }
+    
+    /**
+    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+    
+    - parameter constraints: `[Constraint]`
+    */
+    public static func anyOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
+        CompoundContraint(anyOf: constraints)
+    }
+    
+    private init<C: Constraint>(allOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
+        self.constraints = constraints.map { $0.erase() }
+        self.evaluationStrategy = AndStrategy()
+    }
+    
+    private init<C: Constraint>(anyOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
+        self.constraints = constraints.map { $0.erase() }
         self.evaluationStrategy = OrStrategy()
-    }
-    
-    /**
-    Create a new `OrConstraint` instance populated with a predefined list of `Constraints`
-    
-    - parameter constraints: `[Constraint]`
-    */
-    public init<C: Constraint>(anyOf subconstraints: C...) where C.InputType == T, C.ErrorType == E {
-        self.init(anyOf: subconstraints)
     }
     
     /**

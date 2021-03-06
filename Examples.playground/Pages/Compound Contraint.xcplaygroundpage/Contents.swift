@@ -15,12 +15,12 @@ let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
 let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
 let minLenght = RegexPredicate(expression: "^.{8,}$")
 
-var passwordConstraint = CompoundContraint<String, Form.Password>(allOf:
-    PredicateConstraint(predicate: lowerCasePredicate, error: .missingLowercase),
-    PredicateConstraint(predicate: upperCasePredicate, error: .missingUpercase),
-    PredicateConstraint(predicate: digitsPredicate, error: .missingDigits),
-    PredicateConstraint(predicate: specialChars, error: .missingSpecialChars),
-    PredicateConstraint(predicate: minLenght, error: .minLenght(8))
+var passwordConstraint = CompoundContraint<String, Form.Password>.allOf(
+    PredicateConstraint(lowerCasePredicate, error: .missingLowercase),
+    PredicateConstraint(upperCasePredicate, error: .missingUpercase),
+    PredicateConstraint(digitsPredicate, error: .missingDigits),
+    PredicateConstraint(specialChars, error: .missingSpecialChars),
+    PredicateConstraint(minLenght, error: .minLenght(8))
 )
 
 let password = "3nGuard!"

@@ -17,7 +17,14 @@
     {
       "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
       "line": 11,
-      "symbol": "KeyPathConstraint.init(_:for:)",
+      "symbol": "KeyPathConstraint.init(_:constraint:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "line": 16,
+      "symbol": "KeyPathConstraint.init(_:constraintBuilder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },

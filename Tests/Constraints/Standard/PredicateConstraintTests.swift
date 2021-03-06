@@ -9,7 +9,7 @@ class PredicateConstraintTests: XCTestCase {
 
     func testEvaluateShouldReturnASuccessfulResultWhenTheInputIsValid() {
         
-        let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -21,7 +21,7 @@ class PredicateConstraintTests: XCTestCase {
 
     func testEvaluateShouldReturnAFailureResultWhenTheInputIsInvalid() {
 
-        let sut = PredicateConstraint(predicate: predicate, error: FakeError.Invalid)
+        let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -32,11 +32,13 @@ class PredicateConstraintTests: XCTestCase {
     }
 }
 
+// MARK: - Convenience Initializers
+
 extension PredicateConstraintTests {
     
     func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithErrorBlock() {
 
-        let sut = PredicateConstraint(predicate: predicate) { FakeError.Unexpected($0) }
+        let sut = PredicateConstraint(predicate) { FakeError.Unexpected($0) }
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -45,13 +47,61 @@ extension PredicateConstraintTests {
         default: XCTFail()
         }
     }
+    
+    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithNoParamErrorBlock() {
+
+        let sut = PredicateConstraint(predicate) { FakeError.Invalid }
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
+    
+    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndErrorBuilder() {
+        
+        let sut = PredicateConstraint {
+            self.predicate
+        } errorBuilder: {
+            FakeError.Unexpected($0)
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(invalidInput)]))
+        default: XCTFail()
+        }
+    }
+    
+    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndNoParamErrorBuilder() {
+        
+        let sut = PredicateConstraint {
+            self.predicate
+        } errorBuilder: {
+            FakeError.Invalid
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
 }
+
+// MARK: - Async Evaluation
 
 extension PredicateConstraintTests {
     
     func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
 
-        let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
         var actualResult: Result<Void, Summary<FakeError>>!
@@ -70,7 +120,7 @@ extension PredicateConstraintTests {
     
     func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
 
-        let sut = PredicateConstraint(predicate: predicate, error:FakeError.Invalid)
+        let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
         var actualResult: Result<Void, Summary<FakeError>>!
@@ -83,6 +133,45 @@ extension PredicateConstraintTests {
         switch actualResult {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
+}
+
+// MARK: - BlockPredicate Extension
+
+extension PredicateConstraintTests {
+    
+    func testInitReturnsABlockPredicateConstraint() {
+        
+        let sut = PredicateConstraint<String, FakeError> {
+            $0 == self.validInput
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
+    
+    func testInitReturnsABlockPredicateConstraintWithErrorBuilder() {
+        
+        let sut = PredicateConstraint<String, FakeError> {
+            $0 == self.validInput
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(validInput)]))
         default: XCTFail()
         }
     }

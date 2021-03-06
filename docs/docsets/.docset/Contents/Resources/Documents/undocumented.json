@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/CompoundConstraint.swift",
-      "line": 7,
+      "line": 8,
       "symbol": "CompoundContraint",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
@@ -16,7 +16,7 @@
     },
     {
       "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
-      "line": 10,
+      "line": 11,
       "symbol": "KeyPathConstraint.init(_:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -8,8 +8,13 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
     private let constraint: AnyConstraint<V, E>
     private let keyPath: KeyPath<T, V>
     
-    public init<C: Constraint>(_ constraint: C, for keyPath: KeyPath<T, V>) where C.InputType == V, C.ErrorType == E {
+    public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraint: C) where C.InputType == V, C.ErrorType == E {
         self.constraint = constraint.erase()
+        self.keyPath = keyPath
+    }
+    
+    public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraintBuilder: () -> C) where C.InputType == V, C.ErrorType == E {
+        self.constraint = constraintBuilder().erase()
         self.keyPath = keyPath
     }
     
