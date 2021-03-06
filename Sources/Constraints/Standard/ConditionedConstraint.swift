@@ -24,7 +24,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
      - parameter constraint: A `Constraint` to describes the evaluation rule.
      - parameter conditions: An array of `Constraints` that must fullfil before evaluating the constraint.
      */
-    public init<C: Constraint>(_ constraint: C, conditions: [C] = []) where C.InputType == T, C.ErrorType == E {
+    public init<C: Constraint>(_ constraint: C, conditions: [C]) where C.InputType == T, C.ErrorType == E {
         self.constraint = constraint.erase()
         self.conditions = conditions.map { $0.erase() }
     }
@@ -37,35 +37,6 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
      */
     public init<C: Constraint>(_ constraint: C, conditions: C...) where C.InputType == T, C.ErrorType == E {
         self.init(constraint, conditions: conditions)
-    }
-
-    /**
-     Add a condition `Constraint`.
-
-     - parameter constraint: `Constraint`
-     */
-    public mutating func add<C: Constraint>(_ condition: C) where C.InputType == T, C.ErrorType == E {
-        conditions.append(condition.erase())
-    }
-
-    /**
-     Add a predefined list of conditional `Constraints`.
-
-     - parameter constraints: `[Constraint]`
-     */
-    public mutating func add<C: Constraint>(_ conditions: [C]) where C.InputType == T, C.ErrorType == E {
-        let constraits = conditions.map { $0.erase() }
-        self.conditions.append(contentsOf: constraits)
-    }
-
-    /**
-     A an unsized list of conditional `Constraints`.
-
-     - parameter constraints: `[Constraint]`
-     */
-    public mutating func add<C: Constraint>(_ conditions: C...) where C.InputType == T, C.ErrorType == E {
-        let constraits = conditions.map { $0.erase() }
-        self.conditions.append(contentsOf: constraits)
     }
 
     /**
