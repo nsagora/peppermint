@@ -32,6 +32,8 @@ class PredicateConstraintTests: XCTestCase {
     }
 }
 
+// MARK: - Convenience Initializers
+
 extension PredicateConstraintTests {
     
     func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithErrorBlock() {
@@ -46,7 +48,19 @@ extension PredicateConstraintTests {
         }
     }
     
-    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilder() {
+    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithNoParamErrorBlock() {
+
+        let sut = PredicateConstraint(predicate) { FakeError.Invalid }
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
+    
+    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndErrorBuilder() {
         
         let sut = PredicateConstraint {
             self.predicate
@@ -63,7 +77,7 @@ extension PredicateConstraintTests {
         }
     }
     
-    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndErrorBuilder() {
+    func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndNoParamErrorBuilder() {
         
         let sut = PredicateConstraint {
             self.predicate
@@ -80,6 +94,8 @@ extension PredicateConstraintTests {
         }
     }
 }
+
+// MARK: - Async Evaluation
 
 extension PredicateConstraintTests {
     
@@ -122,6 +138,8 @@ extension PredicateConstraintTests {
     }
 }
 
+// MARK: - BlockPredicate Extension
+
 extension PredicateConstraintTests {
     
     func testInitReturnsABlockPredicateConstraint() {
@@ -132,10 +150,11 @@ extension PredicateConstraintTests {
             .Invalid
         }
         
-        let result = sut.evaluate(with: validInput)
+        let result = sut.evaluate(with: invalidInput)
         
         switch result {
-        case .success: XCTAssertTrue(true)
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
         default: XCTFail()
         }
     }
