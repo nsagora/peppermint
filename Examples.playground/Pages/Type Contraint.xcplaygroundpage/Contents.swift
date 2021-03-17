@@ -13,9 +13,17 @@ struct RegistrationData {
     
     enum Error: Swift.Error {
         case username
-        case password(String)
+        case password(Password)
         case email
         case underAge
+    }
+    
+    enum Password {
+        case missingUppercase
+        case missingLowercase
+        case missingDigits
+        case missingSpecialChars
+        case tooShort
     }
     
     var username: String
@@ -37,29 +45,29 @@ loginConstraint.set(for: \.username) {
 loginConstraint.set(for: \.password) {
     CompoundContraint.allOf(
         PredicateConstraint {
-            RegexPredicate(expression: "^(?=.*[a-z]).*$")
+            CharacterSetPredicate(.lowercaseLetters, mode: .loose)
         } errorBuilder: {
-            .password("Requires lowercase characters")
+            .password(.missingLowercase)
         },
         PredicateConstraint{
-            RegexPredicate(expression: "^(?=.*[A-Z]).*$")
+            CharacterSetPredicate(.uppercaseLetters, mode: .loose)
         } errorBuilder: {
-            .password("Requires uppercase characters")
+            .password(.missingUppercase)
         },
         PredicateConstraint {
-            RegexPredicate(expression: "^(?=.*[0-9]).*$")
+            CharacterSetPredicate(.decimalDigits, mode: .loose)
         } errorBuilder: {
-            .password("Requires digits")
+            .password(.missingDigits)
         },
         PredicateConstraint {
-            RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
+            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
         } errorBuilder: {
-            .password("Requires special characters")
+            .password(.missingSpecialChars)
         },
         PredicateConstraint {
-            RegexPredicate(expression: "^.{8,}$")
+            LengthPredicate(min: 8)
         }  errorBuilder: {
-            .password("Requires minimum 8 characters")
+            .password(.tooShort)
         }
     )
 }
@@ -72,7 +80,7 @@ loginConstraint.set(for: \.age) {
     PredicateConstraint(RangePredicate(min: 14), error: .underAge)
 }
 
-let user = RegistrationData(username: "me", password: "secure", email: "@example.com", age: 12)
+let user = RegistrationData(username: "me", password: "s3cure", email: "@example.com", age: 12)
 let result = loginConstraint.evaluate(with: user)
 
 switch result {
