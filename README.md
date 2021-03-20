@@ -1,8 +1,8 @@
-# Validation Toolkit [![badge-version]][url-validationtoolkit]
+# Peppermint [![badge-version]][url-peppermint]
 
-[![badge-github]][url-validationtoolkit]
+[![badge-github]][url-peppermint]
 [![badge-codecov]][url-codecov]
-[![badge-docs]][url-validationtoolkit-docs]
+[![badge-docs]][url-peppermint-docs]
 [![badge-license]][url-license]
 [![badge-twitter]][url-twitter]
 
@@ -23,7 +23,7 @@
 
 ## Introduction
 
-`ValidationToolkit` is designed to be a lightweight framework specialised in data validation, such as email format, input length or passwords matching.
+`Peppermint` is designed to be a lightweight framework specialised in data validation, such as email format, input length or passwords matching.
 
 At the core of this project are the following principles:
 
@@ -33,19 +33,19 @@ At the core of this project are the following principles:
 
 ### Separation of concerns
 
-Think of `ValidationToolkit` as to an adjustable wrench more than to a Swiss knife.
+Think of `Peppermint` as to an adjustable wrench more than to a Swiss knife.
 
 With this idea in mind, the toolkit is composed from a small set of protocols and structs that can be easily composed to fit your project needs.
 
 ### All platforms availability
 
-Since validation can take place at many levels, `ValidationToolkit` is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
+Since validation can take place at many levels, `Peppermint` is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
 
 ### Open to extensibility
 
 Every project is unique in it's challenges and it's great when we can focus on solving them instead of spending our time on boilerplate tasks.
 
-`ValidationToolkit` is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.
+`Peppermint` is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ Every project is unique in it's challenges and it's great when we can focus on s
 
 ### Swift Package Manager
 
-You can use the [Swift Package Manager][url-swift-package-manager] to install `ValidationToolkit` by adding it to your `Package.swift` file:
+You can use the [Swift Package Manager][url-swift-package-manager] to install `Peppermint` by adding it to your `Package.swift` file:
 
 ```swift
 import PackageDescription
@@ -66,7 +66,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/nsagora/validation-toolkit", majorVersion: 1),
+        .Package(url: "https://github.com/nsagora/peppermint", majorVersion: 1),
     ]
 )
 ```
@@ -83,7 +83,7 @@ For a comprehensive list of examples try the `Examples.playground`:
 
 The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation condition.
 
-At `ValidationToolkit`'s core we have the following two predicates, which allow developers to compose predicates specific to the project needs.
+At `Peppermint`'s core we have the following two predicates, which allow developers to compose predicates specific to the project needs.
 
 <details>
 <summary>RegexPredicate</summary>
@@ -218,7 +218,7 @@ To provide context, a `CompoundContraint` allows us to constraint a piece of dat
 
 An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
-`ValidationToolkit` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
+`Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
 let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
@@ -252,7 +252,7 @@ From above, we see that once we've constructed the `passwordConstraint`, we're s
 
 ## Contribute
 
-We would love you for the contribution to **ValidationToolkit**, check the [`LICENSE`][url-license-file] file for more info.
+We would love you for the contribution to **Peppermint**, check the [`LICENSE`][url-license-file] file for more info.
 
 ## Meta
 
@@ -260,10 +260,10 @@ This project is developed and maintained by the members of [iOS NSAgora][url-twi
 
 Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-file] for more information.
 
-[https://github.com/nsagora/validation-toolkit]
+[https://github.com/nsagora/peppermint]
 
-[url-validationtoolkit]: https://github.com/nsagora/validation-toolkit
-[url-validationtoolkit-docs]: https://nsagora.github.io/validation-toolkit/
+[url-peppermint]: https://github.com/nsagora/peppermint
+[url-peppermint-docs]: https://nsagora.github.io/peppermint/
 [url-carthage]: https://github.com/Carthage/Carthage
 [url-carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
 [url-cocoapods]: https://cocoapods.org
@@ -271,13 +271,13 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [url-swift-package-manager]: https://swift.org/package-manager
 [url-swift-package-manager-github]: https://github.com/apple/swift-package-manager
 [url-license]: http://choosealicense.com/licenses/mit/
-[url-license-file]: https://github.com/nsagora/validation-toolkit/blob/master/LICENSE
+[url-license-file]: https://github.com/nsagora/peppermint/blob/master/LICENSE
 [url-twitter]: https://twitter.com/nsagora
-[url-codecov]: https://codecov.io/gh/nsagora/validation-toolkit
+[url-codecov]: https://codecov.io/gh/nsagora/peppermint
 [url-homebrew]: http://brew.sh/
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
-[badge-github]: https://github.com/nsagora/validation-toolkit/workflows/Build/badge.svg
-[badge-codecov]: https://codecov.io/gh/nsagora/validation-toolkit/branch/develop/graph/badge.svg
+[badge-github]: https://github.com/nsagora/peppermint/workflows/Build/badge.svg
+[badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
 [badge-version]: https://img.shields.io/badge/version-0.7-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat

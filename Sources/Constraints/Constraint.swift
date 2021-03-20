@@ -27,7 +27,7 @@ public protocol Constraint: AsyncConstraint {
 public extension Constraint {
 
     private var workQueue: DispatchQueue {
-        return DispatchQueue(label: "com.nsagora.validation-toolkit.constraint", attributes: .concurrent)
+        return DispatchQueue(label: "com.nsagora.peppermint.constraint", attributes: .concurrent)
     }
 
     /**

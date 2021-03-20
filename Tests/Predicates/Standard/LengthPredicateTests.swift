@@ -1,5 +1,5 @@
 import XCTest
-import ValidationToolkit
+import Peppermint
 
 class LengthPredicateTests: XCTestCase {
 

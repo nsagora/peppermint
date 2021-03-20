@@ -1,5 +1,5 @@
 import XCTest
-@testable import ValidationToolkit
+@testable import Peppermint
 
 class SummaryTests: XCTestCase {
     

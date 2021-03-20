@@ -22,7 +22,7 @@ public protocol Predicate: AsyncPredicate {
 extension Predicate {
     
     private var workQueue: DispatchQueue {
-        return DispatchQueue(label: "com.nsagora.validation-toolkit.predicate", attributes: .concurrent)
+        return DispatchQueue(label: "com.nsagora.peppermint.predicate", attributes: .concurrent)
     }
     
     /**

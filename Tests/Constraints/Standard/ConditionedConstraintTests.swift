@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import ValidationToolkit
+@testable import Peppermint
 
 class ConditionedConstraintTests: XCTestCase {
 

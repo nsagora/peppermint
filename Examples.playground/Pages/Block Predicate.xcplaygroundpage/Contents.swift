@@ -1,6 +1,6 @@
 
 import Foundation
-import ValidationToolkit
+import Peppermint
 
 /*:
  ## `BlockPredicate`
