@@ -22,42 +22,35 @@
 6. [Meta](#meta)
 
 ## Introduction
+ 
+`Peppermint` is a declarative and lightweight data validation framework.
 
-`Peppermint` is designed to be a lightweight framework specialised in data validation, such as email format, input length or passwords matching.
+At the core of it, there are 2 principles:
 
-At the core of this project are the following principles:
+- Empower composition.
+- Embrace standard library.
 
-- Separation of concerns
-- Availability on all platforms
-- Open to extensibility
+Every project is unique in it's own challenges and it's great when we can focus on solving them instead of spending our time on boilerplate tasks.
 
-### Separation of concerns
+With this idea in mind, the framework follows the Protocol Oriented Programming paradigm and was designed from a small set of protocols and structures that can easily be composed to fit your project needs. Thus, you can think of `Peppermint` as an adjustable wrench more than a Swiss knife.
 
-Think of `Peppermint` as to an adjustable wrench more than to a Swiss knife.
-
-With this idea in mind, the toolkit is composed from a small set of protocols and structs that can be easily composed to fit your project needs.
-
-### All platforms availability
-
-Since validation can take place at many levels, `Peppermint` is designed to support iOS, macOS, tvOS, watchOS and native Swift projects, such as server apps.
-
-### Open to extensibility
-
-Every project is unique in it's challenges and it's great when we can focus on solving them instead of spending our time on boilerplate tasks.
-
-`Peppermint` is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates that most of the projects can benefit of: email validation, required fields, password matching, url validation and many more to come.
+Since validation can take place at many levels, `Peppermint` is available on iOS, macOS, tvOS, watchOS and native Swift projects, such as server-side apps.
 
 ## Requirements
 
+- Swift 4.2+
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
-- Swift 4.2+
 
 ## Installation
 
+`Peppermint` is available only through Swift Package Manager.
+
 ### Swift Package Manager
 
-You can use the [Swift Package Manager][url-swift-package-manager] to install `Peppermint` by adding it to your `Package.swift` file:
+You can add `Peppermint` to your project [in Xcode][url-swift-package-manager] by going to  `File > Swift Packages > Add Package Dependency`.
+
+Or, if you want to use it as a dependency to your own package, you can add it to your `Package.swift` file:
 
 ```swift
 import PackageDescription
@@ -73,17 +66,29 @@ let package = Package(
 
 ## Usage example
 
-For a comprehensive list of examples try the `Examples.playground`:
+For a comprehensive list of examples try out the `Examples.playground`:
 
 1. Download the repository locally on your machine
 2. Open the project in Xcode
-4. Select the `Examples` playgrounds from the Project navigator
+4. Select the `Examples` playground from the Project navigator
+
+The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates and constraints that most projects can benefit of.
 
 ### Predicates
 
 The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation condition.
 
-At `Peppermint`'s core we have the following two predicates, which allow developers to compose predicates specific to the project needs.
+At the core of `Peppermint` there are the following two predicates, which allows you to compose predicates specific to the project needs:
+
+<details>
+<summary>BlockPredicate</summary>
+
+```swift
+let predicate = BlockPredicate<String> { $0.characters.count > 2 }
+predicate.evaluate(with: "a") // returns false
+predicate.evaluate(with: "abc") // returns true
+```
+</details>
 
 <details>
 <summary>RegexPredicate</summary>
@@ -94,21 +99,9 @@ predicate.evaluate(with: "a") // returns true
 predicate.evaluate(with: "5") // returns false
 predicate.evaluate(with: "ab") // returns false
 ```
-
 </details>
 
-<details>
-<summary>BlockPredicate</summary>
-
-```swift
-let pred = BlockPredicate<String> { $0.characters.count > 2 }
-predicate.evaluate(with: "a") // returns false
-predicate.evaluate(with: "abc") // returns true
-```
-
-</details>
-
-In addition, the toolkit offers a set of common validation predicates that your project can benefit of:
+In addition, the framework offers a set of common validation predicates that your project can benefit of:
 
 <details>
 <summary>EmailPredicate</summary>
@@ -119,7 +112,6 @@ predicate.evaluate(with: "hello@") // returns false
 predicate.evaluate(with: "hello@nsagora.com") // returns true
 predicate.evaluate(with: "héllo@nsagora.com") // returns true
 ```
-
 </details>
 
 <details>
@@ -130,7 +122,6 @@ let predicate = URLPredicate()
 predicate.evaluate(with: "http://www.url.com") // returns true
 predicate.evaluate(with: "http:\\www.url.com") // returns false
 ```
-
 </details>
 
 <details>
@@ -141,7 +132,26 @@ let predicate = PairMatchingPredicate()
 predicate.evaluate(with: ("swift", "swift")) // returns true
 predicate.evaluate(with: ("swift", "obj-c")) // returns false
 ```
+</details>
 
+<details>
+<summary>RangePredicate</summary>
+
+```swift
+let predicate = let range = RangePredicate(10...20)
+predicate.evaluate(with: 15) // returns true
+predicate.evaluate(with: 21) // returns false
+```
+</details>
+
+<details>
+<summary>LengthPredicate</summary>
+
+```swift
+let predicate = let range = LengthPredicate<String>(min: 5)
+predicate.evaluate(with: "abcde")   // returns true
+predicate.evaluate(with: "abcd")    // returns false
+```
 </details>
 
 On top of that, developers can build more advanced or complex predicates by extending the `Predicate` protocol, and/ or by composing or decorating the existing predicates:
@@ -150,31 +160,30 @@ On top of that, developers can build more advanced or complex predicates by exte
 <summary>Custom Predicate</summary>
 
 ```swift
-public class MinLenghtPredicate: Predicate {
+public struct CustomPredicate: Predicate {
 
     public typealias InputType = String
 
-    private let minLenght:Int
+    private let custom: String
 
-    public init(minLenght:Int) {
-        self.minLenght = minLenght
+    public init(custom: String) {
+        self.custom = custom
     }
 
     public func evaluate(with input: String) -> Bool {
-        return input.characters.count >= minLenght
+        return input == custom
     }
 }
 
-let predicate = MinLenghtPredicate(minLenght: 5)
-predicate.evaluate(with: "alph") // returns false
-predicate.evaluate(with: "alpha") // returns true
+let predicate = CustomPredicate(custom: "alphabet")
+predicate.evaluate(with: "alp") // returns false
+predicate.evaluate(with: "alpha") // returns false
 predicate.evaluate(with: "alphabet") // returns true
 ```
 
 </details>
 
 ### Constraints
-
 
 #### Predicate Constraint
 
@@ -204,14 +213,14 @@ enum MyError: Error {
 
 </details>
 
-#### Compound Contraint
+#### Compound Constraint
 
-A `CompoundContraint` represents a composition of constraints that allows the evaluation to be made on:
+A `CompoundConstraint` represents a composition of constraints that allows the evaluation to be made on:
 
 - any of the constraints
 - all constraints
 
-To provide context, a `CompoundContraint` allows us to constraint a piece of data as being required and also as being a valid email.
+To provide context, a `CompoundConstraint` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
 <summary>ConstraintSet</summary
@@ -221,18 +230,32 @@ An example of a  registration form, whereby users are prompted to enter a strong
 `Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-let lowerCasePredicate = RegexPredicate(expression: "^(?=.*[a-z]).*$")
-let upperCasePredicate = RegexPredicate(expression: "^(?=.*[A-Z]).*$")
-let digitsPredicate = RegexPredicate(expression: "^(?=.*[0-9]).*$")
-let specialChars = RegexPredicate(expression: "^(?=.*[!@#\\$%\\^&\\*]).*$")
-let minLenght = RegexPredicate(expression: "^.{8,}$")
-
-var passwordConstraint = CompoundContraint<String>(allOf:
-    PredicateConstraint(predicate: lowerCasePredicate, error: Form.Password.missingLowercase),
-    PredicateConstraint(predicate: upperCasePredicate, error: Form.Password.missingUpercase),
-    PredicateConstraint(predicate: digitsPredicate, error: Form.Password.missingDigits),
-    PredicateConstraint(predicate: specialChars, error: Form.Password.missingSpecialChars),
-    PredicateConstraint(predicate: minLenght, error: Form.Password.minLenght(8))
+var passwordConstraint = CompoundContraint<String, Form.Password>.allOf(
+    PredicateConstraint {
+        CharacterSetPredicate(.lowercaseLetters, mode: .loose)
+    } errorBuilder: {
+        .missingLowercase
+    },
+    PredicateConstraint{
+        CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+    } errorBuilder: {
+        .missingUppercase
+    },
+    PredicateConstraint {
+        CharacterSetPredicate(.decimalDigits, mode: .loose)
+    } errorBuilder: {
+        .missingDigits
+    },
+    PredicateConstraint {
+        CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
+    } errorBuilder: {
+        .missingSpecialChars
+    },
+    PredicateConstraint {
+        LengthPredicate(min: 8)
+    }  errorBuilder: {
+        .minLength(8)
+    }
 )
 
 let password = "3nGuard!"
@@ -246,7 +269,7 @@ case .failure(let summary):
 } // prints "Wow, that's a 💪 password!"
 ```
 
-From above, we see that once we've constructed the `passwordConstraint`, we're simply calling `evaluate(with:)` to get our evaluation `Result`. This contains `Summary` that can be handled as we please.
+From above, we see that once we've constructed the `passwordConstraint`, we're simply calling `evaluate(with:)` to get our evaluation `Result`. This contains a `Summary` that can be handled as we please.
 
 </details>
 
@@ -268,8 +291,7 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [url-carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
 [url-cocoapods]: https://cocoapods.org
 [url-cocoapods-podfile]: https://guides.cocoapods.org/syntax/podfile.html
-[url-swift-package-manager]: https://swift.org/package-manager
-[url-swift-package-manager-github]: https://github.com/apple/swift-package-manager
+[url-swift-package-manager]: https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
 [url-license]: http://choosealicense.com/licenses/mit/
 [url-license-file]: https://github.com/nsagora/peppermint/blob/master/LICENSE
 [url-twitter]: https://twitter.com/nsagora
