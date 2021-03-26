@@ -1,6 +1,7 @@
 # Peppermint [![badge-version]][url-peppermint]
 
-[![badge-github]][url-peppermint]
+[![badge-build-macos]][url-peppermint]
+[![badge-build-linux]][url-peppermint]
 [![badge-codecov]][url-codecov]
 [![badge-docs]][url-peppermint-docs]
 [![badge-license]][url-license]
@@ -291,7 +292,8 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [url-codecov]: https://codecov.io/gh/nsagora/peppermint
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
-[badge-github]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
+[badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
+[badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
 [badge-version]: https://img.shields.io/badge/version-0.8-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat
