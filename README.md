@@ -7,17 +7,14 @@
 [![badge-twitter]][url-twitter]
 
 1. [Introduction](#introduction)
-   - [Separation of concerns](#separation-of-concerns)
-   - [All platforms availability](#all-platforms-availability)
-   - [Open to extensibility](#open-to-extensibility)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
    - [Swift Package Manager](#swift-package-manager)
 4. [Usage Examples](#usage-examples)
    - [Predicates](#predicates)
    - [Constraints](#constraints)
-    - [Predicate Constraint](#predicate-constraint)
-    - [Compound Constraint](#compound-constraint)
+   - [Predicate Constraint](#predicate-constraint)
+   - [Compound Constraint](#compound-constraint)
 5. [Contribute](#contribute)
 6. [Meta](#meta)
 
@@ -301,5 +298,5 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
 [badge-github]: https://github.com/nsagora/peppermint/workflows/Build/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-0.7-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-0.8-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat
