@@ -49,7 +49,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
         
         guard hasConditions else { return constraint.evaluate(with: input) }
         
-        let compound = CompoundContraint.allOf(conditions)
+        let compound = CompoundConstraint.allOf(conditions)
         let result = compound.evaluate(with: input)
         
         switch result {

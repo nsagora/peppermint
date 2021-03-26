@@ -4,9 +4,9 @@ import Foundation
 import Peppermint
 
 /*:
- ## TypeConstraint
+ ## Type Constraint
  
- In the following example we use a `TypeConstraint` to evaluate a data strucrure used in a registraton form.
+ In the following example we use a `TypeConstraint` to evaluate a data structure used in a registration form.
  */
 
 struct RegistrationData {

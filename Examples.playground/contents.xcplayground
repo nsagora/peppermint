@@ -11,7 +11,8 @@
         <page name='Predicate Constraint'/>
         <page name='Dynamic Constraint'/>
         <page name='Conditionated Constraint'/>
-        <page name='Compound Contraint'/>
+        <page name='Compound Constraint'/>
         <page name='Type Contraint'/>
+        <page name='Other'/>
     </pages>
 </playground>

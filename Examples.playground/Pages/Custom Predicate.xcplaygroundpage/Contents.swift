@@ -6,33 +6,27 @@ import Peppermint
 /*:
  ## Custom Predicate
  
- In the following example we define a custom predicate which evaluates if the length of the user input is equal to 5 characters.
+ In the following example we define a custom predicate which evaluates if the user input is equal to custom text.
  */
 
-public class MinLenghtPredicate: Predicate {
-    
+public struct CustomPredicate: Predicate {
+
     public typealias InputType = String
-    
-    private let minLenght:Int
-    
-    public init(minLenght:Int) {
-        self.minLenght = minLenght
+
+    private let custom: String
+
+    public init(custom: String) {
+        self.custom = custom
     }
-    
+
     public func evaluate(with input: String) -> Bool {
-        return input.count >= minLenght
+        return input == custom
     }
 }
 
-let input = "alphabet"
-let predicate = MinLenghtPredicate(minLenght: 5)
-let isValid = predicate.evaluate(with: input)
-
-if isValid {
-    print("That's what I call a long ⛓ of characters!")
-}
-else {
-    print("Expecting at least 5 digits.")
-}
+let predicate = CustomPredicate(custom: "alphabet")
+predicate.evaluate(with: "alp") // returns false
+predicate.evaluate(with: "alpha") // returns false
+predicate.evaluate(with: "alphabet") // returns true
 
 //: [Next](@next)
