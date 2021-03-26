@@ -1,7 +1,0 @@
-language: swift
-os: osx
-osx_image: xcode12
-
-script:
-  - swift build
-  - swift test

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CharacterSetPredicate Structure Reference</title>
+    <title>RequiredPredicate Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/CharacterSetPredicate" class="dashAnchor"></a>
-    <a title="CharacterSetPredicate Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/RequiredPredicate" class="dashAnchor"></a>
+    <a title="RequiredPredicate Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (95% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CharacterSetPredicate Structure Reference
+        RequiredPredicate Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -116,48 +116,20 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CharacterSetPredicate</h1>
+            <h1>RequiredPredicate</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CharacterSetPredicate</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Predicate.html">Predicate</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RequiredPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Predicate.html">Predicate</a></span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
 
                 </div>
               </div>
-            <p>The <code>CharacterSetPredicate</code> struct is used to evaluate a <code>String</code> inputs agains a defined <code>CharacterSet</code>.</p>
+            <p>The <code>RequiredPredicate</code> struct is used to evaluate whether a given input is empty.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Peppermint21CharacterSetPredicateV4ModeO"></a>
-                    <a name="//apple_ref/swift/Enum/Mode" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint21CharacterSetPredicateV4ModeO">Mode</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The <code>Mode</code> enum is used to set the evaluation mode of the input&rsquo;s character set against the character set provided at initialisation.</p>
-
-                        <a href="../Structs/CharacterSetPredicate/Mode.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Mode</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -177,7 +149,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">InputType</span> <span class="o">=</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">InputType</span> <span class="o">=</span> <span class="kt">T</span></code></pre>
 
                         </div>
                       </div>
@@ -187,9 +159,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint21CharacterSetPredicateV_4modeAC10Foundation0bC0V_AC4ModeOtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:mode:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint21CharacterSetPredicateV_4modeAC10Foundation0bC0V_AC4ModeOtcfc">init(_:<wbr>mode:<wbr>)</a>
+                    <a name="/s:10Peppermint17RequiredPredicateVACyxGycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint17RequiredPredicateVACyxGycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -197,47 +169,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates and returns a new <code>CharacterSetPredicate</code> instance.</p>
+                        <p>Creates and returns a new <code>RequiredPredicate</code> instance.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">characterSet</span><span class="p">:</span> <span class="kt">CharacterSet</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Structs/CharacterSetPredicate/Mode.html">Mode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">strict</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>characterSet</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A <code>CharacterSet</code> used to evaluate a given <code>String</code> input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>mode</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A <code><a href="../Structs/CharacterSetPredicate/Mode.html">Mode</a></code> that describes how the input&rsquo;s character set should be evaluated against the character set provided at initialisation.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -245,9 +186,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint21CharacterSetPredicateV8evaluate4withSbSS_tF"></a>
+                    <a name="/s:10Peppermint17RequiredPredicateV8evaluate4withSbx_tF"></a>
                     <a name="//apple_ref/swift/Method/evaluate(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint21CharacterSetPredicateV8evaluate4withSbSS_tF">evaluate(with:<wbr>)</a>
+                    <a class="token" href="#/s:10Peppermint17RequiredPredicateV8evaluate4withSbx_tF">evaluate(with:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -255,14 +196,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a <code>Boolean</code> value that indicates whether a given <code>Srings</code> contains only characters in the character set.</p>
+                        <p>Returns a <code>Boolean</code> value that indicates whether a given input is empty</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -287,7 +228,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p><code>true</code> if input  contains only characters in the charecter set, otherwise <code>false</code>.</p>
+                        <p><code>false</code> if input is empty, otherwise <code>true</code>.</p>
                       </div>
                     </section>
                   </div>

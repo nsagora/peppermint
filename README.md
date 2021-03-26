@@ -1,23 +1,21 @@
 # Peppermint [![badge-version]][url-peppermint]
 
-[![badge-github]][url-peppermint]
+[![badge-build-macos]][url-peppermint]
+[![badge-build-linux]][url-peppermint]
 [![badge-codecov]][url-codecov]
 [![badge-docs]][url-peppermint-docs]
 [![badge-license]][url-license]
 [![badge-twitter]][url-twitter]
 
 1. [Introduction](#introduction)
-   - [Separation of concerns](#separation-of-concerns)
-   - [All platforms availability](#all-platforms-availability)
-   - [Open to extensibility](#open-to-extensibility)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
    - [Swift Package Manager](#swift-package-manager)
 4. [Usage Examples](#usage-examples)
    - [Predicates](#predicates)
    - [Constraints](#constraints)
-    - [Predicate Constraint](#predicate-constraint)
-    - [Compound Constraint](#compound-constraint)
+   - [Predicate Constraint](#predicate-constraint)
+   - [Compound Constraint](#compound-constraint)
 5. [Contribute](#contribute)
 6. [Meta](#meta)
 
@@ -287,19 +285,15 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 
 [url-peppermint]: https://github.com/nsagora/peppermint
 [url-peppermint-docs]: https://nsagora.github.io/peppermint/
-[url-carthage]: https://github.com/Carthage/Carthage
-[url-carthage-cartfile]: https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile
-[url-cocoapods]: https://cocoapods.org
-[url-cocoapods-podfile]: https://guides.cocoapods.org/syntax/podfile.html
 [url-swift-package-manager]: https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
 [url-license]: http://choosealicense.com/licenses/mit/
 [url-license-file]: https://github.com/nsagora/peppermint/blob/master/LICENSE
 [url-twitter]: https://twitter.com/nsagora
 [url-codecov]: https://codecov.io/gh/nsagora/peppermint
-[url-homebrew]: http://brew.sh/
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
-[badge-github]: https://github.com/nsagora/peppermint/workflows/Build/badge.svg
+[badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
+[badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-0.7-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-0.8-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat
