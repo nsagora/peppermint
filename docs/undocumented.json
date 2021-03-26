@@ -3,7 +3,7 @@
     {
       "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/CompoundConstraint.swift",
       "line": 8,
-      "symbol": "CompoundContraint",
+      "symbol": "CompoundConstraint",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },

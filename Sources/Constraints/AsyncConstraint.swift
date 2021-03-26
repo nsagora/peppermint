@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- The `AsyncConstraint` protocol is used to define the structre that must be implemented by concrete asynchronous constraints.
+ The `AsyncConstraint` protocol is used to define the structure that must be implemented by concrete asynchronous constraints.
  */
 public protocol AsyncConstraint {
 

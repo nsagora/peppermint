@@ -3,19 +3,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "ValidationToolkit",
+    name: "Peppermint",
     products: [
         .library(
-            name: "ValidationToolkit",
-            targets: ["ValidationToolkit"])
+            name: "Peppermint",
+            targets: ["Peppermint"])
     ],
     targets: [
         .target(
-            name: "ValidationToolkit",
+            name: "Peppermint",
             path:"Sources"),
         .testTarget(
-            name: "ValidationToolkitTests",
-            dependencies: ["ValidationToolkit"],
+            name: "PeppermintTests",
+            dependencies: ["Peppermint"],
             path:"Tests")
     ]
 )

@@ -1,6 +1,6 @@
 
 import Foundation
-import ValidationToolkit
+import Peppermint
 
 /*:
  ## `BlockPredicate`
@@ -16,7 +16,7 @@ if isValid {
     print("High ✋!")
 }
 else {
-    print("We're expecting exactlly 5 characters.")
+    print("We're expecting exactly 5 characters.")
 }
 
 //: [Next](@next)

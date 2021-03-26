@@ -1,6 +1,6 @@
 import Foundation
 
-extension CompoundContraint {
+extension CompoundConstraint {
 
     internal struct OrStrategy: Strategy {
 

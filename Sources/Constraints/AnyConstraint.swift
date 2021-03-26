@@ -33,7 +33,12 @@ public struct AnyConstraint<T, E: Error>: Constraint {
 
 extension Constraint {
 
-    internal func erase() -> AnyConstraint<InputType, ErrorType> {
+    /**
+     Wraps this constraint with a type eraser
+     
+     - Returns:An `AnyConstraint` wrapping this constraint.
+     */
+    public func erase() -> AnyConstraint<InputType, ErrorType> {
         return AnyConstraint(self)
     }
 }

@@ -1,5 +1,5 @@
 import Foundation
-import ValidationToolkit
+import Peppermint
 
 struct FakePredicate<T>: Predicate where T: Equatable {
 

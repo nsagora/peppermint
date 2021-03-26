@@ -33,9 +33,11 @@ public struct AnyPredicate<T>: Predicate {
 extension Predicate {
 
     /**
-     Creates a type-erased `Predicate` that wraps the given instance.
+     Wraps this predicate with a type eraser
+     
+     - Returns:An `AnyPredicate` wrapping this predicate.
      */
-    internal func erase() -> AnyPredicate<InputType> {
+    public func erase() -> AnyPredicate<InputType> {
         return AnyPredicate(self)
     }
 }

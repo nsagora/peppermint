@@ -11,10 +11,10 @@ public enum Form {
     
     public enum Password: Error {
         case missingLowercase
-        case missingUpercase
+        case missingUppercase
         case missingDigits
         case missingSpecialChars
-        case minLenght(Int)
+        case minLength(Int)
     }
     
     public enum Email: Error {
@@ -44,10 +44,10 @@ extension Form.Password: LocalizedError {
         
         switch self {
         case .missingLowercase: return "At least a lower case is required."
-        case .missingUpercase: return "At least an upper case is required."
+        case .missingUppercase: return "At least an upper case is required."
         case .missingDigits: return "At least a digit is required."
         case .missingSpecialChars: return "At least a special character is required."
-        case .minLenght(let lenght): return "At least \(lenght) characters are required."
+        case .minLength(let length): return "At least \(length) characters are required."
         }
     }
 }

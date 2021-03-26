@@ -5,7 +5,7 @@ internal protocol Strategy {
     func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>>
 }
 
-public struct CompoundContraint<T, E: Error>: Constraint {
+public struct CompoundConstraint<T, E: Error>: Constraint {
     
     public typealias InputType = T
     public typealias ErrorType = E
@@ -23,8 +23,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func allOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
-        CompoundContraint(allOf: constraints)
+    public static func allOf<C: Constraint>(_ constraints: [C]) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
+        CompoundConstraint(allOf: constraints)
     }
     
     /**
@@ -32,8 +32,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func allOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
-        CompoundContraint(allOf: constraints)
+    public static func allOf<C: Constraint>(_ constraints: C...) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
+        CompoundConstraint(allOf: constraints)
     }
     
     /**
@@ -41,8 +41,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func anyOf<C: Constraint>(_ constraints: [C]) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
-        CompoundContraint(anyOf: constraints)
+    public static func anyOf<C: Constraint>(_ constraints: [C]) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
+        CompoundConstraint(anyOf: constraints)
     }
     
     /**
@@ -50,8 +50,8 @@ public struct CompoundContraint<T, E: Error>: Constraint {
     
     - parameter constraints: `[Constraint]`
     */
-    public static func anyOf<C: Constraint>(_ constraints: C...) -> CompoundContraint where C.InputType == T, C.ErrorType == E {
-        CompoundContraint(anyOf: constraints)
+    public static func anyOf<C: Constraint>(_ constraints: C...) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
+        CompoundConstraint(anyOf: constraints)
     }
     
     private init<C: Constraint>(allOf constraints: [C]) where C.InputType == T, C.ErrorType == E {

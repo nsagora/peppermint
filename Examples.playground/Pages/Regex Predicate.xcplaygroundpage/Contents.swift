@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 
 import Foundation
-import ValidationToolkit
+import Peppermint
 
 /*:
  ## `RegexPredicate`
