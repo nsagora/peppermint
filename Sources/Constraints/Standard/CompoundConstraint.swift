@@ -65,7 +65,7 @@ public struct CompoundConstraint<T, E: Error>: Constraint {
     }
     
     /**
-    Evaluates the input on the  subconstraints.
+    Evaluates the input on the  sub-constraints.
 
     - parameter input: The input to be validated.
     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.

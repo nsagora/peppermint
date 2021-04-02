@@ -32,11 +32,11 @@ class PredicateConstraintTests: XCTestCase {
     }
 }
 
-// MARK: - Convenience Initializers
+// MARK: - Convenience Initialisers
 
 extension PredicateConstraintTests {
     
-    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithErrorBlock() {
+    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitializedWithErrorBlock() {
 
         let sut = PredicateConstraint(predicate) { FakeError.Unexpected($0) }
         let result = sut.evaluate(with: invalidInput)
