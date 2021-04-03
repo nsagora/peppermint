@@ -13,8 +13,8 @@ public struct CompoundConstraint<T, E: Error>: Constraint {
         
         var strategy: Strategy {
             switch self {
-            case .all: return AndStrategy()
-            case .any: return OrStrategy()
+            case .all: return AllStrategy()
+            case .any: return AnyStrategy()
             }
         }
     }
