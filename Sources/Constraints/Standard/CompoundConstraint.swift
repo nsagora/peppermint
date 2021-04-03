@@ -7,6 +7,18 @@ internal protocol Strategy {
 
 public struct CompoundConstraint<T, E: Error>: Constraint {
     
+    public enum Mode {
+        case any
+        case all
+        
+        var strategy: Strategy {
+            switch self {
+            case .all: return AndStrategy()
+            case .any: return OrStrategy()
+            }
+        }
+    }
+    
     public typealias InputType = T
     public typealias ErrorType = E
     
@@ -19,58 +31,46 @@ public struct CompoundConstraint<T, E: Error>: Constraint {
     public var count: Int { constraints.count }
     
     /**
-    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
-    
-    - parameter constraints: `[Constraint]`
-    */
-    public static func allOf<C: Constraint>(_ constraints: [C]) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
-        CompoundConstraint(allOf: constraints)
-    }
-    
-    /**
-    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
-    
-    - parameter constraints: `[Constraint]`
-    */
-    public static func allOf<C: Constraint>(_ constraints: C...) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
-        CompoundConstraint(allOf: constraints)
-    }
-    
-    /**
-    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
-    
-    - parameter constraints: `[Constraint]`
-    */
-    public static func anyOf<C: Constraint>(_ constraints: [C]) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
-        CompoundConstraint(anyOf: constraints)
-    }
-    
-    /**
-    Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
-    
-    - parameter constraints: `[Constraint]`
-    */
-    public static func anyOf<C: Constraint>(_ constraints: C...) -> CompoundConstraint where C.InputType == T, C.ErrorType == E {
-        CompoundConstraint(anyOf: constraints)
-    }
-    
-    private init<C: Constraint>(allOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
+     Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+     
+     - parameter constraints: `[Constraint]`
+     */
+    public init<C: Constraint>(_ mode: Mode = .all, constraints: [C]) where C.InputType == T, C.ErrorType == E {
+        self.evaluationStrategy = mode.strategy
         self.constraints = constraints.map { $0.erase() }
-        self.evaluationStrategy = AndStrategy()
-    }
-    
-    private init<C: Constraint>(anyOf constraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.constraints = constraints.map { $0.erase() }
-        self.evaluationStrategy = OrStrategy()
     }
     
     /**
-    Evaluates the input on the  sub-constraints.
-
-    - parameter input: The input to be validated.
-    - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
-    */
+     Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+     
+     - parameter constraints: `[Constraint]`
+     */
+    public init<C: Constraint>(_ mode: Mode = .all, constraints: C...) where C.InputType == T, C.ErrorType == E {
+        self.evaluationStrategy = mode.strategy
+        self.constraints = constraints.map { $0.erase() }
+    }
+    
+    /**
+     Evaluates the input on the  sub-constraints.
+     
+     - parameter input: The input to be validated.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
+     */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
         return evaluationStrategy.evaluate(constraints: constraints, with: input)
+    }
+}
+
+// MARK: - ConstraintBuilder Extension
+
+extension CompoundConstraint {
+    
+    /**
+     Create a new `CompoundConstraint` instance populated with a predefined list of `Constraints`
+     
+     - parameter constraints: `[Constraint]`
+     */
+    public init(_ mode: Mode = .all, @ConstraintBuilder<T, E> constraintBuilder: () -> [AnyConstraint<T, E>])  {
+        self.init(mode, constraints: constraintBuilder())
     }
 }

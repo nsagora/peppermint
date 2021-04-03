@@ -14,7 +14,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint<String, FakeError>.allOf([constraint])
+        let sut = CompoundConstraint<String, FakeError>(constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -24,7 +24,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
 
-        let sut = CompoundConstraint.allOf(constraint)
+        let sut = CompoundConstraint(constraints: constraint)
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -35,7 +35,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint.allOf(firstConstraint, secondConstraint)
+        let sut = CompoundConstraint(constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -45,13 +45,13 @@ extension CompoundConstraintTests {
         }
     }
 
-    func testEvaluateShouldReturnAFailureResultWhenAllOfTheContraintsAreFailing() {
+    func testEvaluateShouldReturnAFailureResultWhenAllOfTheConstraintsAreFailing() {
         
         let predicate = FakePredicate(expected: validInput)
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint.allOf(firstConstraint, secondConstraint)
+        let sut = CompoundConstraint(constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -69,7 +69,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint.anyOf([constraint])
+        let sut = CompoundConstraint(.any, constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -79,7 +79,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint.anyOf(constraint)
+        let sut = CompoundConstraint(.any, constraints: constraint)
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -90,7 +90,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint.anyOf(firstConstraint, secondConstraint)
+        let sut = CompoundConstraint(.any, constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -100,20 +100,45 @@ extension CompoundConstraintTests {
         }
     }
     
-    
-    
-    func testEvaluateShouldReturnAFailureResultWhenAnyOfTheContraintsAreFailing() {
+    func testEvaluateShouldReturnAFailureResultWhenAnyOfTheConstraintsAreFailing() {
         
         let predicate = FakePredicate(expected: validInput)
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint.anyOf(firstConstraint, secondConstraint)
+        let sut = CompoundConstraint(.any, constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
         case .failure(let summary):
             XCTAssertEqual(summary, Summary<FakeError>(errors: [.Invalid]))
+        default: XCTFail()
+        }
+    }
+}
+
+extension CompoundConstraintTests {
+    
+    func testItCanBeInitializedWithAConstraintsBuilder() {
+        
+        let sut = CompoundConstraint<String, FakeError> {
+            PredicateConstraint {
+                RequiredPredicate()
+            } errorBuilder: {
+                .Invalid
+            }
+            PredicateConstraint {
+                $0 == self.validInput
+            } errorBuilder: {
+                .Unexpected($0)
+            }
+        }
+        
+        let result = sut.evaluate(with: validInput)
+        
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
         default: XCTFail()
         }
     }
