@@ -12,7 +12,7 @@ class ConstraintBuilderTests: XCTestCase {
             PredicateConstraint(RequiredPredicate(), error: .Ordered(1))
             PredicateConstraint(RequiredPredicate(), error: .Ordered(2))
             
-            PredicateConstraint {
+            BlockConstraint {
                 $0.count == 6
             } errorBuilder: {
                 .Ordered(3)

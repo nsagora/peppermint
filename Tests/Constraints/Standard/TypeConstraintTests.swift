@@ -126,7 +126,7 @@ extension TypeConstraintTests {
         
         let sut = TypeConstraint<FakeData, FakeError> {
             KeyPathConstraint(\.integer) {
-                PredicateConstraint {
+                BlockConstraint {
                     $0 < 5
                 } errorBuilder: {
                     .FailingCondition
@@ -134,7 +134,7 @@ extension TypeConstraintTests {
             }
             
             KeyPathConstraint(\.string) {
-                PredicateConstraint{
+                BlockConstraint {
                     $0 != "Swift"
                 } errorBuilder: {
                     .Invalid

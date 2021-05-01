@@ -127,7 +127,7 @@ extension CompoundConstraintTests {
             } errorBuilder: {
                 .Invalid
             }
-            PredicateConstraint {
+            BlockConstraint {
                 $0 == self.validInput
             } errorBuilder: {
                 .Unexpected($0)
