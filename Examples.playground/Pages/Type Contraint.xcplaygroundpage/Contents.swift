@@ -35,7 +35,7 @@ struct RegistrationData {
 var loginConstraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
 
 loginConstraint.set(for: \.username) {
-    PredicateConstraint {
+    BlockConstraint {
         $0.count >= 5
     } errorBuilder: {
         .username
@@ -43,7 +43,7 @@ loginConstraint.set(for: \.username) {
 }
 
 loginConstraint.set(for: \.password) {
-    CompoundContraint.allOf(
+    CompoundConstraint(.all, constraints:
         PredicateConstraint {
             CharacterSetPredicate(.lowercaseLetters, mode: .loose)
         } errorBuilder: {

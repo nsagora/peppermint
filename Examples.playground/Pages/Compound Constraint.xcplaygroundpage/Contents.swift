@@ -9,7 +9,7 @@ import Peppermint
  In the following example we use a `ConstraintSet` to evaluate the strength of the user password.
  */
 
-var passwordConstraint = CompoundContraint<String, Form.Password>.allOf(
+var passwordConstraint = CompoundConstraint<String, Form.Password>(.all, constraints:
     PredicateConstraint {
         CharacterSetPredicate(.lowercaseLetters, mode: .loose)
     } errorBuilder: {

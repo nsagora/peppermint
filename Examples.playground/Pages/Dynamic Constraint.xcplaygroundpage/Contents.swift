@@ -10,7 +10,7 @@ import Peppermint
  */
 
 let text = "1234567890"
-let constraint = PredicateConstraint {
+let constraint = BlockConstraint {
     $0.count >= 5
 } errorBuilder: {
     Form.Username.invalid($0)
