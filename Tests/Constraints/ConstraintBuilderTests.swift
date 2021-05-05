@@ -24,6 +24,13 @@ class ConstraintBuilderTests: XCTestCase {
                 PredicateConstraint(RequiredPredicate(), error: .Ordered(6))
             }
             else {
+                PredicateConstraint(RequiredPredicate(), error: .Ordered(-1))
+            }
+            
+            if varBool == true {
+                PredicateConstraint(RequiredPredicate(), error: .Ordered(-1))
+            }
+            else {
                 PredicateConstraint(RequiredPredicate(), error: .Ordered(7))
                 PredicateConstraint(RequiredPredicate(), error: .Ordered(8))
             }
@@ -34,6 +41,17 @@ class ConstraintBuilderTests: XCTestCase {
             
             if varInt % 2 == 0 {
                 PredicateConstraint(RequiredPredicate(), error: .Ordered(10))
+            }
+            
+            if varInt % 3 == 0 {
+                PredicateConstraint(RequiredPredicate(), error: .Ordered(-1))
+            }
+            
+            if #available(*) {
+                PredicateConstraint(RequiredPredicate(), error: .Ordered(11))
+            }
+            else {
+                PredicateConstraint(RequiredPredicate(), error: .Ordered(-1))
             }
         }
         
@@ -47,10 +65,13 @@ class ConstraintBuilderTests: XCTestCase {
             .Ordered(4),
             .Ordered(5),
             .Ordered(6),
+            .Ordered(7),
+            .Ordered(8),
             .Ordered(9),
             .Ordered(9),
             .Ordered(9),
             .Ordered(10),
+            .Ordered(11),
         ])
         
         switch result {

@@ -3,42 +3,42 @@ import Foundation
 @resultBuilder
 public struct ConstraintBuilder<T, E: Error> {
     
-    static func buildBlock(_ components: ContainerConstraint<T, E>...) -> ContainerConstraint<T, E> {
-        return ContainerConstraint.flatMap(containers: components)
+    static func buildExpression<C: Constraint>(_ expression: C) -> ConstraintContainer<T, E> where C.InputType == T, C.ErrorType == E {
+        return ConstraintContainer(expression)
     }
     
-    static func buildArray(_ components: [ContainerConstraint<T, E>]) -> ContainerConstraint<T, E> {
-        return ContainerConstraint.flatMap(containers: components)
-    }
-    
-    static func buildExpression<C: Constraint>(_ expression: C) -> ContainerConstraint<T, E> where C.InputType == T, C.ErrorType == E {
-        return ContainerConstraint(expression)
-    }
-    
-    static func buildEither(first component: ContainerConstraint<T, E>) -> ContainerConstraint<T, E> {
+    static func buildEither(first component: ConstraintContainer<T, E>) -> ConstraintContainer<T, E> {
         return component
     }
     
-    static func buildEither(second component: ContainerConstraint<T, E>) -> ContainerConstraint<T, E> {
+    static func buildEither(second component: ConstraintContainer<T, E>) -> ConstraintContainer<T, E> {
         return component
     }
     
-    static func buildOptional(_ component: ContainerConstraint<T, E>?) -> ContainerConstraint<T, E> {
-        return component ?? ContainerConstraint()
+    static func buildOptional(_ component: ConstraintContainer<T, E>?) -> ConstraintContainer<T, E> {
+        return component ?? ConstraintContainer()
     }
     
-    static func buildLimitedAvailability(_ component: ContainerConstraint<T, E>) -> AnyConstraint<T, E> {
-        return component.erase()
+    static func buildLimitedAvailability(_ component: ConstraintContainer<T, E>) -> ConstraintContainer<T, E> {
+        return component
     }
     
-    static func buildFinalResult(_ component: ContainerConstraint<T, E>) -> [AnyConstraint<T, E>] {
+    static func buildBlock(_ components: ConstraintContainer<T, E>...) -> ConstraintContainer<T, E> {
+        return ConstraintContainer.flatMap(containers: components)
+    }
+    
+    static func buildArray(_ components: [ConstraintContainer<T, E>]) -> ConstraintContainer<T, E> {
+        return ConstraintContainer.flatMap(containers: components)
+    }
+    
+    static func buildFinalResult(_ component: ConstraintContainer<T, E>) -> [AnyConstraint<T, E>] {
         return component.constraints
     }
 }
 
 extension ConstraintBuilder {
     
-    struct ContainerConstraint<T, E: Error>: Constraint {
+    struct ConstraintContainer<T, E: Error> {
         
         private(set) var constraints = [AnyConstraint<T, E>]()
         
@@ -52,13 +52,9 @@ extension ConstraintBuilder {
             self.constraints = constraints.map { $0.erase() }
         }
         
-        func evaluate(with input: T) -> Result<Void, Summary<E>> {
-            fatalError()
-        }
-        
-        static func flatMap(containers:  [ContainerConstraint] = []) -> ContainerConstraint {
+        static func flatMap(containers:  [ConstraintContainer] = []) -> ConstraintContainer {
             let constraints = containers.reduce([]) { $0 + $1.constraints }
-            return ContainerConstraint(constraints)
+            return ConstraintContainer(constraints)
         }
     }
 }
