@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Summary Structure Reference</title>
+    <title>BlockConstraint Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Summary" class="dashAnchor"></a>
-    <a title="Summary Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/BlockConstraint" class="dashAnchor"></a>
+    <a title="BlockConstraint Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (88% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Summary Structure Reference
+        BlockConstraint Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -122,16 +122,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Summary</h1>
+            <h1>BlockConstraint</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Summary</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Error</span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Summary</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BlockConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
-            <p>The summary of a validation result.</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -140,103 +139,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint7SummaryV6errorsSayxGvp"></a>
-                    <a name="//apple_ref/swift/Property/errors" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint7SummaryV6errorsSayxGvp">errors</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A non-empty<code>[Error]</code> if the validation result is <code>.failure</code>, empty otherwise.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">errors</span><span class="p">:</span> <span class="p">[</span><span class="kt">E</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Peppermint7SummaryV18failingConstraintsSivp"></a>
-                    <a name="//apple_ref/swift/Property/failingConstraints" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint7SummaryV18failingConstraintsSivp">failingConstraints</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The number of failing constraints for a <code>.failure</code> result, <code>0</code> otherwise.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">failingConstraints</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Peppermint7SummaryV21hasFailingConstraintsSbvp"></a>
-                    <a name="//apple_ref/swift/Property/hasFailingConstraints" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint7SummaryV21hasFailingConstraintsSbvp">hasFailingConstraints</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p><code>true</code> if the validation result is <code>.failure</code>, <code>false</code> otherwise.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hasFailingConstraints</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Equatable%20conformance"></a>
-                <a name="//apple_ref/swift/Section/Equatable conformance" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Equatable%20conformance"></a>
-                  <h3 class="section-name"><p>Equatable conformance</p>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:SQ2eeoiySbx_xtFZ"></a>
-                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:<wbr>_:<wbr>)</a>
+                    <a name="/s:10Peppermint10ConstraintP9InputTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/InputType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -250,7 +155,175 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Summary</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Summary</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">InputType</span> <span class="o">=</span> <span class="kt">T</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint10ConstraintP9ErrorTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/ErrorType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ErrorType</span> <span class="o">=</span> <span class="kt">E</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint15BlockConstraintV_12errorBuilderACyxq_GSbxc_q_yctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:errorBuilder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15BlockConstraintV_12errorBuilderACyxq_GSbxc_q_yctcfc">init(_:<wbr>errorBuilder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>BlockContraint</code> instance with an underlying <code><a href="../Structs/BlockPredicate.html">BlockPredicate</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">evaluationBlock</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">E</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>evaluationBlock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure describing a custom validation condition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errorBuilder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A generic closure that dynamically builds an <code>Error</code> to describe why the evaluation has failed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint15BlockConstraintV_12errorBuilderACyxq_GSbxc_q_xctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:errorBuilder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15BlockConstraintV_12errorBuilderACyxq_GSbxc_q_xctcfc">init(_:<wbr>errorBuilder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>BlockContraint</code> instance with an underlying <code><a href="../Structs/BlockPredicate.html">BlockPredicate</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">evaluationBlock</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">E</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>evaluationBlock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure describing a custom validation condition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errorBuilder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A generic closure that dynamically builds an <code>Error</code> to describe why the evaluation has failed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint10ConstraintP8evaluate4withs6ResultOyytAA7SummaryVy9ErrorTypeQzGG05InputH0Qz_tF"></a>
+                    <a name="//apple_ref/swift/Method/evaluate(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP8evaluate4withs6ResultOyytAA7SummaryVy9ErrorTypeQzGG05InputH0Qz_tF">evaluate(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt"><a href="../Structs/Summary.html">Summary</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>

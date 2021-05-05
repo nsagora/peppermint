@@ -17,7 +17,7 @@
     <a title="ConditionedConstraint Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (95% documented)</p>
+        <p><a href="../index.html"> Docs</a> (88% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -62,6 +62,9 @@
                 <a href="../Structs/AnyPredicate.html">AnyPredicate</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/BlockConstraint.html">BlockConstraint</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/BlockPredicate.html">BlockPredicate</a>
               </li>
               <li class="nav-group-task">
@@ -74,7 +77,13 @@
                 <a href="../Structs/CompoundConstraint.html">CompoundConstraint</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CompoundConstraint/Mode.html">– Mode</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ConditionedConstraint.html">ConditionedConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:10Peppermint17ConstraintBuilderV">ConstraintBuilder</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/EmailPredicate.html">EmailPredicate</a>
@@ -84,9 +93,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LengthPredicate.html">LengthPredicate</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/PairMatchingPredicate.html">PairMatchingPredicate</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/PredicateConstraint.html">PredicateConstraint</a>
@@ -257,7 +263,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of <code>Constraints</code> that must fullfil before evaluating the constraint.</p>
+                                  <p>An array of <code>Constraints</code> that must fulfil before evaluating the constraint.</p>
                                 </div>
                               </td>
                             </tr>
@@ -315,7 +321,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of <code>Constraints</code> that must fullfil before evaluating the constraint.</p>
+                                  <p>An array of <code>Constraints</code> that must fulfil before evaluating the constraint.</p>
                                 </div>
                               </td>
                             </tr>
@@ -377,10 +383,81 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ConstraintBuilder%20Extension"></a>
+                <a name="//apple_ref/swift/Section/ConstraintBuilder Extension" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/ConstraintBuilder%20Extension"></a>
+                  <h3 class="section-name"><p>ConstraintBuilder Extension</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint21ConditionedConstraintV_17conditionsBuilderACyxq_Gqd___SayAA03AnyC0Vyxq_GGyXEtc9InputTypeQyd__Rsz05ErrorH0Qyd__Rs_AA0C0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:conditionsBuilder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint21ConditionedConstraintV_17conditionsBuilderACyxq_Gqd___SayAA03AnyC0Vyxq_GGyXEtc9InputTypeQyd__Rsz05ErrorH0Qyd__Rs_AA0C0Rd__lufc">init(_:<wbr>conditionsBuilder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>ConditionedConstraint</code> instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">constraint</span><span class="p">:</span> <span class="kt">C</span><span class="p">,</span> <span class="kd"><a href="../Structs.html#/s:10Peppermint17ConstraintBuilderV">@ConstraintBuilder</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="nv">conditionsBuilder</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/AnyConstraint.html">AnyConstraint</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/ConditionedConstraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">,</span> <span class="kt">E</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/ConditionedConstraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constraint</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code><a href="../Protocols/Constraint.html">Constraint</a></code> to describes the evaluation rule.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>conditions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of <code>Constraints</code> that must fulfil before evaluating the constraint.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-03-26)</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-05-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
