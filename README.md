@@ -123,16 +123,6 @@ predicate.evaluate(with: "http:\\www.url.com") // returns false
 </details>
 
 <details>
-<summary>PairMatchingPredicate</summary>
-
-```swift
-let predicate = PairMatchingPredicate()
-predicate.evaluate(with: ("swift", "swift")) // returns true
-predicate.evaluate(with: ("swift", "obj-c")) // returns false
-```
-</details>
-
-<details>
 <summary>RangePredicate</summary>
 
 ```swift
@@ -221,7 +211,7 @@ A `CompoundConstraint` represents a composition of constraints that allows the e
 To provide context, a `CompoundConstraint` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
-<summary>ConstraintSet</summary
+<summary>CompoundConstraint</summary
 
 An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
