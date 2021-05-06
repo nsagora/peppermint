@@ -4,12 +4,12 @@ import XCTest
 class OptionalConstraintTests: XCTestCase {
     
     fileprivate var validInput: String? = "validInput"
-    fileprivate let invalidInput = "invalidInput"
+    fileprivate let invalidInput: String? = "invalidInput"
     
     func testEvaluateShouldReturnAValidResultWhenTheUnwrappedInputIsValid() {
         
         let sut = OptionalConstraint<String, FakeError> {
-            BlockConstraint<String, FakeError> {
+            BlockConstraint {
                 $0 == "validInput"
             } errorBuilder: {
                 .Invalid
@@ -28,7 +28,7 @@ class OptionalConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAValidResultWhenTheInputIsNil() {
         
         let sut = OptionalConstraint<String, FakeError> {
-            BlockConstraint<String, FakeError> {
+            BlockConstraint {
                 $0 == "validInput"
             } errorBuilder: {
                 .Invalid
@@ -47,7 +47,7 @@ class OptionalConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAFailureResultWhenTheUnwrappedInputIsInvalid() {
         
         let sut = OptionalConstraint<String, FakeError>{
-            BlockConstraint<String, FakeError> {
+            BlockConstraint {
                 $0 == "validInput"
             } errorBuilder: {
                 .Invalid
@@ -66,7 +66,7 @@ class OptionalConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAFailureResultWhenTheInputIsNilAndTheConstraintWasInitiatedWithARequiredError() {
         
         let sut = OptionalConstraint<String, FakeError>(required: .MissingInput){
-            BlockConstraint<String, FakeError> {
+            BlockConstraint {
                 $0 == "validInput"
             } errorBuilder: {
                 .Invalid
