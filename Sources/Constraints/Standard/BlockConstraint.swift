@@ -9,7 +9,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
     private let errorBuilder: (T) -> E
     
     /**
-     Create a new `BlockContraint` instance with an underlying `BlockPredicate`.
+     Create a new `BlockConstraint` instance with an underlying `BlockPredicate`.
      
      - parameter evaluationBlock: A closure describing a custom validation condition.
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
@@ -20,7 +20,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
     }
     
     /**
-     Create a new `BlockContraint` instance with an underlying `BlockPredicate`.
+     Create a new `BlockConstraint` instance with an underlying `BlockPredicate`.
      
      - parameter evaluationBlock: A closure describing a custom validation condition.
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
