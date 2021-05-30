@@ -1,7 +1,25 @@
 import Foundation
 
 /**
- The `Predicate` protocol is used to define the structre that must be implemented by concrete predicates.
+ The `Predicate` protocol defines the structure that must be implemented by concrete predicates.
+ 
+ ```swift
+ public struct CopyCatPredicate: Predicate {
+
+     private let value: String
+
+     public init(value: String) {
+         self.value = value
+     }
+
+     public func evaluate(with input: String) -> Bool {
+         return input == value
+     }
+ }
+
+ let predicate = CopyCatPredicate(value: "alphabet")
+ let isIdentical = predicate.evaluate(with: "alphabet")
+ ```
  */
 public protocol Predicate: AsyncPredicate {
 

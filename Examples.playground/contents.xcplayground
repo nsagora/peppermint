@@ -6,6 +6,7 @@
         <page name='Email Predicate'/>
         <page name='URL Predicate'/>
         <page name='Range Predicate'/>
+        <page name='Any Predicate'/>
         <page name='Custom Predicate'/>
         <page name='Predicate Constraint'/>
         <page name='Dynamic Constraint'/>

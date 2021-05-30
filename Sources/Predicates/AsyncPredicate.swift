@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- The `AsyncPredicate` protocol is used to define the structre that must be implemented by concrete async predicates.
+ The `AsyncPredicate` protocol defines the structure that must be implemented by concrete async predicates.
  */
 public protocol AsyncPredicate {
     

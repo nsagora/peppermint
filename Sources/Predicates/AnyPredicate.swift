@@ -2,6 +2,15 @@ import Foundation
 
 /**
  A type-erased `Predicate`.
+ 
+ ```swift
+ let odd = BlockPredicate<Int> {
+    $0 % 2 != 0
+ }
+ 
+ let anyOdd = AnyPredicate<Int>(odd)
+ let isOdd = anyOdd.evaluate(with: 3)
+ ```
  */
 public struct AnyPredicate<T>: Predicate {
 
@@ -33,7 +42,16 @@ public struct AnyPredicate<T>: Predicate {
 extension Predicate {
 
     /**
-     Wraps this predicate with a type eraser
+     Wraps this predicate with an `AnyPredicate`.
+     
+     ```swift
+     let odd = BlockPredicate<Int> {
+        $0 % 2 != 0
+     }
+     
+     let erasedOdd = odd.erase()
+     let isOdd = erasedOdd.evaluate(with: 3)
+     ```
      
      - Returns:An `AnyPredicate` wrapping this predicate.
      */
