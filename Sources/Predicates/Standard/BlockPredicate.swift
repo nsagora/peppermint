@@ -1,7 +1,15 @@
 import Foundation
 
 /**
- The `BlockPredicate` struct is used to define closure based conditions used to evaluate generic inputs.
+ The `BlockPredicate` struct defines a closure based condition used to evaluate generic inputs.
+ 
+ ```swift
+ let even = BlockPredicate<Int> {
+    $0 % 2 == 0
+ }
+ 
+ let isEven = even.evaluate(with: 2)
+ ```
  */
 public struct BlockPredicate<T>: Predicate {
     
@@ -10,16 +18,25 @@ public struct BlockPredicate<T>: Predicate {
     private let evaluationBlock: (InputType) -> Bool
     
     /**
-     Creates and returns a new `BlockPredicate` instance.
+     Returns a new `BlockPredicate` instance.
+          
+     ```swift
+     let even = BlockPredicate<Int> {
+        $0 % 2 == 0
+     }
      
+     let isEven = even.evaluate(with: 2)
+     ```
      - parameter evaluationBlock: A closure describing a custom validation condition.
+     - parameter input: The input against which to evaluate the receiver.
+     
      */
-    public init(evaluationBlock: @escaping (InputType) -> Bool) {
+    public init(evaluationBlock: @escaping (_ input: InputType) -> Bool) {
         self.evaluationBlock = evaluationBlock
     }
     
     /**
-     Returns a `Boolean` value that indicates whether a given input matches the evalutaion closure specified by the receiver.
+     Returns a `Boolean` value that indicates whether a given input matches the evaluation closure specified by the receiver.
      
      - parameter input: The input against which to evaluate the receiver.
      - returns: `true` if input matches the validation closure specified by the receiver, otherwise `false`.

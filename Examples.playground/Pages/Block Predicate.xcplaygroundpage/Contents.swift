@@ -5,18 +5,17 @@ import Peppermint
 /*:
  ## `BlockPredicate`
  
- In the following example we use a `BlockPredicate` to evaluate if the length of the user input is equal to 5 characters.
+ In the following example we use a `BlockPredicate` to evaluate if a given `Int` is even.
  */
 
-let input = "Hel!O"
-let predicate = BlockPredicate<String> { $0.count == 5 }
-let isValid = predicate.evaluate(with: input)
+let even = BlockPredicate<Int> { $0 % 2 == 0 }
+let isEven = even.evaluate(with: 2)
 
-if isValid {
-    print("High ✋!")
+if isEven {
+    print("High 5️⃣!")
 }
 else {
-    print("We're expecting exactly 5 characters.")
+    print("We're expecting an even number.")
 }
 
 //: [Next](@next)
