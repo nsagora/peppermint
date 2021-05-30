@@ -6,12 +6,11 @@
         <page name='Email Predicate'/>
         <page name='URL Predicate'/>
         <page name='Range Predicate'/>
-        <page name='Value Matchig Predicate'/>
         <page name='Custom Predicate'/>
         <page name='Predicate Constraint'/>
         <page name='Dynamic Constraint'/>
         <page name='Conditionated Constraint'/>
-        <page name='Compound Constraint'/>
+        <page name='Group Constraint'/>
         <page name='Type Contraint'/>
         <page name='Other'/>
     </pages>

@@ -4,12 +4,12 @@ import Foundation
 import Peppermint
 
 /*:
- ## ConstraintSet
+ ## GroupConstraint
  
- In the following example we use a `ConstraintSet` to evaluate the strength of the user password.
+ In the following example we use a `GroupConstraint` to evaluate the strength of the user password.
  */
 
-var passwordConstraint = CompoundConstraint<String, Form.Password>(.all, constraints:
+var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraints:
     PredicateConstraint {
         CharacterSetPredicate(.lowercaseLetters, mode: .loose)
     } errorBuilder: {
