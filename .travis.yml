@@ -1,0 +1,9 @@
+language: swift
+ os: osx
+ osx_image: xcode12.5
+
+ script:
+   - swift build
+   - swift test --enable-code-coverage
+   - xcrun llvm-cov export -format="lcov" .build/debug/PeppermintPackageTests.xctest/Contents/MacOS/PeppermintPackageTests -instr-profile .build/debug/codecov/default.profdata > .build/PeppermintPackageTests.lcov
+   - bash <(curl https://codecov.io/bash)
