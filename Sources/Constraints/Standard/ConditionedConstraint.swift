@@ -22,7 +22,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
      Create a new `ConditionedConstraint` instance
 
      - parameter constraint: A `Constraint` to describes the evaluation rule.
-     - parameter conditions: An array of `Constraints` that must fullfil before evaluating the constraint.
+     - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.
      */
     public init<C: Constraint>(_ constraint: C, conditions: [C]) where C.InputType == T, C.ErrorType == E {
         self.constraint = constraint.erase()
@@ -33,7 +33,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
      Create a new `ConditionedConstraint` instance
 
      - parameter constraint: A `Constraint` to describes the evaluation rule.
-     - parameter conditions: An array of `Constraints` that must fullfil before evaluating the constraint.
+     - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.
      */
     public init<C: Constraint>(_ constraint: C, conditions: C...) where C.InputType == T, C.ErrorType == E {
         self.init(constraint, conditions: conditions)
@@ -49,12 +49,27 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
         
         guard hasConditions else { return constraint.evaluate(with: input) }
         
-        let compound = CompoundConstraint.allOf(conditions)
-        let result = compound.evaluate(with: input)
+        let group = GroupConstraint(constraints: conditions)
+        let result = group.evaluate(with: input)
         
         switch result {
         case .success: return constraint.evaluate(with: input)
         case .failure: return result
         }
+    }
+}
+
+// MARK: - ConstraintBuilder Extension
+
+extension ConditionedConstraint {
+    
+    /**
+     Create a new `ConditionedConstraint` instance
+
+     - parameter constraint: A `Constraint` to describes the evaluation rule.
+     - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.
+     */
+    public init<C: Constraint>(_ constraint: C, @ConstraintBuilder<T, E> conditionsBuilder: () -> [AnyConstraint<T, E>]) where C.InputType == T, C.ErrorType == E {
+        self.init(constraint.erase(), conditions: conditionsBuilder())
     }
 }

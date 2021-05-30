@@ -123,16 +123,6 @@ predicate.evaluate(with: "http:\\www.url.com") // returns false
 </details>
 
 <details>
-<summary>PairMatchingPredicate</summary>
-
-```swift
-let predicate = PairMatchingPredicate()
-predicate.evaluate(with: ("swift", "swift")) // returns true
-predicate.evaluate(with: ("swift", "obj-c")) // returns false
-```
-</details>
-
-<details>
 <summary>RangePredicate</summary>
 
 ```swift
@@ -211,24 +201,24 @@ enum MyError: Error {
 
 </details>
 
-#### Compound Constraint
+#### Group Constraint
 
-A `CompoundConstraint` represents a composition of constraints that allows the evaluation to be made on:
+A `GroupConstraint` represents a composition of constraints that allows the evaluation to be made on:
 
-- any of the constraints
 - all constraints
+- or any of the constraints
 
-To provide context, a `CompoundConstraint` allows us to constraint a piece of data as being required and also as being a valid email.
+To provide context, a `GroupConstraint` allows us to constraint a piece of data as being required and also as being a valid email.
 
 <details>
-<summary>ConstraintSet</summary
+<summary>GroupConstraint</summary
 
 An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
-`Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `CompoundContraint` object that can be used to enforce requirements on the user's password data:
+`Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `GroupConstraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-var passwordConstraint = CompoundContraint<String, Form.Password>.allOf(
+var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraints:
     PredicateConstraint {
         CharacterSetPredicate(.lowercaseLetters, mode: .loose)
     } errorBuilder: {

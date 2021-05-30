@@ -85,28 +85,3 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
         return .failure(summary)
     }
 }
-
-extension PredicateConstraint {
-    
-    /**
-     Create a new `PredicateConstraint` instance with an underlying `BlockPredicate`.
-     
-     - parameter evaluationBlock: A closure describing a custom validation condition.
-     - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
-     */
-    public init(_ evaluationBlock: @escaping (T) -> Bool , errorBuilder: @escaping () -> E) {
-        let predicate = BlockPredicate(evaluationBlock: evaluationBlock)
-        self.init(predicate, errorBuilder: errorBuilder)
-    }
-    
-    /**
-     Create a new `PredicateConstraint` instance with an underlying `BlockPredicate`.
-     
-     - parameter evaluationBlock: A closure describing a custom validation condition.
-     - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
-     */
-    public init(_ evaluationBlock: @escaping (T) -> Bool , errorBuilder: @escaping (T) -> E) {
-        let predicate = BlockPredicate(evaluationBlock: evaluationBlock)
-        self.init(predicate, errorBuilder: errorBuilder)
-    }
-}

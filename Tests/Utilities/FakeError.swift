@@ -7,4 +7,5 @@ enum FakeError: Error {
     case FailingCondition
 
     case Unexpected(String)
+    case Ordered(Int)
 }

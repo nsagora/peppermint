@@ -18,7 +18,7 @@ public struct Summary<E>: Error where E: Error {
     /**
      `true` if the validation result is `.failure`, `false` otherwise.
      */
-    public var hasFailingContraints: Bool { failingConstraints > 0 }
+    public var hasFailingConstraints: Bool { failingConstraints > 0 }
     
     internal init(errors: [E]) {
         self.errors = errors

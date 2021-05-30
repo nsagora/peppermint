@@ -3,7 +3,7 @@ import XCTest
 
 class SummaryTests: XCTestCase {
     
-    func testGasFailingContraintsShouldReturnTrueWhenThereAreErrors() {
+    func testGasFailingConstraintsShouldReturnTrueWhenThereAreErrors() {
         let errors =  [FakeError.Invalid]
         let expectedSummary = Summary(errors: errors)
 
@@ -11,7 +11,7 @@ class SummaryTests: XCTestCase {
         
         switch invalidResult {
         case .failure(let summary):
-            XCTAssertTrue(summary.hasFailingContraints)
+            XCTAssertTrue(summary.hasFailingConstraints)
         default: XCTFail()
         }
     }

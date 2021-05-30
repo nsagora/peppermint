@@ -1,8 +1,8 @@
 import Foundation
 
-extension CompoundConstraint {
+extension GroupConstraint {
 
-    internal struct AndStrategy: Strategy {
+    internal struct AllStrategy: Strategy {
 
         internal func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>> {
 

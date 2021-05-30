@@ -62,3 +62,37 @@ class ConditionedConstraintTests: XCTestCase {
         }
     }
 }
+
+extension ConditionedConstraintTests {
+    
+    func testItCanBeInitializedWithAConstraintsBuilder() {
+
+        let constraint = PredicateConstraint<String, FakeError> {
+            FakePredicate(expected: "001")
+        } errorBuilder: {
+            .Unexpected("Expecting 001")
+        }
+
+        let sut = ConditionedConstraint<String, FakeError>(constraint) {
+            PredicateConstraint{
+                FakePredicate(expected: "002")
+            } errorBuilder: {
+                .Unexpected("Expecting 002")
+            }
+            
+            PredicateConstraint{
+                FakePredicate(expected: "003")
+            } errorBuilder: {
+                .Unexpected("Expecting 003")
+            }
+        }
+
+        let result = sut.evaluate(with: "__002__")
+
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("Expecting 002"), .Unexpected("Expecting 003")]))
+        default: XCTFail()
+        }
+    }
+}
