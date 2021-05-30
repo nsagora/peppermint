@@ -49,8 +49,8 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
         
         guard hasConditions else { return constraint.evaluate(with: input) }
         
-        let compound = CompoundConstraint(constraints: conditions)
-        let result = compound.evaluate(with: input)
+        let group = GroupConstraint(constraints: conditions)
+        let result = group.evaluate(with: input)
         
         switch result {
         case .success: return constraint.evaluate(with: input)

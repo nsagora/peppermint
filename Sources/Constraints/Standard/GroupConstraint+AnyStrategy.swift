@@ -1,6 +1,6 @@
 import Foundation
 
-extension CompoundConstraint {
+extension GroupConstraint {
 
     internal struct AnyStrategy: Strategy {
 

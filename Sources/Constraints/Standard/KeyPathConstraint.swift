@@ -5,16 +5,16 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    private let constraint: CompoundConstraint<V, E>
+    private let constraint: GroupConstraint<V, E>
     private let keyPath: KeyPath<T, V>
     
     public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraints: [C]) where C.InputType == V, C.ErrorType == E {
-        self.constraint = CompoundConstraint(constraints: constraints)
+        self.constraint = GroupConstraint(constraints: constraints)
         self.keyPath = keyPath
     }
     
     public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraints: C...) where C.InputType == V, C.ErrorType == E {
-        self.constraint = CompoundConstraint(constraints: constraints)
+        self.constraint = GroupConstraint(constraints: constraints)
         self.keyPath = keyPath
     }
     

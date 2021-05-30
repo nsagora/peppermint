@@ -41,7 +41,7 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
-        return CompoundConstraint(constraints: constraints).evaluate(with: input)
+        return GroupConstraint(constraints: constraints).evaluate(with: input)
     }
 }
 

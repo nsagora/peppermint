@@ -5,7 +5,7 @@ internal protocol Strategy {
     func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>>
 }
 
-public struct CompoundConstraint<T, E: Error>: Constraint {
+public struct GroupConstraint<T, E: Error>: Constraint {
     
     public enum Mode {
         case any
@@ -63,10 +63,10 @@ public struct CompoundConstraint<T, E: Error>: Constraint {
 
 // MARK: - ConstraintBuilder Extension
 
-extension CompoundConstraint {
+extension GroupConstraint {
     
     /**
-     Create a new `CompoundConstraint` instance populated with a predefined list of `Constraints`
+     Create a new `GroupConstraint` instance populated with a predefined list of `Constraints`
      
      - parameter constraints: `[Constraint]`
      */

@@ -1,20 +1,20 @@
 import XCTest
 @testable import Peppermint
 
-class CompoundConstraintTests: XCTestCase {
+class GroupConstraintTests: XCTestCase {
 
     fileprivate let validInput = "validInput"
     fileprivate let invalidInput = "~invalidInput"
 }
 
-extension CompoundConstraintTests {
+extension GroupConstraintTests {
 
     func testAllOfShouldReturnAnInstanceWithAnArrayOfConstrains() {
 
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint<String, FakeError>(constraints: [constraint])
+        let sut = GroupConstraint<String, FakeError>(constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -24,7 +24,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
 
-        let sut = CompoundConstraint(constraints: constraint)
+        let sut = GroupConstraint(constraints: constraint)
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -35,7 +35,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint(constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -51,7 +51,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint(constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -62,14 +62,14 @@ extension CompoundConstraintTests {
     }
 }
 
-extension CompoundConstraintTests {
+extension GroupConstraintTests {
     
     func testAnyOfShouldReturnAnInstanceWithAnArrayOfConstrains() {
 
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint(.any, constraints: [constraint])
+        let sut = GroupConstraint(.any, constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -79,7 +79,7 @@ extension CompoundConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error:FakeError.Invalid)
 
-        let sut = CompoundConstraint(.any, constraints: constraint)
+        let sut = GroupConstraint(.any, constraints: constraint)
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -90,7 +90,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint(.any, constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(.any, constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -106,7 +106,7 @@ extension CompoundConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error:FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error:FakeError.MissingInput)
         
-        let sut = CompoundConstraint(.any, constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(.any, constraints: firstConstraint, secondConstraint)
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -117,11 +117,11 @@ extension CompoundConstraintTests {
     }
 }
 
-extension CompoundConstraintTests {
+extension GroupConstraintTests {
     
     func testItCanBeInitializedWithAConstraintsBuilder() {
         
-        let sut = CompoundConstraint<String, FakeError> {
+        let sut = GroupConstraint<String, FakeError> {
             PredicateConstraint {
                 RequiredPredicate()
             } errorBuilder: {

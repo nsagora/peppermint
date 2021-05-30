@@ -55,7 +55,7 @@ class ConstraintBuilderTests: XCTestCase {
             }
         }
         
-        let sut = CompoundConstraint<String, FakeError>(constraints: constraints)
+        let sut = GroupConstraint<String, FakeError>(constraints: constraints)
         
         let result = sut.evaluate(with: "")
         let expected = Summary<FakeError>(errors: [
