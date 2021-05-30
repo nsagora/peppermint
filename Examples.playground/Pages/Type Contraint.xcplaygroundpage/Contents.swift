@@ -43,24 +43,24 @@ loginConstraint.set(for: \.username) {
 }
 
 loginConstraint.set(for: \.password) {
-    CompoundConstraint(.all, constraints:
+    GroupConstraint(.all, constraints:
         PredicateConstraint {
-            CharacterSetPredicate(.lowercaseLetters, mode: .loose)
+            CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingLowercase)
         },
         PredicateConstraint{
-            CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+            CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingUppercase)
         },
         PredicateConstraint {
-            CharacterSetPredicate(.decimalDigits, mode: .loose)
+            CharacterSetPredicate(.decimalDigits, mode: .inclusive)
         } errorBuilder: {
             .password(.missingDigits)
         },
         PredicateConstraint {
-            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
+            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
         } errorBuilder: {
             .password(.missingSpecialChars)
         },
