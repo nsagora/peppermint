@@ -5,7 +5,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    private var predicate: BlockPredicate<T>
+    private let predicate: BlockPredicate<T>
     private let errorBuilder: (T) -> E
     
     /**
@@ -14,7 +14,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
      - parameter evaluationBlock: A closure describing a custom validation condition.
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init(_ evaluationBlock: @escaping (T) -> Bool , errorBuilder: @escaping () -> E) {
+    public init(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping () -> E) {
         self.predicate = BlockPredicate(evaluationBlock: evaluationBlock)
         self.errorBuilder = { _ in errorBuilder() }
     }
@@ -25,7 +25,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
      - parameter evaluationBlock: A closure describing a custom validation condition.
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init(_ evaluationBlock: @escaping (T) -> Bool , errorBuilder: @escaping (T) -> E) {
+    public init(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping (T) -> E) {
         predicate = BlockPredicate(evaluationBlock: evaluationBlock)
         self.errorBuilder = errorBuilder
     }

@@ -9,14 +9,14 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
     private let requiredError: E?
     
     /**
-     Create a new `OptionalConstraint` instance with.
+     Create a new `OptionalConstraint` instance.
      */
-    public init<C: Constraint>(required requiredError: E? = nil, constraint  constraintBuilder: () -> C) where C.InputType == T, C.ErrorType == E {
+    public init<C: Constraint>(required requiredError: E? = nil, constraintBuilder: () -> C) where C.InputType == T, C.ErrorType == E {
         self.init(required: requiredError, constraint: constraintBuilder())
     }
     
     /**
-     Create a new `OptionalConstraint` instance with.
+     Create a new `OptionalConstraint` instance.
      */
     public init<C: Constraint>(required requiredError: E? = nil, constraint: C) where C.InputType == T, C.ErrorType == E {
         self.constraint = constraint.erase()
