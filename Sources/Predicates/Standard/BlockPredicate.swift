@@ -4,7 +4,7 @@ import Foundation
  The `BlockPredicate` struct defines a closure based condition used to evaluate generic inputs.
  
  ```swift
- let even = BlockPredicate<Int> {
+ let predicate = BlockPredicate<Int> {
     $0 % 2 == 0
  }
  
@@ -21,7 +21,7 @@ public struct BlockPredicate<T>: Predicate {
      Returns a new `BlockPredicate` instance.
           
      ```swift
-     let even = BlockPredicate<Int> {
+     let predicate = BlockPredicate<Int> {
         $0 % 2 == 0
      }
      

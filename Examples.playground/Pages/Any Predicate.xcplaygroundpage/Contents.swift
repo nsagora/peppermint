@@ -14,13 +14,13 @@ let odd = BlockPredicate<Int> {
 }
 
 let anyOdd = AnyPredicate<Int>(odd)
-var isOdd = anyOdd.evaluate(with: 3)
+anyOdd.evaluate(with: 3)
 
 /*:
  In the following example we erase the type of a `BlockPredicate` by calling the `.erase()` method.
  */
 
 let erasedOdd = odd.erase()
-isOdd = erasedOdd.evaluate(with: 5)
+erasedOdd.evaluate(with: 5)
 
 //: [Next](@next)

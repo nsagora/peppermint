@@ -2,6 +2,11 @@ import Foundation
 
 /**
  The `RequiredPredicate` struct is used to evaluate whether a given input is empty.
+ 
+ ```swift
+ let predicate = RequiredPredicate<String>()
+ let isValid = predicate.evaluate(with: "")
+ ```
  */
 public struct RequiredPredicate<T: Collection>: Predicate {
     
@@ -10,12 +15,17 @@ public struct RequiredPredicate<T: Collection>: Predicate {
     private let predicate = RangePredicate(min: 1)
     
     /**
-     Creates and returns a new `RequiredPredicate` instance.
+     Returns a new `RequiredPredicate` instance.
+    
+     ```swift
+     let predicate = RequiredPredicate<String>()
+     let isValid = predicate.evaluate(with: "")
+     ```
      */
     public init() { }
     
     /**
-     Returns a `Boolean` value that indicates whether a given input is empty
+     Returns a `Boolean` value that indicates whether a given input is empty.
      
      - parameter input: The input against which to evaluate the receiver.
      - returns: `false` if input is empty, otherwise `true`.

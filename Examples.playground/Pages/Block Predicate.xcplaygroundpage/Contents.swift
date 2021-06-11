@@ -9,13 +9,7 @@ import Peppermint
  */
 
 let even = BlockPredicate<Int> { $0 % 2 == 0 }
-let isEven = even.evaluate(with: 2)
-
-if isEven {
-    print("High 5️⃣!")
-}
-else {
-    print("We're expecting an even number.")
-}
+even.evaluate(with: 2)
+even.evaluate(with: 3)
 
 //: [Next](@next)

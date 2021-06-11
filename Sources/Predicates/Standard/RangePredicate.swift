@@ -16,8 +16,13 @@ public struct RangePredicate<T: Comparable>: Predicate {
     private let max: T?
     
     /**
-     Creates and returns a new `RangePredicate` instance.
-     :
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let drinkingAgeLimit = RangePredicate(min: 21)
+     let isAllowed = drinkingAgeLimit.evaluate(with: 18)
+     ```
+     
      - parameter min: The lower bound of the range.
      - parameter max: The upper bound of the range.
      */
@@ -27,9 +32,14 @@ public struct RangePredicate<T: Comparable>: Predicate {
     }
     
     /**
-     Creates and returns a new `RangePredicate` instance.
-     :
-     - parameter range: A `ClosedRange` that defines the lower and uppper bounds of the range.
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let predicate = RangePredicate(21...90)
+     let isAllowed = predicate.evaluate(with: 25)
+     ```
+     
+     - parameter range: A `ClosedRange` that defines the lower and upper bounds of the range.
      */
     public init(_ range: ClosedRange<T>) {
         self.init(min: range.lowerBound, max: range.upperBound)
@@ -62,9 +72,14 @@ public struct RangePredicate<T: Comparable>: Predicate {
 extension RangePredicate where T: Strideable, T.Stride: SignedInteger {
     
     /**
-     Creates and returns a new `RangePredicate` instance.
-     :
-     - parameter range: A `Range` that defines the lower and uppper bounds of the range.
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let predicate = RangePredicate(21..<91)
+     let isAllowed = predicate.evaluate(with: 25)
+     ```
+     
+     - parameter range: A `Range` that defines the lower and upper bounds of the range.
      */
     public init(_ range: Range<T>) {
         self.init(ClosedRange<T>(range))
