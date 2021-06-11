@@ -23,9 +23,7 @@ import Foundation
  */
 public protocol Predicate: AsyncPredicate {
 
-    /**
-     A type that provides information about what kind of values the predicate can be evaluated with.
-     */
+    /// A type that provides information about what kind of values the predicate can be evaluated with.
     associatedtype InputType
     
     /**

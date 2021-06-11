@@ -5,9 +5,6 @@ import Foundation
  */
 public struct AnyConstraint<T, E: Error>: Constraint {
 
-    /**
-     A type that provides information about what kind of values the constraint can be evaluated with.
-     */
     public typealias InputType = T
     public typealias ErrorType = E
 
@@ -36,7 +33,7 @@ extension Constraint {
     /**
      Wraps this constraint with a type eraser
      
-     - Returns:An `AnyConstraint` wrapping this constraint.
+     - Returns: An `AnyConstraint` wrapping this constraint.
      */
     public func erase() -> AnyConstraint<InputType, ErrorType> {
         return AnyConstraint(self)

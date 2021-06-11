@@ -1,18 +1,14 @@
 import Foundation
 
 /**
- The `Constraint` protocol is used to define the structre that must be implemented by concrete constraints.
+ The `Constraint` protocol is used to define the structure that must be implemented by concrete constraints.
  */
 public protocol Constraint: AsyncConstraint {
     
-    /**
-     A type that provides information about what kind of values the constraint can be evaluated with.
-     */
+    /// A type that provides information about what kind of values the constraint can be evaluated with.
     associatedtype InputType
     
-    /**
-     An error type that provides information about why the evaluation failed.
-     */
+    /// An error type that provides information about why the evaluation failed.
     associatedtype ErrorType
     
     /**

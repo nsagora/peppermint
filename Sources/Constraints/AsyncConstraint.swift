@@ -5,14 +5,10 @@ import Foundation
  */
 public protocol AsyncConstraint {
 
-    /**
-     A type that provides information about what kind of values the constraint can be evaluated with.
-     */
+    /// A type that provides information about what kind of values the constraint can be evaluated with.
     associatedtype InputType
     
-    /**
-     An error type that provides information about why the evaluation failed.
-     */
+    /// An error type that provides information about why the evaluation failed.
     associatedtype ErrorType: Error
 
     /**

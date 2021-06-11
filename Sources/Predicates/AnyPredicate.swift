@@ -23,6 +23,15 @@ public struct AnyPredicate<T>: Predicate {
 
     /**
      Creates a type-erased `Predicate` that wraps the given instance.
+     
+     ```swift
+     let odd = BlockPredicate<Int> {
+        $0 % 2 != 0
+     }
+     
+     let anyOdd = AnyPredicate<Int>(odd)
+     let isOdd = anyOdd.evaluate(with: 3)
+     ```
     */
     public init<P: Predicate>(_ predicate: P) where P.InputType == InputType {
         self.evaluate = predicate.evaluate
