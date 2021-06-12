@@ -6,7 +6,7 @@
         <page name='Email Predicate'/>
         <page name='URL Predicate'/>
         <page name='Range Predicate'/>
-        <page name='LenghtPredicate'/>
+        <page name='Lenght Predicate'/>
         <page name='Any Predicate'/>
         <page name='Custom Predicate'/>
         <page name='Predicate Constraint'/>
@@ -14,6 +14,7 @@
         <page name='Conditionated Constraint'/>
         <page name='Group Constraint'/>
         <page name='Type Contraint'/>
+        <page name='Any Constraint'/>
         <page name='Other'/>
     </pages>
 </playground>

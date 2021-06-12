@@ -6,14 +6,13 @@ import Peppermint
 /*:
  ## Predicate Constraint
  
- In the following example we use a `BlockPredicate` based `Constraint` to evaluate if an username has at least 5 characters.
+ In the following example we use a `EmailPredicate` based `Constraint` to evaluate if a given input is a valid email.
  */
 
-let username = "username"
-let predicate = BlockPredicate<String> { $0.count >= 5 }
+let predicate = EmailPredicate()
 
-let constraint = PredicateConstraint(predicate, error: Form.Username.missing)
-let result = constraint.evaluate(with: username)
+let constraint = PredicateConstraint(predicate) { Form.Email.invalid($0) }
+let result = constraint.evaluate(with: "@nsagora.com")
 
 switch result {
 case .success:

@@ -14,12 +14,12 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
     private var hasConditions: Bool { conditionsCount > 0 }
 
     /**
-     The number of conditions that must be evaluated i
+     The number of conditions that must be evaluated.
     */
     public var conditionsCount: Int { conditions.count }
 
     /**
-     Create a new `ConditionedConstraint` instance
+     Returns  a new `ConditionedConstraint` instance.
 
      - parameter constraint: A `Constraint` to describes the evaluation rule.
      - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.
@@ -30,7 +30,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
     }
     
     /**
-     Create a new `ConditionedConstraint` instance
+     Returns  a new `ConditionedConstraint` instance.
 
      - parameter constraint: A `Constraint` to describes the evaluation rule.
      - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.
@@ -64,7 +64,7 @@ public struct ConditionedConstraint<T, E: Error>: Constraint {
 extension ConditionedConstraint {
     
     /**
-     Create a new `ConditionedConstraint` instance
+     Returns  a new `ConditionedConstraint` instance.
 
      - parameter constraint: A `Constraint` to describes the evaluation rule.
      - parameter conditions: An array of `Constraints` that must fulfil before evaluating the constraint.

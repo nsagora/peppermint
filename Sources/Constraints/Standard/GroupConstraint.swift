@@ -25,13 +25,12 @@ public struct GroupConstraint<T, E: Error>: Constraint {
     private var constraints: [AnyConstraint<T, E>]
     private var evaluationStrategy: Strategy
     
-    /**
-     Returns the number of constraints in collection
-     */
+    
+    /// Returns the number of constraints in the group.
     public var count: Int { constraints.count }
     
     /**
-     Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+     Returns a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`.
      
      - parameter constraints: `[Constraint]`
      */
@@ -41,7 +40,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
     }
     
     /**
-     Create a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`
+     Returns a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`.
      
      - parameter constraints: `[Constraint]`
      */
@@ -51,7 +50,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
     }
     
     /**
-     Evaluates the input on the  sub-constraints.
+     Evaluates the input on the underlying constraints.
      
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
@@ -66,7 +65,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
 extension GroupConstraint {
     
     /**
-     Create a new `GroupConstraint` instance populated with a predefined list of `Constraints`
+     Returns a new `GroupConstraint` instance populated with a predefined list of `Constraints`.
      
      - parameter constraints: `[Constraint]`
      */

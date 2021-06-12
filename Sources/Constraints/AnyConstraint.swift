@@ -2,6 +2,21 @@ import Foundation
 
 /**
  A type-erased `Constraint`.
+ 
+ ```swift
+ enum Failure: Error {
+     case notEven
+ }
+ 
+ let constraint = BlockConstraint<Int, Failure> {
+     $0 % 2 == 0
+ } errorBuilder: {
+     .notEven
+ }
+ 
+ let anyConstraint = AnyConstraint(constraint)
+ anyConstraint.evaluate(with: 3)
+ ```
  */
 public struct AnyConstraint<T, E: Error>: Constraint {
 
@@ -31,7 +46,22 @@ public struct AnyConstraint<T, E: Error>: Constraint {
 extension Constraint {
 
     /**
-     Wraps this constraint with a type eraser
+     Wraps this constraint with a type eraser.
+     
+     ```swift
+     enum Failure: Error {
+         case notEven
+     }
+     
+     let constraint = BlockConstraint<Int, Failure> {
+         $0 % 2 == 0
+     } errorBuilder: {
+         .notEven
+     }
+     
+     var erasedConstraint = constraint.erase()
+     erasedConstraint.evaluate(with: 5)
+     ```
      
      - Returns: An `AnyConstraint` wrapping this constraint.
      */
