@@ -20,10 +20,10 @@ enum Strength: Int {
 func getStrength(password: String) -> Strength {
     
     let options = [
-        CharacterSetPredicate(.uppercaseLetters, mode: .loose).erase(),
-        CharacterSetPredicate(.lowercaseLetters, mode: .loose).erase(),
-        CharacterSetPredicate(.decimalDigits, mode: .loose).erase(),
-        CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose).erase(),
+        CharacterSetPredicate(.uppercaseLetters, mode: .inclusive).erase(),
+        CharacterSetPredicate(.lowercaseLetters, mode: .inclusive).erase(),
+        CharacterSetPredicate(.decimalDigits, mode: .inclusive).erase(),
+        CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive).erase(),
         LengthPredicate(min: 8).erase()
     ]
     
