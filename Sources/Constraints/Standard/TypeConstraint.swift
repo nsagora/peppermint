@@ -175,7 +175,7 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      - parameter keyPath: The `KeyPath` for the property we set the `Constraint` on.
      */
     public mutating func set<C: Constraint, V>(for keyPath: KeyPath<T, V>, constraint: C) where C.InputType == V, C.ErrorType == E {
-        let constraint = KeyPathConstraint(keyPath, constraints: constraint).erase()
+        let constraint = KeyPathConstraint(keyPath, constraint: constraint).erase()
         constraints.append(constraint)
     }
     
@@ -186,7 +186,7 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      - parameter keyPath: The `KeyPath` for the property we set the `Constraint` on.
      */
     public mutating func set<C: Constraint, V>(for keyPath: KeyPath<T, V>, constraintBuilder: () -> C ) where C.InputType == V, C.ErrorType == E {
-        let constraint = KeyPathConstraint(keyPath, constraints: constraintBuilder()).erase()
+        let constraint = KeyPathConstraint(keyPath, constraintBuilder: constraintBuilder).erase()
         constraints.append(constraint)
     }
 
