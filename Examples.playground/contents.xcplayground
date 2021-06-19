@@ -14,6 +14,7 @@
         <page name='Conditionated Constraint'/>
         <page name='Group Constraint'/>
         <page name='Optional Constraint'/>
+        <page name='Key Path Constraint'/>
         <page name='Type Contraint'/>
         <page name='Any Constraint'/>
         <page name='Other'/>
