@@ -25,10 +25,12 @@ struct RegistrationData {
         case missingDigits
         case missingSpecialChars
         case tooShort
+        case confirmationMismatch
     }
     
     var username: String
     var password: String
+    var passwordConfirmation: String
     var email: String
     var age: Int
     var website: String?
@@ -88,7 +90,13 @@ constraint.set(for: \.website) {
     }
 }
 
-let user = RegistrationData(username: "nsagora", password: "p@ssW0rd", email: "hello@nsagora.com", age: 21)
+let user = RegistrationData(
+    username: "nsagora",
+    password: "p@ssW0rd",
+    passwordConfirmation: "passW0rd",
+    email: "hello@nsagora.com",
+    age: 21
+)
 let result = constraint.evaluate(with: user)
 
 switch result {
@@ -140,6 +148,11 @@ let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error>
                 .password(.tooShort)
             }
         }
+    }
+    BlockConstraint {
+        $0.password == $0.passwordConfirmation
+    } errorBuilder: {
+        .password(.confirmationMismatch)
     }
     KeyPathConstraint(\.email) {
         PredicateConstraint(EmailPredicate(), error: .email)

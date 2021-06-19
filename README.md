@@ -20,6 +20,72 @@
 6. [Meta](#meta)
 
 ## Introduction
+
+```swift
+let constraint = TypeConstraint<Account, Account.Error> {
+    KeyPathConstraint(\.username) {
+        BlockConstraint {
+            $0.count >= 5
+        } errorBuilder: {
+            .username
+        }
+    }
+    KeyPathConstraint(\.password) {
+        GroupConstraint(.all) {
+            PredicateConstraint {
+                CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingLowercase)
+            }
+            PredicateConstraint{
+                CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingUppercase)
+            }
+            PredicateConstraint {
+                CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingDigits)
+            }
+            PredicateConstraint {
+                CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingSpecialChars)
+            }
+            PredicateConstraint {
+                LengthPredicate(min: 8)
+            }  errorBuilder: {
+                .password(.tooShort)
+            }
+        }
+    }
+    BlockConstraint {
+        $0.password == $0.passwordConfirmation
+    } errorBuilder: {
+        .password(.confirmationMismatch)
+    }
+    KeyPathConstraint(\.email) {
+        PredicateConstraint(EmailPredicate(), error: .email)
+    }
+    KeyPathConstraint(\.age) {
+        PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+    }
+    KeyPathConstraint(\.website) {
+        OptionalConstraint {
+            PredicateConstraint(URLPredicate(), error: .website)
+        }
+    }
+}
+
+let result = constarint.evaluate(with: account)
+switch result {
+case .success:
+    handleSuccess()
+case .failure(let summary):
+    handleErrors(summary.errors)
+}
+
+```
  
 `Peppermint` is a declarative and lightweight data validation framework.
 
@@ -70,7 +136,7 @@ For a comprehensive list of examples try out the `Examples.playground`:
 2. Open the project in Xcode
 4. Select the `Examples` playground from the Project navigator
 
-The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates and constraints that most projects can benefit of.
+The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates and constraints that most projects can benefit off.
 
 ### Predicates
 
@@ -182,7 +248,7 @@ A `PredicateConstraint` represents a data type that links a `Predicate` to an `E
 
 ```swift
 let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
-let constraint = PredicateConstraint(predicate: predicate, error: MyError.magicWord)
+let constraint = PredicateConstraint<String, MyError>(predicate: predicate, error: .magicWord)
 
 let result = constraint.evaluate(with: "please")
 switch result {
@@ -196,6 +262,32 @@ case .invalid(let summary):
 ```swift
 enum MyError: Error {
     case magicWord
+}
+```
+
+</details>
+
+#### Block Constraint
+
+A `BlockConstraint` represents a data type that links a custom validation closure to an `Error` that describes why the evaluation has failed. It's a shortcut of a `PredicateConstraint` that is initialised with a `BlockPredicate`.
+
+<details>
+<summary>PredicateConstraint</summary>
+
+```swift
+let constraint = BlockConstraint<Int, MyError> {
+    $0 % 2 == 0
+} errorBuilder: {
+    .magicNumber
+}
+
+let anyConstraint = AnyConstraint(constraint)
+anyConstraint.evaluate(with: 3)
+```
+
+```swift
+enum Failure: MyError {
+    case magicNumber
 }
 ```
 
@@ -218,33 +310,33 @@ An example of a  registration form, whereby users are prompted to enter a strong
 `Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `GroupConstraint` object that can be used to enforce requirements on the user's password data:
 
 ```swift
-var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraints:
+var passwordConstraint = GroupConstraint<String, Form.Password>(.all) {
     PredicateConstraint {
         CharacterSetPredicate(.lowercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingLowercase
-    },
+    }
     PredicateConstraint{
         CharacterSetPredicate(.uppercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingUppercase
-    },
+    }
     PredicateConstraint {
         CharacterSetPredicate(.decimalDigits, mode: .loose)
     } errorBuilder: {
         .missingDigits
-    },
+    }
     PredicateConstraint {
         CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
     } errorBuilder: {
         .missingSpecialChars
-    },
+    }
     PredicateConstraint {
         LengthPredicate(min: 8)
     }  errorBuilder: {
         .minLength(8)
     }
-)
+}
 
 let password = "3nGuard!"
 let result = passwordConstraint.evaluate(with: password)
