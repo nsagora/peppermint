@@ -9,22 +9,20 @@ import Peppermint
  In the following example we define a custom predicate which evaluates if the user input is equal to custom text.
  */
 
-public struct CustomPredicate: Predicate {
+public struct CopyCatPredicate: Predicate {
 
-    public typealias InputType = String
+    private let value: String
 
-    private let custom: String
-
-    public init(custom: String) {
-        self.custom = custom
+    public init(value: String) {
+        self.value = value
     }
 
     public func evaluate(with input: String) -> Bool {
-        return input == custom
+        return input == value
     }
 }
 
-let predicate = CustomPredicate(custom: "alphabet")
+let predicate = CopyCatPredicate(value: "alphabet")
 predicate.evaluate(with: "alp") // returns false
 predicate.evaluate(with: "alpha") // returns false
 predicate.evaluate(with: "alphabet") // returns true

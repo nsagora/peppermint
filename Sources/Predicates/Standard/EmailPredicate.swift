@@ -2,6 +2,11 @@ import Foundation
 
 /**
  The `EmailPredicate` struct is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.
+ 
+ ```swift
+ let predicate = EmailPredicate()
+ let isEmail = predicate.evaluate(with: "hello@nsagora.com")
+ ```
  */
 public struct EmailPredicate: Predicate {
     
@@ -18,6 +23,11 @@ public struct EmailPredicate: Predicate {
 
     /**
      Creates and returns a new `EmailPredicate` instance.
+     
+     ```swift
+     let predicate = EmailPredicate()
+     let isEmail = predicate.evaluate(with: "hello@nsagora.com")
+     ```
      */
     public init() {
         rule = RegexPredicate(expression: regex)

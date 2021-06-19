@@ -4,7 +4,7 @@ import Foundation
 import Peppermint
 
 /*:
- ## Type Constraint
+ ## `TypeConstraint`
  
  In the following example we use a `TypeConstraint` to evaluate a data structure used in a registration form.
  */
@@ -16,6 +16,7 @@ struct RegistrationData {
         case password(Password)
         case email
         case underAge
+        case website
     }
     
     enum Password {
@@ -24,17 +25,20 @@ struct RegistrationData {
         case missingDigits
         case missingSpecialChars
         case tooShort
+        case confirmationMismatch
     }
     
     var username: String
     var password: String
+    var passwordConfirmation: String
     var email: String
     var age: Int
+    var website: String?
 }
 
-var loginConstraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
+var constraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
 
-loginConstraint.set(for: \.username) {
+constraint.set(for: \.username) {
     BlockConstraint {
         $0.count >= 5
     } errorBuilder: {
@@ -42,25 +46,25 @@ loginConstraint.set(for: \.username) {
     }
 }
 
-loginConstraint.set(for: \.password) {
-    CompoundConstraint(.all, constraints:
+constraint.set(for: \.password) {
+    GroupConstraint(.all, constraints:
         PredicateConstraint {
-            CharacterSetPredicate(.lowercaseLetters, mode: .loose)
+            CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingLowercase)
         },
         PredicateConstraint{
-            CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+            CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingUppercase)
         },
         PredicateConstraint {
-            CharacterSetPredicate(.decimalDigits, mode: .loose)
+            CharacterSetPredicate(.decimalDigits, mode: .inclusive)
         } errorBuilder: {
             .password(.missingDigits)
         },
         PredicateConstraint {
-            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
+            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
         } errorBuilder: {
             .password(.missingSpecialChars)
         },
@@ -72,16 +76,28 @@ loginConstraint.set(for: \.password) {
     )
 }
 
-loginConstraint.set(for: \.email) {
+constraint.set(for: \.email) {
     PredicateConstraint(EmailPredicate(), error: .email)
 }
 
-loginConstraint.set(for: \.age) {
+constraint.set(for: \.age) {
     PredicateConstraint(RangePredicate(min: 14), error: .underAge)
 }
 
-let user = RegistrationData(username: "me", password: "s3cure", email: "@example.com", age: 12)
-let result = loginConstraint.evaluate(with: user)
+constraint.set(for: \.website) {
+    OptionalConstraint {
+        PredicateConstraint(URLPredicate(), error: .website)
+    }
+}
+
+let user = RegistrationData(
+    username: "nsagora",
+    password: "p@ssW0rd",
+    passwordConfirmation: "passW0rd",
+    email: "hello@nsagora.com",
+    age: 21
+)
+let result = constraint.evaluate(with: user)
 
 switch result {
 case .success:
@@ -89,6 +105,65 @@ case .success:
 case .failure(let summary):
     summary.errors.forEach {
         print($0)
+    }
+}
+
+/*:
+ In the following example we use the result builder variant of the `TypeConstraint` to evaluate a data structure used in a registration form.
+*/
+
+let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error> {
+    KeyPathConstraint(\.username) {
+        BlockConstraint {
+            $0.count >= 5
+        } errorBuilder: {
+            .username
+        }
+    }
+    KeyPathConstraint(\.password) {
+        GroupConstraint(.all) {
+            PredicateConstraint {
+                CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingLowercase)
+            }
+            PredicateConstraint{
+                CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingUppercase)
+            }
+            PredicateConstraint {
+                CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingDigits)
+            }
+            PredicateConstraint {
+                CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+            } errorBuilder: {
+                .password(.missingSpecialChars)
+            }
+            PredicateConstraint {
+                LengthPredicate(min: 8)
+            }  errorBuilder: {
+                .password(.tooShort)
+            }
+        }
+    }
+    BlockConstraint {
+        $0.password == $0.passwordConfirmation
+    } errorBuilder: {
+        .password(.confirmationMismatch)
+    }
+    KeyPathConstraint(\.email) {
+        PredicateConstraint(EmailPredicate(), error: .email)
+    }
+    KeyPathConstraint(\.age) {
+        PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+    }
+    KeyPathConstraint(\.website) {
+        OptionalConstraint {
+            PredicateConstraint(URLPredicate(), error: .website)
+        }
     }
 }
 

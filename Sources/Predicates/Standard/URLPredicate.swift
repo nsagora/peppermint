@@ -2,13 +2,22 @@ import Foundation
 
 /**
  The `URLPredicate` struct is used to evaluate whether a given input is a syntactically valid URL.
+ 
+ ```swift
+ let predicate = URLPredicate()
+ let isValid = predicate.evaluate(with: "http://www.swift.org")
+ ```
  */
 public struct URLPredicate: Predicate {
     
     public typealias InputType = String
     
     /**
-     Creates and returns a new `URLPredicate` instance.
+     Returns a new `URLPredicate` instance.
+     
+     ```swift
+     let predicate = URLPredicate()
+     let isValid = predicate.evaluate(with: "http://www.swift.org")
      */
     public init() { }
     

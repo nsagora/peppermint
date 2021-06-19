@@ -18,6 +18,7 @@ public enum Form {
     }
     
     public enum Email: Error {
+        case missing
         case invalid(String)
     }
     
@@ -56,6 +57,7 @@ extension Form.Email: LocalizedError {
     public var errorDescription:String? {
         
         switch self {
+        case .missing: return "The email address is required."
         case .invalid(let email): return "Your email address '\(email)' is invalid."
         }
     }

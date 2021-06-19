@@ -1,17 +1,36 @@
 import Foundation
 
 /**
- The `CharacterSetPredicate` struct is used to evaluate a `String` inputs agains a defined `CharacterSet`.
+ The `CharacterSetPredicate` evaluates a `String` input agains a defined `CharacterSet`.
+ 
+ ```swift
+ let predicate = CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+ let containsLowercaseLetters = predicate.evaluate(with: "Letters")
+ ```
  */
 public struct CharacterSetPredicate: Predicate {
 
-    /// The `Mode` enum is used to set the evaluation mode of the input's character set against the character set provided at initialisation.
+    /// The `Mode` enum sets the evaluation mode for the input's character set against the provider's character set.
     public enum Mode {
-        /// The input's character set should be a subset of the  character set provided at initialisation.
+        /**
+         The input's character set should be a subset of the provider's character set.
+         
+         ```swift
+         let predicate = CharacterSetPredicate(.lowercaseLetters, mode: .strict)
+         let hasOnlyLowercaseLetters = predicate.evaluate(with: "letters")
+         ```
+         */
         case strict
         
-        /// The input's character set should intersect with the  character set provided at initialisation.
-        case loose
+        /**
+         The input's character set should intersect with the provider's character set.
+         
+         ```swift
+         let predicate = CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+         let containsLowercaseLetters = predicate.evaluate(with: "Letters")
+         ```
+         */
+        case inclusive
     }
     
     public typealias InputType = String
@@ -20,10 +39,15 @@ public struct CharacterSetPredicate: Predicate {
     private let mode: Mode
     
     /**
-     Creates and returns a new `CharacterSetPredicate` instance.
+     Returns a new `CharacterSetPredicate` instance.
+     
+     ```swift
+     let predicate = CharacterSetPredicate(.lowercaseLetters)
+     let hasOnlyLowercaseLetters = predicate.evaluate(with: "letters")
+     ```
      
      - parameter characterSet: A `CharacterSet` used to evaluate a given `String` input.
-     - parameter mode: A `Mode` that describes how the input's character set should be evaluated against the character set provided at initialisation.
+     - parameter mode: A `Mode` that describes how the input's character set should be evaluated against the provider's character set.
      */
     public init(_ characterSet: CharacterSet, mode: Mode = .strict) {
         self.characterSet = characterSet
@@ -31,17 +55,17 @@ public struct CharacterSetPredicate: Predicate {
     }
 
     /**
-     Returns a `Boolean` value that indicates whether a given `Srings` contains only characters in the character set.
+     Returns a `Boolean` value that indicates whether a given `String` contains only characters in the character set.
      
      - parameter input: The input against which to evaluate the receiver.
-     - returns: `true` if input  contains only characters in the charecter set, otherwise `false`.
+     - returns: `true` if input  contains only characters in the character set, otherwise `false`.
      */
     public func evaluate(with input: String) -> Bool {
         let inputCharacterSet = CharacterSet(charactersIn: input)
         switch mode {
         case .strict:
             return inputCharacterSet.isSubset(of: characterSet)
-        case .loose:
+        case .inclusive:
             return !inputCharacterSet.intersection(characterSet).isEmpty
         }
         

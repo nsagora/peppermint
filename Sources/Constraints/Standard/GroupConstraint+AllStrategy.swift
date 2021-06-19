@@ -1,11 +1,11 @@
 import Foundation
 
 extension GroupConstraint {
-
-    internal struct AllStrategy: Strategy {
-
-        internal func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>> {
-
+    
+    struct AllStrategy: Strategy {
+        
+        func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>> {
+            
             let errors = constraints
                 .map { $0.evaluate(with: input) }
                 .reduce(into: [C.ErrorType]()) {
@@ -19,6 +19,7 @@ extension GroupConstraint {
             if summary.errors.isEmpty {
                 return Result<Void, Summary<C.ErrorType>>.success(())
             }
+            
             return Result<Void, Summary<C.ErrorType>>.failure(summary)
         }
     }

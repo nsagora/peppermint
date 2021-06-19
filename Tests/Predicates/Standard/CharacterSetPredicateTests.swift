@@ -29,7 +29,7 @@ class CharacterSetPredicateTests: XCTestCase {
     
     func testEvaluateShouldReturnTrueWhenInputHasALowercaseLetterInLooseMode() {
                 
-        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "Abcd")
         
         XCTAssertTrue(result)
@@ -37,7 +37,7 @@ class CharacterSetPredicateTests: XCTestCase {
     
     func testEvaluateShouldReturnFalseWhenInputHasNoUppercaseLetterInLooseMode() {
                 
-        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "abcd")
         
         XCTAssertFalse(result)
@@ -45,7 +45,7 @@ class CharacterSetPredicateTests: XCTestCase {
     
     func testEvaluateShouldReturnFalseWhenInputIsEmptyLetterInLooseMode() {
                 
-        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+        let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "")
         
         XCTAssertFalse(result)

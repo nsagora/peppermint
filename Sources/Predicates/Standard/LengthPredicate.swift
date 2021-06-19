@@ -2,6 +2,11 @@ import Foundation
 
 /**
  The `LengthPredicate` struct is used to evaluate whether a given input is of a given length.
+ 
+ ```swift
+ let predicate = LengthPredicate<String>(8...64)
+ let isValid = predicate.evaluate(with: "p@ssW0rd")
+ ```
  */
 public struct LengthPredicate<T: Collection>: Predicate {
     
@@ -10,8 +15,13 @@ public struct LengthPredicate<T: Collection>: Predicate {
     private let predicate: RangePredicate<Int>
     
     /**
-     Creates and returns a new `LengthPredicate` instance.
-     :
+     Returns a new `LengthPredicate` instance.
+     
+     ```swift
+     let predicate = LengthPredicate<String>(min: 8, max: 64)
+     let isValid = predicate.evaluate(with: "p@ssW0rd")
+     ```
+     
      - parameter min: The lower bound of the range.
      - parameter max: The upper bound of the range.
      */
@@ -21,8 +31,13 @@ public struct LengthPredicate<T: Collection>: Predicate {
     
     /**
      Creates and returns a new `LengthPredicate` instance.
-     :
-     - parameter range: A `ClosedRange` that defines the lower and uppper bounds of the range.
+     
+     ```swift
+     let predicate = LengthPredicate<String>(8...64)
+     let isValid = predicate.evaluate(with: "p@ssW0rd")
+     ```
+     
+     - parameter range: A `ClosedRange` that defines the lower and upper bounds of the range.
      */
     public init(_ range: ClosedRange<Int>) {
         self.predicate = RangePredicate(range)
@@ -30,8 +45,13 @@ public struct LengthPredicate<T: Collection>: Predicate {
     
     /**
      Creates and returns a new `RangePredicate` instance.
-     :
-     - parameter range: A `Range` that defines the lower and uppper bounds of the range.
+     
+     ```swift
+     let predicate = LengthPredicate<String>(8..<65)
+     let isValid = predicate.evaluate(with: "p@ssW0rd")
+     ```
+     
+     - parameter range: A `Range` that defines the lower and upper bounds of the range.
      */
     public init(_ range: Range<Int>) {
         self.predicate = RangePredicate(range)
@@ -44,7 +64,6 @@ public struct LengthPredicate<T: Collection>: Predicate {
      - returns: `true` if input is between the range bounds, otherwise `false`.
      */
     public func evaluate(with input: T) -> Bool {
-        
-        return predicate.evaluate(with: input.count)
+        predicate.evaluate(with: input.count)
     }
 }

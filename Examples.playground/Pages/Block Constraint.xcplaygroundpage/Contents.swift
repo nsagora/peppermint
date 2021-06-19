@@ -4,19 +4,19 @@ import Foundation
 import Peppermint
 
 /*:
- ## Dynamic Constraint
+ ## `BlockConstraint`
  
- In the following example we use a `BlockPredicate` based `Constraint` to evaluate if an username has at least 5 characters. The error is dynamically built at evaluation time. 
+ In the following example we use a `BlockConstraint` to evaluate that a given input has at least 5 characters. The error is dynamically built at evaluation time.
  */
 
-let text = "1234567890"
+let input = "1234567890"
 let constraint = BlockConstraint {
     $0.count >= 5
 } errorBuilder: {
     Form.Username.invalid($0)
 }
 
-let result = constraint.evaluate(with: text)
+let result = constraint.evaluate(with: input)
 
 switch result {
 case .success:

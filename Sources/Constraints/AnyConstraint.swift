@@ -2,12 +2,24 @@ import Foundation
 
 /**
  A type-erased `Constraint`.
+ 
+ ```swift
+ enum Failure: Error {
+     case notEven
+ }
+ 
+ let constraint = BlockConstraint<Int, Failure> {
+     $0 % 2 == 0
+ } errorBuilder: {
+     .notEven
+ }
+ 
+ let anyConstraint = AnyConstraint(constraint)
+ anyConstraint.evaluate(with: 3)
+ ```
  */
 public struct AnyConstraint<T, E: Error>: Constraint {
 
-    /**
-     A type that provides information about what kind of values the constraint can be evaluated with.
-     */
     public typealias InputType = T
     public typealias ErrorType = E
 
@@ -34,9 +46,24 @@ public struct AnyConstraint<T, E: Error>: Constraint {
 extension Constraint {
 
     /**
-     Wraps this constraint with a type eraser
+     Wraps this constraint with a type eraser.
      
-     - Returns:An `AnyConstraint` wrapping this constraint.
+     ```swift
+     enum Failure: Error {
+         case notEven
+     }
+     
+     let constraint = BlockConstraint<Int, Failure> {
+         $0 % 2 == 0
+     } errorBuilder: {
+         .notEven
+     }
+     
+     var erasedConstraint = constraint.erase()
+     erasedConstraint.evaluate(with: 5)
+     ```
+     
+     - Returns: An `AnyConstraint` wrapping this constraint.
      */
     public func erase() -> AnyConstraint<InputType, ErrorType> {
         return AnyConstraint(self)
