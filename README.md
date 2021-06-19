@@ -272,7 +272,7 @@ enum MyError: Error {
 A `BlockConstraint` represents a data type that links a custom validation closure to an `Error` that describes why the evaluation has failed. It's a shortcut of a `PredicateConstraint` that is initialised with a `BlockPredicate`.
 
 <details>
-<summary>PredicateConstraint</summary>
+<summary>BlockConstraint</summary>
 
 ```swift
 let constraint = BlockConstraint<Int, MyError> {
