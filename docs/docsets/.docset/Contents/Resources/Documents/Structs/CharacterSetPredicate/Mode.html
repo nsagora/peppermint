@@ -74,25 +74,28 @@
                 <a href="../../Structs/CharacterSetPredicate/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/CompoundConstraint.html">CompoundConstraint</a>
+                <a href="../../Structs/ConstraintBuilder.html">ConstraintBuilder</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/CompoundConstraint/Mode.html">– Mode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/ConditionedConstraint.html">ConditionedConstraint</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs.html#/s:10Peppermint17ConstraintBuilderV">ConstraintBuilder</a>
+                <a href="../../Structs/ConstraintBuilder.html#/s:10Peppermint17ConstraintBuilderV0B9ContainerV">– ConstraintContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GroupConstraint.html">GroupConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GroupConstraint/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KeyPathConstraint.html">KeyPathConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/LengthPredicate.html">LengthPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/OptionalConstraint.html">OptionalConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/PredicateConstraint.html">PredicateConstraint</a>
@@ -130,7 +133,7 @@
 
                 </div>
               </div>
-            <p>The <code>Mode</code> enum is used to set the evaluation mode of the input&rsquo;s character set against the character set provided at initialisation.</p>
+            <p>The <code>Mode</code> enum sets the evaluation mode for the input&rsquo;s character set against the provider&rsquo;s character set.</p>
 
           </section>
           <section class="section task-group-section">
@@ -149,7 +152,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The input&rsquo;s character set should be a subset of the  character set provided at initialisation.</p>
+                        <p>The input&rsquo;s character set should be a subset of the provider&rsquo;s character set.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">strict</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">hasOnlyLowercaseLetters</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"letters"</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -166,9 +172,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint21CharacterSetPredicateV4ModeO5looseyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/loose" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint21CharacterSetPredicateV4ModeO5looseyA2EmF">loose</a>
+                    <a name="/s:10Peppermint21CharacterSetPredicateV4ModeO9inclusiveyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/inclusive" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint21CharacterSetPredicateV4ModeO9inclusiveyA2EmF">inclusive</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,14 +182,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The input&rsquo;s character set should intersect with the  character set provided at initialisation.</p>
+                        <p>The input&rsquo;s character set should intersect with the provider&rsquo;s character set.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">containsLowercaseLetters</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"Letters"</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">loose</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">inclusive</span></code></pre>
 
                         </div>
                       </div>
@@ -195,8 +204,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-05-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

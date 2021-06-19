@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RangePredicate Structure Reference</title>
+    <title>GroupConstraint Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/RangePredicate" class="dashAnchor"></a>
-    <a title="RangePredicate Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/GroupConstraint" class="dashAnchor"></a>
+    <a title="GroupConstraint Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (88% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        RangePredicate Structure Reference
+        GroupConstraint Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -125,18 +125,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>RangePredicate</h1>
+            <h1>GroupConstraint</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RangePredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Predicate.html">Predicate</a></span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GroupConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
-            <p>The <code>RangePredicate</code> struct is used to evaluate whether a given input is inside a given range.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">drinkingAgeLimit</span> <span class="o">=</span> <span class="kt">RangePredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">21</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">drinkingAgeLimit</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
-</code></pre>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -145,9 +142,37 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint9PredicateP9InputTypeQa"></a>
+                    <a name="/s:10Peppermint15GroupConstraintV4ModeO"></a>
+                    <a name="//apple_ref/swift/Enum/Mode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV4ModeO">Mode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Structs/GroupConstraint/Mode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Mode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint10ConstraintP9InputTypeQa"></a>
                     <a name="//apple_ref/swift/Alias/InputType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint9PredicateP9InputTypeQa">InputType</a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -171,9 +196,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint14RangePredicateV3min3maxACyxGxSg_AGtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(min:max:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint14RangePredicateV3min3maxACyxGxSg_AGtcfc">init(min:<wbr>max:<wbr>)</a>
+                    <a name="/s:10Peppermint10ConstraintP9ErrorTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/ErrorType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -181,17 +206,67 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a new <code>RangePredicate</code> instance.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">drinkingAgeLimit</span> <span class="o">=</span> <span class="kt">RangePredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">21</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">drinkingAgeLimit</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
-</code></pre>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ErrorType</span> <span class="o">=</span> <span class="kt">E</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint15GroupConstraintV5countSivp"></a>
+                    <a name="//apple_ref/swift/Property/count" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV5countSivp">count</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number of constraints in the group.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="kt">T</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span> <span class="kt">T</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint15GroupConstraintV_11constraintsACyxq_GAC4ModeOyxq__G_Sayqd__Gtc9InputTypeQyd__Rsz05ErrorG0Qyd__Rs_AA0C0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:constraints:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV_11constraintsACyxq_GAC4ModeOyxq__G_Sayqd__Gtc9InputTypeQyd__Rsz05ErrorG0Qyd__Rs_AA0C0Rd__lufc">init(_:<wbr>constraints:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code>AndCompoundConstraint</code> instance populated with a predefined list of <code>Constraints</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Structs/GroupConstraint/Mode.html">Mode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">all</span><span class="p">,</span> <span class="nv">constraints</span><span class="p">:</span> <span class="p">[</span><span class="kt">C</span><span class="p">])</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/GroupConstraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">,</span> <span class="kt">E</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/GroupConstraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
 
                         </div>
                       </div>
@@ -202,24 +277,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>min</em>
+                                <em>constraints</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The lower bound of the range.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>max</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The upper bound of the range.</p>
+                                  <p><code>[Constraint]</code></p>
                                 </div>
                               </td>
                             </tr>
@@ -232,9 +295,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint14RangePredicateVyACyxGSNyxGcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint14RangePredicateVyACyxGSNyxGcfc">init(_:<wbr>)</a>
+                    <a name="/s:10Peppermint15GroupConstraintV_11constraintsACyxq_GAC4ModeOyxq__G_qd__dtc9InputTypeQyd__Rsz05ErrorG0Qyd__Rs_AA0C0Rd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:constraints:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV_11constraintsACyxq_GAC4ModeOyxq__G_qd__dtc9InputTypeQyd__Rsz05ErrorG0Qyd__Rs_AA0C0Rd__lufc">init(_:<wbr>constraints:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -242,17 +305,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a new <code>RangePredicate</code> instance.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">RangePredicate</span><span class="p">(</span><span class="mi">21</span><span class="o">...</span><span class="mi">90</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span>
-</code></pre>
+                        <p>Returns a new <code>AndCompoundConstraint</code> instance populated with a predefined list of <code>Constraints</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Structs/GroupConstraint/Mode.html">Mode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">all</span><span class="p">,</span> <span class="nv">constraints</span><span class="p">:</span> <span class="kt">C</span><span class="o">...</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/GroupConstraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">,</span> <span class="kt">E</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/GroupConstraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
 
                         </div>
                       </div>
@@ -263,12 +323,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>range</em>
+                                <em>constraints</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A <code>ClosedRange</code> that defines the lower and upper bounds of the range.</p>
+                                  <p><code>[Constraint]</code></p>
                                 </div>
                               </td>
                             </tr>
@@ -281,9 +341,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint14RangePredicateV8evaluate4withSbx_tF"></a>
+                    <a name="/s:10Peppermint15GroupConstraintV8evaluate4withs6ResultOyytAA7SummaryVyq_GGx_tF"></a>
                     <a name="//apple_ref/swift/Method/evaluate(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint14RangePredicateV8evaluate4withSbx_tF">evaluate(with:<wbr>)</a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV8evaluate4withs6ResultOyytAA7SummaryVyq_GGx_tF">evaluate(with:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -291,14 +351,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a <code>Boolean</code> value that indicates whether a given input is inside the given range bounds.</p>
+                        <p>Evaluates the input on the underlying constraints.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt"><a href="../Structs/Summary.html">Summary</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -314,7 +374,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The input against which to evaluate the receiver.</p>
+                                  <p>The input to be validated.</p>
                                 </div>
                               </td>
                             </tr>
@@ -323,7 +383,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p><code>true</code> if input is between the range bounds, otherwise <code>false</code>.</p>
+                        <p><code>.success</code> if the input is valid,<code>.failure</code> containing the <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code><a href="../Protocols/Constraint.html">Constraint</a></code>s otherwise.</p>
                       </div>
                     </section>
                   </div>
@@ -332,11 +392,11 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Available%20where%20%60T%60%3A%20%60Strideable%60%2C%20%60T.Stride%60%3A%20%60SignedInteger%60"></a>
-                <a name="//apple_ref/swift/Section/Available where `T`: `Strideable`, `T.Stride`: `SignedInteger`" class="dashAnchor"></a>
+                <a name="/ConstraintBuilder%20Extension"></a>
+                <a name="//apple_ref/swift/Section/ConstraintBuilder Extension" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Available%20where%20%60T%60%3A%20%60Strideable%60%2C%20%60T.Stride%60%3A%20%60SignedInteger%60"></a>
-                  <h3 class="section-name"><p>Available where <code>T</code>: <code>Strideable</code>, <code>T.Stride</code>: <code>SignedInteger</code></p>
+                  <a class="section-name-link" href="#/ConstraintBuilder%20Extension"></a>
+                  <h3 class="section-name"><p>ConstraintBuilder Extension</p>
 </h3>
                 </div>
               </div>
@@ -344,9 +404,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint14RangePredicateVAASxRzSZ6StrideRpzrlEyACyxGSnyxGcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint14RangePredicateVAASxRzSZ6StrideRpzrlEyACyxGSnyxGcfc">init(_:<wbr>)</a>
+                    <a name="/s:10Peppermint15GroupConstraintV_17constraintBuilderACyxq_GAC4ModeOyxq__G_SayAA03AnyC0Vyxq_GGyXEtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:constraintBuilder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV_17constraintBuilderACyxq_GAC4ModeOyxq__G_SayAA03AnyC0Vyxq_GGyXEtcfc">init(_:<wbr>constraintBuilder:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -354,17 +414,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a new <code>RangePredicate</code> instance.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">RangePredicate</span><span class="p">(</span><span class="mi">21</span><span class="o">..&lt;</span><span class="mi">91</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span>
-</code></pre>
+                        <p>Returns a new <code>GroupConstraint</code> instance populated with a predefined list of <code>Constraints</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Structs/GroupConstraint/Mode.html">Mode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">all</span><span class="p">,</span> <span class="kd"><a href="../Structs/ConstraintBuilder.html">@ConstraintBuilder</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="nv">constraintBuilder</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/AnyConstraint.html">AnyConstraint</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -375,12 +432,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>range</em>
+                                <em>constraints</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A <code>Range</code> that defines the lower and upper bounds of the range.</p>
+                                  <p><code>[Constraint]</code></p>
                                 </div>
                               </td>
                             </tr>

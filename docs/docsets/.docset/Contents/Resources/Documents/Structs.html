@@ -74,25 +74,28 @@
                 <a href="Structs/CharacterSetPredicate/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CompoundConstraint.html">CompoundConstraint</a>
+                <a href="Structs/ConstraintBuilder.html">ConstraintBuilder</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CompoundConstraint/Mode.html">– Mode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/ConditionedConstraint.html">ConditionedConstraint</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs.html#/s:10Peppermint17ConstraintBuilderV">ConstraintBuilder</a>
+                <a href="Structs/ConstraintBuilder.html#/s:10Peppermint17ConstraintBuilderV0B9ContainerV">– ConstraintContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GroupConstraint.html">GroupConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GroupConstraint/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/KeyPathConstraint.html">KeyPathConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LengthPredicate.html">LengthPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/OptionalConstraint.html">OptionalConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/PredicateConstraint.html">PredicateConstraint</a>
@@ -143,6 +146,19 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A type-erased <code><a href="Protocols/Constraint.html">Constraint</a></code>.</p>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Failure</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">notEven</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">BlockConstraint</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">notEven</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">anyConstraint</span> <span class="o">=</span> <span class="kt">AnyConstraint</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+<span class="n">anyConstraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/AnyConstraint.html" class="slightly-smaller">See more</a>
                       </div>
@@ -172,6 +188,7 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                        <a href="Structs/ConstraintBuilder.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -198,7 +215,18 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <code><a href="Protocols/Constraint.html">Constraint</a></code> that links a custom validation closure to an <code>Error</code> that describes why the evaluation has failed.</p>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Failure</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">notEven</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">BlockConstraint</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">notEven</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/BlockConstraint.html" class="slightly-smaller">See more</a>
                       </div>
@@ -216,9 +244,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint18CompoundConstraintV"></a>
-                    <a name="//apple_ref/swift/Struct/CompoundConstraint" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint18CompoundConstraintV">CompoundConstraint</a>
+                    <a name="/s:10Peppermint15GroupConstraintV"></a>
+                    <a name="//apple_ref/swift/Struct/GroupConstraint" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint15GroupConstraintV">GroupConstraint</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -228,41 +256,13 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="Structs/CompoundConstraint.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/GroupConstraint.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CompoundConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Peppermint21ConditionedConstraintV"></a>
-                    <a name="//apple_ref/swift/Struct/ConditionedConstraint" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint21ConditionedConstraintV">ConditionedConstraint</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A data type that links a <code><a href="Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code> that describes why the predicate evaluation has failed.</p>
-
-                        <a href="Structs/ConditionedConstraint.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConditionedConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GroupConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>
@@ -282,7 +282,25 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <code><a href="Protocols/Constraint.html">Constraint</a></code> that evaluates a property on a piece of data by it&rsquo;s key path.</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">LoginData</span> <span class="p">{</span>
+
+    <span class="kd">enum</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">email</span>
+        <span class="k">case</span> <span class="n">password</span>
+    <span class="p">}</span>
+
+    <span class="k">var</span> <span class="nv">email</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">KeyPathConstraint</span><span class="o">&lt;</span><span class="kt">LoginData</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">LoginData</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">(\</span><span class="o">.</span><span class="n">email</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">EmailPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="kt">LoginData</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="s">"hello@nsagora.com"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">)</span>
+<span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/KeyPathConstraint.html" class="slightly-smaller">See more</a>
                       </div>
@@ -291,6 +309,46 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KeyPathConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">V</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint18OptionalConstraintV"></a>
+                    <a name="//apple_ref/swift/Struct/OptionalConstraint" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint18OptionalConstraintV">OptionalConstraint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code><a href="Protocols/Constraint.html">Constraint</a></code> that accepts an optional input and passes the unwrapped value to an underlying <code><a href="Protocols/Constraint.html">Constraint</a></code>.</p>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Failure</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kd">required</span>
+    <span class="k">case</span> <span class="n">invalidEmail</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="s">"hello@nsagora.com"</span>
+<span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">OptionalConstraint</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">required</span><span class="p">:</span> <span class="o">.</span><span class="kd">required</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">EmailPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">invalidEmail</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">email</span><span class="p">)</span>
+</code></pre>
+
+                        <a href="Structs/OptionalConstraint.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">OptionalConstraint</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Constraint.html">Constraint</a></span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>
@@ -310,7 +368,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A data type that links a <code><a href="Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code> that describes why the predicate evaluation has failed.</p>
+                        <p>A <code><a href="Protocols/Constraint.html">Constraint</a></code> that links a <code><a href="Protocols/Predicate.html">Predicate</a></code> to an <code>Error</code> that describes why the predicate evaluation has failed.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">EmailPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">EmailFailure</span><span class="o">.</span><span class="n">invalid</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"hello@nsagora.com)
+</span></code></pre>
 
                         <a href="Structs/PredicateConstraint.html" class="slightly-smaller">See more</a>
                       </div>
@@ -338,7 +399,78 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <code><a href="Protocols/Constraint.html">Constraint</a></code> that allows to evaluate complex data types.</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">RegistrationData</span> <span class="p">{</span>
+
+    <span class="kd">enum</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">username</span>
+        <span class="k">case</span> <span class="nf">password</span><span class="p">(</span><span class="kt">Password</span><span class="p">)</span>
+        <span class="k">case</span> <span class="n">email</span>
+        <span class="k">case</span> <span class="n">underAge</span>
+    <span class="p">}</span>
+
+    <span class="kd">enum</span> <span class="kt">Password</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">missingUppercase</span>
+        <span class="k">case</span> <span class="n">missingLowercase</span>
+        <span class="k">case</span> <span class="n">missingDigits</span>
+        <span class="k">case</span> <span class="n">missingSpecialChars</span>
+        <span class="k">case</span> <span class="n">tooShort</span>
+    <span class="p">}</span>
+
+    <span class="k">var</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">email</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">age</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">TypeConstraint</span><span class="o">&lt;</span><span class="kt">RegistrationData</span><span class="p">,</span> <span class="kt">RegistrationData</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">BlockConstraint</span> <span class="p">{</span>
+            <span class="nv">$0</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">5</span>
+        <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+            <span class="o">.</span><span class="n">username</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">password</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">GroupConstraint</span><span class="p">(</span><span class="o">.</span><span class="n">all</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">PredicateConstraint</span> <span class="p">{</span>
+                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+            <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingLowercase</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="kt">PredicateConstraint</span><span class="p">{</span>
+                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">uppercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+            <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingUppercase</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="kt">PredicateConstraint</span> <span class="p">{</span>
+                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">decimalDigits</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+            <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingDigits</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="kt">PredicateConstraint</span> <span class="p">{</span>
+                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="kt">CharacterSet</span><span class="p">(</span><span class="nv">charactersIn</span><span class="p">:</span> <span class="s">"!?@#$%^&amp;*()|</span><span class="se">\\</span><span class="s">/&lt;&gt;,.~`_+-="</span><span class="p">),</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+            <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingSpecialChars</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="kt">PredicateConstraint</span> <span class="p">{</span>
+                <span class="kt">LengthPredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="p">}</span>  <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">tooShort</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">email</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">EmailPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">email</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">RangePredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">14</span><span class="p">),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">underAge</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">user</span> <span class="o">=</span> <span class="kt">RegistrationData</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"nsagora"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">,</span> <span class="nv">email</span><span class="p">:</span> <span class="s">"hello@nsagora.com"</span><span class="p">,</span> <span class="nv">age</span><span class="p">:</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">user</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/TypeConstraint.html" class="slightly-smaller">See more</a>
                       </div>
@@ -366,7 +498,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The summary of a validation result.</p>
+                        <p>The summary of a constraint evaluation result.</p>
 
                         <a href="Structs/Summary.html" class="slightly-smaller">See more</a>
                       </div>
@@ -396,6 +528,13 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A type-erased <code><a href="Protocols/Predicate.html">Predicate</a></code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">odd</span> <span class="o">=</span> <span class="kt">BlockPredicate</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">anyOdd</span> <span class="o">=</span> <span class="kt">AnyPredicate</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isOdd</span> <span class="o">=</span> <span class="n">anyOdd</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/AnyPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -423,7 +562,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>BlockPredicate</code> struct is used to define closure based conditions used to evaluate generic inputs.</p>
+                        <p>The <code>BlockPredicate</code> struct defines a closure based condition used to evaluate generic inputs.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">BlockPredicate</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">isEven</span> <span class="o">=</span> <span class="n">even</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/BlockPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -451,7 +596,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>CharacterSetPredicate</code> struct is used to evaluate a <code>String</code> inputs agains a defined <code>CharacterSet</code>.</p>
+                        <p>The <code>CharacterSetPredicate</code> evaluates a <code>String</code> input agains a defined <code>CharacterSet</code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">containsLowercaseLetters</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"Letters"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/CharacterSetPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -480,6 +628,9 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The <code>EmailPredicate</code> struct is used to evaluate whether a given input is a syntactically valid email address, based on the RFC 5322 official standard.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">EmailPredicate</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">isEmail</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"hello@nsagora.com"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/EmailPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -508,6 +659,9 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The <code>LengthPredicate</code> struct is used to evaluate whether a given input is of a given length.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">LengthPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">8</span><span class="o">...</span><span class="mi">64</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/LengthPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -566,7 +720,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>RegexPredicate</code> struct is used to define regluar expression based conditions used to evaluate input strings.</p>
+                        <p>The <code>RegexPredicate</code> struct is used to define regular expression based conditions used to evaluate input strings.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">RegexPredicate</span><span class="p">(</span><span class="nv">expression</span><span class="p">:</span> <span class="s">"^</span><span class="se">\\</span><span class="s">d+$"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"1234567890"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/RegexPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -595,6 +752,9 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The <code>RequiredPredicate</code> struct is used to evaluate whether a given input is empty.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">RequiredPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/RequiredPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -623,6 +783,9 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The <code>URLPredicate</code> struct is used to evaluate whether a given input is a syntactically valid URL.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span> <span class="o">=</span> <span class="kt">URLPredicate</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"http://www.swift.org"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/URLPredicate.html" class="slightly-smaller">See more</a>
                       </div>
@@ -642,8 +805,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-05-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

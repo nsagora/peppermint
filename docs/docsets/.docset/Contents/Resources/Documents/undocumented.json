@@ -1,40 +1,110 @@
 {
   "warnings": [
     {
-      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/CompoundConstraint.swift",
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/ConstraintBuilder.swift",
+      "line": 4,
+      "symbol": "ConstraintBuilder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/BlockConstraint.swift",
+      "line": 3,
+      "symbol": "BlockConstraint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/CompoundConstraint.swift",
       "line": 8,
       "symbol": "CompoundConstraint",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/CompoundConstraint.swift",
+      "line": 10,
+      "symbol": "CompoundConstraint.Mode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/CompoundConstraint.swift",
+      "line": 11,
+      "symbol": "CompoundConstraint.Mode.any",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/CompoundConstraint.swift",
+      "line": 12,
+      "symbol": "CompoundConstraint.Mode.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/CompoundConstraint.swift",
+      "line": 66,
+      "symbol": "CompoundConstraint",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/KeyPathConstraint.swift",
       "line": 3,
       "symbol": "KeyPathConstraint",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/KeyPathConstraint.swift",
       "line": 11,
-      "symbol": "KeyPathConstraint.init(_:constraint:)",
+      "symbol": "KeyPathConstraint.init(_:constraints:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/KeyPathConstraint.swift",
       "line": 16,
+      "symbol": "KeyPathConstraint.init(_:constraints:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "line": 29,
+      "symbol": "KeyPathConstraint",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/KeyPathConstraint.swift",
+      "line": 31,
       "symbol": "KeyPathConstraint.init(_:constraintBuilder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/alex/Developer/opensource/validation-toolkit/Sources/Constraints/Standard/TypeConstraint.swift",
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/TypeConstraint.swift",
       "line": 3,
       "symbol": "TypeConstraint",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/TypeConstraint.swift",
+      "line": 50,
+      "symbol": "TypeConstraint",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/alex/Developer/opensource/peppermint/Sources/Constraints/Standard/TypeConstraint.swift",
+      "line": 52,
+      "symbol": "TypeConstraint.init(constraintBuilder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/alex/Developer/opensource/validation-toolkit"
+  "source_directory": "/Users/alex/Developer/opensource/peppermint"
 }

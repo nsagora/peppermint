@@ -74,25 +74,28 @@
                 <a href="../Structs/CharacterSetPredicate/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CompoundConstraint.html">CompoundConstraint</a>
+                <a href="../Structs/ConstraintBuilder.html">ConstraintBuilder</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CompoundConstraint/Mode.html">– Mode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ConditionedConstraint.html">ConditionedConstraint</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs.html#/s:10Peppermint17ConstraintBuilderV">ConstraintBuilder</a>
+                <a href="../Structs/ConstraintBuilder.html#/s:10Peppermint17ConstraintBuilderV0B9ContainerV">– ConstraintContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/EmailPredicate.html">EmailPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GroupConstraint.html">GroupConstraint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GroupConstraint/Mode.html">– Mode</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KeyPathConstraint.html">KeyPathConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LengthPredicate.html">LengthPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OptionalConstraint.html">OptionalConstraint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/PredicateConstraint.html">PredicateConstraint</a>
@@ -131,6 +134,19 @@
                 </div>
               </div>
             <p>A type-erased <code><a href="../Protocols/Constraint.html">Constraint</a></code>.</p>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Failure</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">notEven</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">constraint</span> <span class="o">=</span> <span class="kt">BlockConstraint</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">notEven</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">anyConstraint</span> <span class="o">=</span> <span class="kt">AnyConstraint</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+<span class="n">anyConstraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre>
 
           </section>
           <section class="section task-group-section">
@@ -139,9 +155,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Peppermint13AnyConstraintV9InputTypea"></a>
+                    <a name="/s:10Peppermint10ConstraintP9InputTypeQa"></a>
                     <a name="//apple_ref/swift/Alias/InputType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint13AnyConstraintV9InputTypea">InputType</a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,8 +165,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A type that provides information about what kind of values the constraint can be evaluated with.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -209,7 +224,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">constraint</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/AnyConstraint.html#/s:10Peppermint13AnyConstraintV9InputTypea">InputType</a></span><span class="p">,</span> <span class="kt">E</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/AnyConstraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">constraint</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/AnyConstraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">,</span> <span class="kt">E</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt"><a href="../Structs/AnyConstraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html">Constraint</a></span></code></pre>
 
                         </div>
                       </div>
@@ -271,8 +286,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-05-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
