@@ -3,6 +3,12 @@
 import Foundation
 import Peppermint
 
+/*:
+ ## `KeyPathConstraint`
+ 
+ In the following example we use a `KeyPathConstraint` to evaluate that the `.email` property of the `LoginData` type is a valid email address.
+ */
+
 struct LoginData {
     
     enum Error: Swift.Error {

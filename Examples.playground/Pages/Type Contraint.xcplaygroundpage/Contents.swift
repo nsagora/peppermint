@@ -4,7 +4,7 @@ import Foundation
 import Peppermint
 
 /*:
- ## Type Constraint
+ ## `TypeConstraint`
  
  In the following example we use a `TypeConstraint` to evaluate a data structure used in a registration form.
  */
@@ -16,6 +16,7 @@ struct RegistrationData {
         case password(Password)
         case email
         case underAge
+        case website
     }
     
     enum Password {
@@ -30,6 +31,7 @@ struct RegistrationData {
     var password: String
     var email: String
     var age: Int
+    var website: String?
 }
 
 var constraint = TypeConstraint<RegistrationData, RegistrationData.Error>()
@@ -78,6 +80,12 @@ constraint.set(for: \.email) {
 
 constraint.set(for: \.age) {
     PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+}
+
+constraint.set(for: \.website) {
+    OptionalConstraint {
+        PredicateConstraint(URLPredicate(), error: .website)
+    }
 }
 
 let user = RegistrationData(username: "nsagora", password: "p@ssW0rd", email: "hello@nsagora.com", age: 21)
@@ -138,6 +146,11 @@ let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error>
     }
     KeyPathConstraint(\.age) {
         PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+    }
+    KeyPathConstraint(\.website) {
+        OptionalConstraint {
+            PredicateConstraint(URLPredicate(), error: .website)
+        }
     }
 }
 

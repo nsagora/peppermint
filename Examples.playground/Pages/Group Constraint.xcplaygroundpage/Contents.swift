@@ -4,7 +4,7 @@ import Foundation
 import Peppermint
 
 /*:
- ## GroupConstraint
+ ## `GroupConstraint`
  
  In the following example we use a `GroupConstraint` to evaluate the strength of the user password.
  */
@@ -37,7 +37,7 @@ var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraint
     }
 )
 
-let password = "3nGuard!"
+let password = "p@ssW0rd"
 let result = passwordConstraint.evaluate(with: password)
 
 switch result {

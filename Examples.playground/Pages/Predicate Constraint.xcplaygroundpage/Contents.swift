@@ -4,7 +4,7 @@ import Foundation
 import Peppermint
 
 /*:
- ## Predicate Constraint
+ ## `PredicateConstraint`
  
  In the following example we use a `EmailPredicate` based `Constraint` to evaluate if a given input is a valid email.
  */
