@@ -25,3 +25,13 @@ class BlockPredicateTests: XCTestCase {
         XCTAssertFalse(result)
     }
 }
+
+extension BlockPredicateTests {
+    
+    func testDynamicLookupExtension() {
+        let sut: BlockPredicate<String> = .block { $0 == "valid" }
+        let result = sut.evaluate(with: "valid")
+        
+        XCTAssertTrue(result)
+    }
+}

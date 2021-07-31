@@ -45,3 +45,26 @@ public struct BlockPredicate<T>: Predicate {
         return evaluationBlock(input)
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate {
+    
+    /**
+     Returns a new `BlockPredicate` instance.
+          
+     ```swift
+     let predicate: BlockPredicate<Int> = .block {
+        $0 % 2 == 0
+     }
+     
+     let isEven = even.evaluate(with: 2)
+     ```
+     - parameter evaluationBlock: A closure describing a custom validation condition.
+     - parameter input: The input against which to evaluate the receiver.
+     */
+    public static func block<T>(evaluationBlock: @escaping (_ input: T) -> Bool) -> Self where Self == BlockPredicate<T> {
+        BlockPredicate(evaluationBlock: evaluationBlock)
+    }
+    
+}
