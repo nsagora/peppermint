@@ -39,3 +39,14 @@ class EmailPredicateTests: XCTestCase {
         XCTAssertTrue(result)
     }
 }
+
+extension BlockPredicateTests {
+    
+    func testEmailPredicateDynamicLookupExtension() {
+        let sut: EmailPredicate = .email
+        let email = "test@example.com"
+        let result = sut.evaluate(with: email)
+        
+        XCTAssertTrue(result)
+    }
+}

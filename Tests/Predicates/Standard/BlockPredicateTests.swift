@@ -28,7 +28,7 @@ class BlockPredicateTests: XCTestCase {
 
 extension BlockPredicateTests {
     
-    func testDynamicLookupExtension() {
+    func testBlockPredicateDynamicLookupExtension() {
         let sut: BlockPredicate<String> = .block { $0 == "valid" }
         let result = sut.evaluate(with: "valid")
         

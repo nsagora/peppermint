@@ -22,7 +22,7 @@ public struct EmailPredicate: Predicate {
         "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$"
 
     /**
-     Creates and returns a new `EmailPredicate` instance.
+     Returns a new `EmailPredicate` instance.
      
      ```swift
      let predicate = EmailPredicate()
@@ -42,4 +42,22 @@ public struct EmailPredicate: Predicate {
     public func evaluate(with input: InputType) -> Bool {
         return rule.evaluate(with: input)
     }
+}
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate where Self == EmailPredicate {
+    
+    /**
+     Returns a new `EmailPredicate` instance.
+     
+     ```swift
+     let predicate: EmailPredicate = .email
+     let isEmail = predicate.evaluate(with: "hello@nsagora.com")
+     ```
+     */
+    public static var email: Self {
+        EmailPredicate()
+    }
+    
 }
