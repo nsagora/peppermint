@@ -11,7 +11,11 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnASuccessfulResultWhenThereIsOneKeyPathConstraintFulfilled() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 > 5}, error: .FailingCondition)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 > 5
+        } errorBuilder: {
+            .FailingCondition
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer, constraint: integerConstraint)
@@ -28,8 +32,16 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnASuccessfulResultWhenThereAreTwoKeyPathConstraintsFulfilled() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 > 5}, error: .FailingCondition)
-        let stringConstraint = PredicateConstraint<String, FakeError>(.block { $0 == "Swift"}, error: .Invalid)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 > 5
+        } errorBuilder: {
+            .FailingCondition
+        }
+        let stringConstraint = BlockConstraint<String, FakeError> {
+            $0 == "Swift"
+        } errorBuilder: {
+            .Invalid
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer, constraint: integerConstraint)
@@ -47,8 +59,16 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnASuccessfulResultWhenThereAreTwoKeyPathConstraintsWithCnstraintBlockFulfilled() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 > 5}, error: .FailingCondition)
-        let stringConstraint = PredicateConstraint<String, FakeError>(.block { $0 == "Swift"}, error: .Invalid)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 > 5
+        } errorBuilder: {
+            .FailingCondition
+        }
+        let stringConstraint = BlockConstraint<String, FakeError> {
+            $0 == "Swift"
+        } errorBuilder: {
+            .Invalid
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer) { integerConstraint }
@@ -66,7 +86,11 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAFailureResultWhenThereIsOneKeyPathConstraintFailing() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 < 5}, error: .FailingCondition)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 < 5
+        } errorBuilder: {
+            .FailingCondition
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer, constraint: integerConstraint)
@@ -83,8 +107,16 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAFailureResultWhenThereAreOneFulfilledAndOneFailingKeyPathConstraints() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 > 5}, error: .FailingCondition)
-        let stringConstraint = PredicateConstraint<String, FakeError>(.block { $0 != "Swift"}, error: .Invalid)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 > 5
+        } errorBuilder: {
+            .FailingCondition
+        }
+        let stringConstraint = BlockConstraint<String, FakeError> {
+            $0 != "Swift"
+        } errorBuilder: {
+            .Invalid
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer, constraint: integerConstraint)
@@ -102,8 +134,16 @@ class TypeConstraintTests: XCTestCase {
     func testEvaluateShouldReturnAFailureResultWhenThereAreTwoKeyPathConstraintsFailing() {
         
         let input = FakeData(integer: 10, string: "Swift")
-        let integerConstraint = PredicateConstraint<Int, FakeError>(.block { $0 < 5}, error: .FailingCondition)
-        let stringConstraint = PredicateConstraint<String, FakeError>(.block { $0 != "Swift"}, error: .Invalid)
+        let integerConstraint = BlockConstraint<Int, FakeError> {
+            $0 < 5
+        } errorBuilder: {
+            .FailingCondition
+        }
+        let stringConstraint = BlockConstraint<String, FakeError> {
+            $0 != "Swift"
+        } errorBuilder: {
+            .Invalid
+        }
         
         var sut = TypeConstraint<FakeData, FakeError>()
         sut.set(for: \.integer, constraint: integerConstraint)
