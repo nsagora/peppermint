@@ -40,9 +40,9 @@ class EmailPredicateTests: XCTestCase {
     }
 }
 
-extension BlockPredicateTests {
+extension EmailPredicateTests {
     
-    func testEmailPredicateDynamicLookupExtension() {
+    func testDynamicLookupExtension() {
         let sut: EmailPredicate = .email
         let email = "test@example.com"
         let result = sut.evaluate(with: email)

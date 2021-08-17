@@ -12,6 +12,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Build
-        run: swift build --enable-test-discovery
+        run: swift build
       - name: Tests
-        run: swift test --enable-test-discovery
+        run: swift test
