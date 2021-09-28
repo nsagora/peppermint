@@ -35,3 +35,20 @@ public struct RequiredPredicate<T: Collection>: Predicate {
         return predicate.evaluate(with: input.count)
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate {
+    
+    /**
+     Returns a new `RequiredPredicate` instance.
+     
+     ```swift
+     let predicate: RequiredPredicate<String> = .required
+     let isValid = predicate.evaluate(with: "")
+     ```
+     */
+    public static func required<T>() -> Self where Self == RequiredPredicate<T> {
+        RequiredPredicate<T>()
+    }
+}

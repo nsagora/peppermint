@@ -19,3 +19,13 @@ class RequiredPredicateTests: XCTestCase {
         XCTAssertTrue(result)
     }
 }
+
+extension RequiredPredicateTests {
+    
+    func testDynamicLookupExtension() {
+        let sut: RequiredPredicate<String> = .required()
+        let result = sut.evaluate(with: "")
+        
+        XCTAssertFalse(result)
+    }
+}
