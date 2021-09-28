@@ -25,3 +25,13 @@ class URLPredicateTests: XCTestCase {
         XCTAssertFalse(result)
     }
 }
+
+extension URLPredicateTests {
+    
+    func testDynamicLookupExtension() {
+        let sut: URLPredicate = .url
+        let result = sut.evaluate(with: "http://www.url.com")
+        
+        XCTAssertTrue(result)
+    }
+}

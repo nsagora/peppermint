@@ -31,3 +31,20 @@ public struct URLPredicate: Predicate {
         return URL(string: input) != nil
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate where Self == URLPredicate {
+    
+    /**
+     Returns a new `URLPredicate` instance.
+     
+     ```swift
+     let predicate: URLPredicate = .url
+     let isValid = predicate.evaluate(with: "http://www.swift.org")
+     */
+    public static var url: Self {
+        URLPredicate()
+    }
+    
+}
