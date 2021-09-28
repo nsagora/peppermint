@@ -51,3 +51,13 @@ class CharacterSetPredicateTests: XCTestCase {
         XCTAssertFalse(result)
     }
 }
+
+extension CharacterSetPredicateTests {
+    
+    func testDynamicLookupExtension() {
+        let sut: CharacterSetPredicate = .characterSet(.uppercaseLetters)
+        let result = sut.evaluate(with: "ABCD")
+        
+        XCTAssertTrue(result)
+    }
+}

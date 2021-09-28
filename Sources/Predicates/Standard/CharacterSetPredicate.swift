@@ -71,3 +71,24 @@ public struct CharacterSetPredicate: Predicate {
         
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate where Self == CharacterSetPredicate {
+    
+    /**
+     Returns a new `CharacterSetPredicate` instance.
+     
+     ```swift
+     let predicate: CharacterSetPredicate = .characterSet(.lowercaseLetters)
+     let hasOnlyLowercaseLetters = predicate.evaluate(with: "letters")
+     ```
+     
+     - parameter characterSet: A `CharacterSet` used to evaluate a given `String` input.
+     - parameter mode: A `Mode` that describes how the input's character set should be evaluated against the provider's character set.
+     */
+    public static func characterSet(_ characterSet: CharacterSet, mode: CharacterSetPredicate.Mode = .strict) -> Self {
+        CharacterSetPredicate(characterSet, mode: mode)
+    }
+    
+}
