@@ -4,7 +4,6 @@ import Peppermint
 class LengthPredicateTests: XCTestCase {
 
     func testEvaluateShouldReturnTrueWhenInputIsEmptyForNoMinOrMax() {
-        
         let sut = LengthPredicate<String>()
         let result = sut.evaluate(with: "")
         
@@ -12,7 +11,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputLengthIsSmallerThanMin() {
-        
         let sut = LengthPredicate<String>(min: 5)
         let result = sut.evaluate(with: "1234")
         
@@ -20,7 +18,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputLengthIsLargerThanMin() {
-        
         let sut = LengthPredicate<String>(min: 5)
         let result = sut.evaluate(with: "123456")
         
@@ -28,7 +25,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputLengthIsLargerThanMax() {
-        
         let sut = LengthPredicate<String>(max: 5)
         let result = sut.evaluate(with: "123456")
         
@@ -36,7 +32,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputIsSmallerThanMax() {
-        
         let sut = LengthPredicate<String>(max: 5)
         let result = sut.evaluate(with: "1234")
         
@@ -44,7 +39,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputLengthIsBetweenMinAndMaxRange() {
-        
         let sut = LengthPredicate<String>(min: 5, max: 10)
         let result = sut.evaluate(with: "1234567")
         
@@ -52,7 +46,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputLengthIsAboveMinAndMaxRange() {
-        
         let sut = LengthPredicate<String>(min: 5, max: 10)
         let result = sut.evaluate(with: "12345678910")
         
@@ -60,7 +53,6 @@ class LengthPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputLengthIsBelowMinAndMaxRange() {
-        
         let sut = LengthPredicate<String>(min: 5, max: 10)
         let result = sut.evaluate(with: "1234")
         
