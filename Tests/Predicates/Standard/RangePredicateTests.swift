@@ -2,9 +2,8 @@ import XCTest
 import Peppermint
 
 class RangePredicateTests: XCTestCase {
-
+    
     func testEvaluateShouldReturnTrueWhenNoMinOrMaxAvailable() {
-        
         let sut = RangePredicate<Int>()
         let result = sut.evaluate(with: 10)
         
@@ -12,7 +11,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputIsSmallerThanMin() {
-        
         let sut = RangePredicate(min: 10)
         let result = sut.evaluate(with: 5)
         
@@ -20,7 +18,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputIsLargerThanMin() {
-        
         let sut = RangePredicate(min: 10)
         let result = sut.evaluate(with: 15)
         
@@ -28,7 +25,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputIsLargerThanMax() {
-        
         let sut = RangePredicate(max: 10)
         let result = sut.evaluate(with: 15)
         
@@ -36,7 +32,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputIsSmallerThanMax() {
-        
         let sut = RangePredicate(max: 10)
         let result = sut.evaluate(with: 5)
         
@@ -44,7 +39,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputIsInMinAndMaxRange() {
-        
         let sut = RangePredicate(min: 5, max: 10)
         let result = sut.evaluate(with: 7)
         
@@ -52,7 +46,6 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputIsAboveMinAndMaxRange() {
-        
         let sut = RangePredicate(min: 5, max: 10)
         let result = sut.evaluate(with: 15)
         
@@ -60,14 +53,13 @@ class RangePredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputIsBelowMinAndMaxRange() {
-        
         let sut = RangePredicate(min: 5, max: 10)
         let result = sut.evaluate(with: 0)
         
         XCTAssertFalse(result)
     }
     
-    func testEvaluateShouldReturnFakseWhenInputEqualsTheUpperBoundOfTheOpenRange() {
+    func testEvaluateShouldReturnFakeWhenInputEqualsTheUpperBoundOfTheOpenRange() {
         let sut = RangePredicate<Int>(0..<10)
         let result = sut.evaluate(with: 10)
         
