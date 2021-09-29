@@ -85,14 +85,14 @@ extension RangePredicateTests {
     }
     
     func testDynamicLookupExtensionWithClosedRange() {
-        let sut = RangePredicate<Int>(0...10)
+        let sut: RangePredicate = .range(0...10)
         let result = sut.evaluate(with: 10)
         
         XCTAssertTrue(result)
     }
     
     func testDynamicLookupExtensionWithRange() {
-        let sut = RangePredicate<Int>(0..<10)
+        let sut: RangePredicate = .range(0..<10)
         let result = sut.evaluate(with: 10)
         
         XCTAssertFalse(result)
