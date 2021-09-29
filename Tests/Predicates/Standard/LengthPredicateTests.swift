@@ -81,3 +81,27 @@ class LengthPredicateTests: XCTestCase {
         XCTAssertTrue(result)
     }
 }
+
+extension LengthPredicateTests {
+    
+    func testDynamicLookupExtensionWithMinAndMax() {
+        let sut: LengthPredicate<String> = .length(min: 5, max: 10)
+        let result = sut.evaluate(with: "1234567")
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testDynamicLookupExtensionWithClosedRange() {
+        let sut: LengthPredicate<String> = .length(0...5)
+        let result = sut.evaluate(with: "12345")
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testDynamicLookupExtensionWithRange() {
+        let sut: LengthPredicate<String> = .length(0..<5)
+        let result = sut.evaluate(with: "1234")
+        
+        XCTAssertTrue(result)
+    }
+}
