@@ -85,3 +85,52 @@ extension RangePredicate where T: Strideable, T.Stride: SignedInteger {
         self.init(ClosedRange<T>(range))
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate {
+    
+    /**
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let drinkingAgeLimit: RangePredicate = .range(min: 21)
+     let isAllowed = drinkingAgeLimit.evaluate(with: 18)
+     ```
+     
+     - parameter min: The lower bound of the range.
+     - parameter max: The upper bound of the range.
+     */
+    public static func range<T>(min: T? = nil, max: T? = nil) -> Self  where Self == RangePredicate<T> {
+        RangePredicate(min: min, max: max)
+    }
+    
+    /**
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let predicate: RangePredicate = .range(21...90)
+     let isAllowed = predicate.evaluate(with: 25)
+     ```
+     
+     - parameter range: A `ClosedRange` that defines the lower and upper bounds of the range.
+     */
+    public static func range<T>(_ range: ClosedRange<T>) -> Self where Self == RangePredicate<T> {
+        self.init(range)
+    }
+    
+    /**
+     Returns a new `RangePredicate` instance.
+     
+     ```swift
+     let predicate: RangePredicate = .range(21..<91)
+     let isAllowed = predicate.evaluate(with: 25)
+     ```
+     
+     - parameter range: A `Range` that defines the lower and upper bounds of the range.
+     */
+    public static func range<T: Strideable>(_ range: Range<T>) -> Self where Self == RangePredicate<T>, T.Stride: SignedInteger {
+        self.init(range)
+    }
+}
+

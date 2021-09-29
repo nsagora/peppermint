@@ -81,3 +81,28 @@ class RangePredicateTests: XCTestCase {
         XCTAssertTrue(result)
     }
 }
+
+
+extension RangePredicateTests {
+    
+    func testDynamicLookupExtensionWithMinAndMax() {
+        let sut: RangePredicate = .range(min: 5, max: 10)
+        let result = sut.evaluate(with: 7)
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testDynamicLookupExtensionWithClosedRange() {
+        let sut = RangePredicate<Int>(0...10)
+        let result = sut.evaluate(with: 10)
+        
+        XCTAssertTrue(result)
+    }
+    
+    func testDynamicLookupExtensionWithRange() {
+        let sut = RangePredicate<Int>(0..<10)
+        let result = sut.evaluate(with: 10)
+        
+        XCTAssertFalse(result)
+    }
+}
