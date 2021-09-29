@@ -41,3 +41,22 @@ public struct RegexPredicate: Predicate {
         return false
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Predicate where Self == RegexPredicate {
+    
+    /**
+     Returns a new `RegexPredicate` instance.
+     
+     ```swift
+     let predicate: RegexPredicate = .regex("^\\d+$")
+     let isValid = predicate.evaluate(with: "1234567890")
+     ```
+     
+     - parameter expression: A `String` describing the regular expression.
+     */
+    public static func regex(_ expression: String) -> Self  {
+        RegexPredicate(expression: expression)
+    }
+}

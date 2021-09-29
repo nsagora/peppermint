@@ -55,3 +55,13 @@ class RegexPredicateTests: XCTestCase {
         XCTAssertTrue(result)
     }
 }
+
+extension RegexPredicateTests {
+    
+    func testDynamicLookupExtension() {
+        let sut: RegexPredicate = .regex("^[0-9]$")
+        let result = sut.evaluate(with: "1")
+        
+        XCTAssertTrue(result)
+    }
+}
