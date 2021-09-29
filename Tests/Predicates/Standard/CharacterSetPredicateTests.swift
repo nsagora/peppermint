@@ -2,9 +2,8 @@ import XCTest
 import Peppermint
 
 class CharacterSetPredicateTests: XCTestCase {
-
+    
     func testEvaluateShouldReturnTrueWhenInputHasUppercaseLettersInStrictMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters)
         let result = sut.evaluate(with: "ABCD")
         
@@ -12,7 +11,6 @@ class CharacterSetPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputHasLowercaseLettersInStrictMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters)
         let result = sut.evaluate(with: "abcd")
         
@@ -20,7 +18,6 @@ class CharacterSetPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputHasALowercaseLetterInStrictMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters, mode: .strict)
         let result = sut.evaluate(with: "Abcd")
         
@@ -28,7 +25,6 @@ class CharacterSetPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputHasALowercaseLetterInLooseMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "Abcd")
         
@@ -36,7 +32,6 @@ class CharacterSetPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputHasNoUppercaseLetterInLooseMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "abcd")
         
@@ -44,7 +39,6 @@ class CharacterSetPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnFalseWhenInputIsEmptyLetterInLooseMode() {
-                
         let sut = CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
         let result = sut.evaluate(with: "")
         
