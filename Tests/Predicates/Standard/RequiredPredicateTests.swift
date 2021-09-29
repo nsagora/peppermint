@@ -2,9 +2,8 @@ import XCTest
 import Peppermint
 
 class RequiredPredicateTests: XCTestCase {
-
+    
     func testEvaluateShouldReturnFalseWhenInputIsEmpty() {
-        
         let sut = RequiredPredicate<String>()
         let result = sut.evaluate(with: "")
         
@@ -12,7 +11,6 @@ class RequiredPredicateTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnTrueWhenInputIsNotEmpty() {
-        
         let sut = RequiredPredicate<String>()
         let result = sut.evaluate(with: "input")
         
