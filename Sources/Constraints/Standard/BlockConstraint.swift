@@ -96,3 +96,58 @@ public struct BlockConstraint<T, E: Error>: Constraint {
         return .failure(summary)
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Constraint {
+    
+    /**
+     Returns a new `BlockConstraint` instance.
+     
+     ```swift
+     enum Failure: Error {
+         case notEven
+     }
+     ```
+     
+     ```swift
+     let constraint: BlockConstraint<Int, Failure> = .block {
+         $0 % 2 == 0
+     } errorBuilder: {
+         .notEven
+     }
+     let result = constraint.evaluate(with: 2)
+     ```
+     
+     - parameter evaluationBlock: A closure describing a custom validation condition.
+     - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
+     */
+    public static func block<T, E>(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping () -> E) -> Self where Self == BlockConstraint<T, E> {
+        BlockConstraint(evaluationBlock, errorBuilder: errorBuilder)
+    }
+    
+    /**
+     Create a new `BlockConstraint` instance.
+     
+     ```swift
+     enum Failure: Error {
+         case notEven(Int)
+     }
+     ```
+     
+     ```swift
+     let constraint: BlockConstraint<Int, Failure> = .block {
+         $0 % 2 == 0
+     } errorBuilder: { input in
+         .notEven(input)
+     }
+     let result = constraint.evaluate(with: 2)
+     ```
+     
+     - parameter evaluationBlock: A closure describing a custom validation condition.
+     - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
+     */
+    public static func block<T, E>(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping (T) -> E) -> Self where Self == BlockConstraint<T, E> {
+        BlockConstraint(evaluationBlock, errorBuilder: errorBuilder)
+    }
+}

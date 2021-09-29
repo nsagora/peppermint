@@ -40,3 +40,38 @@ class BlockConstraintTests: XCTestCase {
         }
     }
 }
+
+extension BlockConstraintTests {
+    
+    func testDynamicLookupExtensionWithSimpleErrorBuilder() {
+        let sut: BlockConstraint<String, FakeError> = .block {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        let result = sut.evaluate(with: validInput)
+        
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default: XCTFail()
+        }
+    }
+    
+    func testDynamicLookupExtensionWithParameterisedErrorBuilder() {
+        let sut: BlockConstraint<String, FakeError> = .block {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        let result = sut.evaluate(with: invalidInput)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected(invalidInput)]))
+        default: XCTFail()
+        }
+    }
+}
