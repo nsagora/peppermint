@@ -139,36 +139,6 @@ extension GroupConstraintTests {
 
 extension GroupConstraintTests {
     
-    func testDynamicLookupExtensionWithArrayInit() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
-        
-        let sut: GroupConstraint<String, FakeError> = .group(.any, constraints: [firstConstraint, secondConstraint])
-        let result = sut.evaluate(with: validInput)
-        
-        switch result {
-        case .success:
-            XCTAssertTrue(true)
-        default: XCTFail()
-        }
-    }
-    
-    func testDynamicLookupExtensionWithVariadicInit() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
-        
-        let sut: GroupConstraint<String, FakeError> = .group(.any, constraints: firstConstraint, secondConstraint)
-        let result = sut.evaluate(with: validInput)
-        
-        switch result {
-        case .success:
-            XCTAssertTrue(true)
-        default: XCTFail()
-        }
-    }
-    
     func testDynamicLookupExtensionWithResultBuilder() {
         let sut: GroupConstraint<String, FakeError> = .group {
             PredicateConstraint {
