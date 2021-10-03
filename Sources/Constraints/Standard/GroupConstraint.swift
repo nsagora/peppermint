@@ -78,11 +78,11 @@ extension GroupConstraint {
 
 extension Constraint {
     
-    static func group<C: Constraint>(_ mode: GroupConstraint<C.InputType, C.ErrorType>.Mode = .all, constraints: [C]) -> Self where Self == GroupConstraint<C.InputType, C.ErrorType> {
+    public static func group<C: Constraint>(_ mode: GroupConstraint<C.InputType, C.ErrorType>.Mode = .all, constraints: [C]) -> Self where Self == GroupConstraint<C.InputType, C.ErrorType> {
         GroupConstraint(mode, constraints: constraints)
     }
     
-    static func group<C: Constraint>(_ mode: GroupConstraint<C.InputType, C.ErrorType>.Mode = .all, constraints: C...) -> Self where Self == GroupConstraint<C.InputType, C.ErrorType> {
+    public static func group<C: Constraint>(_ mode: GroupConstraint<C.InputType, C.ErrorType>.Mode = .all, constraints: C...) -> Self where Self == GroupConstraint<C.InputType, C.ErrorType> {
         GroupConstraint(mode, constraints: constraints)
     }
     
