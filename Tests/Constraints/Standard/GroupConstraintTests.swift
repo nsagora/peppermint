@@ -135,6 +135,8 @@ extension GroupConstraintTests {
     }
 }
 
+// MARK: - Dynamic Lookup Extension
+
 extension GroupConstraintTests {
     
     func testDynamicLookupExtensionWithArrayInit() {

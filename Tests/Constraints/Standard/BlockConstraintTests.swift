@@ -7,7 +7,6 @@ class BlockConstraintTests: XCTestCase {
     fileprivate let invalidInput = "invalidInput"
     
     func testEvaluateShouldReturnAValidResultWhenInputIsValid() {
-        
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {
@@ -24,7 +23,6 @@ class BlockConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnAFailureResultWhenInputIsInvalid() {
-        
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {
@@ -40,6 +38,8 @@ class BlockConstraintTests: XCTestCase {
         }
     }
 }
+
+// MARK: - Dynamic Lookup Extension
 
 extension BlockConstraintTests {
     

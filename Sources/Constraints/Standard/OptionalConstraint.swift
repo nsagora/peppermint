@@ -98,6 +98,8 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
     }
 }
 
+// MARK: - Dynamic Lookup Extension
+
 extension Constraint {
     
     /**

@@ -8,7 +8,6 @@ class PredicateConstraintTests: XCTestCase {
     fileprivate let predicate = FakePredicate(expected: "validInput")
 
     func testEvaluateShouldReturnASuccessfulResultWhenTheInputIsValid() {
-        
         let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: validInput)
         
@@ -20,7 +19,6 @@ class PredicateConstraintTests: XCTestCase {
     }
 
     func testEvaluateShouldReturnAFailureResultWhenTheInputIsInvalid() {
-
         let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let result = sut.evaluate(with: invalidInput)
         
@@ -35,9 +33,8 @@ class PredicateConstraintTests: XCTestCase {
 // MARK: - Convenience Initialisers
 
 extension PredicateConstraintTests {
-    
-    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitializedWithErrorBlock() {
 
+    func testEvaluateShouldDynamicallyBuildTheErrorWhenInitializedWithErrorBlock() {
         let sut = PredicateConstraint(predicate) { FakeError.Unexpected($0) }
         let result = sut.evaluate(with: invalidInput)
         
@@ -49,7 +46,6 @@ extension PredicateConstraintTests {
     }
     
     func testEvaluateShouldDynamicallyBuildTheErrorWhenInitialisedWithNoParamErrorBlock() {
-
         let sut = PredicateConstraint(predicate) { FakeError.Invalid }
         let result = sut.evaluate(with: invalidInput)
         
@@ -61,7 +57,6 @@ extension PredicateConstraintTests {
     }
     
     func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndErrorBuilder() {
-        
         let sut = PredicateConstraint {
             self.predicate
         } errorBuilder: {
@@ -78,7 +73,6 @@ extension PredicateConstraintTests {
     }
     
     func testEvaluteShouldDynamicallyBuildThePredicateWhenInitialisedWithPredicateBuilderAndNoParamErrorBuilder() {
-        
         let sut = PredicateConstraint {
             self.predicate
         } errorBuilder: {
@@ -100,7 +94,6 @@ extension PredicateConstraintTests {
 extension PredicateConstraintTests {
     
     func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
-
         let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
@@ -119,7 +112,6 @@ extension PredicateConstraintTests {
     }
     
     func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
-
         let sut = PredicateConstraint(predicate, error: FakeError.Invalid)
         let expect = expectation(description: "Async Evaluation")
         
@@ -137,6 +129,8 @@ extension PredicateConstraintTests {
         }
     }
 }
+
+// MARK: - Dynamic Lookup Extension
 
 extension PredicateConstraintTests {
     

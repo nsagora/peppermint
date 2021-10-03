@@ -9,7 +9,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnASuccessfulResultWhenThereIsOneKeyPathConstraintFulfilled() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 > 5
@@ -30,7 +29,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnASuccessfulResultWhenThereAreTwoKeyPathConstraintsFulfilled() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 > 5
@@ -57,7 +55,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnASuccessfulResultWhenThereAreTwoKeyPathConstraintsWithCnstraintBlockFulfilled() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 > 5
@@ -84,7 +81,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereIsOneKeyPathConstraintFailing() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 < 5
@@ -105,7 +101,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereAreOneFulfilledAndOneFailingKeyPathConstraints() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 > 5
@@ -132,7 +127,6 @@ class TypeConstraintTests: XCTestCase {
     }
     
     func testEvaluateShouldReturnAFailureResultWhenThereAreTwoKeyPathConstraintsFailing() {
-        
         let input = FakeData(integer: 10, string: "Swift")
         let integerConstraint = BlockConstraint<Int, FakeError> {
             $0 < 5
@@ -191,6 +185,8 @@ extension TypeConstraintTests {
         }
     }
 }
+
+// MARK: - Dynamic Lookup Extension
 
 extension TypeConstraintTests {
     
