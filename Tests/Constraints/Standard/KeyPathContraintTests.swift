@@ -11,7 +11,7 @@ class KeyPathConstraintTests: XCTestCase {
     func testDynamicLookupExtension() {
         let data = FakeData(integer: 10, string: "ten")
         let sut: KeyPathConstraint<FakeData, Int, FakeError> = .keyPath(\.integer) {
-            .block {
+            BlockConstraint {
                 $0 == 10
             } errorBuilder: {
                 .Invalid
