@@ -286,3 +286,89 @@ extension TypeConstraint {
         self.constraints = constraintBuilder()
     }
 }
+
+// MARK: - Dynamic Lookup Extension
+
+extension Constraint {
+ 
+    /**
+     Create a new `TypeConstraint` instance.
+     
+     ```swift
+     struct RegistrationData {
+         
+         enum Error: Swift.Error {
+             case username
+             case password(Password)
+             case email
+             case underAge
+         }
+         
+         enum Password {
+             case missingUppercase
+             case missingLowercase
+             case missingDigits
+             case missingSpecialChars
+             case tooShort
+         }
+         
+         var username: String
+         var password: String
+         var email: String
+         var age: Int
+     }
+     ```
+     
+     ```swift
+     var constraint: TypeConstraint<RegistrationData, RegistrationData.Error> = .type {
+         .keyPath(\.username) {
+             .block {
+                 $0.count >= 5
+             } errorBuilder: {
+                 .username
+             }
+         }
+         .keyPath(\.password) {
+             .group(.all) {
+                 .predicate {
+                     .characterSet(.lowercaseLetters, mode: .inclusive)
+                 } errorBuilder: {
+                     .password(.missingLowercase)
+                 }
+                 .predicate{
+                     .characterSet(.uppercaseLetters, mode: .inclusive)
+                 } errorBuilder: {
+                     .password(.missingUppercase)
+                 }
+                 .predicate {
+                     .characterSet(.decimalDigits, mode: .inclusive)
+                 } errorBuilder: {
+                     .password(.missingDigits)
+                 }
+                 .predicate {
+                     .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                 } errorBuilder: {
+                     .password(.missingSpecialChars)
+                 }
+                 .predicate {
+                     .length(min: 8)
+                 }  errorBuilder: {
+                     .password(.tooShort)
+                 }
+             }
+         }
+         .keyPath(\.email) {
+             .predicate(.email, error: .email)
+         }
+         .keyPath(\.age) {
+             .predicate(.range(min: 14), error: .underAge)
+         }
+     }
+
+     let user = RegistrationData(username: "nsagora", password: "p@ssW0rd", email: "hello@nsagora.com", age: 21)
+     constraint.evaluate(with: user)
+     */
+    public static func type<T, E>(@ConstraintBuilder<T, E> constraintBuilder: () -> [AnyConstraint<T, E>]) -> Self where Self == TypeConstraint<T, E> {
+        TypeConstraint(constraintBuilder: constraintBuilder)
+    }
+}
