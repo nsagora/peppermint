@@ -143,7 +143,7 @@ extension Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public static func predicate<P: Predicate, T, E>(_ predicate: P, error: E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
+    public static func predicate<T, E, P: Predicate>(_ predicate: P, error: E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
         PredicateConstraint(predicate, error: error)
     }
     
@@ -160,7 +160,7 @@ extension Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public static func predicate<P: Predicate, T, E>(_ predicate: P, errorBuilder: @escaping (T) -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
+    public static func predicate<T, E, P: Predicate>(_ predicate: P, errorBuilder: @escaping (T) -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
         PredicateConstraint(predicate, errorBuilder: errorBuilder)
     }
     
@@ -177,7 +177,7 @@ extension Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public static func predicate<P: Predicate, T, E>(_ predicate: P, errorBuilder: @escaping () -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
+    public static func predicate<T, E, P: Predicate>(_ predicate: P, errorBuilder: @escaping () -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
         PredicateConstraint(predicate, errorBuilder: errorBuilder)
     }
     
@@ -196,7 +196,7 @@ extension Constraint {
      - parameter predicateBuilder: A  a closure that dynamically  builds a `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public static func predicate<P: Predicate, T, E>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping (T) -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
+    public static func predicate<T, E, P: Predicate>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping (T) -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
         PredicateConstraint(predicateBuilder, errorBuilder: errorBuilder)
     }
     
@@ -215,7 +215,7 @@ extension Constraint {
      - parameter predicateBuilder: A  a closure that dynamically  builds a `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public static func predicate<P: Predicate, T, E>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping () -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
+    public static func predicate<T, E, P: Predicate>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping () -> E) -> Self where Self == PredicateConstraint<T, E>, P.InputType == T {
         PredicateConstraint(predicateBuilder, errorBuilder: errorBuilder)
     }
 }
