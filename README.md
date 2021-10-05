@@ -375,5 +375,5 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
 [badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-0.8-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-95%25-brightgreen.svg?style=flat
