@@ -16,7 +16,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (88% documented)</p>
+        <p><a href="index.html"> Docs</a> (90% documented)</p>
         <p class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -125,7 +125,7 @@
         <section>
           <section class="section">
             
-            <h1 id='peppermint-a-href-https-github-com-nsagora-peppermint-img-src-https-img-shields-io-badge-version-0-8-blue-svg-style-flat-alt-badge-version-a' class='heading'>Peppermint <a href="https://github.com/nsagora/peppermint"><img src="https://img.shields.io/badge/version-0.8-blue.svg?style=flat" alt="badge-version"></a></h1>
+            <h1 id='peppermint-a-href-https-github-com-nsagora-peppermint-img-src-https-img-shields-io-badge-version-1-0-0-blue-svg-style-flat-alt-badge-version-a' class='heading'>Peppermint <a href="https://github.com/nsagora/peppermint"><img src="https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat" alt="badge-version"></a></h1>
 
 <p><a href="https://github.com/nsagora/peppermint"><img src="https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg" alt="badge-build-macos"></a>
 <a href="https://github.com/nsagora/peppermint"><img src="https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg" alt="badge-build-linux"></a>
@@ -165,27 +165,27 @@
     <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">password</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">GroupConstraint</span><span class="p">(</span><span class="o">.</span><span class="n">all</span><span class="p">)</span> <span class="p">{</span>
             <span class="kt">PredicateConstraint</span> <span class="p">{</span>
-                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">characterSet</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
             <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingLowercase</span><span class="p">)</span>
             <span class="p">}</span>
             <span class="kt">PredicateConstraint</span><span class="p">{</span>
-                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">uppercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">characterSet</span><span class="p">(</span><span class="o">.</span><span class="n">uppercaseLetters</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
             <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingUppercase</span><span class="p">)</span>
             <span class="p">}</span>
             <span class="kt">PredicateConstraint</span> <span class="p">{</span>
-                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="o">.</span><span class="n">decimalDigits</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">characterSet</span><span class="p">(</span><span class="o">.</span><span class="n">decimalDigits</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
             <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingDigits</span><span class="p">)</span>
             <span class="p">}</span>
             <span class="kt">PredicateConstraint</span> <span class="p">{</span>
-                <span class="kt">CharacterSetPredicate</span><span class="p">(</span><span class="kt">CharacterSet</span><span class="p">(</span><span class="nv">charactersIn</span><span class="p">:</span> <span class="s">"!?@#$%^&amp;*()|</span><span class="se">\\</span><span class="s">/&lt;&gt;,.~`_+-="</span><span class="p">),</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">characterSet</span><span class="p">(</span><span class="kt">CharacterSet</span><span class="p">(</span><span class="nv">charactersIn</span><span class="p">:</span> <span class="s">"!?@#$%^&amp;*()|</span><span class="se">\\</span><span class="s">/&lt;&gt;,.~`_+-="</span><span class="p">),</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">inclusive</span><span class="p">)</span>
             <span class="p">}</span> <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">missingSpecialChars</span><span class="p">)</span>
             <span class="p">}</span>
             <span class="kt">PredicateConstraint</span> <span class="p">{</span>
-                <span class="kt">LengthPredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">length</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">8</span><span class="p">)</span>
             <span class="p">}</span>  <span class="nv">errorBuilder</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">tooShort</span><span class="p">)</span>
             <span class="p">}</span>
@@ -197,19 +197,19 @@
         <span class="o">.</span><span class="nf">password</span><span class="p">(</span><span class="o">.</span><span class="n">confirmationMismatch</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">email</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">EmailPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">email</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">RangePredicate</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">14</span><span class="p">),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">underAge</span><span class="p">)</span>
+        <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="o">.</span><span class="nf">range</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">14</span><span class="p">),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">underAge</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="kt">KeyPathConstraint</span><span class="p">(\</span><span class="o">.</span><span class="n">website</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">OptionalConstraint</span> <span class="p">{</span>
-            <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="kt">URLPredicate</span><span class="p">(),</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">website</span><span class="p">)</span>
+            <span class="kt">PredicateConstraint</span><span class="p">(</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">.</span><span class="n">website</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">constarint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">account</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">constraint</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">account</span><span class="p">)</span>
 <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
 <span class="k">case</span> <span class="o">.</span><span class="nv">success</span><span class="p">:</span>
     <span class="nf">handleSuccess</span><span class="p">()</span>
@@ -333,7 +333,7 @@ predicate.evaluate(with: 21) // returns false
 <summary>LengthPredicate</summary>
 
 &rdquo;`swift
-let predicate = let range = LengthPredicate<String>(min: 5)
+let predicate = LengthPredicate<String>(min: 5)
 predicate.evaluate(with: &ldquo;abcde&rdquo;)   // returns true
 predicate.evaluate(with: &ldquo;abcd&rdquo;)    // returns false
 &ldquo;`
@@ -376,21 +376,20 @@ predicate.evaluate(with: &ldquo;alphabet&rdquo;) // returns true
 <summary>PredicateConstraint</summary>
 
 &rdquo;`swift
-let predicate = BlockPredicate<String> { $0 == &ldquo;Mr. Goodbytes&rdquo; }
-let constraint = PredicateConstraint<String, MyError>(predicate: predicate, error: .magicWord)
+let constraint = PredicateConstraint<String, MyError>(.email, error: .invalid)
 
-let result = constraint.evaluate(with: &ldquo;please&rdquo;)
+let result = constraint.evaluate(with: &ldquo;hello@nsagora.com&rdquo;)
 switch result {
 case .valid:
-    print(&ldquo;access granted&hellip;&rdquo;)
+    print(&ldquo;Hi there 👋!&rdquo;)
 case .invalid(let summary):
-    print(&ldquo;Ah Ah Ah! You didn&rsquo;t say the magic word!&rdquo;)
-}  // prints &ldquo;Ah Ah Ah! You didn&rsquo;t say the magic word!&rdquo;
+    print(&ldquo;Oh, I was expecting a valid email address!&rdquo;)
+}  // prints &ldquo;Hi there 👋!&rdquo;
 &ldquo;`
 
 &rdquo;`swift
 enum MyError: Error {
-    case magicWord
+    case invalid
 }
 &ldquo;`
 
@@ -409,8 +408,7 @@ let constraint = BlockConstraint<Int, MyError> {
     .magicNumber
 }
 
-let anyConstraint = AnyConstraint(constraint)
-anyConstraint.evaluate(with: 3)
+constraint.evaluate(with: 3)
 &ldquo;`
 
 &rdquo;`swift
@@ -441,27 +439,27 @@ An example of a  registration form, whereby users are prompted to enter a strong
 ```swift
 var passwordConstraint = GroupConstraint<String, Form.Password>(.all) {
     PredicateConstraint {
-        CharacterSetPredicate(.lowercaseLetters, mode: .loose)
+        .characterSet(.lowercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingLowercase
     }
     PredicateConstraint{
-        CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+        .characterSet(.uppercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingUppercase
     }
     PredicateConstraint {
-        CharacterSetPredicate(.decimalDigits, mode: .loose)
+        .characterSet(.decimalDigits, mode: .loose)
     } errorBuilder: {
         .missingDigits
     }
     PredicateConstraint {
-        CharacterSetPredicate(CharacterSet(charactersIn: &rdquo;!?@#$%^&*()|\/<>,.~`_+-=&ldquo;), mode: .loose)
+        .characterSet(CharacterSet(charactersIn: &rdquo;!?@#$%^&*()|\/<>,.~`_+-=&ldquo;), mode: .loose)
     } errorBuilder: {
         .missingSpecialChars
     }
     PredicateConstraint {
-        LengthPredicate(min: 8)
+        .length(min: 8)
     }  errorBuilder: {
         .minLength(8)
     }
@@ -495,7 +493,7 @@ From above, we see that once we&rsquo;ve constructed the `passwordConstraint`, w
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-19)</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-10-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

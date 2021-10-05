@@ -17,7 +17,7 @@
     <a title="Predicate Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (88% documented)</p>
+        <p><a href="../index.html"> Docs</a> (90% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -360,10 +360,693 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Dynamic%20Lookup%20Extension"></a>
+                <a name="//apple_ref/swift/Section/Dynamic Lookup Extension" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Dynamic%20Lookup%20Extension"></a>
+                  <h3 class="section-name"><p>Dynamic Lookup Extension</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE5block15evaluationBlockAA0eB0Vyqd__GSbqd__c_tAHRszlFZ"></a>
+                    <a name="//apple_ref/swift/Method/block(evaluationBlock:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE5block15evaluationBlockAA0eB0Vyqd__GSbqd__c_tAHRszlFZ">block(evaluationBlock:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/BlockPredicate.html">BlockPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">BlockPredicate</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">.</span><span class="n">block</span> <span class="p">{</span>
+   <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">isEven</span> <span class="o">=</span> <span class="n">even</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">block</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">evaluationBlock</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/BlockPredicate.html">BlockPredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>evaluationBlock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure describing a custom validation condition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input against which to evaluate the receiver.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE6length3min3maxAA06LengthB0Vyqd__GSiSg_AJtAIRszSlRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/length(min:max:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE6length3min3maxAA06LengthB0Vyqd__GSiSg_AJtAIRszSlRd__lFZ">length(min:<wbr>max:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/LengthPredicate.html">LengthPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">LengthPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">.</span><span class="nf">length</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span> <span class="mi">64</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">length</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/LengthPredicate.html">LengthPredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>min</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The lower bound of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>max</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The upper bound of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE6lengthyAA06LengthB0Vyqd__GSNySiGAGRszSlRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/length(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE6lengthyAA06LengthB0Vyqd__GSNySiGAGRszSlRd__lFZ">length(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns a new <code><a href="../Structs/LengthPredicate.html">LengthPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">LengthPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">.</span><span class="nf">length</span><span class="p">(</span><span class="mi">8</span><span class="o">...</span><span class="mi">64</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">length</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/LengthPredicate.html">LengthPredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>ClosedRange</code> that defines the lower and upper bounds of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE6lengthyAA06LengthB0Vyqd__GSnySiGAGRszSlRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/length(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE6lengthyAA06LengthB0Vyqd__GSnySiGAGRszSlRd__lFZ">length(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns a new <code><a href="../Structs/RangePredicate.html">RangePredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">LengthPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">.</span><span class="nf">length</span><span class="p">(</span><span class="mi">8</span><span class="o">..&lt;</span><span class="mi">65</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"p@ssW0rd"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">length</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/LengthPredicate.html">LengthPredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Range</code> that defines the lower and upper bounds of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE5range3min3maxAA05RangeB0Vyqd__Gqd__Sg_AJtAIRszSLRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/range(min:max:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE5range3min3maxAA05RangeB0Vyqd__Gqd__Sg_AJtAIRszSLRd__lFZ">range(min:<wbr>max:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/RangePredicate.html">RangePredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">drinkingAgeLimit</span><span class="p">:</span> <span class="kt">RangePredicate</span> <span class="o">=</span> <span class="o">.</span><span class="nf">range</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">21</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">drinkingAgeLimit</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">range</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="kt">T</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span> <span class="kt">T</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/RangePredicate.html">RangePredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>min</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The lower bound of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>max</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The upper bound of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE5rangeyAA05RangeB0Vyqd__GSNyqd__GAGRszSLRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/range(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE5rangeyAA05RangeB0Vyqd__GSNyqd__GAGRszSLRd__lFZ">range(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/RangePredicate.html">RangePredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">RangePredicate</span> <span class="o">=</span> <span class="o">.</span><span class="nf">range</span><span class="p">(</span><span class="mi">21</span><span class="o">...</span><span class="mi">90</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">range</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/RangePredicate.html">RangePredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>ClosedRange</code> that defines the lower and upper bounds of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE5rangeyAA05RangeB0Vyqd__GSnyqd__GAGRszSxRd__SZ6StrideRpd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/range(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE5rangeyAA05RangeB0Vyqd__GSnyqd__GAGRszSxRd__SZ6StrideRpd__lFZ">range(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/RangePredicate.html">RangePredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">RangePredicate</span> <span class="o">=</span> <span class="o">.</span><span class="nf">range</span><span class="p">(</span><span class="mi">21</span><span class="o">..&lt;</span><span class="mi">91</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isAllowed</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">range</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/RangePredicate.html">RangePredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Strideable</span><span class="p">,</span> <span class="kt">T</span><span class="o">.</span><span class="kt">Stride</span> <span class="p">:</span> <span class="kt">SignedInteger</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Range</code> that defines the lower and upper bounds of the range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePAAE8requiredAA08RequiredB0Vyqd__GyAGRszSlRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/required()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePAAE8requiredAA08RequiredB0Vyqd__GyAGRszSlRd__lFZ">required()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/RequiredPredicate.html">RequiredPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">RequiredPredicate</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">.</span><span class="kd">required</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kd">required</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Structs/RequiredPredicate.html">RequiredPredicate</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60CharacterSetPredicate%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `CharacterSetPredicate`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60CharacterSetPredicate%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code> == <code><a href="../Structs/CharacterSetPredicate.html">CharacterSetPredicate</a></code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePA2A012CharacterSetB0VRszrlE09characterD0_4modeAE10Foundation0cD0V_AE4ModeOtFZ"></a>
+                    <a name="//apple_ref/swift/Method/characterSet(_:mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePA2A012CharacterSetB0VRszrlE09characterD0_4modeAE10Foundation0cD0V_AE4ModeOtFZ">characterSet(_:<wbr>mode:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/CharacterSetPredicate.html">CharacterSetPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">CharacterSetPredicate</span> <span class="o">=</span> <span class="o">.</span><span class="nf">characterSet</span><span class="p">(</span><span class="o">.</span><span class="n">lowercaseLetters</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">hasOnlyLowercaseLetters</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"letters"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">characterSet</span><span class="p">(</span><span class="n">_</span> <span class="nv">characterSet</span><span class="p">:</span> <span class="kt">CharacterSet</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Structs/CharacterSetPredicate.html">CharacterSetPredicate</a></span><span class="o">.</span><span class="kt">Mode</span> <span class="o">=</span> <span class="o">.</span><span class="n">strict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>characterSet</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>CharacterSet</code> used to evaluate a given <code>String</code> input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Mode</code> that describes how the input&rsquo;s character set should be evaluated against the provider&rsquo;s character set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60EmailPredicate%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `EmailPredicate`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60EmailPredicate%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code> == <code><a href="../Structs/EmailPredicate.html">EmailPredicate</a></code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePA2A05EmailB0VRszrlE5emailAEvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/email" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePA2A05EmailB0VRszrlE5emailAEvpZ">email</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/EmailPredicate.html">EmailPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">EmailPredicate</span> <span class="o">=</span> <span class="o">.</span><span class="n">email</span>
+<span class="k">let</span> <span class="nv">isEmail</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"hello@nsagora.com"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">email</span><span class="p">:</span> <span class="k">Self</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60RegexPredicate%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `RegexPredicate`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60RegexPredicate%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code> == <code><a href="../Structs/RegexPredicate.html">RegexPredicate</a></code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePA2A05RegexB0VRszrlE5regexyAESSFZ"></a>
+                    <a name="//apple_ref/swift/Method/regex(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePA2A05RegexB0VRszrlE5regexyAESSFZ">regex(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/RegexPredicate.html">RegexPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">RegexPredicate</span> <span class="o">=</span> <span class="o">.</span><span class="nf">regex</span><span class="p">(</span><span class="s">"^</span><span class="se">\\</span><span class="s">d+$"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"1234567890"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">regex</span><span class="p">(</span><span class="n">_</span> <span class="nv">expression</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>expression</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>String</code> describing the regular expression.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60URLPredicate%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `URLPredicate`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60URLPredicate%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code> == <code><a href="../Structs/URLPredicate.html">URLPredicate</a></code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint9PredicatePA2A12URLPredicateVRszrlE3urlAEvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/url" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint9PredicatePA2A12URLPredicateVRszrlE3urlAEvpZ">url</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new <code><a href="../Structs/URLPredicate.html">URLPredicate</a></code> instance.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">URLPredicate</span> <span class="o">=</span> <span class="o">.</span><span class="n">url</span>
+<span class="k">let</span> <span class="nv">isValid</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="s">"http://www.swift.org"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">url</span><span class="p">:</span> <span class="k">Self</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-06-19)</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-10-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
