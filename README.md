@@ -33,27 +33,27 @@ let constraint = TypeConstraint<Account, Account.Error> {
     KeyPathConstraint(\.password) {
         GroupConstraint(.all) {
             PredicateConstraint {
-                CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+                .characterSet(.lowercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingLowercase)
             }
             PredicateConstraint{
-                CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+                .characterSet(.uppercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingUppercase)
             }
             PredicateConstraint {
-                CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+                .characterSet(.decimalDigits, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingDigits)
             }
             PredicateConstraint {
-                CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
             } errorBuilder: {
                 .password(.missingSpecialChars)
             }
             PredicateConstraint {
-                LengthPredicate(min: 8)
+                .length(min: 8)
             }  errorBuilder: {
                 .password(.tooShort)
             }
@@ -65,19 +65,19 @@ let constraint = TypeConstraint<Account, Account.Error> {
         .password(.confirmationMismatch)
     }
     KeyPathConstraint(\.email) {
-        PredicateConstraint(EmailPredicate(), error: .email)
+        PredicateConstraint(.email, error: .email)
     }
     KeyPathConstraint(\.age) {
-        PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+        PredicateConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
         OptionalConstraint {
-            PredicateConstraint(URLPredicate(), error: .website)
+            PredicateConstraint(.url, error: .website)
         }
     }
 }
 
-let result = constarint.evaluate(with: account)
+let result = constraint.evaluate(with: account)
 switch result {
 case .success:
     handleSuccess()
@@ -202,7 +202,7 @@ predicate.evaluate(with: 21) // returns false
 <summary>LengthPredicate</summary>
 
 ```swift
-let predicate = let range = LengthPredicate<String>(min: 5)
+let predicate = LengthPredicate<String>(min: 5)
 predicate.evaluate(with: "abcde")   // returns true
 predicate.evaluate(with: "abcd")    // returns false
 ```
@@ -247,21 +247,20 @@ A `PredicateConstraint` represents a data type that links a `Predicate` to an `E
 <summary>PredicateConstraint</summary>
 
 ```swift
-let predicate = BlockPredicate<String> { $0 == "Mr. Goodbytes" }
-let constraint = PredicateConstraint<String, MyError>(predicate: predicate, error: .magicWord)
+let constraint = PredicateConstraint<String, MyError>(.email, error: .invalid)
 
-let result = constraint.evaluate(with: "please")
+let result = constraint.evaluate(with: "hello@nsagora.com")
 switch result {
 case .valid:
-    print("access granted...")
+    print("Hi there 👋!")
 case .invalid(let summary):
-    print("Ah Ah Ah! You didn't say the magic word!")
-}  // prints "Ah Ah Ah! You didn't say the magic word!"
+    print("Oh, I was expecting a valid email address!")
+}  // prints "Hi there 👋!"
 ```
 
 ```swift
 enum MyError: Error {
-    case magicWord
+    case invalid
 }
 ```
 
@@ -281,8 +280,7 @@ let constraint = BlockConstraint<Int, MyError> {
     .magicNumber
 }
 
-let anyConstraint = AnyConstraint(constraint)
-anyConstraint.evaluate(with: 3)
+constraint.evaluate(with: 3)
 ```
 
 ```swift
@@ -312,27 +310,27 @@ An example of a  registration form, whereby users are prompted to enter a strong
 ```swift
 var passwordConstraint = GroupConstraint<String, Form.Password>(.all) {
     PredicateConstraint {
-        CharacterSetPredicate(.lowercaseLetters, mode: .loose)
+        .characterSet(.lowercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingLowercase
     }
     PredicateConstraint{
-        CharacterSetPredicate(.uppercaseLetters, mode: .loose)
+        .characterSet(.uppercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingUppercase
     }
     PredicateConstraint {
-        CharacterSetPredicate(.decimalDigits, mode: .loose)
+        .characterSet(.decimalDigits, mode: .loose)
     } errorBuilder: {
         .missingDigits
     }
     PredicateConstraint {
-        CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
+        .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
     } errorBuilder: {
         .missingSpecialChars
     }
     PredicateConstraint {
-        LengthPredicate(min: 8)
+        .length(min: 8)
     }  errorBuilder: {
         .minLength(8)
     }
