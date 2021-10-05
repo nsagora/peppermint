@@ -11,28 +11,28 @@ import Peppermint
 
 var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraints:
     PredicateConstraint {
-        CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+        .characterSet(.lowercaseLetters, mode: .inclusive)
     } errorBuilder: {
         .missingLowercase
     },
     PredicateConstraint{
-        CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+        .characterSet(.uppercaseLetters, mode: .inclusive)
     } errorBuilder: {
         .missingUppercase
     },
     PredicateConstraint {
-        CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+        .characterSet(.decimalDigits, mode: .inclusive)
     } errorBuilder: {
         .missingDigits
     },
     PredicateConstraint {
-        CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+        .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
     } errorBuilder: {
         .missingSpecialChars
     },
     PredicateConstraint {
-        LengthPredicate(min: 8)
-    }  errorBuilder: {
+        .length(min: 8)
+    } errorBuilder: {
         .minLength(8)
     }
 )

@@ -49,27 +49,27 @@ constraint.set(for: \.username) {
 constraint.set(for: \.password) {
     GroupConstraint(.all, constraints:
         PredicateConstraint {
-            CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+            .characterSet(.lowercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingLowercase)
         },
         PredicateConstraint{
-            CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+            .characterSet(.uppercaseLetters, mode: .inclusive)
         } errorBuilder: {
             .password(.missingUppercase)
         },
         PredicateConstraint {
-            CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+            .characterSet(.decimalDigits, mode: .inclusive)
         } errorBuilder: {
             .password(.missingDigits)
         },
         PredicateConstraint {
-            CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+            .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
         } errorBuilder: {
             .password(.missingSpecialChars)
         },
         PredicateConstraint {
-            LengthPredicate(min: 8)
+            .length(min: 8)
         }  errorBuilder: {
             .password(.tooShort)
         }
@@ -77,16 +77,16 @@ constraint.set(for: \.password) {
 }
 
 constraint.set(for: \.email) {
-    PredicateConstraint(EmailPredicate(), error: .email)
+    PredicateConstraint(.email, error: .email)
 }
 
 constraint.set(for: \.age) {
-    PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+    PredicateConstraint(.range(min: 14), error: .underAge)
 }
 
 constraint.set(for: \.website) {
     OptionalConstraint {
-        PredicateConstraint(URLPredicate(), error: .website)
+        PredicateConstraint(.url, error: .website)
     }
 }
 
@@ -123,27 +123,27 @@ let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error>
     KeyPathConstraint(\.password) {
         GroupConstraint(.all) {
             PredicateConstraint {
-                CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+                .characterSet(.lowercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingLowercase)
             }
             PredicateConstraint{
-                CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+                .characterSet(.uppercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingUppercase)
             }
             PredicateConstraint {
-                CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+                .characterSet(.decimalDigits, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingDigits)
             }
             PredicateConstraint {
-                CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
             } errorBuilder: {
                 .password(.missingSpecialChars)
             }
             PredicateConstraint {
-                LengthPredicate(min: 8)
+                .length(min: 8)
             }  errorBuilder: {
                 .password(.tooShort)
             }
@@ -155,15 +155,26 @@ let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error>
         .password(.confirmationMismatch)
     }
     KeyPathConstraint(\.email) {
-        PredicateConstraint(EmailPredicate(), error: .email)
+        PredicateConstraint(.email, error: .email)
     }
     KeyPathConstraint(\.age) {
-        PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+        PredicateConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
         OptionalConstraint {
-            PredicateConstraint(URLPredicate(), error: .website)
+            PredicateConstraint(.url, error: .website)
         }
+    }
+}
+
+let newResult = constraintBuilder.evaluate(with: user)
+
+switch newResult {
+case .success:
+    print("Account successfully created 🥳")
+case .failure(let summary):
+    summary.errors.forEach {
+        print($0)
     }
 }
 

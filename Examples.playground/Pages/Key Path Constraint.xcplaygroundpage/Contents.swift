@@ -25,7 +25,13 @@ let constraint = KeyPathConstraint<LoginData, String, LoginData.Error>(\.email) 
 }
 
 let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")
-constraint.evaluate(with: data)
+let result = constraint.evaluate(with: data)
 
+switch result {
+case .success:
+    print("You got 📬!")
+case .failure(let summary):
+    print(summary.errors.map({$0.localizedDescription}))
+}
 
 //: [Next](@next)
