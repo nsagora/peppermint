@@ -13,7 +13,7 @@ import Foundation
  ```swift
  let email: String? = "hello@nsagora.com"
  let constraint = OptionalConstraint<String, Failure>(required: .required) {
-     PredicateConstraint(EmailPredicate(), error: .invalidEmail)
+     PredicateConstraint(.email, error: .invalidEmail)
  }
 
  let result = constraint.evaluate(with: email)
@@ -39,7 +39,7 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
      
      ```swift
      let email: String? = "hello@nsagora.com"
-     let emailConstraint = PredicateConstraint(EmailPredicate(), error: .invalidEmail)
+     let emailConstraint = PredicateConstraint(.email, error: .invalidEmail)
      let constraint = OptionalConstraint<String, Failure>(required: .required, constraint: emailConstraint)
 
      let result = constraint.evaluate(with: email)
@@ -66,7 +66,7 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
      ```swift
      let email: String? = "hello@nsagora.com"
      let constraint = OptionalConstraint<String, Failure>(required: .required) {
-         PredicateConstraint(EmailPredicate(), error: .invalidEmail)
+         PredicateConstraint(.email, error: .invalidEmail)
      }
 
      let result = constraint.evaluate(with: email)

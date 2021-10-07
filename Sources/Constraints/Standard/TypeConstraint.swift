@@ -40,37 +40,37 @@ import Foundation
      KeyPathConstraint(\.password) {
          GroupConstraint(.all) {
              PredicateConstraint {
-                 CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+                 .characterSet(.lowercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingLowercase)
              }
              PredicateConstraint{
-                 CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+                .characterSet(.uppercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingUppercase)
              }
              PredicateConstraint {
-                 CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+                .characterSet(.decimalDigits, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingDigits)
              }
              PredicateConstraint {
-                 CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
              } errorBuilder: {
                  .password(.missingSpecialChars)
              }
              PredicateConstraint {
-                 LengthPredicate(min: 8)
+                 .length(min: 8)
              }  errorBuilder: {
                  .password(.tooShort)
              }
          }
      }
      KeyPathConstraint(\.email) {
-         PredicateConstraint(EmailPredicate(), error: .email)
+         PredicateConstraint(.email, error: .email)
      }
      KeyPathConstraint(\.age) {
-         PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+         PredicateConstraint(.range(min: 14), error: .underAge)
      }
  }
 
@@ -127,27 +127,27 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      constraint.set(for: \.password) {
          GroupConstraint(.all, constraints:
              PredicateConstraint {
-                 CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+                 .characterSet(.lowercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingLowercase)
              },
              PredicateConstraint{
-                 CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+                 .characterSet(.uppercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingUppercase)
              },
              PredicateConstraint {
-                 CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+                 .characterSet(.decimalDigits, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingDigits)
              },
              PredicateConstraint {
-                 CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                 .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
              } errorBuilder: {
                  .password(.missingSpecialChars)
              },
              PredicateConstraint {
-                 LengthPredicate(min: 8)
+                 .length(min: 8)
              }  errorBuilder: {
                  .password(.tooShort)
              }
@@ -155,11 +155,11 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      }
 
      constraint.set(for: \.email) {
-         PredicateConstraint(EmailPredicate(), error: .email)
+         PredicateConstraint(.email, error: .email)
      }
 
      constraint.set(for: \.age) {
-         PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+         PredicateConstraint(.range(min: 14), error: .underAge)
      }
 
      let user = RegistrationData(username: "nsagora", password: "p@ssW0rd", email: "hello@nsagora.com", age: 21)
@@ -245,37 +245,37 @@ extension TypeConstraint {
          KeyPathConstraint(\.password) {
              GroupConstraint(.all) {
                  PredicateConstraint {
-                     CharacterSetPredicate(.lowercaseLetters, mode: .inclusive)
+                     .characterSet(.lowercaseLetters, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingLowercase)
                  }
                  PredicateConstraint{
-                     CharacterSetPredicate(.uppercaseLetters, mode: .inclusive)
+                    .characterSet(.uppercaseLetters, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingUppercase)
                  }
                  PredicateConstraint {
-                     CharacterSetPredicate(.decimalDigits, mode: .inclusive)
+                    .characterSet(.decimalDigits, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingDigits)
                  }
                  PredicateConstraint {
-                     CharacterSetPredicate(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                    .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingSpecialChars)
                  }
                  PredicateConstraint {
-                     LengthPredicate(min: 8)
+                     .length(min: 8)
                  }  errorBuilder: {
                      .password(.tooShort)
                  }
              }
          }
          KeyPathConstraint(\.email) {
-             PredicateConstraint(EmailPredicate(), error: .email)
+             PredicateConstraint(.email, error: .email)
          }
          KeyPathConstraint(\.age) {
-             PredicateConstraint(RangePredicate(min: 14), error: .underAge)
+             PredicateConstraint(.range(min: 14), error: .underAge)
          }
      }
 

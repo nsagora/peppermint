@@ -18,7 +18,7 @@ import Foundation
  
  ```swift
  let constraint = KeyPathConstraint<LoginData, String, LoginData.Error>(\.email) {
-     PredicateConstraint(EmailPredicate(), error: .email)
+     PredicateConstraint(.email, error: .email)
  }
 
  let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")
@@ -52,7 +52,7 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
      ```swift
      let constraint = KeyPathConstraint<LoginData, String, LoginData.Error>(
          \.email,
-         constraint: PredicateConstraint(EmailPredicate(), error: .email)
+         constraint: PredicateConstraint(.email, error: .email)
      )
 
      let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")
@@ -85,7 +85,7 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
      
      ```swift
      let constraint = KeyPathConstraint<LoginData, String, LoginData.Error>(\.email) {
-         PredicateConstraint(EmailPredicate(), error: .email)
+         PredicateConstraint(.email, error: .email)
      }
 
      let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")

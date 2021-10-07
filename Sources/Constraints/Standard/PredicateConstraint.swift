@@ -4,7 +4,7 @@ import Foundation
  A `Constraint` that links a `Predicate` to an `Error` that describes why the predicate evaluation has failed.
  
  ```swift
- let constraint = PredicateConstraint(EmailPredicate(), error: EmailFailure.invalid)
+ let constraint = PredicateConstraint(.email, error: EmailFailure.invalid)
  let result = constraint.evaluate(with: "hello@nsagora.com)
  ```
  */
@@ -20,7 +20,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      Returns a new `PredicateConstraint` instance.
      
      ```swift
-     let constraint = PredicateConstraint(EmailPredicate(), error: EmailFailure.invalid)
+     let constraint = PredicateConstraint(.email, error: EmailFailure.invalid)
      let result = constraint.evaluate(with: "hello@nsagora.com)
      ```
      
@@ -36,7 +36,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      Returns a new `PredicateConstraint` instance.
      
      ```swift
-     let constraint = PredicateConstraint(EmailPredicate()) {
+     let constraint = PredicateConstraint(.email) {
         EmailFailure.invalidFormat($0)
      }
      let result = constraint.evaluate(with: "hello@nsagora.com)
@@ -54,7 +54,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      Returns a new `PredicateConstraint` instance.
      
      ```swift
-     let constraint = PredicateConstraint(EmailPredicate()) {
+     let constraint = PredicateConstraint(.email) {
         EmailFailure.invalid
      }
      let result = constraint.evaluate(with: "hello@nsagora.com)
@@ -73,7 +73,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      
      ```swift
      let constraint = PredicateConstraint {
-        EmailPredicate()
+        .email
      } errorBuilder: {
         EmailFailure.invalidFormat($0)
      }
@@ -93,7 +93,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      
      ```swift
      let constraint = PredicateConstraint {
-        EmailPredicate()
+        .email
      } errorBuilder: {
         EmailFailure.invalid
      }
