@@ -32,7 +32,7 @@ class ConstraintBuilderTests: XCTestCase {
             }
             else {
                 PredicateConstraint(.required(), error: .Ordered(7))
-                PredicateConstraint(.required()), error: .Ordered(8))
+                PredicateConstraint(.required(), error: .Ordered(8))
             }
             
             for _ in 1...3 {
