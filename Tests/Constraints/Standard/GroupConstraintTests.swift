@@ -134,31 +134,3 @@ extension GroupConstraintTests {
         }
     }
 }
-
-// MARK: - Dynamic Lookup Extension
-
-extension GroupConstraintTests {
-    
-    func testDynamicLookupExtensionWithResultBuilder() {
-        let sut: GroupConstraint<String, FakeError> = .group {
-            PredicateConstraint {
-                RequiredPredicate()
-            } errorBuilder: {
-                .Invalid
-            }
-            BlockConstraint {
-                $0 == self.validInput
-            } errorBuilder: {
-                .Unexpected($0)
-            }
-        }
-        
-        let result = sut.evaluate(with: validInput)
-        
-        switch result {
-        case .success:
-            XCTAssertTrue(true)
-        default: XCTFail()
-        }
-    }
-}

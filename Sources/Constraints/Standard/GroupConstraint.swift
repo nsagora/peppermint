@@ -73,17 +73,3 @@ extension GroupConstraint {
         self.init(mode, constraints: constraintBuilder())
     }
 }
-
-// MARK: - Dynamic Lookup Extension
-
-extension Constraint {
-    
-    /**
-     Returns a new `GroupConstraint` instance populated with a predefined list of `Constraints`.
-     
-     - parameter constraints: `[Constraint]`
-     */
-    public static func group<T, E>(_ mode: GroupConstraint<T, E>.Mode = .all, @ConstraintBuilder<T, E> constraintBuilder: () -> [AnyConstraint<T, E>]) -> Self where Self == GroupConstraint<T, E> {
-        GroupConstraint(mode, constraintBuilder: constraintBuilder)
-    }
-}

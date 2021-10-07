@@ -78,26 +78,3 @@ class OptionalConstraintTests: XCTestCase {
         }
     }
 }
-
-// MARK: - Dynamic Lookup Extension
-
-extension OptionalConstraintTests {
-    
-    func testDynamicLookupExtension() {
-        let sut: OptionalConstraint<String, FakeError> = .optional {
-            BlockConstraint {
-                $0 == "validInput"
-            } errorBuilder: {
-                .Invalid
-            }
-        }
-        
-        let result = sut.evaluate(with: "validInput")
-        
-        switch result {
-        case .success:
-            XCTAssertTrue(true)
-        default: XCTFail()
-        }
-    }
-}

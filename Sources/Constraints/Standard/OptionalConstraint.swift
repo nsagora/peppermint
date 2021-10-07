@@ -97,33 +97,3 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
         return .success(())
     }
 }
-
-// MARK: - Dynamic Lookup Extension
-
-extension Constraint {
-    
-    /**
-     Returns a new `OptionalConstraint` instance.
-     
-     ```swift
-     enum Failure: Error {
-         case required
-         case invalidEmail
-     }
-     ```
-     
-     ```swift
-     let email: String? = "hello@nsagora.com"
-     let constraint: OptionalConstraint<String, Failure> = .optional(required: .required) {
-         PredicateConstraint(EmailPredicate(), error: .invalidEmail)
-     }
-
-     let result = constraint.evaluate(with: email)
-     
-     - parameter required: An optional `Error` that marks the optional as mandatory.
-     - parameter constraint: A closure that dynamically  builds a `Constraint` to describes the evaluation rule for the unwrapped value of the input.
-     */
-    public static func optional<T, E, C: Constraint>(required requiredError: E? = nil, constraintBuilder: () -> C) -> Self where Self == OptionalConstraint<T, E>, C.InputType == T, C.ErrorType == E {
-        OptionalConstraint(required: requiredError, constraintBuilder: constraintBuilder)
-    }
-}

@@ -108,37 +108,3 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
         return constraint.evaluate(with: value)
     }
 }
-
-// MARK: - Dynamic Lookup Extension
-
-extension Constraint {
-    
-    /**
-     Returns a new
-     
-     ```swift
-     struct LoginData {
-         
-         enum Error: Swift.Error {
-             case email
-             case password
-         }
-         
-         var email: String
-         var password: String
-     }
-     ```
-     
-     ```swift
-     let constraint:  KeyPathConstraint<LoginData, String, LoginData.Error> = .keyPath(\.email) {
-         PredicateConstraint(EmailPredicate(), error: .email)
-     }
-
-     let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")
-     constraint.evaluate(with: data)
-     ```
-     */
-    public static func keyPath<T, V, E, C: Constraint>(_ keyPath: KeyPath<T, V>, constraintBuilder: () -> C) -> Self where Self == KeyPathConstraint<T, V, E>, C.InputType == V, C.ErrorType == E {
-        KeyPathConstraint<T, V, E>(keyPath, constraintBuilder: constraintBuilder)
-    }
-}
