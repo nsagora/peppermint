@@ -48,7 +48,7 @@ extension Predicate {
      let isValid = predicate.evaluate(with: "")
      ```
      */
-    public static func required<T>() -> Self where Self == RequiredPredicate<T> {
+    public static func `required`<T>() -> Self where Self == RequiredPredicate<T> {
         RequiredPredicate<T>()
     }
 }
