@@ -48,31 +48,31 @@ constraint.set(for: \.username) {
 
 constraint.set(for: \.password) {
     GroupConstraint(.all, constraints:
-        PredicateConstraint {
-            .characterSet(.lowercaseLetters, mode: .inclusive)
-        } errorBuilder: {
-            .password(.missingLowercase)
-        },
-        PredicateConstraint{
-            .characterSet(.uppercaseLetters, mode: .inclusive)
-        } errorBuilder: {
-            .password(.missingUppercase)
-        },
-        PredicateConstraint {
-            .characterSet(.decimalDigits, mode: .inclusive)
-        } errorBuilder: {
-            .password(.missingDigits)
-        },
-        PredicateConstraint {
-            .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
-        } errorBuilder: {
-            .password(.missingSpecialChars)
-        },
-        PredicateConstraint {
-            .length(min: 8)
-        }  errorBuilder: {
-            .password(.tooShort)
-        }
+                        PredicateConstraint {
+        .characterSet(.lowercaseLetters, mode: .inclusive)
+    } errorBuilder: {
+        .password(.missingLowercase)
+    },
+                    PredicateConstraint{
+        .characterSet(.uppercaseLetters, mode: .inclusive)
+    } errorBuilder: {
+        .password(.missingUppercase)
+    },
+                    PredicateConstraint {
+        .characterSet(.decimalDigits, mode: .inclusive)
+    } errorBuilder: {
+        .password(.missingDigits)
+    },
+                    PredicateConstraint {
+        .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+    } errorBuilder: {
+        .password(.missingSpecialChars)
+    },
+                    PredicateConstraint {
+        .length(min: 8)
+    }  errorBuilder: {
+        .password(.tooShort)
+    }
     )
 }
 
@@ -85,9 +85,8 @@ constraint.set(for: \.age) {
 }
 
 constraint.set(for: \.website) {
-    OptionalConstraint {
-        PredicateConstraint(.url, error: .website)
-    }
+    PredicateConstraint(.url, error: .website)
+        .optional()
 }
 
 let user = RegistrationData(
@@ -110,7 +109,7 @@ case .failure(let summary):
 
 /*:
  In the following example we use the result builder variant of the `TypeConstraint` to evaluate a data structure used in a registration form.
-*/
+ */
 
 let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error> {
     KeyPathConstraint(\.username) {
@@ -161,9 +160,8 @@ let constraintBuilder = TypeConstraint<RegistrationData, RegistrationData.Error>
         PredicateConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
-        OptionalConstraint {
-            PredicateConstraint(.url, error: .website)
-        }
+        PredicateConstraint(.url, error: .website)
+            .optional()
     }
 }
 
