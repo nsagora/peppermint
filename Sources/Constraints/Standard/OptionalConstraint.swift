@@ -97,3 +97,13 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
         return .success(())
     }
 }
+
+// MARK: - Constraint modifiers
+
+extension Constraint {
+    
+    
+    public func `optional`<T, E>(required requiredError: E? = nil) -> OptionalConstraint<T, E> where Self.ErrorType == E, Self.InputType == T{
+        OptionalConstraint(required: requiredError, constraint: self)
+    }
+}

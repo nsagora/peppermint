@@ -78,3 +78,26 @@ class OptionalConstraintTests: XCTestCase {
         }
     }
 }
+
+// MARK: - Constraint modifiers
+
+extension OptionalConstraintTests {
+    
+    func testOptionalConstraintModifier() {
+        
+        let constraint = BlockConstraint <String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Invalid
+        }
+        let sut = constraint.optional(required: .MissingInput)
+        
+        let result = sut.evaluate(with: nil)
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.MissingInput]))
+        default: XCTFail()
+        }
+    }
+}
