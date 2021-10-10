@@ -102,7 +102,26 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
 
 extension Constraint {
     
-    
+    /**
+     Returns a new `OptionalConstraint` instance.
+     
+     ```swift
+     enum Failure: Error {
+         case required
+         case invalidEmail
+     }
+     ```
+     
+     ```swift
+     let email: String? = "hello@nsagora.com"
+     let emailConstraint = PredicateConstraint(.email, error: .invalidEmail)
+     let constraint = emailConstraint.optional(required: .required)
+
+     let result = constraint.evaluate(with: email)
+     
+     - parameter required: An optional `Error` that marks the optional as mandatory.
+     - parameter constraint: A `Constraint` to describes the evaluation rule for the unwrapped value of the input.
+     */
     public func `optional`<T, E>(required requiredError: E? = nil) -> OptionalConstraint<T, E> where Self.ErrorType == E, Self.InputType == T{
         OptionalConstraint(required: requiredError, constraint: self)
     }
