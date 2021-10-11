@@ -9,8 +9,8 @@ class ConstraintBuilderTests: XCTestCase {
         let varInt = 2
         
         @ConstraintBuilder<String, FakeError> var constraints: [AnyConstraint<String, FakeError>] {
-            PredicateConstraint(.required(), error: .Ordered(1))
-            PredicateConstraint(.required(), error: .Ordered(2))
+            RequiredConstraint { .Ordered(1) }
+            RequiredConstraint { .Ordered(2) }
             
             BlockConstraint {
                 $0.count == 6
@@ -19,39 +19,39 @@ class ConstraintBuilderTests: XCTestCase {
             }
             
             if varBool == false {
-                PredicateConstraint(.required(), error: .Ordered(4))
-                PredicateConstraint(.required(), error: .Ordered(5))
-                PredicateConstraint(.required(), error: .Ordered(6))
+                RequiredConstraint { .Ordered(4) }
+                RequiredConstraint { .Ordered(5) }
+                RequiredConstraint { .Ordered(6) }
             }
             else {
-                PredicateConstraint(.required(), error: .Ordered(-1))
+                RequiredConstraint { .Ordered(-1) }
             }
             
             if varBool == true {
-                PredicateConstraint(.required(), error: .Ordered(-1))
+                RequiredConstraint { .Ordered(-1) }
             }
             else {
-                PredicateConstraint(.required(), error: .Ordered(7))
-                PredicateConstraint(.required(), error: .Ordered(8))
+                RequiredConstraint { .Ordered(7) }
+                RequiredConstraint { .Ordered(8)}
             }
             
             for _ in 1...3 {
-                PredicateConstraint(.required(), error: .Ordered(9))
+                RequiredConstraint { .Ordered(9) }
             }
             
             if varInt % 2 == 0 {
-                PredicateConstraint(.required(), error: .Ordered(10))
+                RequiredConstraint { .Ordered(10) }
             }
             
             if varInt % 3 == 0 {
-                PredicateConstraint(.required(), error: .Ordered(-1))
+                RequiredConstraint { .Ordered(-1) }
             }
             
             if #available(*) {
-                PredicateConstraint(.required(), error: .Ordered(11))
+                RequiredConstraint { .Ordered(11) }
             }
             else {
-                PredicateConstraint(.required(), error: .Ordered(-1))
+                RequiredConstraint { .Ordered(-1) }
             }
         }
         
