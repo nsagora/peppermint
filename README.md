@@ -71,9 +71,8 @@ let constraint = TypeConstraint<Account, Account.Error> {
         PredicateConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
-        OptionalConstraint {
-            PredicateConstraint(.url, error: .website)
-        }
+        PredicateConstraint(.url, error: .website)
+            .optional()
     }
 }
 
@@ -375,5 +374,5 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
 [badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-1.1.0-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-90%25-brightgreen.svg?style=flat
