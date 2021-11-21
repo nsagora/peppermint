@@ -51,7 +51,7 @@ extension BlockConstraintTests {
         }
         
         do {
-            let result = try sut.check(on: validInput)
+            let result = try sut.check(validInput)
             XCTAssertEqual(result, validInput)
         }
         catch {
@@ -67,7 +67,7 @@ extension BlockConstraintTests {
         }
         
         do {
-            let _ = try sut.check(on: invalidInput)
+            let _ = try sut.check(invalidInput)
             XCTFail()
         }
         catch let error as Summary<FakeError> {
