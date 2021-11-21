@@ -21,6 +21,19 @@ public protocol Constraint: AsyncConstraint {
 }
 
 public extension Constraint {
+    
+    func check(on input: InputType) throws -> InputType {
+        let result = evaluate(with: input)
+        switch result {
+        case .success:
+            return input
+        case .failure(let summary):
+            throw summary
+        }
+    }
+}
+
+public extension Constraint {
 
     private var workQueue: DispatchQueue {
         return DispatchQueue(label: "com.nsagora.peppermint.constraint", attributes: .concurrent)

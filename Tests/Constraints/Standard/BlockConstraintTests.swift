@@ -38,3 +38,44 @@ class BlockConstraintTests: XCTestCase {
         }
     }
 }
+
+// MARK: - Check Evaluation
+
+extension BlockConstraintTests {
+    
+    func testThatCheckReturnsTheInputWhenEvaluationIsSuccessful() {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        do {
+            let result = try sut.check(on: validInput)
+            XCTAssertEqual(result, validInput)
+        }
+        catch {
+            XCTFail()
+        }
+    }
+    
+    func testThatCheckThrowsTheSummaryWhenEvaluationFails() {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        do {
+            let _ = try sut.check(on: invalidInput)
+            XCTFail()
+        }
+        catch let error as Summary<FakeError> {
+            XCTAssertEqual(error, Summary<FakeError>(errors: [.Unexpected(invalidInput)]))
+        }
+        catch {
+            XCTFail()
+        }
+    }
+}
+
