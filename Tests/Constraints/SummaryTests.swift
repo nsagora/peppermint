@@ -3,16 +3,17 @@ import XCTest
 
 class SummaryTests: XCTestCase {
     
-    func testGasFailingConstraintsShouldReturnTrueWhenThereAreErrors() {
+    func testHasFailingConstraintsShouldReturnTrueWhenThereAreErrors() {
         let errors =  [FakeError.Invalid]
-        let expectedSummary = Summary(errors: errors)
+        let sut = Summary(errors: errors)
 
-        let invalidResult = Result<Void, Summary>.failure(expectedSummary)
-        
-        switch invalidResult {
-        case .failure(let summary):
-            XCTAssertTrue(summary.hasFailingConstraints)
-        default: XCTFail()
-        }
+        XCTAssertTrue(sut.hasFailingConstraints)
+    }
+    
+    func testFailingConstraintsShouldReturn1WhenThereIsOnly1Error() {
+        let errors =  [FakeError.Invalid]
+        let sut = Summary(errors: errors)
+
+        XCTAssertEqual(sut.failingConstraints, 1)
     }
 }
