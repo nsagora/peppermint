@@ -21,7 +21,7 @@ import Foundation
  let isIdentical = predicate.evaluate(with: "alphabet")
  ```
  */
-public protocol Predicate: AsyncPredicate {
+public protocol Predicate<InputType>: AsyncPredicate {
 
     /// A type that provides information about what kind of values the predicate can be evaluated with.
     associatedtype InputType

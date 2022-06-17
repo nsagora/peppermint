@@ -3,7 +3,7 @@ import Foundation
 /**
  The `AsyncPredicate` protocol defines the structure that must be implemented by concrete async predicates.
  */
-public protocol AsyncPredicate {
+public protocol AsyncPredicate<InputType> {
     
     /// A type that provides information about what kind of values the predicate can be evaluated with.
     associatedtype InputType

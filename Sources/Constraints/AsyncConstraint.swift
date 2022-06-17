@@ -3,7 +3,7 @@ import Foundation
 /**
  The `AsyncConstraint` protocol is used to define the structure that must be implemented by concrete asynchronous constraints.
  */
-public protocol AsyncConstraint {
+public protocol AsyncConstraint<InputType, ErrorType> {
 
     /// A type that provides information about what kind of values the constraint can be evaluated with.
     associatedtype InputType
