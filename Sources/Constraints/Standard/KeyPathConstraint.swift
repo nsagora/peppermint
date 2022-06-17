@@ -30,7 +30,7 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    private let constraint: AnyConstraint<V, E>
+    private let constraint: any Constraint<V, E>
     private let keyPath: KeyPath<T, V>
     
     /**
@@ -62,8 +62,8 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
      - parameter keyPath: A
      - parameter constraint: A `Constraint` to describes the evaluation rule for the property at the provided key path.
      */
-    public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraint: C) where C.InputType == V, C.ErrorType == E {
-        self.constraint = constraint.erase()
+    public init(_ keyPath: KeyPath<T, V>, constraint: some Constraint<V, E>) {
+        self.constraint = constraint
         self.keyPath = keyPath
     }
     
@@ -92,8 +92,8 @@ public struct KeyPathConstraint<T, V, E: Error>: Constraint {
      constraint.evaluate(with: data)
      ```
      */
-    public init<C: Constraint>(_ keyPath: KeyPath<T, V>, constraintBuilder: () -> C) where C.InputType == V, C.ErrorType == E {
-        self.constraint = constraintBuilder().erase()
+    public init(_ keyPath: KeyPath<T, V>, constraintBuilder: () -> some Constraint<V, E>) {
+        self.constraint = constraintBuilder()
         self.keyPath = keyPath
     }
     
