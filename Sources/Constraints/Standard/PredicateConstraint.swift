@@ -13,7 +13,7 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    private let predicate: AnyPredicate<T>
+    private let predicate: any Predicate<T>
     private let errorBuilder: (T) -> E
 
     /**
@@ -27,8 +27,8 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: An `Error` that describes why the evaluation has failed.
      */
-    public init<P: Predicate>(_ predicate: P, error: E) where P.InputType == InputType {
-        self.predicate = predicate.erase()
+    public init(_ predicate: some Predicate<T>, error: E) {
+        self.predicate = predicate
         self.errorBuilder = { _ in return error }
     }
     
@@ -45,8 +45,8 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P: Predicate>(_ predicate: P, errorBuilder: @escaping (T) -> E) where P.InputType == T {
-        self.predicate = predicate.erase()
+    public init(_ predicate: some Predicate<T>, errorBuilder: @escaping (T) -> E) {
+        self.predicate = predicate
         self.errorBuilder = errorBuilder
     }
     
@@ -63,8 +63,8 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter predicate: A `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P: Predicate>(_ predicate: P, errorBuilder: @escaping () -> E) where P.InputType == T {
-        self.predicate = predicate.erase()
+    public init(_ predicate: some Predicate<T>, errorBuilder: @escaping () -> E) {
+        self.predicate = predicate
         self.errorBuilder = { _ in errorBuilder() }
     }
     
@@ -83,8 +83,8 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter predicateBuilder: A  a closure that dynamically  builds a `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P: Predicate>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping (T) -> E) where P.InputType == T {
-        self.predicate = predicateBuilder().erase()
+    public init(_ predicateBuilder: @escaping () -> some Predicate<T>, errorBuilder: @escaping (T) -> E) {
+        self.predicate = predicateBuilder()
         self.errorBuilder = errorBuilder
     }
     
@@ -103,8 +103,8 @@ public struct PredicateConstraint<T, E: Error>: Constraint {
      - parameter predicateBuilder: A  a closure that dynamically  builds a `Predicate` to describes the evaluation rule.
      - parameter error: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
-    public init<P: Predicate>(_ predicateBuilder: @escaping () -> P, errorBuilder: @escaping () -> E) where P.InputType == T {
-        self.predicate = predicateBuilder().erase()
+    public init(_ predicateBuilder: @escaping () -> some Predicate<T>, errorBuilder: @escaping () -> E) {
+        self.predicate = predicateBuilder()
         self.errorBuilder = { _ in errorBuilder() }
     }
     
