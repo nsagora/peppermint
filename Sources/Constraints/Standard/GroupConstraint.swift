@@ -34,17 +34,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
      
      - parameter constraints: `[Constraint]`
      */
-    public init<C: Constraint>(_ mode: Mode = .all, constraints: [C]) where C.InputType == T, C.ErrorType == E {
-        self.evaluationStrategy = mode.strategy
-        self.constraints = constraints.map { $0.erase() }
-    }
-    
-    /**
-     Returns a new `AndCompoundConstraint` instance populated with a predefined list of `Constraints`.
-     
-     - parameter constraints: `[Constraint]`
-     */
-    public init<C: Constraint>(_ mode: Mode = .all, constraints: C...) where C.InputType == T, C.ErrorType == E {
+    public init(_ mode: Mode = .all, constraints: [some Constraint<T, E>]) {
         self.evaluationStrategy = mode.strategy
         self.constraints = constraints.map { $0.erase() }
     }

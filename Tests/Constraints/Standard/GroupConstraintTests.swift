@@ -22,7 +22,7 @@ extension GroupConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         
-        let sut = GroupConstraint(constraints: constraint)
+        let sut = GroupConstraint(constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -32,7 +32,7 @@ extension GroupConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
         
-        let sut = GroupConstraint(constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -47,7 +47,7 @@ extension GroupConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
         
-        let sut = GroupConstraint(constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
@@ -73,7 +73,7 @@ extension GroupConstraintTests {
         let predicate = FakePredicate(expected: validInput)
         let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         
-        let sut = GroupConstraint(.any, constraints: constraint)
+        let sut = GroupConstraint(.any, constraints: [constraint])
         
         XCTAssertEqual(sut.count, 1)
     }
@@ -83,7 +83,7 @@ extension GroupConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
         
-        let sut = GroupConstraint(.any, constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(.any, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: validInput)
         
         switch result {
@@ -98,7 +98,7 @@ extension GroupConstraintTests {
         let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
         let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
         
-        let sut = GroupConstraint(.any, constraints: firstConstraint, secondConstraint)
+        let sut = GroupConstraint(.any, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: invalidInput)
         
         switch result {
