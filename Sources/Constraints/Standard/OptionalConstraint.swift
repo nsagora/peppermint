@@ -24,7 +24,7 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
     public typealias InputType = T?
     public typealias ErrorType = E
     
-    private let constraint: AnyConstraint<T, E>
+    private let constraint: any Constraint<T, E>
     private let requiredError: E?
     
     /**
@@ -47,8 +47,8 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
      - parameter required: An optional `Error` that marks the optional as mandatory.
      - parameter constraint: A `Constraint` to describes the evaluation rule for the unwrapped value of the input.
      */
-    public init<C: Constraint>(required requiredError: E? = nil, constraint: C) where C.InputType == T, C.ErrorType == E {
-        self.constraint = constraint.erase()
+    public init(required requiredError: E? = nil, constraint: some Constraint<T, E>) {
+        self.constraint = constraint
         self.requiredError = requiredError
     }
     
@@ -74,7 +74,7 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
      - parameter required: An optional `Error` that marks the optional as mandatory.
      - parameter constraint: A closure that dynamically  builds a `Constraint` to describes the evaluation rule for the unwrapped value of the input.
      */
-    public init<C: Constraint>(required requiredError: E? = nil, constraintBuilder: () -> C) where C.InputType == T, C.ErrorType == E {
+    public init(required requiredError: E? = nil, constraintBuilder: () -> some Constraint<T, E>) {
         self.init(required: requiredError, constraint: constraintBuilder())
     }
     
@@ -122,7 +122,7 @@ extension Constraint {
      - parameter required: An optional `Error` that marks the optional as mandatory.
      - parameter constraint: A `Constraint` to describes the evaluation rule for the unwrapped value of the input.
      */
-    public func `optional`<T, E>(required requiredError: E? = nil) -> OptionalConstraint<T, E> where Self.ErrorType == E, Self.InputType == T{
+    public func `optional`<T, E>(required requiredError: E? = nil) -> some Constraint<T?, E> where Self.ErrorType == E, Self.InputType == T{
         OptionalConstraint(required: requiredError, constraint: self)
     }
 }
