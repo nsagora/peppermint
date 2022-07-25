@@ -1,8 +1,12 @@
 import Foundation
 
-internal protocol Strategy {
+internal protocol Strategy<InputType, ErrorType> {
     
-    func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>>
+    associatedtype InputType
+    associatedtype ErrorType: Error
+    
+    
+    func evaluate(constraints: [some Constraint<InputType, ErrorType>], with input: InputType) -> Result<Void, Summary<ErrorType>>
 }
 
 public struct GroupConstraint<T, E: Error>: Constraint {
@@ -11,10 +15,10 @@ public struct GroupConstraint<T, E: Error>: Constraint {
         case any
         case all
         
-        var strategy: Strategy {
+        var strategy: any Strategy<T, E> {
             switch self {
-            case .all: return AllStrategy()
-            case .any: return AnyStrategy()
+            case .all: return AllStrategy<T, E>()
+            case .any: return AnyStrategy<T, E>()
             }
         }
     }
@@ -23,7 +27,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
     public typealias ErrorType = E
     
     private var constraints: [AnyConstraint<T, E>]
-    private var evaluationStrategy: Strategy
+    private var evaluationStrategy: any Strategy<T, E>
     
     
     /// Returns the number of constraints in the group.

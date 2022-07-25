@@ -2,9 +2,12 @@ import Foundation
 
 extension GroupConstraint {
     
-    struct AnyStrategy: Strategy {
+    struct AnyStrategy<T, E: Error>: Strategy {
         
-        func evaluate<C: Constraint>(constraints: [C], with input: C.InputType) -> Result<Void, Summary<C.ErrorType>> {
+        typealias InputType = T
+        typealias ErrorType = E
+        
+        func evaluate(constraints: [some Constraint<T, E>], with input: T) -> Result<Void, Summary<E>>{
             return constraints.reduce(.success(())) {
                 switch $0 {
                 case .success: return $1.evaluate(with: input)
