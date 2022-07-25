@@ -23,13 +23,13 @@ public struct AnyConstraint<T, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
 
-    private let evaluate: (InputType) -> Result<Void, Summary<E>>
+    private let constraint: any Constraint<T, E>
 
     /**
      Creates a type-erased `Constraint` that wraps the given instance.
      */
     public init<C: Constraint>(_ constraint: C) where C.InputType == T, C.ErrorType == E {
-        self.evaluate = constraint.evaluate
+        self.constraint = constraint
     }
 
     /**
@@ -39,7 +39,7 @@ public struct AnyConstraint<T, E: Error>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
-        return evaluate(input)
+        return constraint.evaluate(with: input)
     }
 }
 
