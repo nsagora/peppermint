@@ -122,7 +122,7 @@ extension Constraint {
      - parameter required: An optional `Error` that marks the optional as mandatory.
      - parameter constraint: A `Constraint` to describes the evaluation rule for the unwrapped value of the input.
      */
-    public func `optional`<T, E>(required requiredError: E? = nil) -> some Constraint<T?, E> where Self.ErrorType == E, Self.InputType == T{
+    public func `optional`<T, E>(required requiredError: E? = nil) -> OptionalConstraint<T, E> where Self.ErrorType == E, Self.InputType == T{
         OptionalConstraint(required: requiredError, constraint: self)
     }
 }
