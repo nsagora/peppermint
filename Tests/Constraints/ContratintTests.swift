@@ -92,3 +92,43 @@ extension ConstraintTests {
         }
     }
 }
+
+// MARK: - Async/Await Evaluation
+
+extension ConstraintTests {
+    
+    func testEvaluateAsyncAwaitCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() async {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        do {
+            let result = try await sut.check("validInput")
+            XCTAssertEqual(result, "validInput")
+        }
+        catch {
+            XCTFail()
+        }
+    }
+    
+    func testEvaluateAsyncAwaitCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() async {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        do {
+            let _ = try await sut.check("invalidInput")
+            XCTFail()
+        }
+        catch let error as Summary<FakeError> {
+            XCTAssertEqual(error, Summary<FakeError>(errors: [.Unexpected("invalidInput")]))
+        }
+        catch {
+            XCTFail()
+        }
+    }
+}

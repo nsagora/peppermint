@@ -20,4 +20,8 @@ public protocol AsyncConstraint<InputType, ErrorType> {
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result<Void, Summary<ErrorType>>) -> Void)
+    
+    #if swift(>=5.5)
+    func check(_ input: InputType) async throws -> InputType
+    #endif
 }
