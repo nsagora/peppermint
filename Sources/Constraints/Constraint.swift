@@ -18,6 +18,15 @@ public protocol Constraint<InputType, ErrorType>: AsyncConstraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     func evaluate(with input: InputType) -> Result<Void, Summary<ErrorType>>
+    
+    /**
+     Evaluates the input against the receiver. When the evaluation is successful, it return the `input`, otherwise it throws the `Summary` of the failing `Constraint`.
+     
+     - parameter input: The input to be validated.
+     - Returns:The `input` when the validation is successful.
+     - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
+     */
+    func check(_ input: InputType) throws -> InputType
 }
 
 public extension Constraint {
