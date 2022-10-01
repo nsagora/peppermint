@@ -48,7 +48,7 @@ extension ConstraintTests {
 
 extension ConstraintTests {
     
-    func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
+    func testEvaluateOnQueueCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() {
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {
@@ -70,7 +70,7 @@ extension ConstraintTests {
         }
     }
     
-    func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
+    func testEvaluateOnQueueCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() {
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {
@@ -93,11 +93,48 @@ extension ConstraintTests {
     }
 }
 
+// MARK: - Async Evaluation
+
+extension ConstraintTests {
+    
+    func testEvaluateAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() async {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Invalid
+        }
+        
+        let result = await sut.evaluate(with: "validInput")
+
+        switch result {
+        case .success:
+            XCTAssertTrue(true)
+        default: XCTFail()
+        }
+    }
+    
+    func testEvaluateAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() async {
+        let sut = BlockConstraint<String, FakeError> {
+            $0 == "validInput"
+        } errorBuilder: {
+            .Unexpected($0)
+        }
+        
+        let result = await sut.evaluate(with: "invalidInput")
+        
+        switch result {
+        case .failure(let summary):
+            XCTAssertEqual(summary, Summary<FakeError>(errors: [.Unexpected("invalidInput")]))
+        default: XCTFail()
+        }
+    }
+}
+
 // MARK: - Async/Await Evaluation
 
 extension ConstraintTests {
     
-    func testEvaluateAsyncAwaitCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() async {
+    func testCheckAsyncCallsTheCallbackWithASuccessfulResultWhenTheInputIsValid() async {
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {
@@ -113,7 +150,7 @@ extension ConstraintTests {
         }
     }
     
-    func testEvaluateAsyncAwaitCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() async {
+    func testCheckAsyncCallsTheCallbackWithAFailureResultWhenTheInputIsInvalid() async {
         let sut = BlockConstraint<String, FakeError> {
             $0 == "validInput"
         } errorBuilder: {

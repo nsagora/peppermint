@@ -23,6 +23,14 @@ public protocol AsyncConstraint<InputType, ErrorType> {
     
     #if swift(>=5.5)
     /**
+     Asynchronous evaluates the input against the receiver.
+
+     - parameter input: The input to be validated.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
+     */
+    func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>>
+    
+    /**
      Asynchronous evaluates the input against the receiver. When the evaluation is successful, it return the `input`, otherwise it throws the `Summary` of the failing `Constraint`.
      
      - parameter input: The input to be validated.
@@ -35,7 +43,21 @@ public protocol AsyncConstraint<InputType, ErrorType> {
 
 #if swift(>=5.5)
 public extension AsyncConstraint {
+    
+    /**
+     Asynchronous evaluates the input against the receiver.
 
+     - parameter input: The input to be validated.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
+     */
+    func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>> {
+        try await withCheckedContinuation { continuation in
+            evaluate(with: input, queue: .main) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
     /**
      Asynchronous evaluates the input against the receiver. When the evaluation is successful, it return the `input`, otherwise it throws the `Summary` of the failing `Constraint`.
      
@@ -44,15 +66,12 @@ public extension AsyncConstraint {
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
     func check(_ input: InputType) async throws -> InputType {
-        try await withCheckedThrowingContinuation { continuation in
-            evaluate(with: input, queue: .main) { result in
-                switch result {
-                case .success:
-                    continuation.resume(returning: input)
-                case .failure(let summary):
-                    continuation.resume(throwing: summary)
-                }
-            }
+        let result = await evaluate(with: input)
+        switch result {
+        case .success:
+           return input
+        case .failure(let summary):
+            throw summary
         }
     }
 }
