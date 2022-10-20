@@ -19,9 +19,10 @@ public protocol AsyncConstraint<InputType, ErrorType> {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
+    @available(*, deprecated, renamed: "evaluate(with:)")
     func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result<Void, Summary<ErrorType>>) -> Void)
     
-    #if swift(>=5.5)
+    
     /**
      Asynchronous evaluates the input against the receiver.
 
@@ -38,25 +39,11 @@ public protocol AsyncConstraint<InputType, ErrorType> {
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
     func check(_ input: InputType) async throws -> InputType
-    #endif
+    
 }
 
-#if swift(>=5.5)
-public extension AsyncConstraint {
-    
-    /**
-     Asynchronous evaluates the input against the receiver.
 
-     - parameter input: The input to be validated.
-     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
-     */
-    func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>> {
-        try await withCheckedContinuation { continuation in
-            evaluate(with: input, queue: .main) { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
+public extension AsyncConstraint {
     
     /**
      Asynchronous evaluates the input against the receiver. When the evaluation is successful, it return the `input`, otherwise it throws the `Summary` of the failing `Constraint`.
@@ -75,4 +62,4 @@ public extension AsyncConstraint {
         }
     }
 }
-#endif
+

@@ -74,4 +74,18 @@ public extension Constraint {
             }
         }
     }
+    
+    /**
+     Asynchronous evaluates the input against the receiver.
+
+     - parameter input: The input to be validated.
+     - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
+     */
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>> {
+        await withCheckedContinuation { continuation in
+            let result = evaluate(with: input)
+            continuation.resume(returning: result)
+        }
+    }
 }
