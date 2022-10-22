@@ -83,11 +83,10 @@ public extension Constraint {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>> {
-        await withCheckedContinuation { continuation in
-            Task {
-                let result = evaluate(with: input)
-                continuation.resume(returning: result)
-            }
+        let t = Task {
+            evaluate(with: input)
         }
+        
+        return await t.value
     }
 }
