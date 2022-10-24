@@ -83,10 +83,8 @@ public extension Constraint {
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>> {
-        let t = Task {
+        await Task {
             evaluate(with: input)
-        }
-        
-        return await t.value
+        }.value
     }
 }
