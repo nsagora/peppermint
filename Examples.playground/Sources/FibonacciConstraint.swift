@@ -24,7 +24,6 @@ func isFibonacciNumber(input: Int) -> Bool {
     var i = 0
     var fib = 0
     repeat {
-        print(i, fib, input)
         if fib == input {
             return true
         }
