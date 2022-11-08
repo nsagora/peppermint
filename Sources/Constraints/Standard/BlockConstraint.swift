@@ -88,11 +88,10 @@ public struct BlockConstraint<T, E: Error>: Constraint {
         let result = predicate.evaluate(with: input)
         
         if result == true {
-            return .success(())
+            return .success
         }
         
         let error = errorBuilder(input)
-        let summary = Summary(errors: [error])
-        return .failure(summary)
+        return .failure(error)
     }
 }

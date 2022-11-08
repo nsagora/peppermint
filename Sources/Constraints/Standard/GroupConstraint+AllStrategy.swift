@@ -17,13 +17,10 @@ extension GroupConstraint {
                     case .failure(let summary): $0 += summary.errors
                     }
                 }
-            
-            let summary = Summary<E>(errors: errors)
-            if summary.errors.isEmpty {
-                return Result<Void, Summary<E>>.success(())
+            if errors.isEmpty {
+                return .success
             }
-            
-            return Result<Void, Summary<E>>.failure(summary)
+            return .failure(errors)
         }
     }
 }

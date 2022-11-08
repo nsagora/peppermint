@@ -92,11 +92,10 @@ public struct RequiredConstraint<T: Collection, E: Error>: Constraint {
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
         let result = predicate.evaluate(with: input)
         if result {
-            return .success(())
+            return .success
         }
         
         let error = errorBuilder(input)
-        let summary = Summary(errors: [error])
-        return .failure(summary)
+        return .failure(error)
     }
 }

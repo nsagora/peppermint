@@ -91,10 +91,10 @@ public struct OptionalConstraint<T, E: Error>: Constraint {
         }
         
         if let requiredError = requiredError {
-            return .failure(Summary(errors: [requiredError]))
+            return .failure(requiredError)
         }
         
-        return .success(())
+        return .success
     }
 }
 
