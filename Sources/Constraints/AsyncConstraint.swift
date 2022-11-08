@@ -29,6 +29,7 @@ public protocol AsyncConstraint<InputType, ErrorType> {
      - parameter input: The input to be validated.
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func evaluate(with input: InputType) async -> Result<Void, Summary<ErrorType>>
     
     /**
@@ -38,6 +39,7 @@ public protocol AsyncConstraint<InputType, ErrorType> {
      - Returns:The `input` when the validation is successful.
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func check(_ input: InputType) async throws -> InputType
     
 }
@@ -52,6 +54,7 @@ public extension AsyncConstraint {
      - Returns:The `input` when the validation is successful.
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func check(_ input: InputType) async throws -> InputType {
         let result = await evaluate(with: input)
         switch result {
