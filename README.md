@@ -85,7 +85,7 @@ case .failure(let summary):
 }
 
 ```
- 
+
 `Peppermint` is a declarative and lightweight data validation framework.
 
 At the core of it, there are 2 principles:
@@ -111,7 +111,7 @@ Since validation can take place at many levels, `Peppermint` is available on iOS
 
 ### Swift Package Manager
 
-You can add `Peppermint` to your project [in Xcode][url-swift-package-manager] by going to  `File > Swift Packages > Add Package Dependency`.
+You can add `Peppermint` to your project [in Xcode][url-swift-package-manager] by going to `File > Swift Packages > Add Package Dependency`.
 
 Or, if you want to use it as a dependency to your own package, you can add it to your `Package.swift` file:
 
@@ -133,7 +133,7 @@ For a comprehensive list of examples try out the `Examples.playground`:
 
 1. Download the repository locally on your machine
 2. Open the project in Xcode
-4. Select the `Examples` playground from the Project navigator
+3. Select the `Examples` playground from the Project navigator
 
 The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates and constraints that most projects can benefit off.
 
@@ -151,6 +151,7 @@ let predicate = BlockPredicate<String> { $0.characters.count > 2 }
 predicate.evaluate(with: "a") // returns false
 predicate.evaluate(with: "abc") // returns true
 ```
+
 </details>
 
 <details>
@@ -162,6 +163,7 @@ predicate.evaluate(with: "a") // returns true
 predicate.evaluate(with: "5") // returns false
 predicate.evaluate(with: "ab") // returns false
 ```
+
 </details>
 
 In addition, the framework offers a set of common validation predicates that your project can benefit of:
@@ -175,6 +177,7 @@ predicate.evaluate(with: "hello@") // returns false
 predicate.evaluate(with: "hello@nsagora.com") // returns true
 predicate.evaluate(with: "héllo@nsagora.com") // returns true
 ```
+
 </details>
 
 <details>
@@ -185,6 +188,7 @@ let predicate = URLPredicate()
 predicate.evaluate(with: "http://www.url.com") // returns true
 predicate.evaluate(with: "http:\\www.url.com") // returns false
 ```
+
 </details>
 
 <details>
@@ -195,6 +199,7 @@ let predicate = let range = RangePredicate(10...20)
 predicate.evaluate(with: 15) // returns true
 predicate.evaluate(with: 21) // returns false
 ```
+
 </details>
 
 <details>
@@ -205,6 +210,7 @@ let predicate = LengthPredicate<String>(min: 5)
 predicate.evaluate(with: "abcde")   // returns true
 predicate.evaluate(with: "abcd")    // returns false
 ```
+
 </details>
 
 On top of that, developers can build more advanced or complex predicates by extending the `Predicate` protocol, and/ or by composing or decorating the existing predicates:
@@ -302,7 +308,7 @@ To provide context, a `GroupConstraint` allows us to constraint a piece of data 
 <details>
 <summary>GroupConstraint</summary
 
-An example of a  registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
+An example of a registration form, whereby users are prompted to enter a strong _password_. This process typically entails some form of validation, but the logic itself is often unstructured and spread out through a view controller.
 
 `Peppermint` seeks instead to consolidate, standardise, and make explicit the logic that is being used to validate user input. To this end, the below example demonstrates construction of a full `GroupConstraint` object that can be used to enforce requirements on the user's password data:
 
@@ -374,5 +380,5 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
 [badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
-[badge-version]: https://img.shields.io/badge/version-1.1.0-blue.svg?style=flat
+[badge-version]: https://img.shields.io/badge/version-1.2.0-blue.svg?style=flat
 [badge-docs]: https://img.shields.io/badge/docs-90%25-brightgreen.svg?style=flat
