@@ -9,33 +9,33 @@ import Peppermint
  In the following example we use a `GroupConstraint` to evaluate the strength of the user password.
  */
 
-var passwordConstraint = GroupConstraint<String, Form.Password>(.all, constraints:
+var passwordConstraint = GroupConstraint<String, Form.Password>(.all) {
     PredicateConstraint {
         .characterSet(.lowercaseLetters, mode: .inclusive)
     } errorBuilder: {
         .missingLowercase
-    },
+    }
     PredicateConstraint{
         .characterSet(.uppercaseLetters, mode: .inclusive)
     } errorBuilder: {
         .missingUppercase
-    },
+    }
     PredicateConstraint {
         .characterSet(.decimalDigits, mode: .inclusive)
     } errorBuilder: {
         .missingDigits
-    },
+    }
     PredicateConstraint {
         .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
     } errorBuilder: {
         .missingSpecialChars
-    },
+    }
     PredicateConstraint {
         .length(min: 8)
     } errorBuilder: {
         .minLength(8)
     }
-)
+}
 
 let password = "p@ssW0rd"
 let result = passwordConstraint.evaluate(with: password)
