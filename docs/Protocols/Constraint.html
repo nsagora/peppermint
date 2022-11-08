@@ -17,18 +17,18 @@
     <a title="Constraint Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (90% documented)</p>
-        <p class="header-right">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+        <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         Constraint Protocol Reference
       </p>
     </div>
@@ -75,9 +75,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ConstraintBuilder.html">ConstraintBuilder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ConstraintBuilder.html#/s:10Peppermint17ConstraintBuilderV0B9ContainerV">– ConstraintContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DatePredicate.html">DatePredicate</a>
@@ -135,7 +132,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Constraint</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Constraint</span><span class="o">&lt;</span><span class="kt">InputType</span><span class="p">,</span> <span class="kt">ErrorType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncConstraint.html">AsyncConstraint</a></span></code></pre>
 
                 </div>
               </div>
@@ -252,6 +249,74 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:10Peppermint10ConstraintP5checky9InputTypeQzAFKF"></a>
+                    <a name="//apple_ref/swift/Method/check(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintP5checky9InputTypeQzAFKF">check(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaluates the input against the receiver. When the evaluation is successful, it return the <code>input</code>, otherwise it throws the <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code>Constraint</code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    The <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code>Constraint</code>s when the validation fails.
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Evaluates the input against the receiver. When the evaluation is successful, it return the <code>input</code>, otherwise it throws the <code>Summary</code> of the failing <code>Constraint</code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    The <code>Summary</code> of the failing <code>Constraint</code>s when the validation fails.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">check</span><span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input to be validated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <code>input</code> when the validation is successful.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:10Peppermint10ConstraintPAAE5eraseAA03AnyB0Vy9InputTypeQz05ErrorF0QzGyF"></a>
                     <a name="//apple_ref/swift/Method/erase()" class="dashAnchor"></a>
                     <a class="token" href="#/s:10Peppermint10ConstraintPAAE5eraseAA03AnyB0Vy9InputTypeQz05ErrorF0QzGyF">erase()</a>
@@ -292,64 +357,6 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>An <code><a href="../Structs/AnyConstraint.html">AnyConstraint</a></code> wrapping this constraint.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Peppermint10ConstraintPAAE5checky9InputTypeQzAFKF"></a>
-                    <a name="//apple_ref/swift/Method/check(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Peppermint10ConstraintPAAE5checky9InputTypeQzAFKF">check(_:<wbr>)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Evaluates the input against the receiver. When the evaluation is successful, it return the <code>input</code>, otherwise it throws the <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code>Constraint</code>.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    The <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code>Constraint</code>s when the validation fails.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">check</span><span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>input</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The input to be validated.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The <code>input</code> when the validation is successful.</p>
                       </div>
                     </section>
                   </div>
@@ -439,6 +446,60 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Peppermint10ConstraintPAAE8evaluate4withs6ResultOyytAA7SummaryVy9ErrorTypeQzGG05InputH0Qz_tYaF"></a>
+                    <a name="//apple_ref/swift/Method/evaluate(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Peppermint10ConstraintPAAE8evaluate4withs6ResultOyytAA7SummaryVy9ErrorTypeQzGG05InputH0Qz_tYaF">evaluate(with:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method, asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronous evaluates the input against the receiver.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">macOS</span> <span class="mf">10.15</span><span class="p">,</span> <span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="n">tvOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="n">watchOS</span> <span class="mf">6.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">with</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9InputTypeQa">InputType</a></span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt"><a href="../Structs/Summary.html">Summary</a></span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Constraint.html#/s:10Peppermint10ConstraintP9ErrorTypeQa">ErrorType</a></span><span class="o">&gt;&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input to be validated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>.success</code> if the input is valid,<code>.failure</code> containing the <code><a href="../Structs/Summary.html">Summary</a></code> of the failing <code>Constraint</code>s otherwise.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -447,7 +508,7 @@
                 <a name="//apple_ref/swift/Section/Constraint modifiers" class="dashAnchor"></a>
                 <div class="section-name-container">
                   <a class="section-name-link" href="#/Constraint%20modifiers"></a>
-                  <h3 class="section-name"><p>Constraint modifiers</p>
+                  <h3 class="section-name"><span>Constraint modifiers</span>
 </h3>
                 </div>
               </div>
@@ -501,11 +562,10 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-12-06)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-11-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
