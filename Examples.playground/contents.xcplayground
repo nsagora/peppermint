@@ -17,5 +17,6 @@
         <page name='Type Contraint'/>
         <page name='Any Constraint'/>
         <page name='Other'/>
+        <page name='Async Constraint'/>
     </pages>
 </playground>
