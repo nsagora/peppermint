@@ -19,7 +19,6 @@ public protocol QueuedConstraint<InputType, ErrorType> {
      - parameter completionHandler: The completion handler to call when the evaluation is complete. It takes a `Bool` parameter:
      - parameter result: `.success` if the input is valid, `.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
-    @available(*, deprecated, renamed: "evaluate(with:)")
-    func evaluate(with input: InputType, queue: DispatchQueue, completionHandler: @escaping (_ result: Result<Void, Summary<ErrorType>>) -> Void)
+    func evaluate(with input: InputType, on queue: DispatchQueue, completionHandler: @escaping (_ result: Result<Void, Summary<ErrorType>>) -> Void)
 }
 
