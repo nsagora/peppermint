@@ -13,7 +13,7 @@ enum FibonacciError: Swift.Error {
     case invalid
 }
 
-let constraint = FibonnaciConstraint<FibonacciError>(with: .invalid)
+let constraint = FibonnaciConstraint<FibonacciError>(with: .invalid).async()
 
 Task {
     print("Started at: \(Date.now)")
