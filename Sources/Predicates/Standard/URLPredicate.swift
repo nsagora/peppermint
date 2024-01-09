@@ -32,7 +32,7 @@ public struct URLPredicate: Predicate {
     }
     
     private func parseURL(from input: String) -> URL? {
-        if #available(macOS 14.0, macCatalyst 17.0, iOS 17.0, watchOS 10.0, tvOS 10.0, visionOS 1.0, *) {
+        if #available(macOS 14.0, macCatalyst 17.0, iOS 17.0, watchOS 10.0, tvOS 10.0, *) {
             return URL(string: input, encodingInvalidCharacters: false)
         } else {
             return URL(string: input)
