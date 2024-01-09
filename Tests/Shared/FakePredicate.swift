@@ -1,4 +1,3 @@
-import Foundation
 import Peppermint
 
 struct FakePredicate<T>: Predicate where T: Equatable {

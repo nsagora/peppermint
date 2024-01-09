@@ -28,7 +28,15 @@ public struct URLPredicate: Predicate {
      - returns: `true` if input is a valid URL, otherwise `false`.
      */
     public func evaluate(with input: InputType) -> Bool {
-        return URL(string: input) != nil
+        return  parseURL(from: input) != nil
+    }
+    
+    private func parseURL(from input: String) -> URL? {
+        if #available(macOS 14.0, macCatalyst 17.0, iOS 17.0, watchOS 10.0, tvOS 10.0, visionOS 1.0, *) {
+            return URL(string: input, encodingInvalidCharacters: false)
+        } else {
+            return URL(string: input)
+        }
     }
 }
 
