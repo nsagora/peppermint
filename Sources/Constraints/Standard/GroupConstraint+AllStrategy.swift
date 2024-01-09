@@ -2,16 +2,16 @@ import Foundation
 
 extension GroupConstraint {
     
-    struct AllStrategy<T, E: Error>: Strategy {
+    struct AllStrategy<ST, SE: Error>: Strategy {
         
-        typealias InputType = T
-        typealias ErrorType = E
+        typealias InputType = ST
+        typealias ErrorType = SE
         
-        func evaluate(constraints: [some Constraint<T, E>], with input: T) -> Result<Void, Summary<E>> {
+        func evaluate(constraints: [some Constraint<ST, SE>], with input: ST) -> Result<Void, Summary<SE>> {
             
             let errors = constraints
                 .map { $0.evaluate(with: input) }
-                .reduce(into: [E]()) {
+                .reduce(into: [SE]()) {
                     switch $1 {
                     case .success: $0 += []
                     case .failure(let summary): $0 += summary.errors
