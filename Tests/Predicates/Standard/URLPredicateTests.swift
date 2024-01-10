@@ -12,7 +12,7 @@ class URLPredicateTests: XCTestCase {
 
     func testThatItEvaluatesInvalidURLToFalse() {
         let sut = URLPredicate()
-        let result = sut.evaluate(with: "http:\\www.url.com")
+        let result = sut.evaluate(with: "http://www.url com")
         
         XCTAssertFalse(result)
     }
