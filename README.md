@@ -373,10 +373,10 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [url-swift-package-manager]: https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
 [url-license]: http://choosealicense.com/licenses/mit/
 [url-license-file]: https://github.com/nsagora/peppermint/blob/master/LICENSE
-[url-twitter]: https://twitter.com/nsagora
+[url-twitter]: https://x.com/nsagora
 [url-codecov]: https://codecov.io/gh/nsagora/peppermint
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
-[badge-twitter]: https://img.shields.io/badge/twitter-%40nsgaora-blue.svg?style=flat
+[badge-twitter]: https://img.shields.io/badge/𝕏-%40nsgaora-blue.svg?style=flat
 [badge-build-macos]: https://github.com/nsagora/peppermint/actions/workflows/build-macos.yml/badge.svg
 [badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
