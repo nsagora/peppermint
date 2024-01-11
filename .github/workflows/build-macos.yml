@@ -20,3 +20,11 @@ jobs:
         run: |
           xcrun llvm-cov export -format="lcov" .build/debug/PeppermintPackageTests.xctest/Contents/MacOS/PeppermintPackageTests -instr-profile .build/debug/codecov/default.profdata > .build/PeppermintPackageTests.lcov
           bash <(curl https://codecov.io/bash)
+      - name: Docs
+        uses: fwcd/swift-docc-action@v1
+        with:
+          target: Peppermint
+          output: ./docs
+          hosting-base-path: pappermint
+          disable-indexing: "true"
+          transform-for-static-hosting: "true"
