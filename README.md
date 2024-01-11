@@ -2,8 +2,8 @@
 
 [![badge-build-macos]][url-peppermint]
 [![badge-build-linux]][url-peppermint]
-[![badge-codecov]][url-codecov]
 [![badge-docs]][url-peppermint-docs]
+[![badge-codecov]][url-codecov]
 [![badge-license]][url-license]
 [![badge-twitter]][url-twitter]
 
@@ -381,4 +381,4 @@ Distributed under the [MIT][url-license] license. See [`LICENSE`][url-license-fi
 [badge-build-linux]: https://github.com/nsagora/peppermint/actions/workflows/build-linux.yml/badge.svg
 [badge-codecov]: https://codecov.io/gh/nsagora/peppermint/branch/develop/graph/badge.svg
 [badge-version]: https://img.shields.io/badge/version-1.2.0-blue.svg?style=flat
-[badge-docs]: https://img.shields.io/badge/docs-90%25-brightgreen.svg?style=flat
+[badge-docs]: https://github.com/nsagora/peppermint/actions/workflows/docs.yml/badge.svg
