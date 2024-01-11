@@ -9,6 +9,9 @@ let package = Package(
             name: "Peppermint",
             targets: ["Peppermint"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0")
+    ],
     targets: [
         .target(
             name: "Peppermint",
