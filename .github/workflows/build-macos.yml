@@ -5,6 +5,10 @@ on:
     branches:
       - "main"
 
+concurrency:
+  group: build-macos
+  cancel-in-progress: true
+
 jobs:
   macos:
     runs-on: macos-latest
