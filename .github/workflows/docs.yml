@@ -1,4 +1,4 @@
-name: Docs
+name: docs
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   docs:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
