@@ -12,5 +12,6 @@ import Peppermint
 let predicate = URLPredicate()
 predicate.evaluate(with: "http://www.url.com")
 predicate.evaluate(with: "http:\\www.url.com")
+predicate.evaluate(with: "dfsadfdasfdsfads")
 
 //: [Next](@next)

@@ -51,7 +51,7 @@ let constraint = TypeConstraint<RegistrationData, RegistrationData.Error> {
             } errorBuilder: {
                 .password(.missingLowercase)
             }
-            PredicateConstraint{
+            PredicateConstraint {
                 .characterSet(.uppercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingUppercase)
@@ -62,13 +62,13 @@ let constraint = TypeConstraint<RegistrationData, RegistrationData.Error> {
                 .password(.missingDigits)
             }
             PredicateConstraint {
-                .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
+                .characterSet(.specialChars, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingSpecialChars)
             }
             PredicateConstraint {
                 .length(min: 8)
-            }  errorBuilder: {
+            } errorBuilder: {
                 .password(.tooShort)
             }
         }
@@ -92,10 +92,11 @@ let constraint = TypeConstraint<RegistrationData, RegistrationData.Error> {
 
 let user = RegistrationData(
     username: "nsagora",
-    password: "p@ssW0rd",
-    passwordConfirmation: "passW0rd",
+    password: "p@ssWrd",
+    passwordConfirmation: "pssW0rd",
     email: "hello@nsagora.com",
-    age: 21
+    age: 21,
+    website: "http://www.url.com"
 )
 
 let result = constraint.evaluate(with: user)
