@@ -17,7 +17,7 @@ import Foundation
  */
 public struct RequiredConstraint<T: Collection, E: Error>: Constraint {
     
-    private let predicate = RequiredPredicate<T>()
+    private let rule = RequiredRule<T>()
     private let errorBuilder: (T) -> E
   
     /**
@@ -90,7 +90,7 @@ public struct RequiredConstraint<T: Collection, E: Error>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` with the provided `Error`.
      */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
-        let result = predicate.evaluate(with: input)
+        let result = rule.evaluate(with: input)
         if result {
             return .success
         }

@@ -39,27 +39,27 @@ import Foundation
      }
      KeyPathConstraint(\.password) {
          GroupConstraint(.all) {
-             PredicateConstraint {
+             RuleConstraint {
                  .characterSet(.lowercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingLowercase)
              }
-             PredicateConstraint{
+             RuleConstraint{
                 .characterSet(.uppercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingUppercase)
              }
-             PredicateConstraint {
+             RuleConstraint {
                 .characterSet(.decimalDigits, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingDigits)
              }
-             PredicateConstraint {
+             RuleConstraint {
                 .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
              } errorBuilder: {
                  .password(.missingSpecialChars)
              }
-             PredicateConstraint {
+             RuleConstraint {
                  .length(min: 8)
              }  errorBuilder: {
                  .password(.tooShort)
@@ -67,10 +67,10 @@ import Foundation
          }
      }
      KeyPathConstraint(\.email) {
-         PredicateConstraint(.email, error: .email)
+         RuleConstraint(.email, error: .email)
      }
      KeyPathConstraint(\.age) {
-         PredicateConstraint(.range(min: 14), error: .underAge)
+         RuleConstraint(.range(min: 14), error: .underAge)
      }
  }
 
@@ -126,27 +126,27 @@ public struct TypeConstraint<T, E: Error>: Constraint {
 
      constraint.set(for: \.password) {
          GroupConstraint(.all, constraints:
-             PredicateConstraint {
+             RuleConstraint {
                  .characterSet(.lowercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingLowercase)
              },
-             PredicateConstraint{
+             RuleConstraint{
                  .characterSet(.uppercaseLetters, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingUppercase)
              },
-             PredicateConstraint {
+             RuleConstraint {
                  .characterSet(.decimalDigits, mode: .inclusive)
              } errorBuilder: {
                  .password(.missingDigits)
              },
-             PredicateConstraint {
+             RuleConstraint {
                  .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
              } errorBuilder: {
                  .password(.missingSpecialChars)
              },
-             PredicateConstraint {
+             RuleConstraint {
                  .length(min: 8)
              }  errorBuilder: {
                  .password(.tooShort)
@@ -155,11 +155,11 @@ public struct TypeConstraint<T, E: Error>: Constraint {
      }
 
      constraint.set(for: \.email) {
-         PredicateConstraint(.email, error: .email)
+         RuleConstraint(.email, error: .email)
      }
 
      constraint.set(for: \.age) {
-         PredicateConstraint(.range(min: 14), error: .underAge)
+         RuleConstraint(.range(min: 14), error: .underAge)
      }
 
      let user = RegistrationData(username: "nsagora", password: "p@ssW0rd", email: "hello@nsagora.com", age: 21)
@@ -244,27 +244,27 @@ extension TypeConstraint {
          }
          KeyPathConstraint(\.password) {
              GroupConstraint(.all) {
-                 PredicateConstraint {
+                 RuleConstraint {
                      .characterSet(.lowercaseLetters, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingLowercase)
                  }
-                 PredicateConstraint{
+                 RuleConstraint{
                     .characterSet(.uppercaseLetters, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingUppercase)
                  }
-                 PredicateConstraint {
+                 RuleConstraint {
                     .characterSet(.decimalDigits, mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingDigits)
                  }
-                 PredicateConstraint {
+                 RuleConstraint {
                     .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
                  } errorBuilder: {
                      .password(.missingSpecialChars)
                  }
-                 PredicateConstraint {
+                 RuleConstraint {
                      .length(min: 8)
                  }  errorBuilder: {
                      .password(.tooShort)
@@ -272,10 +272,10 @@ extension TypeConstraint {
              }
          }
          KeyPathConstraint(\.email) {
-             PredicateConstraint(.email, error: .email)
+             RuleConstraint(.email, error: .email)
          }
          KeyPathConstraint(\.age) {
-             PredicateConstraint(.range(min: 14), error: .underAge)
+             RuleConstraint(.range(min: 14), error: .underAge)
          }
      }
 

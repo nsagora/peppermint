@@ -23,7 +23,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
     public typealias InputType = T
     public typealias ErrorType = E
     
-    private let predicate: BlockPredicate<T>
+    private let rule: BlockRule<T>
     private let errorBuilder: (T) -> E
     
     /**
@@ -48,7 +48,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
     public init(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping () -> E) {
-        self.predicate = BlockPredicate(evaluationBlock: evaluationBlock)
+        self.rule = BlockRule(evaluationBlock: evaluationBlock)
         self.errorBuilder = { _ in errorBuilder() }
     }
     
@@ -74,7 +74,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
      - parameter errorBuilder: A generic closure that dynamically builds an `Error` to describe why the evaluation has failed.
      */
     public init(_ evaluationBlock: @escaping (T) -> Bool, errorBuilder: @escaping (T) -> E) {
-        predicate = BlockPredicate(evaluationBlock: evaluationBlock)
+        self.rule = BlockRule(evaluationBlock: evaluationBlock)
         self.errorBuilder = errorBuilder
     }
     
@@ -85,7 +85,7 @@ public struct BlockConstraint<T, E: Error>: Constraint {
      - returns: `.success` if the input is valid,`.failure` containing the `Summary` of the failing `Constraint`s otherwise.
      */
     public func evaluate(with input: T) -> Result<Void, Summary<E>> {
-        let result = predicate.evaluate(with: input)
+        let result = rule.evaluate(with: input)
         
         if result == true {
             return .success

@@ -46,27 +46,27 @@ let constraint = TypeConstraint<RegistrationData, RegistrationData.Error> {
     }
     KeyPathConstraint(\.password) {
         GroupConstraint(.all) {
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.lowercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingLowercase)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.uppercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingUppercase)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.decimalDigits, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingDigits)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.specialChars, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingSpecialChars)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .length(min: 8)
             } errorBuilder: {
                 .password(.tooShort)
@@ -79,13 +79,13 @@ let constraint = TypeConstraint<RegistrationData, RegistrationData.Error> {
         .password(.confirmationMismatch)
     }
     KeyPathConstraint(\.email) {
-        PredicateConstraint(.email, error: .email)
+        RuleConstraint(.email, error: .email)
     }
     KeyPathConstraint(\.age) {
-        PredicateConstraint(.range(min: 14), error: .underAge)
+        RuleConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
-        PredicateConstraint(.url, error: .website)
+        RuleConstraint(.url, error: .website)
             .optional()
     }
 }

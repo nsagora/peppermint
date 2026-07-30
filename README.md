@@ -12,9 +12,9 @@
 3. [Installation](#installation)
    - [Swift Package Manager](#swift-package-manager)
 4. [Usage Examples](#usage-examples)
-   - [Predicates](#predicates)
+   - [Rules](#rules)
    - [Constraints](#constraints)
-   - [Predicate Constraint](#predicate-constraint)
+   - [Rule Constraint](#rule-constraint)
    - [Compound Constraint](#compound-constraint)
 5. [Contribute](#contribute)
 6. [Meta](#meta)
@@ -32,27 +32,27 @@ let constraint = TypeConstraint<Account, Account.Error> {
     }
     KeyPathConstraint(\.password) {
         GroupConstraint(.all) {
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.lowercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingLowercase)
             }
-            PredicateConstraint{
+            RuleConstraint{
                 .characterSet(.uppercaseLetters, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingUppercase)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(.decimalDigits, mode: .inclusive)
             } errorBuilder: {
                 .password(.missingDigits)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .inclusive)
             } errorBuilder: {
                 .password(.missingSpecialChars)
             }
-            PredicateConstraint {
+            RuleConstraint {
                 .length(min: 8)
             }  errorBuilder: {
                 .password(.tooShort)
@@ -65,13 +65,13 @@ let constraint = TypeConstraint<Account, Account.Error> {
         .password(.confirmationMismatch)
     }
     KeyPathConstraint(\.email) {
-        PredicateConstraint(.email, error: .email)
+        RuleConstraint(.email, error: .email)
     }
     KeyPathConstraint(\.age) {
-        PredicateConstraint(.range(min: 14), error: .underAge)
+        RuleConstraint(.range(min: 14), error: .underAge)
     }
     KeyPathConstraint(\.website) {
-        PredicateConstraint(.url, error: .website)
+        RuleConstraint(.url, error: .website)
             .optional()
     }
 }
@@ -135,91 +135,91 @@ For a comprehensive list of examples try out the `Examples.playground`:
 2. Open the project in Xcode
 3. Select the `Examples` playground from the Project navigator
 
-The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation predicates and constraints that most projects can benefit off.
+The `Peppermint` framework is compact and offers you the foundation you need to build data validation around your project needs. In addition, it includes a set of common validation rules and constraints that most projects can benefit off.
 
-### Predicates
+### Rules
 
-The `Predicate` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation condition.
+The `Rule` represents the core `protocol` and has the role to `evaluate` if an input matches on a given validation condition.
 
-At the core of `Peppermint` there are the following two predicates, which allows you to compose predicates specific to the project needs:
+At the core of `Peppermint` there are the following two rules, which allows you to compose rules specific to the project needs:
 
 <details>
-<summary>BlockPredicate</summary>
+<summary>BlockRule</summary>
 
 ```swift
-let predicate = BlockPredicate<String> { $0.characters.count > 2 }
-predicate.evaluate(with: "a") // returns false
-predicate.evaluate(with: "abc") // returns true
+let rule = BlockRule<String> { $0.characters.count > 2 }
+rule.evaluate(with: "a") // returns false
+rule.evaluate(with: "abc") // returns true
 ```
 
 </details>
 
 <details>
-<summary>RegexPredicate</summary>
+<summary>RegexRule</summary>
 
 ```swift
-let predicate = RegexPredicate(expression: "^[a-z]$")
-predicate.evaluate(with: "a") // returns true
-predicate.evaluate(with: "5") // returns false
-predicate.evaluate(with: "ab") // returns false
+let rule = RegexRule(expression: "^[a-z]$")
+rule.evaluate(with: "a") // returns true
+rule.evaluate(with: "5") // returns false
+rule.evaluate(with: "ab") // returns false
 ```
 
 </details>
 
-In addition, the framework offers a set of common validation predicates that your project can benefit of:
+In addition, the framework offers a set of common validation rules that your project can benefit of:
 
 <details>
-<summary>EmailPredicate</summary>
+<summary>EmailRule</summary>
 
 ```swift
-let predicate = EmailPredicate()
-predicate.evaluate(with: "hello@") // returns false
-predicate.evaluate(with: "hello@nsagora.com") // returns true
-predicate.evaluate(with: "héllo@nsagora.com") // returns true
-```
-
-</details>
-
-<details>
-<summary>URLPredicate</summary>
-
-```swift
-let predicate = URLPredicate()
-predicate.evaluate(with: "http://www.url.com") // returns true
-predicate.evaluate(with: "http:\\www.url.com") // returns false
+let rule = EmailRule()
+rule.evaluate(with: "hello@") // returns false
+rule.evaluate(with: "hello@nsagora.com") // returns true
+rule.evaluate(with: "héllo@nsagora.com") // returns true
 ```
 
 </details>
 
 <details>
-<summary>RangePredicate</summary>
+<summary>URLRule</summary>
 
 ```swift
-let predicate = let range = RangePredicate(10...20)
-predicate.evaluate(with: 15) // returns true
-predicate.evaluate(with: 21) // returns false
+let rule = URLRule()
+rule.evaluate(with: "http://www.url.com") // returns true
+rule.evaluate(with: "http:\\www.url.com") // returns false
 ```
 
 </details>
 
 <details>
-<summary>LengthPredicate</summary>
+<summary>RangeRule</summary>
 
 ```swift
-let predicate = LengthPredicate<String>(min: 5)
-predicate.evaluate(with: "abcde")   // returns true
-predicate.evaluate(with: "abcd")    // returns false
+let rule = let range = RangeRule(10...20)
+rule.evaluate(with: 15) // returns true
+rule.evaluate(with: 21) // returns false
 ```
 
 </details>
 
-On top of that, developers can build more advanced or complex predicates by extending the `Predicate` protocol, and/ or by composing or decorating the existing predicates:
-
 <details>
-<summary>Custom Predicate</summary>
+<summary>LengthRule</summary>
 
 ```swift
-public struct CustomPredicate: Predicate {
+let rule = LengthRule<String>(min: 5)
+rule.evaluate(with: "abcde")   // returns true
+rule.evaluate(with: "abcd")    // returns false
+```
+
+</details>
+
+On top of that, developers can build more advanced or complex rules by extending the `Rule` protocol, and/ or by composing or decorating the existing rules:
+
+<details>
+<summary>Custom Rule</summary>
+
+```swift
+public struct CustomRule: Rule {
 
     public typealias InputType = String
 
@@ -234,25 +234,25 @@ public struct CustomPredicate: Predicate {
     }
 }
 
-let predicate = CustomPredicate(custom: "alphabet")
-predicate.evaluate(with: "alp") // returns false
-predicate.evaluate(with: "alpha") // returns false
-predicate.evaluate(with: "alphabet") // returns true
+let rule = CustomRule(custom: "alphabet")
+rule.evaluate(with: "alp") // returns false
+rule.evaluate(with: "alpha") // returns false
+rule.evaluate(with: "alphabet") // returns true
 ```
 
 </details>
 
 ### Constraints
 
-#### Predicate Constraint
+#### Rule Constraint
 
-A `PredicateConstraint` represents a data type that links a `Predicate` to an `Error`, in order to provide useful feedback for the end users.
+A `RuleConstraint` represents a data type that links a `Rule` to an `Error`, in order to provide useful feedback for the end users.
 
 <details>
-<summary>PredicateConstraint</summary>
+<summary>RuleConstraint</summary>
 
 ```swift
-let constraint = PredicateConstraint<String, MyError>(.email, error: .invalid)
+let constraint = RuleConstraint<String, MyError>(.email, error: .invalid)
 
 let result = constraint.evaluate(with: "hello@nsagora.com")
 switch result {
@@ -273,7 +273,7 @@ enum MyError: Error {
 
 #### Block Constraint
 
-A `BlockConstraint` represents a data type that links a custom validation closure to an `Error` that describes why the evaluation has failed. It's a shortcut of a `PredicateConstraint` that is initialised with a `BlockPredicate`.
+A `BlockConstraint` represents a data type that links a custom validation closure to an `Error` that describes why the evaluation has failed. It's a shortcut of a `RuleConstraint` that is initialised with a `BlockRule`.
 
 <details>
 <summary>BlockConstraint</summary>
@@ -314,27 +314,27 @@ An example of a registration form, whereby users are prompted to enter a strong 
 
 ```swift
 var passwordConstraint = GroupConstraint<String, Form.Password>(.all) {
-    PredicateConstraint {
+    RuleConstraint {
         .characterSet(.lowercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingLowercase
     }
-    PredicateConstraint{
+    RuleConstraint{
         .characterSet(.uppercaseLetters, mode: .loose)
     } errorBuilder: {
         .missingUppercase
     }
-    PredicateConstraint {
+    RuleConstraint {
         .characterSet(.decimalDigits, mode: .loose)
     } errorBuilder: {
         .missingDigits
     }
-    PredicateConstraint {
+    RuleConstraint {
         .characterSet(CharacterSet(charactersIn: "!?@#$%^&*()|\\/<>,.~`_+-="), mode: .loose)
     } errorBuilder: {
         .missingSpecialChars
     }
-    PredicateConstraint {
+    RuleConstraint {
         .length(min: 8)
     }  errorBuilder: {
         .minLength(8)

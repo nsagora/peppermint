@@ -12,8 +12,8 @@ class GroupConstraintTests: XCTestCase {
 extension GroupConstraintTests {
     
     func testAllSatisfiedShouldReturnAnInstanceWithAnArrayOfConstraints() {
-        let predicate = FakePredicate(expected: validInput)
-        let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
+        let rule = FakeRule(expected: validInput)
+        let constraint = RuleConstraint(rule, error: FakeError.Invalid)
         
         let sut = GroupConstraint<String, FakeError>(constraints: [constraint])
         
@@ -21,8 +21,8 @@ extension GroupConstraintTests {
     }
     
     func testAllSatisfiedShouldReturnAnInstanceWithAListArrayOfConstraints() {
-        let predicate = FakePredicate(expected: validInput)
-        let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
+        let rule = FakeRule(expected: validInput)
+        let constraint = RuleConstraint(rule, error: FakeError.Invalid)
         
         let sut = GroupConstraint(.allSatisfied, constraints: [constraint])
         
@@ -30,9 +30,9 @@ extension GroupConstraintTests {
     }
     
     func testAllSatisfiedShouldSucceedWhenAllConstraintsPass() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.allSatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: validInput)
@@ -44,9 +44,9 @@ extension GroupConstraintTests {
     }
     
     func testAllSatisfiedShouldCollectAllErrorsWhenAllConstraintsFail() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.allSatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: invalidInput)
@@ -64,8 +64,8 @@ extension GroupConstraintTests {
 extension GroupConstraintTests {
     
     func testAnySatisfiedShouldReturnAnInstanceWithAnArrayOfConstraints() {
-        let predicate = FakePredicate(expected: validInput)
-        let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
+        let rule = FakeRule(expected: validInput)
+        let constraint = RuleConstraint(rule, error: FakeError.Invalid)
         
         let sut = GroupConstraint(.anySatisfied, constraints: [constraint])
         
@@ -73,9 +73,9 @@ extension GroupConstraintTests {
     }
     
     func testAnySatisfiedShouldSucceedWhenAllConstraintsPass() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.anySatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: validInput)
@@ -104,9 +104,9 @@ extension GroupConstraintTests {
     }
     
     func testAnySatisfiedShouldCollectAllErrorsWhenAllConstraintsFail() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.anySatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: invalidInput)
@@ -124,8 +124,8 @@ extension GroupConstraintTests {
 extension GroupConstraintTests {
     
     func testFirstUnsatisfiedShouldReturnAnInstanceWithAnArrayOfConstraints() {
-        let predicate = FakePredicate(expected: validInput)
-        let constraint = PredicateConstraint(predicate, error: FakeError.Invalid)
+        let rule = FakeRule(expected: validInput)
+        let constraint = RuleConstraint(rule, error: FakeError.Invalid)
         
         let sut = GroupConstraint(.firstUnsatisfied, constraints: [constraint])
         
@@ -133,9 +133,9 @@ extension GroupConstraintTests {
     }
     
     func testFirstUnsatisfiedShouldSucceedWhenAllConstraintsPass() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.firstUnsatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: validInput)
@@ -147,9 +147,9 @@ extension GroupConstraintTests {
     }
     
     func testFirstUnsatisfiedShouldReturnOnlyTheFirstErrorWhenAConstraintFails() {
-        let predicate = FakePredicate(expected: validInput)
-        let firstConstraint = PredicateConstraint(predicate, error: FakeError.Invalid)
-        let secondConstraint = PredicateConstraint(predicate, error: FakeError.MissingInput)
+        let rule = FakeRule(expected: validInput)
+        let firstConstraint = RuleConstraint(rule, error: FakeError.Invalid)
+        let secondConstraint = RuleConstraint(rule, error: FakeError.MissingInput)
         
         let sut = GroupConstraint(.firstUnsatisfied, constraints: [firstConstraint, secondConstraint])
         let result = sut.evaluate(with: invalidInput)
@@ -166,8 +166,8 @@ extension GroupConstraintTests {
     
     func testItCanBeInitializedWithAConstraintsBuilder() {
         let sut = GroupConstraint<String, FakeError> {
-            PredicateConstraint {
-                RequiredPredicate()
+            RuleConstraint {
+                RequiredRule()
             } errorBuilder: {
                 .Invalid
             }

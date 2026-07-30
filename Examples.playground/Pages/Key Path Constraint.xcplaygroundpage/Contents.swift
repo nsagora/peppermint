@@ -21,7 +21,7 @@ struct LoginData {
 }
 
 let constraint = KeyPathConstraint<LoginData, String, LoginData.Error>(\.email) {
-    PredicateConstraint(EmailPredicate(), error: .email)
+    RuleConstraint(EmailRule(), error: .email)
 }
 
 let data = LoginData(email: "hello@nsagora.com", password: "p@ssW0rd")

@@ -14,7 +14,7 @@ import Peppermint
 
 let email: String? = nil
 let constraint = OptionalConstraint<String, Form.Email>(required: .missing) {
-    PredicateConstraint(.email) {
+    RuleConstraint(.email) {
         .invalid($0)
     }
 }
