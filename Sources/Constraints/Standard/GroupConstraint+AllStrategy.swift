@@ -2,7 +2,7 @@ import Foundation
 
 extension GroupConstraint {
     
-    struct AllStrategy<ST, SE: Error>: Strategy {
+    struct AllSatisfiedStrategy<ST, SE: Error>: Strategy {
         
         typealias InputType = ST
         typealias ErrorType = SE

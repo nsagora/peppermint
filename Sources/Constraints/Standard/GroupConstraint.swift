@@ -12,13 +12,18 @@ internal protocol Strategy<InputType, ErrorType> {
 public struct GroupConstraint<T, E: Error>: Constraint {
     
     public enum Mode {
-        case any
-        case all
-        
+        /// Evaluates every constraint and collects all errors. All constraints must be satisfied.
+        case allSatisfied
+        /// Short-circuits on the first satisfied constraint. At least one constraint must be satisfied.
+        case anySatisfied
+        /// Short-circuits on the first unsatisfied constraint, returning only that error. All constraints must be satisfied.
+        case firstUnsatisfied
+
         var strategy: any Strategy<T, E> {
             switch self {
-            case .all: return AllStrategy<T, E>()
-            case .any: return AnyStrategy<T, E>()
+            case .allSatisfied: return AllSatisfiedStrategy<T, E>()
+            case .anySatisfied: return AnySatisfiedStrategy<T, E>()
+            case .firstUnsatisfied: return FirstUnsatisfiedStrategy<T, E>()
             }
         }
     }
@@ -38,7 +43,7 @@ public struct GroupConstraint<T, E: Error>: Constraint {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(_ mode: Mode = .all, constraints: [some Constraint<T, E>]) {
+    public init(_ mode: Mode = .allSatisfied, constraints: [some Constraint<T, E>]) {
         self.evaluationStrategy = mode.strategy
         self.constraints = constraints.map { $0.erase() }
     }
@@ -63,7 +68,7 @@ extension GroupConstraint {
      
      - parameter constraints: `[Constraint]`
      */
-    public init(_ mode: Mode = .all, @ConstraintBuilder<T, E> constraintBuilder: () -> [AnyConstraint<T, E>])  {
+    public init(_ mode: Mode = .allSatisfied, @ConstraintBuilder<T, E> constraintBuilder: () -> [AnyConstraint<T, E>])  {
         self.init(mode, constraints: constraintBuilder())
     }
 }
