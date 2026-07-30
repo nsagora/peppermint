@@ -1,9 +1,16 @@
-// swift-tools-version:5.1
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
     name: "Peppermint",
+    platforms: [
+        .iOS(.v15),
+        .macOS(.v11),
+        .tvOS(.v15),
+        .watchOS(.v8),
+        .visionOS(.v1)
+    ],
     products: [
         .library(
             name: "Peppermint",
