@@ -39,6 +39,7 @@ public extension AsyncConstraint {
      - Returns:The `input` when the validation is successful.
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
+    @discardableResult
     func check(_ input: InputType) async throws -> InputType {
         let result = await evaluate(with: input)
         switch result {

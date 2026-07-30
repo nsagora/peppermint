@@ -39,6 +39,7 @@ public extension Constraint {
      - Returns:The `input` when the validation is successful.
      - Throws: The `Summary` of the failing `Constraint`s when the validation fails.
      */
+    @discardableResult
     func check(_ input: InputType) throws -> InputType {
         let result = evaluate(with: input)
         switch result {
