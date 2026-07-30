@@ -19,9 +19,9 @@ public struct Summary<E>: Error where E: Error {
 
 // MARK: - Equatable conformance
 
-extension Summary: Equatable {
+extension Summary: Equatable where E: Equatable {
     
     public static func ==(lhs: Summary, rhs: Summary) -> Bool {
-        return lhs.errors.map { $0.localizedDescription } == rhs.errors.map { $0.localizedDescription }
+        return lhs.errors == rhs.errors
     }
 }
